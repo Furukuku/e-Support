@@ -214,6 +214,65 @@
   --theme-color: #0E2C15;
 }
 
+.sticky-top {
+  z-index: 9 !important;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  display: none;
+}
+
+.backdrop.show-backdrop {
+  display: block;
+}
+
+.sidebar-btn {
+  cursor: pointer;
+}
+
+.sidebar {
+  width: 230px;
+  position: fixed;
+  top: 0;
+  right: -230px;
+  bottom: 0;
+  z-index: 11;
+  transition: right 300ms linear;
+}
+
+.sidebar.show-sidebar {
+  right: 0;
+}
+
+.sidebar .profile-picture {
+  height: 50px;
+  width: 50px;
+}
+
+.sidebar .sidebar-items {
+  list-style: none;
+}
+
+.sidebar .sidebar-items a {
+  text-decoration: none;
+}
+
+.logout-btn {
+  border: none;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
 .dropdown-menu {
   --bs-dropdown-link-active-color: black;
   --bs-dropdown-link-active-bg: #e0e0e0;
@@ -250,6 +309,11 @@
   width: 40px;
 }
 
+.docs-card {
+  width: 24rem;
+  min-width: 22rem;
+}
+
 .docs-form-header {
   background-color: var(--theme-color);
 }
@@ -278,4 +342,62 @@ label[for="proof"] {
 
 .biz-clearance-form > .btn {
   --bs-btn-active-bg: #0e2c15dc;
+}
+
+
+@media (max-width: 870px){
+  .navbar {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+  }
+
+  .navbar .navbar-brand > span {
+    display: initial !important;
+  }
+
+  .navbar-hide-items {
+    display: none !important;
+  }
+
+  .sidebar-btn {
+    display: initial !important;
+  }
+
+  .docs-form-container {
+    width: 80% !important;
+  }
+
+  .home-start,
+  .home-end,
+  .services-start {
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .home-middle {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .docs-card {
+    width: 22rem;
+  }
+}
+
+
+@media (max-width: 730px){
+  .home-middle-texts {
+    display: block !important;
+  }
+}
+
+
+@media (min-width: 871px){
+  .backdrop {
+    display: none !important;
+  }
+
+  .sidebar {
+    right: -230px !important;
+  }
 }
