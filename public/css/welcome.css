@@ -1,0 +1,143 @@
+:root {
+  --main-color: #432344;
+  --welcome-body-color: #E7EEFB;
+  --see-more-border-color: #BD00FF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  background-color: var(--main-color);
+}
+
+.brgy-captain-bg {
+  background-image: url('../images/welcome-bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 30rem;
+  position: relative;
+}
+
+.captain-container {
+  position: absolute;
+  left: 50%;
+  bottom: -2rem;
+  transform: translateX(-50%);
+}
+
+.welcome-body {
+  background-color: var(--welcome-body-color);
+}
+
+.program-height {
+  height: 20rem;
+}
+
+.more-programs {
+  border: 1px solid var(--see-more-border-color);
+  cursor: pointer;
+}
+
+.more-programs:hover {
+  text-decoration: underline;
+}
+
+.program-anchor {
+  display: block;
+  height: 80px; /*same height as header*/
+  margin-top: -80px; /*same height as header*/
+  visibility: hidden;
+}
+
+.places-anchor {
+  display: block;
+  height: 20px; /*same height as header*/
+  margin-top: -20px; /*same height as header*/
+  visibility: hidden;
+}
+
+.officials-anchor {
+  display: block;
+  height: 50px; /*same height as header*/
+  margin-top: -50px; /*same height as header*/
+  visibility: hidden;
+}
+
+.location-anchor {
+  display: block;
+  height: 80px; /*same height as header*/
+  margin-top: -80px; /*same height as header*/
+  visibility: hidden;
+}
+
+.pointer {
+  cursor: pointer;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+  transition: box-shadow 100ms ease-in;
+}
+
+.pointer:hover {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .50);
+}
+
+.carousel-container {
+  width: 90%;
+}
+
+.carousel-container .carousel-caption {
+  height: 10rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.carousel-bg {
+  background-color: var(--main-color);
+}
+
+.img-width {
+  width: 500px;
+  height: 412.8px;
+}
+
+#carousel-btn-next,
+#carousel-btn-prev {
+  width: 5%;
+}
+
+.mvh-card {
+  min-height: 35rem;
+}
+
+.footer-color {
+  background-color: var(--welcome-body-color);
+}
+
+.contacts-containers {
+  height: 10rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-icon-cont {
+  height: 3rem;
+  width: 3rem;
+  display: grid;
+  place-items: center;
+}
+
+.active-image {
+  width: 30rem;
+  height: 30rem;
+}
+
+#map {
+  height: 20rem;
+  width: 70%;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>e-Support</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,1,0" />
+
+  <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+  <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
+
+  <script defer src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
+
+  @livewireStyles
+</head>
+<body>
+  <div class="main-container">
+    <div id="side-bar" class="pb-5 sidebar scrollbar rounded-end">
+      <h2 class="text-center text-white mt-3 mb-4">e-Support<span id="sb-close" class="sidebar-close">&times;</span></h2>
+      <hr class="mx-auto text-white border-2 horizontal-line">
+      <ul id="sidebar-list" class="navbar-nav">
+        <li class="nav-item text-white sidebar-list">
+          <a href="{{ route('resident.home') }}" id="home" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'navigate-active' : '' }}">
+            <div class="container-fluid row p-0 ps-2 m-0">
+              <span class="material-symbols-outlined col-3 text-center">dashboard</span>
+              <p class="col-9 m-0 ps-0">Home</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item text-white sidebar-list">
+          <a href="{{ route('resident.documents') }}" id="documents" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.documents') ? 'navigate-active' : '' }}">
+            <div class="container-fluid row p-0 ps-2 m-0">
+              <span class="material-symbols-outlined col-3 text-center">patient_list</span>
+              <p class="col-9 m-0 ps-0">Barangay Documents</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item text-white sidebar-list">
+          <a href="{{ route('resident.reports') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.reports') ? 'navigate-active' : '' }}">
+            <div class="container-fluid row p-0 ps-2 m-0">
+              <span class="material-symbols-outlined col-3 text-center">report</span>
+              <p class="col-9 m-0 ps-0">Reports</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item text-white sidebar-list">
+          <a href="{{ route('resident.account') }}" id="account" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.account') ? 'navigate-active' : '' }}">
+            <div class="container-fluid row p-0 ps-2 m-0">
+              <span class="material-symbols-outlined col-3 text-center">manage_accounts</span>
+              <p class="col-9 m-0 ps-0">Account</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="b-sidebar" class="block-sidebar"></div>
+    <div class="right-content">
+      <nav class="navbar navbar-dark navbar-expand-lg nav-bg rounded sticky-top">
+        <div class="container-fluid">
+          <button id="toggle-sidebar" class="navbar-brand bg-transparent border-0">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <button id="toggle-sidebar2" class="navbar-brand bg-transparent border-0">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-dark bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="username">{{ auth()->user()->username }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="dropdown-item p-0">
+                <form action="{{ route('resident.logout') }}" method="POST">
+                  @csrf
+                  <button type="submit" class="bg-transparent border-0 w-100 logout-btn">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        <div id="content">
+          @yield('content')
+        </div>
+      </main>
+    </div>
+  </div>
+
+  @livewireScripts
+
+  @yield('script')
+</body>
+</html>

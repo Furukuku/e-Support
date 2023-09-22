@@ -1,0 +1,123 @@
+:root {
+  --header-bg: #FFC03D;
+  --add-btn-color: #432344;
+  --view-icon-color: #3887D0;
+  --edit-icon-color: #FFB800;
+  --delete-icon-color: #FF2020;
+  --restore-icon-color: #939581;
+}
+
+body {
+  background-color: #E7EEFB;
+}
+
+.nav-bg {
+  background-color: #432344;
+}
+
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #cacaca;
+}
+
+.officials-header,
+.btn-warning,
+.header-bg {
+  background-color: var(--header-bg);
+}
+
+.btn-add {
+  margin-top: -0.5rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: var(--add-btn-color);
+  color: #FFFFFF;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #673a69;
+  --bs-btn-disabled-border-color: #673a69;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: #5a315c;
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #713f74;
+  --bs-btn-active-border-color: #713f74;
+}
+
+.modal-close-icon {
+  cursor: pointer;
+}
+
+.officials-profile-table {
+  width: 70%;
+}
+
+.sorting-arrow {
+  cursor: pointer;
+}
+
+.officials-photo {
+  height: 2rem;
+  width: 2rem;
+}
+
+.view-icon,
+.edit-icon,
+.delete-icon,
+.restore-icon,
+.search-icon {
+  cursor: pointer;
+}
+
+.view-icon {
+  color: var(--view-icon-color);
+}
+
+.edit-icon,
+.search-icon {
+  color: var(--edit-icon-color);
+}
+
+.delete-icon {
+  color: var(--delete-icon-color);
+}
+
+.restore-icon {
+  color: var(--restore-icon-color);
+}
+
+.view-image {
+  height: 5rem;
+  width: 5rem;
+}
+
+.delete-warning {
+  color: var(--delete-icon-color);
+}
+
+.delete-btn {
+  background-color: var(--delete-icon-color);
+}
+
+.card-container {
+  background-color: var(--header-bg);
+}
+
+.card-counter {
+  margin-bottom: -3rem;
+}
+
+.card-counter .card-icon {
+  background-color: var(--add-btn-color);
+  height: 50px;
+  width: 50px;
+  display: grid;
+  place-items: center;
+}
+
+.patient-container {
+  height: 10rem;
+  background-color: var(--header-bg);
+}
+
+.patient-details-container {
+  margin-top: -8rem;
+}

@@ -1,0 +1,9 @@
+
+.message-header {
+  position: absolute;
+  top: -1.5rem;
+  width: 95%;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: #FFC03D;
+}

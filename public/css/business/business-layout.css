@@ -1,0 +1,12 @@
+body {
+  background-color: #E7EEFB;
+}
+
+.nav-bg {
+  background-color: #432344;
+}
+
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #cacaca;
+}

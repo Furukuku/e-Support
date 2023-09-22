@@ -1,0 +1,22 @@
+.profile-family-width {
+  width: 65%;
+  height: 70vh;
+  overflow: auto;
+}
+
+.profile-family-width::-webkit-scrollbar {
+  background-color: #fff;
+  border-radius: 0.375rem;
+  width: 10px;
+}
+
+.profile-family-width::-webkit-scrollbar-thumb {
+  background: rgb(175, 175, 175);
+  border-radius: 0.375rem;
+  width: 0.5rem;
+}
+
+.resident-category,
+.remove-member {
+  cursor: pointer;
+}

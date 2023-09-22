@@ -1,0 +1,23 @@
+.account-header {
+  height: 100px; 
+  width: 90%;
+}
+
+.account-details {
+  margin-top: -3.5rem;
+  width: 85%;
+}
+
+.edit-username-icon,
+.edit-email-icon,
+.edit-password-icon {
+  cursor: pointer;
+}
+
+.change-password {
+  font-size: 1rem;
+}
+
+.colored-toast.swal2-icon-success {
+  background-color: #33a54e !important;
+}

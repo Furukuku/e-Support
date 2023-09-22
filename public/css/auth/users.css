@@ -1,0 +1,115 @@
+:root {
+  --header-bg: #FFC03D;
+  --main-color: #BD00FF;
+  --links-color: #0000FF;
+}
+
+body {
+  height: 100vh;
+}
+
+.users-auth-bg {
+  background: rgb(67,35,68);
+  background: radial-gradient(circle, rgba(67,35,68,1) 0%, rgba(255,192,61,1) 100%);
+}
+
+.header-bg {
+  background-color: var(--header-bg);
+}
+
+.links-color {
+  color: var(--links-color);
+}
+
+.modal-close-icon,
+.registers {
+  cursor: pointer;
+}
+
+.sign-up-link {
+  font-size: 0.8rem;
+}
+
+.reg-resident-container {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #E7EEFB;
+}
+
+.reg-resident-bg {
+  background-image: url('../../images/welcome-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background: rgb(67,35,68);
+  background: radial-gradient(circle, rgba(67,35,68,1) 30%, rgba(255,192,61,1) 100%); */
+}
+
+.input-labels {
+  font-size: 0.85rem;
+}
+
+.progress-container {
+  width: 90%;
+}
+
+.progress {
+  --bs-progress-bg: rgb(196, 196, 196);
+}
+
+.progress-btn-color {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.progress-bar {
+  background-color: var(--main-color);
+}
+
+.progress-btn {
+  transition: all 200ms linear 500ms;
+}
+
+#second-progress {
+  left: 33% !important;
+}
+
+#third-progress {
+  left: 66% !important;
+}
+
+.loader {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #999999;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
+
+/* .btn-submit,
+.btn-next {
+  background-color: var(--header-bg);
+}
+
+.btn-submit:hover,
+.btn-next:hover {
+  opacity: 0.8 !important;
+} */
+
+/* .temp-img {
+  height: 50px;
+  width: 50px;
+} */

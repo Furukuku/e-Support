@@ -1,0 +1,174 @@
+body {
+  background-color: #E7EEFB;
+}
+
+.nav-bg {
+  background-color: #432344;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  gap: 0.2rem;
+}
+
+.block-sidebar {
+  min-width: 17rem;
+  max-width: 17rem;
+  flex-grow: 3;
+  transition: margin-left 0.4s ease-out;
+}
+
+.sidebar {
+  background-color: #432344;
+  min-width: 17rem;
+  max-width: 17rem;
+  flex-grow: 3;
+  transition: margin-left 0.4s ease-out;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar-close {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: -2px;
+  cursor: pointer;
+}
+
+#toggle-sidebar2 {
+  display: none;
+}
+
+.scrollbar {
+  overflow-y: scroll;
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.right-content {
+  flex-grow: 8;
+  position: relative;
+}
+
+.horizontal-line {
+  width: 90%;
+}
+
+/* .sidebar-list {
+  height: 50px;
+} */
+
+.sidebar-navigate {
+  height: 50px;
+  cursor: pointer;
+}
+
+.sidebar-navigate:active {
+  opacity: 0.7;
+}
+
+/* .sidebar-navigate:hover {
+  background-color: rgba(255, 192, 61, 0.5);
+} */
+
+.navigate-active {
+  background-color: #FFC03D;
+}
+
+.logout-btn {
+  height: 100%;
+}
+
+.sidebar-active {
+  margin-left: -17.2rem;
+}
+
+.submenu-link {
+  position: relative;
+}
+
+.submenu-active {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.arrow1,
+.arrow2,
+.arrow3 {
+  transition: transform 0.2s;
+}
+
+.arrow1.rotate1,
+.arrow2.rotate2,
+.arrow3.rotate3 {
+  transform: rotate(-90deg);
+}
+
+.p-submenu,
+.u-submenu,
+.d-submenu {
+  display: none;
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #cacaca;
+}
+
+.custom-loader {
+  position: absolute;
+  top: 600%;
+  left: calc(50% - 25px); /* calc(17rem + ((100% - 17rem) / 2) - 25px) */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#432344 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#432344);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation:s3 1s infinite linear;
+}
+
+@keyframes s3{ 
+  100%{transform: rotate(1turn)}
+}
+
+
+/* @media (max-width: 490px) {
+  .username {
+    display: none;
+  }
+} */
+
+@media (max-width: 1070px) {
+  .block-sidebar {
+    display: none;
+  }
+
+  #toggle-sidebar2 {
+    display: block;
+  }
+
+  #toggle-sidebar {
+    display: none;
+  }
+
+  .sidebar-close {
+    display: block;
+  }
+}

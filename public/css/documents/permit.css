@@ -1,0 +1,204 @@
+:root {
+  font-size: 15px;
+}
+
+.content-container {
+  /* top: 0px;
+  bottom: 0px;
+  left: 100px;
+  right: 100px; */
+  /* height: 100vh; */
+}
+
+.header-container {
+  /* top: 0;
+  left: 0;
+  right: 0; */
+}
+
+.document-body {
+  position: relative;
+  min-height: 720px;
+}
+
+.document-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../images/logos/bamboo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  transform: scaleX(-1);
+  opacity: 0.3;
+}
+
+.section {
+  width: 35%;
+  border-right: 5px solid rgb(180, 2, 2);
+  padding-bottom: 100px;
+}
+
+.main {
+  width: 65%;
+}
+
+.footer-container {
+  transform: rotate(180deg);
+  margin-top: -150px;
+  /* bottom: 0;
+  left: 0;
+  right: 0; */
+}
+
+.wrapper {
+  position: relative;
+  transform: skewY(-9deg);
+  top: -90px;
+}
+
+.footer-wrapper {
+  position: relative;
+  transform: skewY(-9deg);
+  top: -90px;
+}
+
+.decoration {
+  background-color: rgb(147, 180, 1);
+  height: 200px;
+  width: 100%;
+}
+
+.decoration::before {
+  content: '';
+  background-color: green;
+  height: 100px;
+  width: 90%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 115px;
+  left: 50%;
+  z-index: -1;
+}
+
+.decoration::after {
+  content: '';
+  background-color: rgb(180, 2, 2);
+  height: 100px;
+  width: 80%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 125px;
+  left: 50%;
+  z-index: -2;
+}
+
+.brgy-logo {
+  height: 130px;
+  width: 130px;
+  position: absolute;
+  top: 13px;
+  left: 30px;
+}
+
+.separator {
+  border-left: 1px solid black;
+  height: 110px;
+  width: 1px;
+  position: absolute;
+  top: 20px;
+  left: 168px;
+}
+
+.header-text {
+  position: absolute;
+  top: 20px;
+  left: 180px;
+}
+
+h5 {
+  font-weight: 300;
+  margin-bottom: -5px;
+}
+
+.lower-header {
+  margin-top: -30px;
+}
+
+/* .fields-container h6:nth-child(1) {
+  padding-left: 26px;
+}
+
+.fields-container h6:nth-child(2) {
+  padding-left: 12px;
+}
+
+.fields-container h6:nth-child(4) {
+  padding-left: 20px;
+}
+
+.fields-container h6:nth-child(5) {
+  padding-left: 15px;
+}
+
+.fields-container h6:nth-child(6) {
+  padding-left: 52px;
+}
+
+.fields-container h6:nth-child(7) {
+  padding-left: 62px;
+} */
+
+.footer-text-container {
+  transform: rotate(180deg);
+  position: absolute;
+  top: 40px;
+  left: 30px;
+}
+
+.foorter-brgy-captain {
+  text-decoration: overline;
+}
+
+.note-text {
+  transform: rotate(180deg);
+  position: absolute;
+  font-size: 13px;
+  top: -2px;
+  right: 0;
+}
+
+@media print {
+  @page {
+    /* margin-top: -10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 0; */
+    margin: 0;
+    padding: 0;
+  }
+
+  .doc-container {
+    padding: 0 !important;
+  }
+
+  /* body {
+    display: grid;
+    place-items: center;
+  } */
+  body {
+    padding: 0;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .printing-file,
+  .printing-file * {
+    visibility: visible;
+  }
+}
