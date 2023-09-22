@@ -13,22 +13,16 @@
   <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}"> --}}
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
-  <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
   <nav class="navbar navbar-expand-lg bg-white border-bottom px-4 shadow-sm sticky-top">
     <div class="container-fluid">
       <div class="d-flex gap-5 align-items-center">
-        <a class="navbar-brand mb-0 align-middle h1" href="#">
+        <a class="navbar-brand mb-0 align-middle h1" href="{{ route('resident.home') }}">
           <img src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="Logo" height="40" class="">
-          {{-- <span class="align-middle">e-Support</span> --}}
+          <span class="align-middle d-none">e-Support</span>
         </a>
-        <ul class="nav nav-underline gap-5">
+        <ul class="nav nav-underline gap-5 navbar-hide-items">
           <li class="nav-item">
             <a href="{{ route('resident.home') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'active' : '' }}">
               <h5 class="m-0">Home</h5>
@@ -46,7 +40,7 @@
           </li>
         </ul>
       </div>
-      <div class="btn-group">
+      <div class="btn-group navbar-hide-items">
         <button type="button" class="btn btn-white bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="username">{{ auth()->guard('web')->user()->username }}</span>
         </button>
@@ -54,13 +48,57 @@
           <li class="dropdown-item p-0">
             <form class="logout-form" action="{{ route('resident.logout') }}" method="POST">
               @csrf
-              <button type="submit" class="btn btn-transparent border-0 w-100 logout-btn">Logout</button>
+              <button type="submit" class="btn btn-transparent border-0 w-100">Logout</button>
             </form>
           </li>
         </ul>
       </div>
+      <span id="sidebar-btn" class="material-symbols-outlined d-none sidebar-btn">
+        menu
+      </span>
     </div>
   </nav>
+  <div id="sidebar-backdrop" class="bg-dark bg-opacity-25 backdrop"></div>
+  <div id="sidebar" class="pb-2 bg-white sidebar border">
+    <div class="w-100 d-flex align-items-center border py-4 px-2">
+      <div class="p-2">
+        <img class="rounded-circle profile-picture" src="{{ Storage::url(auth()->guard('web')->user()->profile) }}" alt="profile_picture">
+      </div>
+      <div class="text-truncate">
+        <p class="m-0 text-truncate fw-semibold">{{ auth()->guard('web')->user()->username }}</p>
+      </div>
+    </div>
+    <div class="w-100">
+      <ul class="p-4 sidebar-items">
+        <li class="pb-3">
+          <a href="{{ route('resident.home') }}" class="d-flex align-items-center">
+            <span class="material-symbols-outlined">home</span>
+            <span class="ps-2">Home</span>
+          </a>
+        </li>
+        <li class="pb-3">
+          <a href="{{ route('resident.services') }}" class="d-flex align-items-center">
+            <span class="material-symbols-outlined">quick_reference</span>
+            <span class="ps-2">Services</span>
+          </a>
+        </li>
+        <li class="pb-3">
+          <a href="{{ route('resident.profile') }}" class="d-flex align-items-center">
+            <span class="material-symbols-outlined">manage_accounts</span>
+            <span class="ps-2">Profile</span>
+          </a>
+        </li>
+        <li class="pb-3">
+          <form action="{{ route('resident.logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="logout-btn"><span class="material-symbols-outlined pe-2">logout</span>Logout</button>
+          </form>
+          {{-- <a href="{{  }}" class="d-flex align-items-center">
+          </a> --}}
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <main>
     <div id="content">
@@ -68,6 +106,18 @@
     </div>
   </main>
 
+  {{-- scripts --}}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  
+  <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
+  
+  <script src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
+
   @yield('scripts')
+
 </body>
 </html>

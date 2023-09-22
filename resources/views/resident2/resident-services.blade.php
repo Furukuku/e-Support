@@ -4,13 +4,13 @@
 
   <div class="py-5">
 
-    <div class="mx-5">
+    <div class="mx-5 services-start">
       <div>
         <h6>REQUEST DOCUMENTS</h6>
       </div>
       <div class="row gap-2 justify-content-center p-2">
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="width: 24rem;">
+          <div class="card shadow-sm docs-card">
             <div class="card-body px-4">
               <div class="d-flex justify-content-end mb-3">
                 <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background: #0E2C15;">
@@ -20,12 +20,12 @@
                 </div>
               </div>
               <h5 class="card-title mb-3">Barangay Clearance</h5>
-              <a href="#" class="btn btn-transparent border border-success rounded-pill px-3">Request</a>
+              <a href="{{ route('resident.brgy-clearance') }}" class="btn btn-transparent border border-success rounded-pill px-3">Request</a>
             </div>
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="width: 24rem;background: #0E2C15;">
+          <div class="card shadow-sm docs-card" style="background: #0E2C15;">
             <div class="card-body px-4">
               <div class="d-flex justify-content-end mb-3">
                 <div class="rounded-circle bg-white d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
@@ -35,12 +35,12 @@
                 </div>
               </div>
               <h5 class="card-title mb-3 text-white">Barangay Indigency</h5>
-              <a href="#" class="btn border border-white text-white rounded-pill px-3" style="background-color: #0E2C15;">Request</a>
+              <a href="{{ route('resident.indigency') }}" class="btn border border-white text-white rounded-pill px-3" style="background-color: #0E2C15;">Request</a>
             </div>
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="width: 24rem;">
+          <div class="card shadow-sm docs-card">
             <div class="card-body px-4">
               <div class="d-flex justify-content-end mb-3">
                 <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background: #0E2C15;">

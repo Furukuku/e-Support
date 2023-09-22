@@ -25,7 +25,7 @@
         <div class="row mb-3">
           <label for="username" class="">Username</label>
           <div class="col-md-12">
-            <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}">
+            <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autofocus>
 
             @error('username')
                 <span class="invalid-feedback" role="alert">
