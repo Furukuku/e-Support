@@ -20,22 +20,18 @@ class Indigency extends Component
         $date = now()->day;
         $suffix = '';
         
-        if($date % 100 >= 11 && $date % 100 <= 13){
-            $suffix = 'th';
-        }else{
-            switch($date % 10){
-                case 1:
-                    $suffix = 'st';
-                    break;
-                case 2:
-                    $suffix = 'nd';
-                    break;
-                case 3:
-                    $suffix = 'rd';
-                    break;
-                default:
-                    $suffix = 'th';
-            }
+        switch($date % 10){
+            case 1:
+                $suffix = 'st';
+                break;
+            case 2:
+                $suffix = 'nd';
+                break;
+            case 3:
+                $suffix = 'rd';
+                break;
+            default:
+                $suffix = 'th';
         }
 
         $captain = BrgyOfficial::where('position', 'Captain')->first();

@@ -4,7 +4,7 @@
 
   <div class="py-5">
 
-    <div class="position-relative mx-5 home-start">
+    <div class="position-relative mx-5">
       <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 end-0 translate-middle-y d-none" id="scroll-right">
         <span class="material-symbols-outlined">
         arrow_forward
@@ -92,27 +92,25 @@
       </div>
     </div>
     
-    <div class="d-flex justify-content-between align-items-center py-4 px-5 my-5 bg-success bg-opacity-25 home-middle">
-      <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
+    <div class="d-flex justify-content-between align-items-center py-4 px-5 my-5 bg-success bg-opacity-25">
+      <div class="d-flex gap-3 flex-row align-items-end">
         <h5 class="m-0 align-center">Where do you want to go?</h5>
         <p class="m-0 align-center">Explore some places around Barangay Nancayasan.</p>
       </div>
-      <div>
-        <div class="rounded-circle border border-dark place-icon">
-          <span class="material-symbols-outlined">
-            storefront
-          </span>
-        </div>
+      <div class="rounded-circle border border-dark place-icon">
+        <span class="material-symbols-outlined">
+          storefront
+        </span>
       </div>
     </div>
 
-    <div class="mx-5 home-end">
+    <div class="mx-5">
       <div>
         <h6>PLACES</h6>
       </div>
       <div class="row gap-2 justify-content-center p-2">
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -121,7 +119,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -130,7 +128,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -139,7 +137,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -148,7 +146,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -157,7 +155,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -166,7 +164,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -175,7 +173,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -184,7 +182,7 @@
           </div>
         </div>
         <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
+          <div class="card shadow-sm" style="width: 24rem;">
             <div class="card-body">
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

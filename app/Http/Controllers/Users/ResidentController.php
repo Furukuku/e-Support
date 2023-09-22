@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -39,6 +40,17 @@ class ResidentController extends Controller
             'proof' => ['required', File::image(),],
         ]);
 
+        // $qr_password = Hash::make('esupport-biz-clearance-qr-password');
+
+        // dd(uniqid('biz-clearance', true));
+
+        // $qr_code = collect([
+        //     'password' => $qr_password,
+        //     'id' => '1',
+        // ]);
+
+        // return redirect()->route('qr-code', ['qr_code' => $qr_code]);
+
         if(Auth::guard('web')->check()){
             $proof_filename = $request->proof->store('public/images/biz-clearances/proofs');
             $token = uniqid(Str::random(10), true);
@@ -59,54 +71,6 @@ class ResidentController extends Controller
             return redirect()->route('resident.qr-code', ['token' => $token]);
         }else{
             return redirect()->route('resident.biz-clearance');
-        }
-    }
-
-    public function storeIndigency(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:155'],
-        ]);
-
-        if(Auth::guard('web')->check()){
-            $token = uniqid(Str::random(10), true);
-
-            $document = new Document();
-            $document->user_id = auth()->guard('web')->id();
-            $document->type = 'Indigency';
-            $document->name = $request->name;
-            $document->token = $token;
-            $document->save();
-
-            return redirect()->route('resident.qr-code', ['token' => $token]);
-        }else{
-            return redirect()->route('resident.indigency');
-        }
-    }
-
-    public function storeBrgyClearance(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:155'],
-            'zone' => ['required', 'string', 'max:1'],
-            'purpose' => ['required', 'string', 'max:155'],
-        ]);
-
-        if(Auth::guard('web')->check()){
-            $token = uniqid(Str::random(10), true);
-
-            $document = new Document();
-            $document->user_id = auth()->guard('web')->id();
-            $document->type = 'Barangay Clearance';
-            $document->name = $request->name;
-            $document->zone = $request->zone;
-            $document->purpose = $request->purpose;
-            $document->token = $token;
-            $document->save();
-
-            return redirect()->route('resident.qr-code', ['token' => $token]);
-        }else{
-            return redirect()->route('resident.brgy-clearance');
         }
     }
 

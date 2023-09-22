@@ -167,12 +167,8 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
         Route::view('/home', 'resident2.resident-home')->name('home');
         Route::view('/services', 'resident2.resident-services')->name('services');
         Route::view('/profile', 'resident2.resident-profile')->name('profile');
-        Route::view('/business-clearance', 'resident2.documents.business-clearance')->name('biz-clearance');
-        Route::view('/indigency', 'resident2.documents.indigency')->name('indigency');
-        Route::view('/brgy-clearance', 'resident2.documents.brgy-clearance')->name('brgy-clearance');
-        Route::post('/business-clearance', [ResidentController::class, 'storeBizClearance'])->name('validate.biz-clearance');
-        Route::post('/indigency', [ResidentController::class, 'storeIndigency'])->name('validate.indigency');
-        Route::post('/brgy-clearance', [ResidentController::class, 'storeBrgyClearance'])->name('validate.brgy-clearance');
+        Route::view('/resident/biz-clearance', 'resident2.documents.business-clearance')->name('biz-clearance');
+        Route::post('/biz-clearance', [ResidentController::class, 'storeBizClearance'])->name('validate.biz-clearance');
         Route::get('/qr-code/{token}', [ResidentController::class, 'showQr'])->name('qr-code');
 
     });

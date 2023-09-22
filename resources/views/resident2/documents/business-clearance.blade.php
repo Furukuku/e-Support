@@ -4,7 +4,7 @@
 
   <div class="py-5">
 
-    <div class="container w-50 docs-form-container">
+    <div class="container w-25">
       <div class="row docs-form-header justify-content-center rounded py-3 mb-3">
         <div class="rounded-circle bg-white d-flex justify-content-center align-items-center mb-3">
           <span class="material-symbols-outlined fs-2">
@@ -14,7 +14,7 @@
         <h5 class="text-center text-white">Business Clearance</h5>
       </div>
       <div class="row">
-        <form id="biz-clearance-form" class="biz-clearance-form" action="{{ route('resident.validate.biz-clearance') }}" method="POST" enctype="multipart/form-data">
+        <form class="biz-clearance-form" action="{{ route('resident.validate.biz-clearance') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="row mb-3">
             <label for="biz-nature" class="form-label px-0">Nature of Business</label>
@@ -52,35 +52,11 @@
             <input type="file" accept="image/*" id="proof" class="form-control form-control-sm" name="proof" value="{{ old('proof') }}">
             @error('proof') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <button id="confirmation" type="button" class="btn text-white my-4 rounded-pill px-4">Submit</button>
+          <button type="submit" class="btn text-white my-4 rounded-pill px-4">Submit</button>
         </form>
       </div>
     </div>
 
   </div>
-
-@endsection
-
-@section('scripts')
-
-  <script>
-    
-    document.getElementById('confirmation').addEventListener('click', () => {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#0e2c15dc',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $('#biz-clearance-form').submit();
-        }
-      });
-    });
-
-  </script>
 
 @endsection

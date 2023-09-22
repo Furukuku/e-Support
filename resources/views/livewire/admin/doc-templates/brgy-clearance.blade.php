@@ -37,7 +37,7 @@
   <footer class="px-5">
     <div class="d-flex justify-content-end">
       <div class="w-50 d-flex flex-column align-items-center">
-        <h5 class="m-0"><strong><u>{{ !is_null($captain) ? strtoUpper($captain->fname . ' ' . $captain->mname[0] . '. ' . $captain->lname . ' ' . $captain->sname) : '' }}</u></strong></h5>
+        <h5 class="m-0"><strong><u>{{ !is_null($captain) ? strtoUpper($captain->fname . ' ' $captain->mname[0] . '. ' . $captain->lname . ' ' $captain->sname) : '' }}</u></strong></h5>
         <h5 class="fw-1">PUNONG BARANGAY</h5>
       </div>
     </div>
