@@ -7,10 +7,10 @@
 
   {{-- @livewire('users.registration') --}}
 
-  <div class="h-100 d-flex justify-content-center align-items-center">
-    <div class="card bg-white bg-opacity-50 pt-4 pb-1 w-50">
+  <div class="d-flex justify-content-center align-items-center login-container">
+    <div class="card bg-white bg-opacity-50 pb-1 px-4 login-card">
       <div class="card-body d-flex flex-column align-items-center">
-        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png?w=740&t=st=1682225191~exp=1682225791~hmac=35847e176c9e88801c133b577ecf852825415d5b2b3c23f9d76d6c47a5a1e5b1" alt="logo" style="height: 6rem">
+        <img src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" class="rounded-circle brgy-logo" alt="logo">
         <h4>e-Support</h4>
         <form action="{{ route('user.validate') }}" method="POST" autocomplete="off" class="mt-3">
           @csrf
@@ -60,11 +60,11 @@
           </div>
           <div class="row">
             <div class="d-flex flex-column align-items-center">
-              <button type="submit" class="btn btn-warning rounded-pill w-50 mb-3">Login</button>
+              <button type="submit" class="btn btn-warning rounded-pill w-50 mb-3 login-btn">Login</button>
             </div>
           </div>
         </form>
-        <a href="#" class="text-decoration-none links-color my-3">Forgot Password?</a>
+        <a href="#" class="text-decoration-none links-color my-3 forgot-pwd-link">Forgot Password?</a>
         {{-- <div class="d-flex justify-content-between w-75 mt-3">
           <p class="links-color registers" data-bs-toggle="modal" data-bs-target="#residentModal">
             Sign up as resident
@@ -73,7 +73,7 @@
             Sign up as company
           </p>
         </div> --}}
-        <p class="mt-3 sign-up-link">Don't have an account yet? <a href="{{ route('resident.register') }}">Sign up</a></p>
+        <p class="mt-3 mb-0 sign-up-link">Don't have an account yet? <a href="{{ route('resident.register') }}">Sign up</a></p>
       </div>
     </div>
   </div>

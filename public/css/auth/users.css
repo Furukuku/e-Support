@@ -17,6 +17,19 @@ body {
   background-color: var(--header-bg);
 }
 
+.login-container {
+  height: 100vh;
+}
+
+.login-card {
+  width: 40rem;
+}
+
+.brgy-logo {
+  height: 6rem;
+  width: 6rem;
+}
+
 .links-color {
   color: var(--links-color);
 }
@@ -90,14 +103,44 @@ body {
   animation: rotation 1s linear infinite;
   }
 
-  @keyframes rotation {
+@keyframes rotation {
   0% {
       transform: rotate(0deg);
   }
   100% {
       transform: rotate(360deg);
   }
-  } 
+}
+
+@media (max-width: 870px){
+  .login-container {
+    height: 80vh;
+  }
+
+  .login-card {
+    width: 20rem;
+  }
+
+  .login-card * {
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .login-btn {
+    margin-bottom: 0 !important;
+  }
+
+  .brgy-logo {
+    height: 4rem;
+    width: 4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .forgot-pwd-link {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
 
 /* .btn-submit,
 .btn-next {

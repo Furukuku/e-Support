@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}"> --}}
 
+
+  @livewireStyles
 </head>
 <body>
   <nav class="navbar navbar-expand-lg bg-white border-bottom px-4 shadow-sm sticky-top">
@@ -60,7 +62,7 @@
   </nav>
   <div id="sidebar-backdrop" class="bg-dark bg-opacity-25 backdrop"></div>
   <div id="sidebar" class="pb-2 bg-white sidebar border">
-    <div class="w-100 d-flex align-items-center border py-4 px-2">
+    <div class="w-100 d-flex align-items-center border-bottom shadow-sm py-4 px-2">
       <div class="p-2">
         <img class="rounded-circle profile-picture" src="{{ Storage::url(auth()->guard('web')->user()->profile) }}" alt="profile_picture">
       </div>
@@ -71,19 +73,19 @@
     <div class="w-100">
       <ul class="p-4 sidebar-items">
         <li class="pb-3">
-          <a href="{{ route('resident.home') }}" class="d-flex align-items-center">
+          <a href="{{ route('resident.home') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'text-primary' : 'text-dark' }}">
             <span class="material-symbols-outlined">home</span>
             <span class="ps-2">Home</span>
           </a>
         </li>
         <li class="pb-3">
-          <a href="{{ route('resident.services') }}" class="d-flex align-items-center">
+          <a href="{{ route('resident.services') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'text-primary' : 'text-dark' }}">
             <span class="material-symbols-outlined">quick_reference</span>
             <span class="ps-2">Services</span>
           </a>
         </li>
         <li class="pb-3">
-          <a href="{{ route('resident.profile') }}" class="d-flex align-items-center">
+          <a href="{{ route('resident.profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.profile') ? 'text-primary' : 'text-dark' }}">
             <span class="material-symbols-outlined">manage_accounts</span>
             <span class="ps-2">Profile</span>
           </a>
@@ -106,6 +108,7 @@
     </div>
   </main>
 
+  @livewireScripts
   {{-- scripts --}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 

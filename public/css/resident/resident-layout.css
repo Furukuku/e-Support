@@ -309,9 +309,10 @@
   width: 40px;
 }
 
-.docs-card {
+.docs-card,
+.requested-docs-card {
   width: 24rem;
-  min-width: 22rem;
+  min-width: 18rem;
 }
 
 .docs-form-header {
@@ -331,17 +332,46 @@ label[for="proof"] {
   font-size: 13px;
 }
 
-.biz-clearance-form > button {
+.biz-clearance-form > button,
+.add-report-btn {
   background-color: var(--theme-color);
 }
 
-.biz-clearance-form > button:hover {
-  background-color: #0e2c15dc;
+.biz-clearance-form > button:hover,
+.add-report-btn:hover {
+  background-color: var(--theme-color);
 
 }
 
-.biz-clearance-form > .btn {
-  --bs-btn-active-bg: #0e2c15dc;
+.biz-clearance-form > .btn,
+.add-report-btn.btn {
+  --bs-btn-active-bg: var(--theme-color);
+  border: none;
+}
+
+.even-requested-docs-card-body,
+.odd-requested-docs-card-footer {
+  background-color: var(--theme-color);
+}
+
+.requested-docs-pagination > div > nav {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  align-items: center !important;
+}
+
+.requested-docs-pagination > div > nav > div > p > span {
+  font-size: 12px !important;
+}
+
+.requested-docs-pagination > div > nav > ul > .active > .page-link {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color);
+  color: #fff;
+}
+
+.requested-docs-pagination > div > nav > ul > li > .page-link {
+  color: var(--theme-color);
 }
 
 
@@ -379,8 +409,13 @@ label[for="proof"] {
     padding-right: 1rem !important;
   }
 
-  .docs-card {
+  .docs-card,
+  .requested-docs-card {
     width: 22rem;
+  }
+
+  .requested-docs-pagination > div > nav > div > p > span {
+    font-size: 10px !important;
   }
 }
 
@@ -388,6 +423,10 @@ label[for="proof"] {
 @media (max-width: 730px){
   .home-middle-texts {
     display: block !important;
+  }
+
+  .home-middle *:not(span) {
+    font-size: 14px;
   }
 }
 

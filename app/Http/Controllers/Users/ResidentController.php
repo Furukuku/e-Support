@@ -7,11 +7,100 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ResidentController extends Controller
 {
+    public function updateIndigency(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:155'],
+        ]);
+
+        if($validated){
+            $document = Document::find($id);
+            $document->update($validated);
+        }
+
+        return redirect()->route('resident.services');
+    }
+
+    public function updateBizClearance(Request $request, $id){
+        $request->validate([
+            'business_nature' => ['required', 'string', 'max:255'],
+            'owner_name' => ['required', 'string', 'max:255'],
+            'business_name' => ['required', 'string', 'max:255'],
+            'owner_address' => ['required', 'string', 'max:255'],
+            'business_address' => ['required', 'string', 'max:255'],
+            'proof' => [File::image()],
+        ]);
+        // dd($request->proof);
+        if($request->hasFile('proof')){
+            $document = Document::find($id);
+
+            $proof_filename = $request->proof->store('public/images/biz-clearances/proofs');
+            Storage::delete($document->proof);
+
+            $document->biz_nature = $request->business_nature;
+            $document->biz_owner = $request->owner_name;
+            $document->biz_name = $request->business_name;
+            $document->owner_address = $request->owner_address;
+            $document->biz_address = $request->business_address;
+            $document->proof = $proof_filename;
+            $document->update();
+        }else{
+            $document = Document::find($id);
+            $document->biz_nature = $request->business_nature;
+            $document->biz_owner = $request->owner_name;
+            $document->biz_name = $request->business_name;
+            $document->owner_address = $request->owner_address;
+            $document->biz_address = $request->business_address;
+            $document->update();
+        }
+
+        return redirect()->route('resident.services');
+    }
+
+    public function updateBrgyClearance(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:155'],
+            'zone' => ['required', 'string', 'max:1'],
+            'purpose' => ['required', 'string', 'max:155'],
+        ]);
+
+        $document = Document::find($id);
+
+        if($validated){
+            $document->update($validated);
+
+            return redirect()->route('resident.services');
+        }
+    }
+
+    public function editDocs($id, $token)
+    {
+        $document = Document::where('id', $id)
+            ->where('token', $token)
+            ->first();
+
+        if(!is_null($document)){
+            if($document->type === 'Barangay Clearance'){
+                return view('resident2.documents.edit-documents.brgy-clearance', ['document' => $document]);
+            }else if($document->type === 'Business Clearance'){
+                return view('resident2.documents.edit-documents.business-clearance', ['document' => $document]);
+            }else if($document->type === 'Indigency'){
+                return view('resident2.documents.edit-documents.indigency', ['document' => $document]);
+            }else{
+                abort(404);
+            }
+        }else{
+            abort(404);
+        }
+    }
+
     public function showQr($token)
     {
         $document = Document::where('token', $token)

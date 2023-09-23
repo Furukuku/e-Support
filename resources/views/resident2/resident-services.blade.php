@@ -9,7 +9,7 @@
         <h6>REQUEST DOCUMENTS</h6>
       </div>
       <div class="row gap-2 justify-content-center p-2">
-        <div class="col-auto mb-5">
+        <div class="col-auto mb-4">
           <div class="card shadow-sm docs-card">
             <div class="card-body px-4">
               <div class="d-flex justify-content-end mb-3">
@@ -24,7 +24,7 @@
             </div>
           </div>
         </div>
-        <div class="col-auto mb-5">
+        <div class="col-auto mb-4">
           <div class="card shadow-sm docs-card" style="background: #0E2C15;">
             <div class="card-body px-4">
               <div class="d-flex justify-content-end mb-3">
@@ -39,7 +39,7 @@
             </div>
           </div>
         </div>
-        <div class="col-auto mb-5">
+        <div class="col-auto mb-4">
           <div class="card shadow-sm docs-card">
             <div class="card-body px-4">
               <div class="d-flex justify-content-end mb-3">
@@ -56,6 +56,20 @@
         </div>
       </div>
     </div>
+
+    <div class="d-flex justify-content-between align-items-center py-4 px-5 mb-4 bg-success bg-opacity-25 home-middle">
+      <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
+        <h5 class="m-0 align-center">Do you have concern?</h5>
+        <p class="m-0 align-center">Just send a report to the barangay.</p>
+      </div>
+      <div>
+        <div class="add-report-btn-container">
+          <button type="button" class="btn text-white rounded-pill px-4 add-report-btn">Report</button>
+        </div>
+      </div>
+    </div>
+
+    @livewire('resident.requested-docs')
 
   </div>
 

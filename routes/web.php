@@ -174,6 +174,10 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
         Route::post('/indigency', [ResidentController::class, 'storeIndigency'])->name('validate.indigency');
         Route::post('/brgy-clearance', [ResidentController::class, 'storeBrgyClearance'])->name('validate.brgy-clearance');
         Route::get('/qr-code/{token}', [ResidentController::class, 'showQr'])->name('qr-code');
+        Route::get('/edit/documents/{id}/{token}', [ResidentController::class, 'editDocs'])->name('edit.docs');
+        Route::patch('/update/brgy-clearance/{id}', [ResidentController::class, 'updateBrgyClearance'])->name('update.brgy-clearnce');
+        Route::patch('/update/business-clearance/{id}', [ResidentController::class, 'updateBizClearance'])->name('update.biz-clearnce');
+        Route::patch('/update/indigency/{id}', [ResidentController::class, 'updateIndigency'])->name('update.indigency');
 
     });
 });
