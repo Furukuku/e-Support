@@ -23,7 +23,9 @@ class Indigencies extends Component
     
     protected $listeners = ['getDocDetails'];
 
-    public $name, $date_requested;
+    public $name, $date_requested, $status;
+
+    public $user_id, $business_id;
 
     public $doc_id;
 
@@ -44,6 +46,9 @@ class Indigencies extends Component
             'date_requested',
             'doc_id',
             'error_msg',
+            'status',
+            'user_id',
+            'business_id',
         );
     }
 
@@ -108,11 +113,40 @@ class Indigencies extends Component
     public function editDoc(Document $document)
     {
         $this->doc_id = $document->id;
+        $this->status = $document->status;
+        $this->user_id = $document->user_id;
+        $this->business_id = $document->business_id;
+        $this->name = $document->name;
+    }
+
+    public function updateDoc()
+    {
+        $document = Document::find($this->doc_id);
+
+        if(is_null($this->user_id) && is_null($this->business_id)){
+            $this->validate([
+                'name' => ['required', 'string', 'max:255'],
+            ]);
+
+            $document->name = $this->name;
+            $document->update();
+        }else{
+            $this->validate([
+                'status' => ['required', 'string', 'max:15'],
+            ]);
+
+            $document->status = $this->status;
+            $document->update();
+        }
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
     }
 
     public function release()
     {
         $document = Document::find($this->doc_id);
+        $document->status = 'Released';
         $document->is_released = true;
         $document->update();
 

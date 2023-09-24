@@ -45,6 +45,7 @@
       $('#qrResult').modal('hide');
       $('#editDoc').modal('hide');
       $('#addDoc').modal('hide');
+      $('#releaseDoc').modal('hide');
     });
   </script>
 

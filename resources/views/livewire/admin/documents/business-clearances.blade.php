@@ -58,26 +58,42 @@
             <th class="align-middle text-center">Business Name</th>
             <th class="align-middle text-center">Nature of Business</th>
             <th class="align-middle text-center">Owner</th>
+            <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Date/Time</th>
             <th class="align-middle text-center">Action</th>
           </tr>
         </thead>
         <tbody>
           @forelse ($documents as $document)
-            <tr>
+            <tr wire:poll.60s>
               <td class="align-middle text-center">{{ $document->biz_name }}</td>
               <td class="align-middle text-center">{{ $document->biz_nature }}</td>
               <td class="align-middle text-center">{{ $document->biz_owner }}</td>
+              <td class="align-middle text-center">
+                <div class="px-1 rounded-pill 
+                @if ($document->status === 'Pending')
+                  bg-warning
+                @elseif ($document->status === 'Ready to Pickup')
+                  bg-primary text-light
+                @elseif ($document->status === 'Released' && $document->is_released == true)
+                  bg-success text-light
+                @else
+                  bg-dark text-light
+                @endif">
+                  {{ $document->status }}
+                </div>
+              </td>
+              </td>
               <td class="align-middle text-center">{{ $document->created_at->format('h:i A - M d, Y') }}</td>
               <td class="d-flex gap-1 align-items-center justify-content-center">
                 <a href="{{ route('admin.templates.biz-clearance', ['document' => $document]) }}" target="_blank" class="text-dark pt-1">
-                  <span class="material-symbols-outlined">
+                  <span class="material-symbols-outlined ms-1">
                     print
                   </span>
                 </a>
-                <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#bizClearanceInfo"></i>
-                <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i>
-                {{-- <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:click="archiveConfirmation({{ $place }})" data-bs-toggle="modal" data-bs-target="#archivePlace"></i> --}}
+                <i class="fa-solid fa-eye ms-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#bizClearanceInfo"></i>
+                <i class="fa-solid fa-pen ms-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i>
+                <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
               </td>
             </tr>
           @empty

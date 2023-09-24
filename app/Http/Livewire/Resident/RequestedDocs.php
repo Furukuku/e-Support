@@ -15,6 +15,12 @@ class RequestedDocs extends Component
     public function render()
     {
         $myDocs =Document::where('user_id', auth()->guard('web')->id())
+            ->orderByRaw("CASE
+                WHEN status = 'Ready to Pickup' THEN 1
+                WHEN status = 'Pending' THEN 2
+                WHEN status = 'Released' AND is_released = true THEN 3
+                ELSE 4
+                END")
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 

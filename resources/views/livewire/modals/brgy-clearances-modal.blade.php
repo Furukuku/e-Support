@@ -121,11 +121,11 @@
 
 
 {{-- view --}}
-<div wire:ignore.self class="modal fade" id="bizClearanceInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bizClearanceInfoLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="brgyClearanceInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="brgyClearanceInfoLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header header-bg py-2">
-        <h1 class="modal-title fs-5" id="bizClearanceInfoLabel">Information</h1>
+        <h1 class="modal-title fs-5" id="brgyClearanceInfoLabel">Information</h1>
         <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
           cancel
         </span>
@@ -163,8 +163,8 @@
 </div>
 
 
-{{-- Edit --}}
-<div wire:ignore.self class="modal fade" id="editDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDocLabel" aria-hidden="true">
+{{-- Release --}}
+<div wire:ignore.self class="modal fade" id="releaseDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="releaseDocLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0 justify-content-end">
@@ -188,3 +188,61 @@
     </div>
   </div>
 </div>
+
+
+{{-- edit document --}}
+<form wire:submit.prevent="updateDoc">
+  @csrf
+  <div wire:ignore.self class="modal fade" id="editDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDocLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header header-bg py-2">
+          <h1 class="modal-title fs-5" id="editDocLabel">Barangay Clearance</h1>
+          <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
+            cancel
+          </span>
+        </div>
+        <div class="modal-body px-4">
+          @if (is_null($user_id) && is_null($business_id))
+            <div class="my-3">
+              <label for="name" class="form-label m-0">Name</label>
+              <input type="text" wire:model.defer="name" id="name" class="form-control">
+              @error('name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="zone" class="form-label m-0">Zone</label>
+              <select id="zone" wire:model.defer="zone" class="form-select">
+                <option value="">Choose one...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+              @error('zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="purpose" class="form-label m-0">Purpose</label>
+              <input type="text" wire:model.defer="purpose" id="purpose" class="form-control">
+              @error('purpose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+          @elseif (!is_null($status))
+            <div class="my-3">
+              <label for="status" class="form-label m-0">Status</label>
+              <select id="status" wire:model.defer="status" class="form-select">
+                <option value="">Choose one...</option>
+                <option value="Pending">Pending</option>
+                <option value="Ready to Pickup">Ready to Pickup</option>
+              </select>
+              @error('status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+          @endif
+        </div>
+        <div class="modal-footer justify-content-center border-0">
+          <button type="submit" class="btn btn-warning rounded-pill px-5">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

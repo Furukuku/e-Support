@@ -189,8 +189,8 @@
 </div>
 
 
-{{-- Edit --}}
-<div wire:ignore.self class="modal fade" id="editDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDocLabel" aria-hidden="true">
+{{-- Release --}}
+<div wire:ignore.self class="modal fade" id="releaseDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="releaseDocLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0 justify-content-end">
@@ -214,3 +214,62 @@
     </div>
   </div>
 </div>
+
+{{-- edit document --}}
+<form wire:submit.prevent="updateDoc">
+  @csrf
+  <div wire:ignore.self class="modal fade" id="editDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDocLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header header-bg py-2">
+          <h1 class="modal-title fs-5" id="editDocLabel">Business Clearance</h1>
+          <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
+            cancel
+          </span>
+        </div>
+        <div class="modal-body px-4">
+          @if (is_null($user_id) && is_null($business_id))
+            <div class="my-3">
+              <label for="biz_name" class="form-label m-0">Business Name</label>
+              <input type="text" wire:model.defer="business_name" id="biz_name" class="form-control">
+              @error('business_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="biz_nature" class="form-label m-0">Nature of Business</label>
+              <input type="text" wire:model.defer="business_nature" id="biz_nature" class="form-control">
+              @error('business_nature') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="biz_address" class="form-label m-0">Business Address</label>
+              <input type="text" wire:model.defer="business_address" id="biz_address" class="form-control">
+              @error('business_address') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="biz_owner" class="form-label m-0">Name of Owner</label>
+              <input type="text" wire:model.defer="owner_name" id="biz_owner" class="form-control">
+              @error('owner_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="owner_address" class="form-label m-0">Owner's Address</label>
+              <input type="text" wire:model.defer="owner_address" id="owner_address" class="form-control">
+              @error('owner_address') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+          @else
+            <div class="my-3">
+              <label for="status" class="form-label m-0">Status</label>
+              <select id="status" wire:model.defer="status" class="form-select">
+                <option value="">Choose one...</option>
+                <option value="Pending">Pending</option>
+                <option value="Ready to Pickup">Ready to Pickup</option>
+              </select>
+              @error('status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+          @endif
+        </div>
+        <div class="modal-footer justify-content-center border-0">
+          <button type="submit" class="btn btn-warning rounded-pill px-5">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

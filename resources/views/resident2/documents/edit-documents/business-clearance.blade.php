@@ -48,7 +48,7 @@
             <input type="file" accept="image/*" id="proof" class="form-control form-control-sm inputs" disabled name="proof" value="{{ old('proof') }}">
             @error('proof') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <button id="confirmation" hidden type="button" class="btn text-white my-4 rounded-pill px-4">Update</button>
+          <button id="confirmation" hidden type="submit" class="btn text-white my-4 rounded-pill px-4">Update</button>
         </form>
       </div>
     </div>
@@ -78,8 +78,9 @@
         confirmBtn.toggleAttribute('hidden');
       }, 300);
     });
-    
-    confirmBtn.addEventListener('click', () => {
+
+    document.getElementById('biz-clearance-form').addEventListener('submit', e => {
+      e.preventDefault();
       Swal.fire({
         title: 'Update Business Clearance?',
         text: "Are you sure you want to update this request?",

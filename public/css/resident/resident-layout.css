@@ -315,6 +315,10 @@
   min-width: 18rem;
 }
 
+.even-requested-docs-card-body {
+  min-height: 9.5rem !important;
+}
+
 .docs-form-header {
   background-color: var(--theme-color);
 }

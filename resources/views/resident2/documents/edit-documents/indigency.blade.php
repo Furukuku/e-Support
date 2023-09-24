@@ -27,7 +27,7 @@
             <input type="text" id="name" class="form-control mb-2" disabled  name="name" value="{{ old('name', $document->name) }}" placeholder="Enter your name">
             @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <button id="confirmation" type="button" hidden class="btn text-white my-4 rounded-pill px-4">Update</button>
+          <button id="confirmation" type="submit" hidden class="btn text-white my-4 rounded-pill px-4">Update</button>
         </form>
       </div>
     </div>
@@ -50,7 +50,24 @@
       }, 300);
     });
     
-    confirmBtn.addEventListener('click', () => {
+    // confirmBtn.addEventListener('click', () => {
+    //   Swal.fire({
+    //     title: 'Update Indigency?',
+    //     text: "Are you sure you want to update this request?",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#0e2c15dc',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Yes!'
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       $('#indigency-form').submit();
+    //     }
+    //   });
+    // });
+
+    document.getElementById('indigency-form').addEventListener('submit', e => {
+      e.preventDefault();
       Swal.fire({
         title: 'Update Indigency?',
         text: "Are you sure you want to update this request?",

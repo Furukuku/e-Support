@@ -45,7 +45,7 @@
             <input type="text" id="purpose" class="form-control mb-2 inputs" disabled name="purpose" value="{{ old('purpose', $document->purpose) }}" placeholder="Enter purpose (ex. Scholarship)">
             @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <button id="confirmation" type="button" hidden class="btn text-white my-4 rounded-pill px-4">Update</button>
+          <button id="confirmation" type="submit" hidden class="btn text-white my-4 rounded-pill px-4">Update</button>
         </form>
       </div>
     </div>
@@ -70,7 +70,24 @@
       }, 300);
     });
     
-    confirmBtn.addEventListener('click', () => {
+    // confirmBtn.addEventListener('click', () => {
+    //   Swal.fire({
+    //     title: 'Update Barangay Clearance?',
+    //     text: "Are you sure you want to update this request?",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#0e2c15dc',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Yes!'
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       $('#brgy-clearance-form').submit();
+    //     }
+    //   });
+    // });
+
+    document.getElementById('brgy-clearance-form').addEventListener('submit', e => {
+      e.preventDefault();
       Swal.fire({
         title: 'Update Barangay Clearance?',
         text: "Are you sure you want to update this request?",

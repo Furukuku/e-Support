@@ -50,7 +50,8 @@
 .edit-icon,
 .delete-icon,
 .restore-icon,
-.search-icon {
+.search-icon,
+.release-icon {
   cursor: pointer;
 }
 

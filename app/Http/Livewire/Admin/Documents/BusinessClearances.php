@@ -23,9 +23,11 @@ class BusinessClearances extends Component
     
     protected $listeners = ['getDocDetails'];
 
-    public $biz_name, $biz_owner, $biz_address, $biz_nature, $owner_address, $date_requested, $type;
+    public $biz_name, $biz_owner, $biz_address, $biz_nature, $owner_address, $date_requested, $type, $status;
 
     public $business_nature, $owner_name, $business_name, $business_address;
+
+    public $user_id, $business_id;
 
     public $doc_id;
 
@@ -39,6 +41,8 @@ class BusinessClearances extends Component
 
     public function closeModal()
     {
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->reset(
             'biz_name', 
             'biz_owner', 
@@ -53,6 +57,9 @@ class BusinessClearances extends Component
             'owner_name',
             'business_name',
             'business_address',
+            'status',
+            'user_id',
+            'business_id',
         );
     }
 
@@ -136,11 +143,52 @@ class BusinessClearances extends Component
     public function editDoc(Document $document)
     {
         $this->doc_id = $document->id;
+        $this->status = $document->status;
+        $this->user_id = $document->user_id;
+        $this->business_id = $document->business_id;
+        $this->business_name = $document->biz_name;
+        $this->business_address = $document->biz_address;
+        $this->business_nature = $document->biz_nature;
+        $this->owner_name = $document->biz_owner;
+        $this->owner_address = $document->owner_address;
+    }
+
+    public function updateDoc()
+    {
+        $document = Document::find($this->doc_id);
+
+        if(is_null($this->user_id) && is_null($this->business_id)){
+            $this->validate([
+                'business_nature' => ['required', 'string', 'max:255'],
+                'owner_name' => ['required', 'string', 'max:255'],
+                'business_name' => ['required', 'string', 'max:255'],
+                'owner_address' => ['required', 'string', 'max:255'],
+                'business_address' => ['required', 'string', 'max:255'],
+            ]);
+
+            $document->biz_name = $this->business_name;
+            $document->biz_address = $this->business_address;
+            $document->biz_nature = $this->business_nature;
+            $document->biz_owner = $this->owner_name;
+            $document->owner_address = $this->owner_address;
+            $document->update();
+        }else{
+            $this->validate([
+                'status' => ['required', 'string', 'max:15'],
+            ]);
+    
+            $document->status = $this->status;
+            $document->update();
+        }
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
     }
 
     public function release()
     {
         $document = Document::find($this->doc_id);
+        $document->status = 'Released';
         $document->is_released = true;
         $document->update();
 
