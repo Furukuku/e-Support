@@ -17,6 +17,8 @@ class Report extends Model
         'report_name',
         'zone',
         'report_img',
+        'latitude',
+        'longitude',
         'description',
         'status',
     ];

@@ -64,12 +64,14 @@
       </div>
       <div>
         <div class="add-report-btn-container">
-          <button type="button" class="btn text-white rounded-pill px-4 add-report-btn">Report</button>
+          <a href="{{ route('resident.add-report') }}" class="btn text-white rounded-pill px-4 add-report-btn">Report</a>
         </div>
       </div>
     </div>
 
     @livewire('resident.requested-docs')
+
+    @livewire('resident.reports')
 
   </div>
 

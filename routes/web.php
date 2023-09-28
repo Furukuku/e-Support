@@ -159,25 +159,30 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
     Route::prefix('resident')->name('resident.')->group(function(){
 
         Route::post('/logout', [LogoutController::class, 'residentLogout'])->name('logout');
-        // Route::get('/home', [ResidentController::class, 'home'])->name('home');
-        // Route::get('/documents', [ResidentController::class, 'documents'])->name('documents');
-        // Route::get('/reports', [ResidentController::class, 'reports'])->name('reports');
-        // Route::get('/account', [ResidentController::class, 'account'])->name('account');
-
         Route::view('/home', 'resident2.resident-home')->name('home');
         Route::view('/services', 'resident2.resident-services')->name('services');
         Route::view('/profile', 'resident2.resident-profile')->name('profile');
+
         Route::view('/business-clearance', 'resident2.documents.business-clearance')->name('biz-clearance');
         Route::view('/indigency', 'resident2.documents.indigency')->name('indigency');
         Route::view('/brgy-clearance', 'resident2.documents.brgy-clearance')->name('brgy-clearance');
+
         Route::post('/business-clearance', [ResidentController::class, 'storeBizClearance'])->name('validate.biz-clearance');
         Route::post('/indigency', [ResidentController::class, 'storeIndigency'])->name('validate.indigency');
         Route::post('/brgy-clearance', [ResidentController::class, 'storeBrgyClearance'])->name('validate.brgy-clearance');
+
         Route::get('/qr-code/{token}', [ResidentController::class, 'showQr'])->name('qr-code');
         Route::get('/edit/documents/{id}/{token}', [ResidentController::class, 'editDocs'])->name('edit.docs');
+
         Route::patch('/update/brgy-clearance/{id}', [ResidentController::class, 'updateBrgyClearance'])->name('update.brgy-clearnce');
         Route::patch('/update/business-clearance/{id}', [ResidentController::class, 'updateBizClearance'])->name('update.biz-clearnce');
         Route::patch('/update/indigency/{id}', [ResidentController::class, 'updateIndigency'])->name('update.indigency');
+
+        Route::view('/add-report', 'resident2.reports.add-report')->name('add-report');
+        Route::post('/report', [ResidentController::class, 'report'])->name('report');
+        Route::get('/report/{report}/{id}', [ResidentController::class, 'viewReport'])->name('view.report');
+        Route::patch('/update-report/{report}', [ResidentController::class, 'updateReport'])->name('update-report');
+
 
     });
 });

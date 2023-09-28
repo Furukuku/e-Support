@@ -218,6 +218,20 @@
   z-index: 9 !important;
 }
 
+.navbar.navbar-wide::after {
+  content: 'E-SUPPORT';
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  color: #fff;
+  background-color: var(--theme-color);
+  height: 50px;
+  position: absolute;
+  top: 66px;
+  left: 0;
+  right: 0;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -337,6 +351,7 @@ label[for="proof"] {
 }
 
 .biz-clearance-form > button,
+.biz-clearance-form > div:last-child > button,
 .add-report-btn {
   background-color: var(--theme-color);
 }
@@ -348,14 +363,23 @@ label[for="proof"] {
 }
 
 .biz-clearance-form > .btn,
+.biz-clearance-form > div:last-child > .btn.report-update-btn,
 .add-report-btn.btn {
   --bs-btn-active-bg: var(--theme-color);
   border: none;
 }
 
+.requested-docs-tabs {
+  cursor: pointer;
+}
+
 .even-requested-docs-card-body,
 .odd-requested-docs-card-footer {
   background-color: var(--theme-color);
+}
+
+.even-requested-docs-card-body.color {
+  background-color: initial;
 }
 
 .requested-docs-pagination > div > nav {
@@ -393,6 +417,52 @@ label[for="proof"] {
     display: none !important;
   }
 
+  .navbar.navbar-wide::after {
+    display: none;
+  }
+
+  .navbar.navbar-home::after {
+    content: 'HOME';
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    color: #fff;
+    background-color: var(--theme-color);
+    height: 50px;
+    position: absolute;
+    top: 66px;
+    left: 0;
+    right: 0;
+  }
+
+  .navbar.navbar-services::after {
+    content: 'SERVICES';
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    color: #fff;
+    background-color: var(--theme-color);
+    height: 50px;
+    position: absolute;
+    top: 66px;
+    left: 0;
+    right: 0;
+  }
+
+  .navbar.navbar-profile::after {
+    content: 'PROFILE';
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    color: #fff;
+    background-color: var(--theme-color);
+    height: 50px;
+    position: absolute;
+    top: 66px;
+    left: 0;
+    right: 0;
+  }
+
   .sidebar-btn {
     display: initial !important;
   }
@@ -420,6 +490,18 @@ label[for="proof"] {
 
   .requested-docs-pagination > div > nav > div > p > span {
     font-size: 10px !important;
+  }
+
+  .view-report-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .back-btn {
+    display: block !important;
   }
 }
 

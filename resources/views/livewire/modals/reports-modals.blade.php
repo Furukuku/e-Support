@@ -20,6 +20,7 @@
           @isset($report_img)
             <img src="{{ Storage::url($report_img) }}" class="object-fit-contain border rounded" alt="image">
           @endisset
+          <div wire:ignore id="map" class="my-3" style="height: 300px"></div>
         </div>
       </div>
     </div>

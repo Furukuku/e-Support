@@ -17,11 +17,18 @@
   @livewireStyles
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-white border-bottom px-4 shadow-sm sticky-top">
+  <nav class="navbar navbar-expand-lg bg-light border-bottom px-4 shadow-sm sticky-top navbar-wide
+    @if (str_contains(Route::currentRouteName(), 'resident.home'))
+      navbar-home
+    @elseif (str_contains(Route::currentRouteName(), 'resident.services'))
+      navbar-services
+    @elseif(str_contains(Route::currentRouteName(), 'resident.profile'))
+      navbar-profile
+    @endif">
     <div class="container-fluid">
       <div class="d-flex gap-5 align-items-center">
         <a class="navbar-brand mb-0 align-middle h1" href="{{ route('resident.home') }}">
-          <img src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="Logo" height="40" class="">
+          <img class="rounded-circle" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="Logo" height="40" class="">
           <span class="align-middle d-none">e-Support</span>
         </a>
         <ul class="nav nav-underline gap-5 navbar-hide-items">
@@ -102,7 +109,7 @@
     </div>
   </div>
 
-  <main>
+  <main class="mt-3">
     <div id="content">
       @yield('content')
     </div>

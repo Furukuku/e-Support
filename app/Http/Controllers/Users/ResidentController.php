@@ -6,6 +6,7 @@ use App\Models\Document;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
@@ -13,6 +14,79 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ResidentController extends Controller
 {
+    public function updateReport(Request $request, Report $report)
+    {
+        $request->validate([
+            'kind_of_report' => ['required', 'string', 'max:16'],
+            'zone' => ['required', 'string', 'max:1'],
+            'photo' => [File::image()],
+            'description' => ['required', 'string'],
+        ]);
+
+        if($request->hasFile('photo')){
+            Storage::delete($report->report_img);
+            $photo_filename = $request->photo->store('public/images/reports');
+
+            $report->report_name = $request->kind_of_report;
+            $report->zone = $request->zone;
+            $report->description = $request->description;
+            $report->report_img = $photo_filename;
+            $report->update();
+        }else{
+            $report->report_name = $request->kind_of_report;
+            $report->zone = $request->zone;
+            $report->description = $request->description;
+            $report->update();
+        }
+
+        return redirect()->route('resident.services');
+    }
+
+    public function viewReport(Report $report, $id)
+    {
+        if(Auth::guard('web')->check() && auth()->guard('web')->id() == $id){
+            return view('resident2.reports.view-report', ['report' => $report]);
+        }else{
+            return back();
+        }
+    }
+
+    public function report(Request $request)
+    {
+        $request->validate(
+            [
+                'kind_of_report' => ['required', 'string', 'max:16'],
+                'zone' => ['required', 'string', 'max:1'],
+                'photo' => ['required', File::image()],
+                'latitude' => ['required', 'string'],
+                'longitude' => ['required', 'string'],
+                'description' => ['required', 'string'],
+            ],
+            [
+                'latitude' => [
+                    'required' => 'Your current location is required.',
+                    'string' => 'The current location must be a valid location.',
+                ]
+            ]
+        );
+
+        if(Auth::guard('web')->check()){
+            $photo_filename = $request->photo->store('public/images/reports');
+    
+            Report::create([
+                'user_id' => auth()->guard('web')->id(),
+                'report_name' => $request->kind_of_report,
+                'zone' => $request->zone,
+                'report_img' => $photo_filename,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'description' => $request->description,
+            ]);
+        }
+
+        return redirect()->route('resident.services');
+    }
+
     public function updateIndigency(Request $request, $id)
     {
         $validated = $request->validate([

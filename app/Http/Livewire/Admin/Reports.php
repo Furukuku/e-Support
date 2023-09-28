@@ -12,7 +12,7 @@ class Reports extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $report_from, $report_type, $zone, $description, $report_img;
+    public $report_from, $report_type, $zone, $description, $report_img, $time;
 
     public $status;
 
@@ -41,6 +41,13 @@ class Reports extends Component
         $this->zone = $report->zone;
         $this->description = $report->description;
         $this->report_img = $report->report_img;
+        $this->time = $report->created_at;
+
+        $this->dispatchBrowserEvent('set-location', [
+            'name' => $report->report_name,
+            'lat' => $report->latitude,
+            'long' => $report->longitude,
+        ]);
     }
 
     public function editReport(Report $report)

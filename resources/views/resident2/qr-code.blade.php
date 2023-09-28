@@ -4,7 +4,7 @@
 
   <div class="py-5 w-100 d-flex flex-column gap-4 justify-content-center align-items-center" style="height: 80vh;">
 
-    <p>Please make a screenshot for the QR Code.</p>
+    <p class="text-center">Please make a screenshot for the QR Code. It will be used as claiming stub.</p>
     <div>
       {{ $qr_code }}
     </div>

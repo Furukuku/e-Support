@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('report_name');
             $table->string('zone');
             $table->string('report_img');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->longText('description');
             $table->string('status')->default('Pending');
             $table->timestamps();
