@@ -197,7 +197,11 @@ Route::middleware('business.auth:business', 'company-mobile.verified', 'company.
     Route::prefix('business')->name('business.')->group(function(){
 
         Route::post('/logout', [LogoutController::class, 'businessLogout'])->name('logout');
-        Route::get('/home', [BusinessController::class, 'home'])->name('home');
+        Route::view('/home', 'business.business-home')->name('home');
+        Route::view('/profile', 'business.business-profile')->name('profile');
+        Route::view('/archives', 'business.business-archives')->name('archives');
+
+        Route::view('/post-job', 'business.jobs.post-job')->name('post-job');
     });
 });
 /*------------------------- End of Business Routes -------------------------*/

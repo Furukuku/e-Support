@@ -52,7 +52,7 @@
         </thead>
         <tbody>
           @forelse ($documents as $document)
-            <tr>
+            <tr wire:poll.60s>
               <td class="align-middle text-center">{{ $document->name }}</td>
               <td class="align-middle text-center">
                 <div class="px-1 rounded-pill 
