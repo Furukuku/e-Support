@@ -1,4 +1,4 @@
-@extends('resident2.resident-layout.resident-app')
+@extends('resident.resident-layout.resident-app')
 
 @section('content')
 

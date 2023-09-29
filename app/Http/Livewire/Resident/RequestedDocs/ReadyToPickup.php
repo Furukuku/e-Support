@@ -17,7 +17,7 @@ class ReadyToPickup extends Component
         $myPickupDocs = Document::where('user_id', auth()->guard('web')->id())
             ->where('status', 'Ready to Pickup')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(5, ['*'], 'toPickupDocs');
 
         return view('livewire.resident.requested-docs.ready-to-pickup', ['myPickupDocs' => $myPickupDocs]);
     }

@@ -18,7 +18,7 @@ class Claimed extends Component
             ->where('status', 'Released')
             ->where('is_released', true)
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(5, ['*'], 'claimedDocs');
 
         return view('livewire.resident.requested-docs.claimed', ['myClaimedDocs' => $myClaimedDocs]);
     }

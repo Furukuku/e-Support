@@ -12,7 +12,7 @@ class Solved extends Component
         $solvedReports = Report::where('user_id', auth()->guard('web')->id())
             ->where('status', 'Solved')
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
+            ->paginate(5, ['*'], 'solvedReports');
             
         return view('livewire.resident.reports.solved', ['solvedReports' => $solvedReports]);
     }

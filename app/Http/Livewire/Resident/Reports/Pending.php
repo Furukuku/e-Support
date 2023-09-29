@@ -12,7 +12,7 @@ class Pending extends Component
         $pendingReports = Report::where('user_id', auth()->guard('web')->id())
             ->where('status', 'Pending')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(5, ['*'], 'pendingReports');
             
         return view('livewire.resident.reports.pending', ['pendingReports' => $pendingReports]);
     }

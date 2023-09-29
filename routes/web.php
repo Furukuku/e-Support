@@ -159,13 +159,13 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
     Route::prefix('resident')->name('resident.')->group(function(){
 
         Route::post('/logout', [LogoutController::class, 'residentLogout'])->name('logout');
-        Route::view('/home', 'resident2.resident-home')->name('home');
-        Route::view('/services', 'resident2.resident-services')->name('services');
-        Route::view('/profile', 'resident2.resident-profile')->name('profile');
+        Route::view('/home', 'resident.resident-home')->name('home');
+        Route::view('/services', 'resident.resident-services')->name('services');
+        Route::view('/profile', 'resident.resident-profile')->name('profile');
 
-        Route::view('/business-clearance', 'resident2.documents.business-clearance')->name('biz-clearance');
-        Route::view('/indigency', 'resident2.documents.indigency')->name('indigency');
-        Route::view('/brgy-clearance', 'resident2.documents.brgy-clearance')->name('brgy-clearance');
+        Route::view('/business-clearance', 'resident.documents.business-clearance')->name('biz-clearance');
+        Route::view('/indigency', 'resident.documents.indigency')->name('indigency');
+        Route::view('/brgy-clearance', 'resident.documents.brgy-clearance')->name('brgy-clearance');
 
         Route::post('/business-clearance', [ResidentController::class, 'storeBizClearance'])->name('validate.biz-clearance');
         Route::post('/indigency', [ResidentController::class, 'storeIndigency'])->name('validate.indigency');
@@ -178,7 +178,7 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
         Route::patch('/update/business-clearance/{id}', [ResidentController::class, 'updateBizClearance'])->name('update.biz-clearnce');
         Route::patch('/update/indigency/{id}', [ResidentController::class, 'updateIndigency'])->name('update.indigency');
 
-        Route::view('/add-report', 'resident2.reports.add-report')->name('add-report');
+        Route::view('/add-report', 'resident.reports.add-report')->name('add-report');
         Route::post('/report', [ResidentController::class, 'report'])->name('report');
         Route::get('/report/{report}/{id}', [ResidentController::class, 'viewReport'])->name('view.report');
         Route::patch('/update-report/{report}', [ResidentController::class, 'updateReport'])->name('update-report');

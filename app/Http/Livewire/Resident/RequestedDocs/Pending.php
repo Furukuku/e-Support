@@ -17,7 +17,7 @@ class Pending extends Component
         $myPendingDocs = Document::where('user_id', auth()->guard('web')->id())
             ->where('status', 'Pending')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(5, ['*'], 'pendingDocs');
 
         return view('livewire.resident.requested-docs.pending', ['myPendingDocs' => $myPendingDocs]);
     }

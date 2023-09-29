@@ -45,7 +45,7 @@ class ResidentController extends Controller
     public function viewReport(Report $report, $id)
     {
         if(Auth::guard('web')->check() && auth()->guard('web')->id() == $id){
-            return view('resident2.reports.view-report', ['report' => $report]);
+            return view('resident.reports.view-report', ['report' => $report]);
         }else{
             return back();
         }
@@ -162,11 +162,11 @@ class ResidentController extends Controller
 
         if(!is_null($document)){
             if($document->type === 'Barangay Clearance'){
-                return view('resident2.documents.edit-documents.brgy-clearance', ['document' => $document]);
+                return view('resident.documents.edit-documents.brgy-clearance', ['document' => $document]);
             }else if($document->type === 'Business Clearance'){
-                return view('resident2.documents.edit-documents.business-clearance', ['document' => $document]);
+                return view('resident.documents.edit-documents.business-clearance', ['document' => $document]);
             }else if($document->type === 'Indigency'){
-                return view('resident2.documents.edit-documents.indigency', ['document' => $document]);
+                return view('resident.documents.edit-documents.indigency', ['document' => $document]);
             }else{
                 abort(404);
             }
@@ -188,7 +188,7 @@ class ResidentController extends Controller
 
         $qr_code = QrCode::size(200)->generate($qr);
 
-        return view('resident2.qr-code', ['qr_code' => $qr_code]);
+        return view('resident.qr-code', ['qr_code' => $qr_code]);
     }
 
     public function storeBizClearance(Request $request)

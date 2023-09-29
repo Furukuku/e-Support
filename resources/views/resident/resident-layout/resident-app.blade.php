@@ -11,94 +11,123 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,1,0" />
 
   <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}"> --}}
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
-  <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
-
-  <script defer src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
 
   @livewireStyles
 </head>
 <body>
-  <div class="main-container">
-    <div id="side-bar" class="pb-5 sidebar scrollbar rounded-end">
-      <h2 class="text-center text-white mt-3 mb-4">e-Support<span id="sb-close" class="sidebar-close">&times;</span></h2>
-      <hr class="mx-auto text-white border-2 horizontal-line">
-      <ul id="sidebar-list" class="navbar-nav">
-        <li class="nav-item text-white sidebar-list">
-          <a href="{{ route('resident.home') }}" id="home" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'navigate-active' : '' }}">
-            <div class="container-fluid row p-0 ps-2 m-0">
-              <span class="material-symbols-outlined col-3 text-center">dashboard</span>
-              <p class="col-9 m-0 ps-0">Home</p>
-            </div>
+  <nav class="navbar navbar-expand-lg bg-light border-bottom px-4 shadow-sm sticky-top navbar-wide
+    @if (str_contains(Route::currentRouteName(), 'resident.home'))
+      navbar-home
+    @elseif (str_contains(Route::currentRouteName(), 'resident.services'))
+      navbar-services
+    @elseif(str_contains(Route::currentRouteName(), 'resident.profile'))
+      navbar-profile
+    @endif">
+    <div class="container-fluid">
+      <div class="d-flex gap-5 align-items-center">
+        <a class="navbar-brand mb-0 align-middle h1" href="{{ route('resident.home') }}">
+          <img class="rounded-circle" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="Logo" height="40" class="">
+          <span class="align-middle d-none">e-Support</span>
+        </a>
+        <ul class="nav nav-underline gap-5 navbar-hide-items">
+          <li class="nav-item">
+            <a href="{{ route('resident.home') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'active' : '' }}">
+              <h5 class="m-0">Home</h5>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('resident.services') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'active' : '' }}">
+              <h5 class="m-0">Services</h5>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('resident.profile') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'resident.profile') ? 'active' : '' }}">
+              <h5 class="m-0">Profile</h5>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group navbar-hide-items">
+        <button type="button" class="btn btn-white bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="username">{{ auth()->guard('web')->user()->username }}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li class="dropdown-item p-0">
+            <form class="logout-form" action="{{ route('resident.logout') }}" method="POST">
+              @csrf
+              <button type="submit" class="btn btn-transparent border-0 w-100">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <span id="sidebar-btn" class="material-symbols-outlined d-none sidebar-btn">
+        menu
+      </span>
+    </div>
+  </nav>
+  <div id="sidebar-backdrop" class="bg-dark bg-opacity-25 backdrop"></div>
+  <div id="sidebar" class="pb-2 bg-white sidebar border">
+    <div class="w-100 d-flex align-items-center border-bottom shadow-sm py-4 px-2">
+      <div class="p-2">
+        <img class="rounded-circle profile-picture" src="{{ Storage::url(auth()->guard('web')->user()->profile) }}" alt="profile_picture">
+      </div>
+      <div class="text-truncate">
+        <p class="m-0 text-truncate fw-semibold">{{ auth()->guard('web')->user()->username }}</p>
+      </div>
+    </div>
+    <div class="w-100">
+      <ul class="p-4 sidebar-items">
+        <li class="pb-3">
+          <a href="{{ route('resident.home') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'text-primary' : 'text-dark' }}">
+            <span class="material-symbols-outlined">home</span>
+            <span class="ps-2">Home</span>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
-          <a href="{{ route('resident.documents') }}" id="documents" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.documents') ? 'navigate-active' : '' }}">
-            <div class="container-fluid row p-0 ps-2 m-0">
-              <span class="material-symbols-outlined col-3 text-center">patient_list</span>
-              <p class="col-9 m-0 ps-0">Barangay Documents</p>
-            </div>
+        <li class="pb-3">
+          <a href="{{ route('resident.services') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'text-primary' : 'text-dark' }}">
+            <span class="material-symbols-outlined">quick_reference</span>
+            <span class="ps-2">Services</span>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
-          <a href="{{ route('resident.reports') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.reports') ? 'navigate-active' : '' }}">
-            <div class="container-fluid row p-0 ps-2 m-0">
-              <span class="material-symbols-outlined col-3 text-center">report</span>
-              <p class="col-9 m-0 ps-0">Reports</p>
-            </div>
+        <li class="pb-3">
+          <a href="{{ route('resident.profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.profile') ? 'text-primary' : 'text-dark' }}">
+            <span class="material-symbols-outlined">manage_accounts</span>
+            <span class="ps-2">Profile</span>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
-          <a href="{{ route('resident.account') }}" id="account" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'resident.account') ? 'navigate-active' : '' }}">
-            <div class="container-fluid row p-0 ps-2 m-0">
-              <span class="material-symbols-outlined col-3 text-center">manage_accounts</span>
-              <p class="col-9 m-0 ps-0">Account</p>
-            </div>
-          </a>
+        <li class="pb-3">
+          <form action="{{ route('resident.logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="logout-btn"><span class="material-symbols-outlined pe-2">logout</span>Logout</button>
+          </form>
+          {{-- <a href="{{  }}" class="d-flex align-items-center">
+          </a> --}}
         </li>
       </ul>
     </div>
-    <div id="b-sidebar" class="block-sidebar"></div>
-    <div class="right-content">
-      <nav class="navbar navbar-dark navbar-expand-lg nav-bg rounded sticky-top">
-        <div class="container-fluid">
-          <button id="toggle-sidebar" class="navbar-brand bg-transparent border-0">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <button id="toggle-sidebar2" class="navbar-brand bg-transparent border-0">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <div class="btn-group">
-            <button type="button" class="btn btn-dark bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="username">{{ auth()->user()->username }}</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li class="dropdown-item p-0">
-                <form action="{{ route('resident.logout') }}" method="POST">
-                  @csrf
-                  <button type="submit" class="bg-transparent border-0 w-100 logout-btn">Logout</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <main>
-        <div id="content">
-          @yield('content')
-        </div>
-      </main>
-    </div>
   </div>
 
-  @livewireScripts
+  <main class="mt-3">
+    <div id="content">
+      @yield('content')
+    </div>
+  </main>
 
-  @yield('script')
+  @livewireScripts
+  {{-- scripts --}}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  
+  <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
+  
+  <script src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
+
+  @yield('scripts')
+
 </body>
 </html>

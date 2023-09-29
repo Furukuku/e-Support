@@ -12,7 +12,7 @@ class Ongoing extends Component
         $ongoingReports = Report::where('user_id', auth()->guard('web')->id())
             ->where('status', 'Ongoing')
             ->orderBy('updated_at', 'desc')
-            ->paginate(5);
+            ->paginate(5, ['*'], 'ongoingReports');
 
         return view('livewire.resident.reports.ongoing', ['ongoingReports' => $ongoingReports]);
     }
