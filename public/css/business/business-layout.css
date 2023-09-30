@@ -104,8 +104,12 @@
   width: 42px;
 }
 
+.post-job-illustration {
+  height: 20rem;
+}
+
 .multi-step-container {
-  max-width: 30rem;
+  max-width: 35rem;
   max-height: 30rem;
 }
 
@@ -128,7 +132,7 @@
 .first-step,
 .second-step,
 .last-step {
-  min-width: 30rem;
+  min-width: 35rem;
   padding: 1rem;
 }
 
@@ -176,27 +180,49 @@ label[for="proof"] {
   font-size: 13px;
 }
 
-.biz-clearance-form > button,
-.biz-clearance-form > div:last-child > button,
+.next-btn,
 .add-report-btn {
-  background-color: var(--theme-color);
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
 }
 
-.biz-clearance-form > button:hover,
+.next-btn:hover,
 .add-report-btn:hover {
-  background-color: var(--theme-color);
-
+  opacity: 0.9 !important;
 }
 
-.biz-clearance-form > .btn,
-.biz-clearance-form > div:last-child > .btn.report-update-btn,
-.add-report-btn.btn {
-  --bs-btn-active-bg: var(--theme-color);
-  border: none;
+.next-btn:disabled {
+  opacity: 0.8 !important;
+  background-color: var(--theme-color) !important;
+}
+
+.next-btn:active,
+.add-report-btn:active {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+}
+
+.next-btn:focus,
+.add-report-btn:focus {
+  background-color: var(--theme-color) !important;
 }
 
 .requested-docs-tabs {
   cursor: pointer;
+}
+
+.edit-btn-container > button:hover {
+  background-color: var(--theme-color) !important;
+  color: #fff !important;
+}
+
+.edit-btn-container > button:active {
+  background-color: var(--theme-color) !important;
+  color: #fff !important;
+}
+
+.job-cards-img {
+  height: 13rem;
 }
 
 .even-requested-docs-card-body,
@@ -231,7 +257,7 @@ label[for="proof"] {
 
 @keyframes to-first-animate {
   0% {
-    transform: translateX(-30rem);
+    transform: translateX(-35rem);
   }
   25% {
     transform: translateX(-40rem);
@@ -246,34 +272,34 @@ label[for="proof"] {
     transform: translateX(0);
   }
   25% {
-    transform: translateX(10rem);
+    transform: translateX(5rem);
   }
   100% {
-    transform: translateX(-30rem);
+    transform: translateX(-35rem);
   }
 }
 
 @keyframes from-last-to-second-animate {
   0% {
-    transform: translateX(-60rem);
-  }
-  25% {
     transform: translateX(-70rem);
   }
+  25% {
+    transform: translateX(-75rem);
+  }
   100% {
-    transform: translateX(-30rem);
+    transform: translateX(-35rem);
   }
 }
 
 @keyframes to-last-animate {
   0% {
-    transform: translateX(-30rem);
+    transform: translateX(-35rem);
   }
   25% {
-    transform: translateX(-20rem);
+    transform: translateX(-30rem);
   }
   100% {
-    transform: translateX(-60rem);
+    transform: translateX(-70rem);
   }
 }
 
@@ -360,7 +386,7 @@ label[for="proof"] {
   }
 
   .navbar.navbar-services::after {
-    content: 'SERVICES';
+    content: 'ARCHIVES';
     display: flex;
     align-items: center;
     padding-left: 30px;
@@ -431,7 +457,13 @@ label[for="proof"] {
   .post-job-main-container {
     display: flex;
     flex-direction: column !important;
+    gap: 2rem;
     align-items: center;
+    padding-top: 0 !important;
+  }
+
+  .post-job-illustration {
+    height: 10rem;
   }
 
   .multi-step-container {
@@ -459,6 +491,23 @@ label[for="proof"] {
   
   .last {
     animation: to-last-animate-small 500ms ease-in-out forwards;
+  }
+
+  .view-job-layout {
+    display: flex;
+    flex-direction: column-reverse !important;
+    gap: 2rem;
+  }
+
+  .view-job-img {
+    display: flex;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+
+  .repost-btn-container {
+    display: flex;
+    justify-content: center !important;
   }
 }
 

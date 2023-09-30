@@ -75,6 +75,11 @@ class Business extends Authenticatable implements IMustVerifyMobile
         return $this->hasMany(Document::class);
     }
 
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
+
     public function routeNotificationForVonage(Notification $notification): string
     {
         return $this->mobile;

@@ -4,94 +4,44 @@
 
   <div class="py-5">
 
-    <div class="position-relative mx-5 home-start">
-      <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 end-0 translate-middle-y d-none" id="scroll-right">
-        <span class="material-symbols-outlined">
-        arrow_forward
-        </span>
-      </div>
-      <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 start-0 translate-middle-y d-none" id="scroll-left">
-        <span class="material-symbols-outlined">
-        arrow_back
-        </span>
-      </div>
-      <div>
-        <h6>RECOMMENDED JOBS</h6>
-      </div>
-      <div id="jobs-container" class="d-flex flex-nowrap gap-5 p-2 overflow-x-auto" style="width: 100%;">
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+    @if ($jobs->count() > 0 && auth()->guard('web')->user()->employ_status === 'Employed')
+      <div class="position-relative mx-5 home-start">
+        <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 end-0 translate-middle-y d-none" id="scroll-right">
+          <span class="material-symbols-outlined">
+          arrow_forward
+          </span>
         </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+        <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 start-0 translate-middle-y d-none" id="scroll-left">
+          <span class="material-symbols-outlined">
+          arrow_back
+          </span>
         </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+        <div>
+          <h6>RECOMMENDED JOBS</h6>
         </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card shadow-sm" style="min-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+        <div id="jobs-container" class="d-flex flex-nowrap gap-5 p-2 overflow-x-auto" style="width: 100%;">
+          @foreach ($jobs as $job)
+            <div class="card mb-3 shadow-sm job-cards">
+              <div class="d-flex align-items-center h-100">
+                <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                  <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/post-job1.svg') : Storage::url($job->business_img) }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="h-100" style="width: 60%;">
+                  <div class="card-body h-100 d-flex flex-column justify-content-between">
+                    <div class="">
+                      <h5 class="card-title">{{ $job->title }}</h5>
+                      <p class="card-text text-truncate">{{ $job->description }}</p>
+                    </div>
+                    <p class="card-text"><small class="text-body-secondary">{{ $job->location }}</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
         </div>
       </div>
-    </div>
-    
+    @endif
+  
     <div class="d-flex justify-content-between align-items-center py-4 px-5 my-5 bg-success bg-opacity-25 home-middle">
       <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
         <h5 class="m-0 align-center">Where do you want to go?</h5>
@@ -199,50 +149,52 @@
 
 @endsection
 
-@section('scripts')
+@if ($jobs->count() > 0 && auth()->guard('web')->user()->employ_status === 'Employed')
+  @section('scripts')
 
-  <script>
+    <script>
 
-    const scrollRightBtn = document.getElementById('scroll-right');
-    const scrollLeftBtn = document.getElementById('scroll-left');
-    const jobsContainer = document.getElementById('jobs-container');
+      const scrollRightBtn = document.getElementById('scroll-right');
+      const scrollLeftBtn = document.getElementById('scroll-left');
+      const jobsContainer = document.getElementById('jobs-container');
 
-    checkIfWillShowTheBtn();
-
-    scrollRightBtn.addEventListener('click', () => {
-      jobsContainer.scrollTo({
-        left: jobsContainer.scrollLeft + 1100,
-        behavior: 'smooth',
-      });
-    });
-
-    scrollLeftBtn.addEventListener('click', () => {
-      jobsContainer.scrollTo({
-        left: jobsContainer.scrollLeft - 1100,
-        behavior: 'smooth',
-      });
-    });
-
-    jobsContainer.addEventListener('scroll', () => {
       checkIfWillShowTheBtn();
-    });
+
+      scrollRightBtn.addEventListener('click', () => {
+        jobsContainer.scrollTo({
+          left: jobsContainer.scrollLeft + 1100,
+          behavior: 'smooth',
+        });
+      });
+
+      scrollLeftBtn.addEventListener('click', () => {
+        jobsContainer.scrollTo({
+          left: jobsContainer.scrollLeft - 1100,
+          behavior: 'smooth',
+        });
+      });
+
+      jobsContainer.addEventListener('scroll', () => {
+        checkIfWillShowTheBtn();
+      });
 
 
-    function checkIfWillShowTheBtn() {
-      const maxScroll = jobsContainer.scrollWidth - jobsContainer.clientWidth;
-      if(jobsContainer.clientWidth < jobsContainer.scrollWidth && jobsContainer.scrollLeft > 0){
-        scrollLeftBtn.classList.remove('d-none');
-      }else{
-        scrollLeftBtn.classList.add('d-none');
+      function checkIfWillShowTheBtn() {
+        const maxScroll = jobsContainer.scrollWidth - jobsContainer.clientWidth;
+        if(jobsContainer.clientWidth < jobsContainer.scrollWidth && jobsContainer.scrollLeft > 0){
+          scrollLeftBtn.classList.remove('d-none');
+        }else{
+          scrollLeftBtn.classList.add('d-none');
+        }
+
+        if(jobsContainer.clientWidth < jobsContainer.scrollWidth && jobsContainer.scrollLeft < maxScroll){
+          scrollRightBtn.classList.remove('d-none');
+        }else{
+          scrollRightBtn.classList.add('d-none');
+        }
       }
 
-      if(jobsContainer.clientWidth < jobsContainer.scrollWidth && jobsContainer.scrollLeft < maxScroll){
-        scrollRightBtn.classList.remove('d-none');
-      }else{
-        scrollRightBtn.classList.add('d-none');
-      }
-    }
+    </script>
 
-  </script>
-
-@endsection
+  @endsection
+@endif

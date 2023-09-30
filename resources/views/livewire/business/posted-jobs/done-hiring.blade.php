@@ -1,26 +1,26 @@
 <div class="py-2">
 
   <div class="row gap-2 justify-content-center p-2">
-    {{-- @forelse ($myPendingDocs as $index => $doc) --}}
+    @forelse ($myDoneHiring as $job)
       <div wire:poll.60s class="col-auto mb-3">
-        <a href=""style="text-decoration: none;">
-          <div class="card shadow-sm" style="width: 18rem;">
-            <img src="{{ asset('images/places/place2.png') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{{ route('business.view-job', ['id' => $job->id]) }}" style="text-decoration: none;">
+          <div class="card shadow-sm job-cards" style="width: 18rem;">
+            <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/post-job1.svg') : Storage::url($job->business_img) }}" class="card-img-top object-fit-contain job-cards-img" alt="...">
+            <div class="card-body border-top">
+              <h5 class="card-title">{{ $job->title }}</h5>
+              <p class="card-text text-truncate">{{ $job->description }}</p>
             </div>
           </div>
         </a>
       </div>
-    {{-- @empty
-      <p class="text-center mt-5" style="font-size: 13px;">You have no job offers.</p>
-    @endforelse --}}
+    @empty
+      <p class="text-center mt-5" style="font-size: 13px;">You have no jobs that are done hiring.</p>
+    @endforelse
   
   </div>
 
   <div class="requested-docs-pagination">
-    {{-- {{ $myPendingDocs->links() }} --}}
+    {{ $myDoneHiring->links() }}
   </div>
 
 </div>

@@ -99,7 +99,7 @@
       </div>
       <div>
         <div class="add-report-btn-container">
-          <a href="{{ route('business.post-job') }}" class="btn text-white rounded-pill px-4 add-report-btn">Add or Post</a>
+          <a href="{{ route('business.post-job') }}" class="btn btn-success text-white rounded-pill px-4 add-report-btn">Post</a>
         </div>
       </div>
     </div>

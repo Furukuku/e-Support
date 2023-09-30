@@ -2,13 +2,20 @@
 
 namespace App\Http\Livewire\Business\Jobs;
 
+use App\Models\Job;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class PostJob extends Component
 {
+    use WithFileUploads;
+
+    protected $listeners = ['submit'];
+
     public $page;
 
-    public $job_title, $job_type, $workplace_type, $phone_number, $email, $location, $job_description, $job_requirement;
+    public $job_title, $job_type, $workplace_type, $phone_number, $email, $location, $business_image, $job_description, $job_requirements;
 
     public function toFirst()
     {
@@ -45,11 +52,49 @@ class PostJob extends Component
     public function submit()
     {
         $this->validate([
+            'job_title' => ['required', 'string', 'max:255'],
+            'job_type' => ['required', 'string', 'max:255'],
+            'workplace_type' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'digits:11'],
+            'email' => ['required', 'email', 'max:255'],
+            'location' => ['required', 'string', 'max:255'],
+            'business_image' => ['nullable', 'image'],
             'job_description' => ['required', 'string'],
-            'job_requirement' => ['required', 'string'],
+            'job_requirements' => ['required', 'string'],
         ]);
 
-        
+        if(Auth::guard('business')->check()){
+            if(is_null($this->business_image)){
+                Job::create([
+                    'business_id' => auth()->guard('business')->id(),
+                    'title' => $this->job_title,
+                    'job_type' => $this->job_type,
+                    'workplace_type' => $this->workplace_type,
+                    'phone_number' => $this->phone_number,
+                    'email' => $this->email,
+                    'location' => $this->location,
+                    'description' => $this->job_description,
+                    'requirements' => $this->job_requirements,
+                ]);
+            }else{
+                $business_img_filename = $this->business_image->store('public/images/biz-images');
+
+                Job::create([
+                    'business_id' => auth()->guard('business')->id(),
+                    'title' => $this->job_title,
+                    'job_type' => $this->job_type,
+                    'workplace_type' => $this->workplace_type,
+                    'phone_number' => $this->phone_number,
+                    'email' => $this->email,
+                    'location' => $this->location,
+                    'business_img' => $business_img_filename,
+                    'description' => $this->job_description,
+                    'requirements' => $this->job_requirements,
+                ]);
+            }
+        }
+
+        return redirect()->route('business.home');
     }
 
     public function render()

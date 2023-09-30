@@ -316,6 +316,23 @@
   width: 42px;
 }
 
+.job-cards {
+  min-width: 20rem; 
+  width: 20rem;
+  max-width: 20rem;
+  max-height: 10rem;
+  height: 10rem;
+  min-height: 10rem;
+}
+
+.job-cards > div > div:first-child {
+  width: 40%;
+}
+
+.job-cards > div > div:last-child {
+  width: 60%;
+}
+
 .place-icon {
   display: grid;
   place-items: center;

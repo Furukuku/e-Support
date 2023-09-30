@@ -6,6 +6,7 @@ use App\Models\Document;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -47,7 +48,7 @@ class ResidentController extends Controller
         if(Auth::guard('web')->check() && auth()->guard('web')->id() == $id){
             return view('resident.reports.view-report', ['report' => $report]);
         }else{
-            return back();
+            abort(404);
         }
     }
 
@@ -290,7 +291,9 @@ class ResidentController extends Controller
 
     public function home()
     {
-        return view('resident.resident-home');
+        $jobs = Job::inRandomOrder()->take(10)->get();
+
+        return view('resident.resident-home', ['jobs' => $jobs]);
     }
 
     public function documents()
