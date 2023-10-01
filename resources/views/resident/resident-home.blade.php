@@ -21,22 +21,24 @@
         </div>
         <div id="jobs-container" class="d-flex flex-nowrap gap-5 p-2 overflow-x-auto" style="width: 100%;">
           @foreach ($jobs as $job)
-            <div class="card mb-3 shadow-sm job-cards">
-              <div class="d-flex align-items-center h-100">
-                <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
-                  <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/post-job1.svg') : Storage::url($job->business_img) }}" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="h-100" style="width: 60%;">
-                  <div class="card-body h-100 d-flex flex-column justify-content-between">
-                    <div class="">
-                      <h5 class="card-title">{{ $job->title }}</h5>
-                      <p class="card-text text-truncate">{{ $job->description }}</p>
+            <a href="{{ route('resident.view-job', ['job' => $job]) }}" style="text-decoration: none;">
+              <div class="card mb-3 shadow-sm job-cards">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/job_hunt.svg') : Storage::url($job->business_img) }}" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">{{ $job->title }}</h5>
+                        <p class="card-text text-truncate">{{ $job->business->biz_name }}</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">{{ $job->location }}</small></p>
                     </div>
-                    <p class="card-text"><small class="text-body-secondary">{{ $job->location }}</small></p>
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           @endforeach
         </div>
       </div>

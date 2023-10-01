@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <div class="{{ $view }}">
+  {{-- <div class="{{ $view }}">
     <div class="d-flex justify-content-between view-job-layout">
       <div>
         <div class="d-flex gap-2">
@@ -123,6 +123,80 @@
         @endforeach
       @endif
     </div>
+  </div> --}}
+
+  <div class="py-3 {{ $view }}">
+
+    <div class="container rounded bg-white p-0 mb-3 border shadow-sm">
+      @if (!is_null($view_biz_img))
+        <div class="w-100 p-0">
+          <img class="rounded-top w-100 object-fit-cover" src="{{ Storage::url($view_biz_img) }}" style="height: 20rem;" alt="image">
+        </div>
+      @endif
+      <div class="d-flex justify-content-between p-4">
+        <div>
+          <img class="border rounded-circle object-fit-cover" src="{{ Storage::url($biz_profile) }}" style="height: 5rem; width: 5rem" alt="profile_img">
+          <h5 class="mb-4 text-break">{{ $biz_name }}</h5>
+          <h4 class="text-break">{{ $job_title }}</h4>
+          <p class="m-0 text-secondary text-break"><small>{{ $location }}</small></p>
+          <p class="text-secondary text-break"><small>Date Posted: {{ $created_at->format('M d, Y') }}</small></p>
+        </div>
+        <div class="pt-5">
+          <a href="{{ route('business.home') }}" class="btn btn-success px-5 back-btn">Back</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container rounded bg-white p-4 mb-3 border shadow-sm">
+      <div class="text-wrap">
+        <label class="form-label fw-bold">Job Description</label>
+        <p class="text-break m-0" style="text-indent: 3rem">{{ $job_description }}</p>
+      </div>
+    </div>
+
+    <div class="container rounded bg-white p-4 mb-3 border shadow-sm">
+      <div class="text-wrap">
+        <label class="form-label fw-bold">Job Requirements</label>
+        @if (count($requirements) > 1)
+          <ul>
+            @foreach ($requirements as $requirement)
+              <li class="text-break">{{ $requirement }}</li>
+            @endforeach
+          </ul>
+        @else
+          @foreach ($requirements as $requirement)
+            <p class="px-2 text-break m-0">{{ $requirement }}</p>
+          @endforeach
+        @endif
+      </div>
+    </div>
+
+    <div class="container rounded bg-white p-4 mb-3 border shadow-sm">
+      <h5 class="fw-bold">Additional Info</h5>
+      <div class="row mt-3 px-2">
+        <div class="col-6">
+          <div>
+            <label class="form-label fw-bold m-0">Workplace Type</label>
+            <p class="text-break">{{ $workplace_type }}</p>
+          </div>
+          <div>
+            <label class="form-label fw-bold m-0">Job Type</label>
+            <p class="text-break">{{ $job_type }}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div>
+            <label class="form-label fw-bold m-0">Email</label>
+            <p class="text-break">{{ $email }}</p>
+          </div>
+          <div>
+            <label class="form-label fw-bold m-0">Phone Number</label>
+            <p class="text-break">{{ $phone_number }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   @if ($done_hiring == true)

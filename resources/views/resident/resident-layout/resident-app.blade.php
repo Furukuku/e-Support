@@ -13,12 +13,21 @@
   <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}"> --}}
 
+  @stack('page-name')
+
+  @if (str_contains(Route::currentRouteName(), 'resident.home'))
+    <style>
+      :root {
+        --page-name: 'HOME';
+      }
+    </style>
+  @endif
 
   @livewireStyles
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg bg-light border-bottom px-4 shadow-sm sticky-top navbar-wide
-    @if (str_contains(Route::currentRouteName(), 'resident.home'))
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg bg-white border-bottom px-4 shadow-sm sticky-top navbar-wide
+    @if (str_contains(Route::currentRouteName(), 'resident.home') || str_contains(Route::currentRouteName(), 'resident.view-job'))
       navbar-home
     @elseif (str_contains(Route::currentRouteName(), 'resident.services'))
       navbar-services
@@ -109,7 +118,7 @@
     </div>
   </div>
 
-  <main class="mt-3">
+  <main class="mt-3 bg-light">
     <div id="content">
       @yield('content')
     </div>

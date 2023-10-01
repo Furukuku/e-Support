@@ -180,10 +180,10 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 
         Route::view('/add-report', 'resident.reports.add-report')->name('add-report');
         Route::post('/report', [ResidentController::class, 'report'])->name('report');
-        Route::get('/report/{report}/{id}', [ResidentController::class, 'viewReport'])->name('view.report');
+        Route::get('/report/{report}', [ResidentController::class, 'viewReport'])->name('view.report');
         Route::patch('/update-report/{report}', [ResidentController::class, 'updateReport'])->name('update-report');
 
-
+        Route::get('/job/{job}', [ResidentController::class, 'viewJob'])->name('view-job');
     });
 });
 /*------------------------- End of Residents Routes -------------------------*/

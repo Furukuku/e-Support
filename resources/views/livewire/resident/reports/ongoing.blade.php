@@ -3,7 +3,7 @@
   <div class="row gap-2 justify-content-center p-2">
     @forelse ($ongoingReports as $report)
       <div wire:poll.60s class="col-auto mb-3">
-        <a href="{{ route('resident.view.report', ['report' => $report, 'id' => auth()->guard('web')->id()]) }}" style="text-decoration: none;">
+        <a href="{{ route('resident.view.report', ['report' => $report]) }}" style="text-decoration: none;">
           <div class="card bg-light shadow-sm requested-docs-card">
             <div class="card-body pt-4 pb-5 rounded-top even-requested-docs-card-body color">
               <h5 class="card-title">{{ $report->report_name }}</h5>

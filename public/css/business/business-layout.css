@@ -80,30 +80,6 @@
   --bs-dropdown-link-active-bg: #e0e0e0;
 }
 
-#jobs-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  /* box-shadow: inset 0 -10px 5px black; */
-}
-
-#jobs-container::-webkit-scrollbar {
-  display: none;
-}
-
-#scroll-left,
-#scroll-right {
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
-  transition: all 100ms linear;
-}
-
-#scroll-left:hover,
-#scroll-right:hover {
-  height: 42px;
-  width: 42px;
-}
-
 .post-job-illustration {
   height: 20rem;
 }
@@ -145,40 +121,6 @@
 /* .last-textareas::-webkit-scrollbar {
   display: none;
 } */
-
-.place-icon {
-  display: grid;
-  place-items: center;
-  height: 40px;
-  width: 40px;
-}
-
-.docs-card,
-.requested-docs-card {
-  width: 24rem;
-  min-width: 18rem;
-}
-
-.even-requested-docs-card-body {
-  min-height: 9.5rem !important;
-}
-
-.docs-form-header {
-  background-color: var(--theme-color);
-}
-
-.docs-form-header > div {
-  height: 50px;
-  width: 50px;
-}
-
-.docs-form-header > div > span {
-  color: var(--theme-color);
-}
-
-label[for="proof"] {
-  font-size: 13px;
-}
 
 .next-btn,
 .add-report-btn {
@@ -223,15 +165,6 @@ label[for="proof"] {
 
 .job-cards-img {
   height: 13rem;
-}
-
-.even-requested-docs-card-body,
-.odd-requested-docs-card-footer {
-  background-color: var(--theme-color);
-}
-
-.even-requested-docs-card-body.color {
-  background-color: initial;
 }
 
 .requested-docs-pagination > div > nav {
@@ -433,25 +366,8 @@ label[for="proof"] {
     padding-right: 1rem !important;
   }
 
-  .docs-card,
-  .requested-docs-card {
-    width: 22rem;
-  }
-
   .requested-docs-pagination > div > nav > div > p > span {
     font-size: 10px !important;
-  }
-
-  .view-report-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
-  .back-btn {
-    display: block !important;
   }
 
   .post-job-main-container {

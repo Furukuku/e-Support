@@ -15,7 +15,7 @@
 
   @livewireStyles
 </head>
-<body>
+<body class="bg-light">
   <nav class="navbar navbar-expand-lg bg-light border-bottom px-4 shadow-sm sticky-top navbar-wide
     @if (str_contains(Route::currentRouteName(), 'business.home'))
       navbar-home

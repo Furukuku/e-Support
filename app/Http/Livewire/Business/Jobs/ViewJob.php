@@ -14,7 +14,7 @@ class ViewJob extends Component
 
     protected $listeners = ['submit', 'doneHiring'];
 
-    public $job_title, $job_type, $workplace_type, $phone_number, $email, $location, $business_image, $job_description, $job_requirements, $done_hiring;
+    public $job_title, $job_type, $workplace_type, $phone_number, $email, $location, $business_image, $job_description, $job_requirements, $done_hiring, $created_at, $biz_name, $biz_profile;
 
     public $view_biz_img, $requirements;
 
@@ -27,11 +27,11 @@ class ViewJob extends Component
     public function mount($id)
     {
         if(Auth::guard('business')->check()){
-            $job = Job::where('id', $id)
+            $job = Job::with('business')->where('id', $id)
                 ->where('business_id', auth()->guard('business')->id())
                 ->first();
 
-            if(is_null($job)){
+            if(is_null($job) || $job->business_id != auth()->guard('business')->id()){
                 abort(404);
             }else{
                 $this->job_title = $job->title;
@@ -43,6 +43,9 @@ class ViewJob extends Component
                 $this->job_description = $job->description;
                 $this->job_requirements = $job->requirements;
                 $this->done_hiring = $job->done_hiring;
+                $this->created_at = $job->created_at;
+                $this->biz_name = $job->business->biz_name;
+                $this->biz_profile = $job->business->profile;
 
                 $this->view_biz_img = $job->business_img;
                 $this->requirements = explode(';', $job->requirements);

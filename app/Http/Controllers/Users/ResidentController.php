@@ -15,6 +15,15 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ResidentController extends Controller
 {
+    public function viewJob(Job $job)
+    {
+        if($job->done_hiring == true){
+            abort(404);
+        }
+        
+        return view('resident.job', ['job' => $job]);
+    }
+
     public function updateReport(Request $request, Report $report)
     {
         $request->validate([
@@ -43,9 +52,9 @@ class ResidentController extends Controller
         return redirect()->route('resident.services');
     }
 
-    public function viewReport(Report $report, $id)
+    public function viewReport(Report $report)
     {
-        if(Auth::guard('web')->check() && auth()->guard('web')->id() == $id){
+        if(Auth::guard('web')->check() && $report->user_id == auth()->guard('web')->id()){
             return view('resident.reports.view-report', ['report' => $report]);
         }else{
             abort(404);
@@ -161,7 +170,7 @@ class ResidentController extends Controller
             ->where('token', $token)
             ->first();
 
-        if(!is_null($document)){
+        if(!is_null($document) && $document->user_id == auth()->guard('web')->id()){
             if($document->type === 'Barangay Clearance'){
                 return view('resident.documents.edit-documents.brgy-clearance', ['document' => $document]);
             }else if($document->type === 'Business Clearance'){
@@ -291,7 +300,7 @@ class ResidentController extends Controller
 
     public function home()
     {
-        $jobs = Job::inRandomOrder()->take(10)->get();
+        $jobs = Job::with('business')->where('done_hiring', false)->inRandomOrder()->take(10)->get();
 
         return view('resident.resident-home', ['jobs' => $jobs]);
     }
