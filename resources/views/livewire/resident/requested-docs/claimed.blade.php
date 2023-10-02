@@ -14,7 +14,7 @@
             @endif
             <p class="card-text text-white m-0" style="font-size: 13px;">{{ $doc->created_at->format('h:i A - M d, Y') }}</p>
           </div>
-          <div class="card-footer d-flex justify-content-between">
+          <div class="card-footer d-flex justify-content-between bg-white">
             <div class="d-flex">
               <p class="m-0 text-dark">Status:</p>
               <div class="rounded-pill bg-success text-light ms-2 px-3">

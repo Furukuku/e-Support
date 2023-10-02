@@ -89,19 +89,19 @@
     <div class="w-100">
       <ul class="p-4 sidebar-items">
         <li class="pb-3">
-          <a href="{{ route('resident.home') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'text-primary' : 'text-dark' }}">
+          <a href="{{ route('resident.home') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.home') ? 'text-success' : 'main-color' }}">
             <span class="material-symbols-outlined">home</span>
             <span class="ps-2">Home</span>
           </a>
         </li>
         <li class="pb-3">
-          <a href="{{ route('resident.services') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'text-primary' : 'text-dark' }}">
+          <a href="{{ route('resident.services') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'text-success' : 'main-color' }}">
             <span class="material-symbols-outlined">quick_reference</span>
             <span class="ps-2">Services</span>
           </a>
         </li>
         <li class="pb-3">
-          <a href="{{ route('resident.profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.profile') ? 'text-primary' : 'text-dark' }}">
+          <a href="{{ route('resident.profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.profile') ? 'text-success' : 'main-color' }}">
             <span class="material-symbols-outlined">manage_accounts</span>
             <span class="ps-2">Profile</span>
           </a>

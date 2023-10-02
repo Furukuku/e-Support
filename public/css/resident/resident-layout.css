@@ -3,6 +3,10 @@
   --theme-color: #0E2C15;
 }
 
+.main-color {
+  color: var(--theme-color);
+}
+
 .sticky-top {
   z-index: 9 !important;
 }
@@ -26,7 +30,7 @@
   top: 0;
   right: 0;
   left: 0;
-  bottom: 0;
+  bottom: -20rem;
   z-index: 10;
   display: none;
 }
@@ -44,13 +48,14 @@
   position: fixed;
   top: 0;
   right: -230px;
-  bottom: 0;
+  bottom: -20rem;
   z-index: 11;
   transition: right 300ms linear;
 }
 
 .sidebar.show-sidebar {
   right: 0;
+  overflow: hidden;
 }
 
 .sidebar .profile-picture {
@@ -290,6 +295,10 @@ label[for="proof"] {
     width: 80% !important;
   }
 
+  .request-report {
+    display: none;
+  }
+
   .home-start,
   .home-end,
   .services-start {
@@ -300,6 +309,11 @@ label[for="proof"] {
   .home-middle {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
+  }
+
+  .request-list,
+  .report-list {
+    padding-bottom: 3rem;
   }
 
   .docs-card,
@@ -325,6 +339,22 @@ label[for="proof"] {
 }
 
 
+@media (max-width: 380px){
+  .docs-card,
+  .requested-docs-card {
+    width: 20rem;
+  }
+}
+
+
+@media (max-width: 350px) {
+  .docs-card,
+  .requested-docs-card {
+    width: 18rem;
+  }
+}
+
+
 @media (max-width: 730px){
   .home-middle-texts {
     display: block !important;
@@ -343,5 +373,9 @@ label[for="proof"] {
 
   .sidebar {
     right: -230px !important;
+  }
+
+  .services-bot-nav {
+    display: none !important;
   }
 }

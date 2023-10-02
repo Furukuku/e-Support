@@ -160,7 +160,7 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 
         Route::post('/logout', [LogoutController::class, 'residentLogout'])->name('logout');
         Route::get('/home', [ResidentController::class, 'home'])->name('home');
-        Route::view('/services', 'resident.resident-services')->name('services');
+        Route::view('/services', 'resident.request-report')->name('services');
         Route::view('/profile', 'resident.resident-profile')->name('profile');
 
         Route::view('/business-clearance', 'resident.documents.business-clearance')->name('biz-clearance');
@@ -173,11 +173,13 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 
         Route::get('/qr-code/{token}', [ResidentController::class, 'showQr'])->name('qr-code');
         Route::get('/edit/documents/{id}/{token}', [ResidentController::class, 'editDocs'])->name('edit.docs');
+        Route::view('/documents', 'resident.documents.request-list')->name('docs-list');
 
         Route::patch('/update/brgy-clearance/{id}', [ResidentController::class, 'updateBrgyClearance'])->name('update.brgy-clearnce');
         Route::patch('/update/business-clearance/{id}', [ResidentController::class, 'updateBizClearance'])->name('update.biz-clearnce');
         Route::patch('/update/indigency/{id}', [ResidentController::class, 'updateIndigency'])->name('update.indigency');
 
+        Route::view('/reports', 'resident.reports.report-list')->name('report-list');
         Route::view('/add-report', 'resident.reports.add-report')->name('add-report');
         Route::post('/report', [ResidentController::class, 'report'])->name('report');
         Route::get('/report/{report}', [ResidentController::class, 'viewReport'])->name('view.report');
