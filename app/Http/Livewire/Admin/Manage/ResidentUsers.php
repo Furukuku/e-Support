@@ -16,6 +16,8 @@ class ResidentUsers extends Component
 
     public $search = "";
 
+    public $category = 0;
+
     protected $listeners = ['closeModal'];
 
     public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $family_head;

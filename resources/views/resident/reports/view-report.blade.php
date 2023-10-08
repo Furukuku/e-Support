@@ -6,8 +6,10 @@
 
     <div class="container py-3 d-flex gap-2 justify-content-around view-report-container">
       @if ($report->status === 'Pending')
-        <div class="col rounded py-3 mb-3">
-          <img id="preview-image" class="object-fit-contain border rounded" src="{{ Storage::url($report->report_img) }}" alt="preview-image" style="max-width: 20rem;">
+        <div id="preview-img-container" class="col rounded py-3 mb-3">
+          @foreach ($report->images as $image)
+            <img class="object-fit-contain border rounded" src="{{ Storage::url($image->image) }}" alt="preview-image" style="max-width: 10rem;">
+          @endforeach
         </div>
         <div class="col">
           <form id="report-form" class="biz-clearance-form" action="{{ route('resident.update-report', ['report' => $report]) }}" method="POST" enctype="multipart/form-data">
@@ -41,8 +43,8 @@
               @error('zone') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
             <div class="row mb-3">
-              <label for="photo" class="form-label px-0">Photo <span style="font-size: 0.80rem;">(Insert a photo of your report)</span></label>
-              <input type="file" accept="image/*" id="photo" class="form-control form-control-sm mb-2" name="photo">
+              <label for="photo" class="form-label px-0">Photo <span style="font-size: 0.80rem;">(Insert photo of your report)</span></label>
+              <input type="file" accept="image/*" id="photo" class="form-control form-control-sm mb-2" name="photo[]" multiple>
               @error('photo') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
             <div class="row mb-3">
@@ -58,7 +60,9 @@
         </div>
       @else
         <div class="col rounded py-3 mb-3">
-          <img class="object-fit-contain border rounded" src="{{ Storage::url($report->report_img) }}" alt="preview-image" style="max-width: 20rem;">
+          @foreach ($report->images as $image)
+            <img class="object-fit-contain border rounded" src="{{ Storage::url($image->image) }}" alt="preview-image" style="max-width: 10rem;">
+          @endforeach
         </div>
         <div class="col">
           <div class="row mb-3">
@@ -87,11 +91,52 @@
 
     <script>
 
-      const photo = document.getElementById('photo');
-      const previewImage = document.getElementById('preview-image');
+      // const photo = document.getElementById('photo');
+      // const previewImgContainer = document.getElementById('preview-img-container');
 
-      photo.addEventListener('change', () => {
-        previewImage.src = URL.createObjectURL(event.target.files[0]);
+      // photo.addEventListener('change', e => {
+        
+      //   // previewImage.src = URL.createObjectURL(event.target.files[0]);
+        
+      //   const files = e.target.files;
+
+      //   for (const file of files) {
+      //     const reader = new FileReader();
+          
+      //     reader.onload = function(event) {
+      //       const previewImg = document.createElement('img');
+      //       previewImg.src = event.target.result;
+      //       previewImg.classList.add('object-fit-contain border rounded');
+      //       previewImg.style.maxWidth = "10rem";
+      //       previewImgContainer.appendChild(previewImg);
+      //     };
+
+      //     reader.readAsDataURL(file);
+      //   }
+      // });
+
+      const photo = document.getElementById('photo');
+      const previewImgContainer = document.getElementById('preview-img-container');
+
+      photo.addEventListener('change', e => {
+        const files = e.target.files;
+        
+        // Clear previous previews
+        previewImgContainer.innerHTML = '';
+
+        for (const file of files) {
+          const reader = new FileReader();
+
+          reader.onload = function(event) {
+            const previewImg = document.createElement('img');
+            previewImg.src = event.target.result;
+            previewImg.classList.add('object-fit-contain', 'border', 'rounded');
+            previewImg.style.maxWidth = "10rem";
+            previewImgContainer.appendChild(previewImg);
+          };
+
+          reader.readAsDataURL(file);
+        }
       });
 
       document.getElementById('report-form').addEventListener('submit', e => {

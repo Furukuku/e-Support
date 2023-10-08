@@ -27,7 +27,7 @@
 </head>
 <body class="bg-light">
   <nav class="navbar navbar-expand-lg bg-white border-bottom px-4 shadow-sm sticky-top navbar-wide
-    @if (str_contains(Route::currentRouteName(), 'resident.home') || str_contains(Route::currentRouteName(), 'resident.view-job'))
+    @if (str_contains(Route::currentRouteName(), 'resident.home') || str_contains(Route::currentRouteName(), 'resident.view-job') || str_contains(Route::currentRouteName(), 'resident.family-profile'))
       navbar-home
     @elseif (str_contains(Route::currentRouteName(), 'resident.services'))
       navbar-services
@@ -56,6 +56,13 @@
               <h5 class="m-0">Profile</h5>
             </a>
           </li>
+          @if (auth()->guard('web')->user()->is_head == 'Yes')
+            <li class="nav-item">
+              <a href="{{ route('resident.family-profile') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'resident.family-profile') ? 'active' : '' }}">
+                <h5 class="m-0">Family Profile</h5>
+              </a>
+            </li>
+          @endif
         </ul>
       </div>
       <div class="btn-group navbar-hide-items">
@@ -106,6 +113,14 @@
             <span class="ps-2">Profile</span>
           </a>
         </li>
+        @if (auth()->guard('web')->user()->is_head == 'Yes')
+          <li class="pb-3">
+            <a href="{{ route('resident.family-profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.family-profile') ? 'text-success' : 'main-color' }}">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              <span class="ps-2">Family Profile</span>
+            </a>
+          </li>
+        @endif
         <li class="pb-3">
           <form action="{{ route('resident.logout') }}" method="POST">
             @csrf
@@ -124,6 +139,8 @@
     </div>
   </main>
 
+  @livewire('resident.chatbot')
+
   @livewireScripts
   {{-- scripts --}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -137,6 +154,8 @@
   <script src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
 
   @yield('scripts')
+
+  @stack('chatbot-js')
 
 </body>
 </html>

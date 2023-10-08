@@ -4,7 +4,7 @@
 
   <div class="bg-white officials-profile-table shadow rounded">
     <div class="d-flex justify-content-between p-2 rounded-top officials-header">
-      <h3>OFFICIALS' AND STAFF'S ACCOUNTS</h3>
+      <h3>OFFICIALS' AND STAFFS' ACCOUNTS</h3>
       <button type="button" class="btn px-4 shadow btn-add" wire:loading.attr="disabled" data-bs-toggle="modal" data-bs-target="#createAccount">Create new Account</button>
     </div>
     <div class="d-flex justify-content-between p-2">

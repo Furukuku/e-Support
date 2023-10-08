@@ -83,7 +83,7 @@
             @endif
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">groups</span>
-              <p class="col-7 m-0 ps-0">Users Management</p>
+              <p class="col-7 m-0 ps-0 text-truncate">User's Account Management</p>
               <span id="u-submenu-arrow" class="material-symbols-outlined col-2 arrow2 {{ str_contains(Route::currentRouteName(), 'admin.manage.') ? 'rotate2' : '' }}">chevron_left</span>
             </div>
           </a>

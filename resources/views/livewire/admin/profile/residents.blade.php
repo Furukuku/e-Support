@@ -61,11 +61,11 @@
         <tbody>
           @forelse ($families as $family)
             <tr>
-              <td class="align-middle text-center">{{ $family->head_fname }} {{ $family->head_mname }} {{ $family->head_lname }} {{ $family->head_sname }}</td>
-              <td class="align-middle text-center">{{ $family->head_zone }}</td>
-              <td class="align-middle text-center">{{ $family->head_bplace }}</td>
-              <td class="align-middle text-center">{{ date('m/d/Y', strtotime($family->head_bday)) }}</td>
-              <td class="align-middle text-center">{{ $family->head_contact }}</td>
+              <td class="align-middle text-center">{{ $family->fullname }}</td>
+              <td class="align-middle text-center">{{ $family->zone }}</td>
+              <td class="align-middle text-center">{{ $family->bplace }}</td>
+              <td class="align-middle text-center">{{ date('m/d/Y', strtotime($family->bday)) }}</td>
+              <td class="align-middle text-center">{{ $family->contact }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewFamily({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#viewResident"></i>
                 <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:loading.class="pe-none" wire:click="editFamily({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#updateResident"></i>

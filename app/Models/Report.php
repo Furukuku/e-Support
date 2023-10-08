@@ -16,7 +16,6 @@ class Report extends Model
         'user_id',
         'report_name',
         'zone',
-        'report_img',
         'latitude',
         'longitude',
         'description',
@@ -26,5 +25,10 @@ class Report extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ReportImage::class);
     }
 }

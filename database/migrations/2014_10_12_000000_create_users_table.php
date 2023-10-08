@@ -27,9 +27,9 @@ return new class extends Migration
             $table->timestamp('mobile_verified_at')->nullable();
             $table->timestamp('mobile_verify_code_exp')->nullable();
             $table->string('zone');
-            $table->string('employ_status');
+            $table->string('employ_status'); // TODO: change to boolean and is_employed must be the name
             $table->string('gender');
-            $table->string('is_head');
+            $table->string('is_head'); // TODO: change to boolean
             $table->boolean('is_approved')->default(false); // false/0 => not approved, true/1 => approved
             $table->boolean('is_active')->default(true); // false/0 => not active, true/1 => active
             $table->string('username')->unique();

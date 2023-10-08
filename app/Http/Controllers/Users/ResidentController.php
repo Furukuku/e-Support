@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\Report;
+use App\Models\ReportImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
@@ -29,19 +30,31 @@ class ResidentController extends Controller
         $request->validate([
             'kind_of_report' => ['required', 'string', 'max:16'],
             'zone' => ['required', 'string', 'max:1'],
-            'photo' => [File::image()],
+            'photo.*' => [File::image()],
+            'photo' => ['max:3'],
             'description' => ['required', 'string'],
         ]);
 
         if($request->hasFile('photo')){
-            Storage::delete($report->report_img);
-            $photo_filename = $request->photo->store('public/images/reports');
-
+            $images = ReportImage::where('report_id', $report->id)->get();
+            foreach($images as $image){
+                Storage::delete($image->image);
+                $image->delete();
+            }
+            
             $report->report_name = $request->kind_of_report;
             $report->zone = $request->zone;
             $report->description = $request->description;
-            $report->report_img = $photo_filename;
             $report->update();
+
+            foreach($request->file('photo') as $photo){
+                $photo_filename = $photo->store('public/images/reports');
+
+                ReportImage::create([
+                    'report_id' => $report->id,
+                    'image' => $photo_filename,
+                ]);
+            }
         }else{
             $report->report_name = $request->kind_of_report;
             $report->zone = $request->zone;
@@ -67,7 +80,8 @@ class ResidentController extends Controller
             [
                 'kind_of_report' => ['required', 'string', 'max:16'],
                 'zone' => ['required', 'string', 'max:1'],
-                'photo' => ['required', File::image()],
+                'photo.*' => [File::image()],
+                'photo' => ['required', 'min:1', 'max:3'],
                 'latitude' => ['required', 'string'],
                 'longitude' => ['required', 'string'],
                 'description' => ['required', 'string'],
@@ -81,17 +95,24 @@ class ResidentController extends Controller
         );
 
         if(Auth::guard('web')->check()){
-            $photo_filename = $request->photo->store('public/images/reports');
-    
-            Report::create([
-                'user_id' => auth()->guard('web')->id(),
-                'report_name' => $request->kind_of_report,
-                'zone' => $request->zone,
-                'report_img' => $photo_filename,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-                'description' => $request->description,
-            ]);
+            
+            $report = new Report();
+            $report->user_id = auth()->guard('web')->id();
+            $report->report_name = $request->kind_of_report;
+            $report->zone = $request->zone;
+            $report->latitude = $request->latitude;
+            $report->longitude = $request->longitude;
+            $report->description = $request->description;
+            $report->save();
+            
+            foreach($request->file('photo') as $photo){
+                $photo_filename = $photo->store('public/images/reports');
+
+                ReportImage::create([
+                    'report_id' => $report->id,
+                    'image' => $photo_filename,
+                ]);
+            }
         }
 
         return redirect()->route('resident.services');

@@ -5,6 +5,10 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Admin;
+use App\Models\Chatbot;
+use App\Models\ChatBotPattern;
+use App\Models\ChatBotResponse;
+use App\Models\ChatBotTag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -47,6 +51,159 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'resident@sample.com',
         //     'username' => 'resident',
         //     'password' => Hash::make('123456'),
+        // ]);
+
+        // Chatbot::insert([
+        //     'question' => 'badwords',
+        //     'response' => "Please don't send unnecessary words!",
+        // ]);
+
+        // ChatBotTag::insert([
+        //     'tag' => 'badwords',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'putang',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'putanginamo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'putangina',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'putang ina mo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'putang inamo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'putangina mo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'fuck',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'fucker',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'fucking',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'fuckin',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'fuck u',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'fuck you',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'taenamo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'taena mo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'taena',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'tanginamo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'puta',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'tangina mo',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'tangina',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'tang ina',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'keyword' => 'ina mo',
+        // ]);
+
+        // ChatBotResponse::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'response' => "Please don't send unnecessary words :(.",
+        // ]);
+
+        // ChatBotResponse::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'response' => "We strive to maintain a respectful environment. Please refrain from using offensive words.",
+        // ]);
+
+        // ChatBotResponse::insert([
+        //     'chat_bot_tag_id' => 2,
+        //     'response' => "Oops! It seems you've used inappropriate language.",
+        // ]);
+
+        // ChatBotTag::insert([
+        //     'tag' => 'jokes',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 3,
+        //     'keyword' => 'joke',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 3,
+        //     'keyword' => 'jokes',
+        // ]);
+
+        // ChatBotPattern::insert([
+        //     'chat_bot_tag_id' => 3,
+        //     'keyword' => 'funny',
+        // ]);
+
+        // ChatBotResponse::insert([
+        //     'chat_bot_tag_id' => 3,
+        //     'response' => "Si MC ay panot.",
         // ]);
     }
 }

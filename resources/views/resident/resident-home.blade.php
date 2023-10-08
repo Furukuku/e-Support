@@ -25,7 +25,7 @@
               <div class="card mb-3 shadow-sm job-cards">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
-                    <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/job_hunt.svg') : Storage::url($job->business_img) }}" class="img-fluid rounded-start" alt="...">
+                    <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/job_hunt.svg') : Storage::url($job->business_img) }}" class="img-fluid rounded-start job-card-img" alt="...">
                   </div>
                   <div class="h-100" style="width: 60%;">
                     <div class="card-body h-100 d-flex flex-column justify-content-between">

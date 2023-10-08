@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('family_members', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('family_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('family_head_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('lname');
             $table->string('fname')->nullable();
             $table->string('mname')->nullable();
             $table->string('sname')->nullable();
+            $table->string('fullname');
             $table->date('bday');
             $table->string('bplace');
             $table->string('educ_attainment');

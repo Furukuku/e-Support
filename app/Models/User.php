@@ -82,6 +82,11 @@ class User extends Authenticatable implements IMustVerifyMobile
         return $this->hasMany(Document::class);
     }
 
+    public function familyHead()
+    {
+        return $this->hasOne(FamilyHead::class);
+    }
+
     public function routeNotificationForVonage(Notification $notification): string
     {
         return $this->mobile;

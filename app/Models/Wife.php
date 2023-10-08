@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FamilyMember extends Model
+class Wife extends Model
 {
     use HasFactory;
 
-    protected $table = 'family_members';
+    protected $table = 'wives';
 
     protected $fillable = [
         'family_head_id',
@@ -20,7 +20,13 @@ class FamilyMember extends Model
         'fullname',
         'bday',
         'bplace',
+        'civil_status',
         'educ_attainment',
+        'zone',
+        'religion',
+        'occupation',
+        'contact',
+        'philhealth',
         'first_dose',
         'second_dose',
         'vaccine_brand',
@@ -30,6 +36,6 @@ class FamilyMember extends Model
 
     public function familyHead()
     {
-        return $this->belongsTo(FamilyHead::class);
+        return $this->belongsTo(FamilyHead::class,);
     }
 }

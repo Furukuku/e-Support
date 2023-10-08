@@ -186,6 +186,8 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
         Route::patch('/update-report/{report}', [ResidentController::class, 'updateReport'])->name('update-report');
 
         Route::get('/job/{job}', [ResidentController::class, 'viewJob'])->name('view-job');
+
+        Route::view('/family-profile', 'resident.resident-family-profile')->middleware('resident.head')->name('family-profile');
     });
 });
 /*------------------------- End of Residents Routes -------------------------*/

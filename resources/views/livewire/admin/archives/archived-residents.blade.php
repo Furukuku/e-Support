@@ -43,11 +43,11 @@
         <tbody>
           @forelse ($families as $family)
             <tr>
-              <td class="align-middle text-center">{{ $family->head_fname }} {{ $family->head_mname }} {{ $family->head_lname }} {{ $family->head_sname }}</td>
-              <td class="align-middle text-center">{{ $family->head_zone }}</td>
-              <td class="align-middle text-center">{{ $family->head_bplace }}</td>
-              <td class="align-middle text-center">{{ date('m/d/Y', strtotime($family->head_bday)) }}</td>
-              <td class="align-middle text-center">{{ $family->head_contact }}</td>
+              <td class="align-middle text-center">{{ $family->fullname }}</td>
+              <td class="align-middle text-center">{{ $family->zone }}</td>
+              <td class="align-middle text-center">{{ $family->bplace }}</td>
+              <td class="align-middle text-center">{{ date('m/d/Y', strtotime($family->bday)) }}</td>
+              <td class="align-middle text-center">{{ $family->contact }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-trash-arrow-up mx-1 align-middle text-success restore-icon" wire:loading.class="pe-none" wire:click="restoreConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#restoreFamily"></i>
                 <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#deleteFamily"></i>

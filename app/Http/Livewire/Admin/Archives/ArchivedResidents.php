@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Archives;
 
 use App\Models\Family;
+use App\Models\FamilyHead;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,7 +17,7 @@ class ArchivedResidents extends Component
 
     public $search = "";
 
-    public $family_id;
+    public $family_head_id;
 
     public function updatingSearch()
     {
@@ -25,7 +26,7 @@ class ArchivedResidents extends Component
 
     public function resetVariables()
     {
-        $this->family_id = '';
+        $this->family_head_id = null;
     }
     
     public function closeModal()
@@ -35,14 +36,13 @@ class ArchivedResidents extends Component
 
     public function restoreConfirmation($id)
     {
-        $family = Family::onlyTrashed()->find($id);
-        $this->family_id = $family->id;
+        $this->family_head_id = $id;
     }
 
     public function restoreFamily()
     {
-        $family = Family::onlyTrashed()->find($this->family_id);
-        $family->restore();
+        $family_head = FamilyHead::onlyTrashed()->find($this->family_head_id);
+        $family_head->restore();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
@@ -50,14 +50,13 @@ class ArchivedResidents extends Component
 
     public function permanentlyDelConfirmation($id)
     {
-        $family = Family::onlyTrashed()->find($id);
-        $this->family_id = $family->id;
+        $this->family_head_id = $id;
     }
 
     public function permanentlyDel()
     {
-        $family = Family::onlyTrashed()->find($this->family_id);
-        $family->forceDelete();
+        $family_head = FamilyHead::onlyTrashed()->find($this->family_head_id);
+        $family_head->forceDelete();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
@@ -65,11 +64,12 @@ class ArchivedResidents extends Component
 
     public function render()
     {
-        $families = Family::onlyTrashed()
+        $families = FamilyHead::onlyTrashed()
         ->where(function($query){
-            $query->where('head_fname', 'like', '%' . $this->search . '%')
-            ->orWhere('head_mname', 'like', '%' . $this->search . '%')
-            ->orWhere('head_lname', 'like', '%' . $this->search . '%');
+            $query->where('fullname', 'like', '%' . $this->search . '%')
+            ->orWhere('fname', 'like', '%' . $this->search . '%')
+            ->orWhere('mname', 'like', '%' . $this->search . '%')
+            ->orWhere('lname', 'like', '%' . $this->search . '%');
         })
         ->orderBy('deleted_at', 'desc')
         ->paginate($this->paginate, ['*'], 'familiesPage');

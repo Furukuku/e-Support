@@ -16,319 +16,319 @@
             <div>
               <div id="add-family-head" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 border-black resident-category">
                 <span class="material-symbols-outlined
-                @error('family_head_last_name')
+                @error('last_name')
                   text-danger
                 @enderror
-                @error('family_head_middle_name')
+                @error('middle_name')
                   text-danger
                 @enderror
-                @error('family_head_first_name')
+                @error('first_name')
                   text-danger
                 @enderror
-                @error('family_head_suffix_name')
+                @error('suffix_name')
                   text-danger
                 @enderror
-                @error('family_head_birthday')
+                @error('birthday')
                   text-danger
                 @enderror
-                @error('family_head_birthplace')
+                @error('birthplace')
                   text-danger
                 @enderror
-                @error('family_head_civil_status')
+                @error('civil_status')
                   text-danger
                 @enderror
-                @error('family_head_eductaional_attainment')
+                @error('educational_attainment')
                   text-danger
                 @enderror
-                @error('family_head_zone')
+                @error('zone')
                   text-danger
                 @enderror
-                @error('family_head_religion')
+                @error('religion')
                   text-danger
                 @enderror
-                @error('family_head_occupation')
+                @error('occupation')
                   text-danger
                 @enderror
-                @error('family_head_contact')
+                @error('contact')
                   text-danger
                 @enderror
-                @error('family_head_philhealth')
+                @error('philhealth')
                   text-danger
                 @enderror
-                @error('family_head_first_dose_date')
+                @error('first_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_second_dose_date')
+                @error('second_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_vaccine_brand')
+                @error('vaccine_brand')
                   text-danger
                 @enderror
-                @error('family_head_booster_date')
+                @error('booster_date')
                   text-danger
                 @enderror
-                @error('family_head_booster_brand')
+                @error('booster_brand')
                   text-danger
                 @enderror
                 ">
                 counter_1
                 </span>
                 <p class="m-0 ms-1
-                @error('family_head_last_name')
+                @error('last_name')
                   text-danger
                 @enderror
-                @error('family_head_middle_name')
+                @error('middle_name')
                   text-danger
                 @enderror
-                @error('family_head_first_name')
+                @error('first_name')
                   text-danger
                 @enderror
-                @error('family_head_suffix_name')
+                @error('suffix_name')
                   text-danger
                 @enderror
-                @error('family_head_birthday')
+                @error('birthday')
                   text-danger
                 @enderror
-                @error('family_head_birthplace')
+                @error('birthplace')
                   text-danger
                 @enderror
-                @error('family_head_civil_status')
+                @error('civil_status')
                   text-danger
                 @enderror
-                @error('family_head_eductaional_attainment')
+                @error('educational_attainment')
                   text-danger
                 @enderror
-                @error('family_head_zone')
+                @error('zone')
                   text-danger
                 @enderror
-                @error('family_head_religion')
+                @error('religion')
                   text-danger
                 @enderror
-                @error('family_head_occupation')
+                @error('occupation')
                   text-danger
                 @enderror
-                @error('family_head_contact')
+                @error('contact')
                   text-danger
                 @enderror
-                @error('family_head_philhealth')
+                @error('philhealth')
                   text-danger
                 @enderror
-                @error('family_head_first_dose_date')
+                @error('first_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_second_dose_date')
+                @error('second_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_vaccine_brand')
+                @error('vaccine_brand')
                   text-danger
                 @enderror
-                @error('family_head_booster_date')
+                @error('booster_date')
                   text-danger
                 @enderror
-                @error('family_head_booster_brand')
+                @error('booster_brand')
                   text-danger
                 @enderror
                 ">Head of Family</p>
               </div>
               <div id="add-wife" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
                 <span class="material-symbols-outlined
-                @error('wife_last_name')
+                @error('wife.*.lname')
                   text-danger
                 @enderror
-                @error('wife_middle_name')
+                @error('wife.*.mname')
                   text-danger
                 @enderror
-                @error('wife_first_name')
+                @error('wife.*.fname')
                   text-danger
                 @enderror
-                @error('wife_suffix_name')
+                @error('wife.*.sname')
                   text-danger
                 @enderror
-                @error('wife_birthday')
+                @error('wife.*.bday')
                   text-danger
                 @enderror
-                @error('wife_birthplace')
+                @error('wife.*.bplace')
                   text-danger
                 @enderror
-                @error('wife_civil_status')
+                @error('wife.*.civil_status')
                   text-danger
                 @enderror
-                @error('wife_eductaional_attainment')
+                @error('wife.*.educ_attainment')
                   text-danger
                 @enderror
-                @error('wife_zone')
+                @error('wife.*.zone')
                   text-danger
                 @enderror
-                @error('wife_religion')
+                @error('wife.*.religion')
                   text-danger
                 @enderror
-                @error('wife_occupation')
+                @error('wife.*.occupation')
                   text-danger
                 @enderror
-                @error('wife_contact')
+                @error('wife.*.contact')
                   text-danger
                 @enderror
-                @error('wife_philhealth')
+                @error('wife.*.philhealth')
                   text-danger
                 @enderror
-                @error('wife_first_dose_date')
+                @error('wife.*.first_dose')
                   text-danger
                 @enderror
-                @error('wife_second_dose_date')
+                @error('wife.*.second_dose')
                   text-danger
                 @enderror
-                @error('wife_vaccine_brand')
+                @error('wife.*.vaccine_brand')
                   text-danger
                 @enderror
-                @error('wife_booster_date')
+                @error('wife.*.booster')
                   text-danger
                 @enderror
-                @error('wife_booster_brand')
+                @error('wife.*.booster_brand')
                   text-danger
                 @enderror
                 ">
                 counter_2
                 </span>
                 <p class="m-0 ms-1
-                @error('wife_last_name')
+                @error('wife.*.lname')
                   text-danger
                 @enderror
-                @error('wife_middle_name')
+                @error('wife.*.mname')
                   text-danger
                 @enderror
-                @error('wife_first_name')
+                @error('wife.*.fname')
                   text-danger
                 @enderror
-                @error('wife_suffix_name')
+                @error('wife.*.sname')
                   text-danger
                 @enderror
-                @error('wife_birthday')
+                @error('wife.*.bday')
                   text-danger
                 @enderror
-                @error('wife_birthplace')
+                @error('wife.*.bplace')
                   text-danger
                 @enderror
-                @error('wife_civil_status')
+                @error('wife.*.civil_status')
                   text-danger
                 @enderror
-                @error('wife_eductaional_attainment')
+                @error('wife.*.educ_attainment')
                   text-danger
                 @enderror
-                @error('wife_zone')
+                @error('wife.*.zone')
                   text-danger
                 @enderror
-                @error('wife_religion')
+                @error('wife.*.religion')
                   text-danger
                 @enderror
-                @error('wife_occupation')
+                @error('wife.*.occupation')
                   text-danger
                 @enderror
-                @error('wife_contact')
+                @error('wife.*.contact')
                   text-danger
                 @enderror
-                @error('wife_philhealth')
+                @error('wife.*.philhealth')
                   text-danger
                 @enderror
-                @error('wife_first_dose_date')
+                @error('wife.*.first_dose')
                   text-danger
                 @enderror
-                @error('wife_second_dose_date')
+                @error('wife.*.second_dose')
                   text-danger
                 @enderror
-                @error('wife_vaccine_brand')
+                @error('wife.*.vaccine_brand')
                   text-danger
                 @enderror
-                @error('wife_booster_date')
+                @error('wife.*.booster')
                   text-danger
                 @enderror
-                @error('wife_booster_brand')
+                @error('wife.*.booster_brand')
                   text-danger
                 @enderror
                 ">Wife</p>
               </div>
               <div id="add-family-member" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
                 <span class="material-symbols-outlined
-                @error('members.*.family_member_last_name')
+                @error('members.*.lname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_first_name')
+                @error('members.*.fname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_middle_name')
+                @error('members.*.mname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_suffix_name')
+                @error('members.*.sname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_birthday')
+                @error('members.*.bday')
                   text-danger
                 @enderror
-                @error('members.*.family_member_birthplace')
+                @error('members.*.bplace')
                   text-danger
                 @enderror
-                @error('members.*.family_member_eductaional_attainment')
+                @error('members.*.educ_attain')
                   text-danger
                 @enderror
-                @error('members.*.family_member_first_dose_date')
+                @error('members.*.fdose')
                   text-danger
                 @enderror
-                @error('members.*.family_member_second_dose_date')
+                @error('members.*.sdose')
                   text-danger
                 @enderror
-                @error('members.*.family_member_vaccine_brand')
+                @error('members.*.brand')
                   text-danger
                 @enderror
-                @error('members.*.family_member_booster_date')
+                @error('members.*.booster')
                   text-danger
                 @enderror
-                @error('members.*.family_member_booster_brand')
+                @error('members.*.bbrand')
                   text-danger
                 @enderror
                 ">
                 counter_3
                 </span>
                 <p class="m-0 ms-1 
-                @error('members.*.family_member_last_name')
+                @error('members.*.lname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_first_name')
+                @error('members.*.fname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_middle_name')
+                @error('members.*.mname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_suffix_name')
+                @error('members.*.sname')
                   text-danger
                 @enderror
-                @error('members.*.family_member_birthday')
+                @error('members.*.bday')
                   text-danger
                 @enderror
-                @error('members.*.family_member_birthplace')
+                @error('members.*.bplace')
                   text-danger
                 @enderror
-                @error('members.*.family_member_eductaional_attainment')
+                @error('members.*.educ_attain')
                   text-danger
                 @enderror
-                @error('members.*.family_member_first_dose_date')
+                @error('members.*.fdose')
                   text-danger
                 @enderror
-                @error('members.*.family_member_second_dose_date')
+                @error('members.*.sdose')
                   text-danger
                 @enderror
-                @error('members.*.family_member_vaccine_brand')
+                @error('members.*.brand')
                   text-danger
                 @enderror
-                @error('members.*.family_member_booster_date')
+                @error('members.*.booster')
                   text-danger
                 @enderror
-                @error('members.*.family_member_booster_brand')
+                @error('members.*.bbrand')
                   text-danger
                 @enderror
                 ">Member of the Family</p>
               </div>
               <div id="add-info" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
                 <span class="material-symbols-outlined
-                @error('total_family_member')
+                @error('house_no')
                   text-danger
                 @enderror
                 @error('water_source')
@@ -350,7 +350,7 @@
                 counter_4
                 </span>
                 <p class="m-0 ms-1
-                @error('total_family_member')
+                @error('house_no')
                   text-danger
                 @enderror
                 @error('water_source')
@@ -410,37 +410,37 @@
               <div class="col mt-4">
                 <div class="row-auto mb-3">
                   <label for="add-head-lname">Last Name</label>
-                  <input wire:model.defer="family_head_last_name" id="add-head-lname" type="text" class="form-control">
-                  @error('family_head_last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="last_name" id="add-head-lname" type="text" class="form-control">
+                  @error('last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-fname">First Name</label>
-                  <input wire:model.defer="family_head_first_name" id="add-head-fname" type="text" class="form-control">
-                  @error('family_head_first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="first_name" id="add-head-fname" type="text" class="form-control">
+                  @error('first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-mname">Middle Name</label>
-                  <input wire:model.defer="family_head_middle_name" id="add-head-mname" type="text" class="form-control">
-                  @error('family_head_middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="middle_name" id="add-head-mname" type="text" class="form-control">
+                  @error('middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-sname">Suffix (Optional)</label>
-                  <input wire:model.defer="family_head_suffix_name" id="add-head-sname" type="text" class="form-control">
-                  @error('family_head_suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="suffix_name" id="add-head-sname" type="text" class="form-control">
+                  @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-bday">Birthday</label>
-                  <input wire:model.defer="family_head_birthday" id="add-head-bday" type="date" class="form-control">
-                  @error('family_head_birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="birthday" id="add-head-bday" type="date" class="form-control">
+                  @error('birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-bplace">Birthplace</label>
-                  <input wire:model.defer="family_head_birthplace" id="add-head-bplace" type="text" class="form-control">
-                  @error('family_head_birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="birthplace" id="add-head-bplace" type="text" class="form-control">
+                  @error('birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-civil-status">Civil Status</label>
-                  <select wire:model.defer="family_head_civil_status" id="add-head-civil-status" class="form-select">
+                  <select wire:model.defer="civil_status" id="add-head-civil-status" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="Single">Single</option>
                     <option value="Married">Married</option>
@@ -448,16 +448,16 @@
                     <option value="Separated">Separated</option>
                     <option value="Widowed">Widowed</option>
                   </select>
-                  @error('family_head_civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-educ-attain">Educational Attainment</label>
-                  <input wire:model.defer="family_head_eductaional_attainment" id="add-head-educ-attain" type="text" class="form-control">
-                  @error('family_head_eductaional_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="educational_attainment" id="add-head-educ-attain" type="text" class="form-control">
+                  @error('educational_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-zone">Zone</label>
-                  <select  wire:model.defer="family_head_zone" id="add-head-zone" class="form-select">
+                  <select  wire:model.defer="zone" id="add-head-zone" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -466,45 +466,46 @@
                     <option value="5">5</option>
                     <option value="6">6</option>
                   </select>
-                  @error('family_head_zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-religion">Religion</label>
-                  <input wire:model.defer="family_head_religion" id="add-head-religion" type="text" class="form-control">
-                  @error('family_head_religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="religion" id="add-head-religion" type="text" class="form-control">
+                  @error('religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-occupation">Occupation</label>
-                  <input wire:model.defer="family_head_occupation" id="add-head-occupation" type="text" class="form-control">
-                  @error('family_head_occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="occupation" id="add-head-occupation" type="text" class="form-control">
+                  @error('occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-contact">Contact</label>
-                  <input wire:model.defer="family_head_contact" id="add-head-contact" type="tel" class="form-control">
-                  @error('family_head_contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="contact" id="add-head-contact" type="tel" class="form-control">
+                  @error('contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-philhealth">Philhealth</label>
-                  <select wire:model.defer="family_head_philhealth" id="add-head-philhealth" class="form-select">
+                  <select wire:model.defer="philhealth" id="add-head-philhealth" class="form-select">
                     <option value="">Choose one...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
                   </select>
-                  @error('family_head_philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
+                <h6 class="mt-5 mb-3">Vaccination Status</h6>
                 <div class="row-auto mb-3">
                   <label for="add-head-1st-dose">1st Dose</label>
-                  <input wire:model.defer="family_head_first_dose_date" id="add-head-1st-dose" type="date" class="form-control">
-                  @error('family_head_first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="first_dose_date" id="add-head-1st-dose" type="date" class="form-control">
+                  @error('first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-2nd-dose">2nd Dose</label>
-                  <input wire:model.defer="family_head_second_dose_date" id="add-head-2nd-dose" type="date" class="form-control">
-                  @error('family_head_second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="second_dose_date" id="add-head-2nd-dose" type="date" class="form-control">
+                  @error('second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-brand">Brand</label>
-                  <select  wire:model.defer="family_head_vaccine_brand" id="add-head-brand" class="form-select">
+                  <select  wire:model.defer="vaccine_brand" id="add-head-brand" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="Sinovac Biotech">Sinovac Biotech</option>
                     <option value="AstraZeneca">AstraZeneca</option>
@@ -513,16 +514,16 @@
                     <option value="Johnson & Johnson">Johnson & Johnson</option>
                     <option value="Sputnik V">Sputnik V</option>
                   </select>
-                  @error('family_head_vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-booster">Booster</label>
-                  <input wire:model.defer="family_head_booster_date" id="add-head-booster" type="date" class="form-control">
-                  @error('family_head_booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="booster_date" id="add-head-booster" type="date" class="form-control">
+                  @error('booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-booster-brand">Brand</label>
-                  <select  wire:model.defer="family_head_booster_brand" id="add-head-booster-brand" class="form-select">
+                  <select  wire:model.defer="booster_brand" id="add-head-booster-brand" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="Sinovac Biotech">Sinovac Biotech</option>
                     <option value="AstraZeneca">AstraZeneca</option>
@@ -531,141 +532,151 @@
                     <option value="Johnson & Johnson">Johnson & Johnson</option>
                     <option value="Sputnik V">Sputnik V</option>
                   </select>
-                  @error('family_head_booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
               </div>
             </div>
 
             {{-- Wife --}}
             <div id="add-wife-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
-              <h4>Wife</h1>
-              <div class="col mt-4">
-                <div class="row-auto mb-3">
-                  <label for="add-wife-lname">Last Name</label>
-                  <input wire:model.defer="wife_last_name" id="add-wife-lname" type="text" class="form-control">
-                  @error('wife_last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-fname">First Name</label>
-                  <input wire:model.defer="wife_first_name" id="add-wife-fname" type="text" class="form-control">
-                  @error('wife_first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-mname">Middle Name</label>
-                  <input wire:model.defer="wife_middle_name" id="add-wife-mname" type="text" class="form-control">
-                  @error('wife_middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-sname">Suffix (Optional)</label>
-                  <input wire:model.defer="wife_suffix_name" id="add-wife-sname" type="text" class="form-control">
-                  @error('wife_suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-bday">Birthday</label>
-                  <input wire:model.defer="wife_birthday" id="add-wife-bday" type="date" class="form-control">
-                  @error('wife_birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-bplace">Birthplace</label>
-                  <input wire:model.defer="wife_birthplace" id="add-wife-bplace" type="text" class="form-control">
-                  @error('wife_birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-civil-status">Civil Status</label>
-                  <select wire:model.defer="wife_civil_status" id="add-wife-civil-status" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
-                    <option value="Separated">Separated</option>
-                    <option value="Widowed">Widowed</option>
-                  </select>
-                  @error('wife_civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-educ-attain">Educational Attainment</label>
-                  <input wire:model.defer="wife_eductaional_attainment" id="add-wife-educ-attain" type="text" class="form-control">
-                  @error('wife_eductaional_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-zone">Zone</label>
-                  <select  wire:model.defer="wife_zone" id="add-wife-zone" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
-                  @error('wife_zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-religion">Religion</label>
-                  <input wire:model.defer="wife_religion" id="add-wife-religion" type="text" class="form-control">
-                  @error('wife_religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-occupation">Occupation</label>
-                  <input wire:model.defer="wife_occupation" id="add-wife-occupation" type="text" class="form-control">
-                  @error('wife_occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-contact">Contact</label>
-                  <input wire:model.defer="wife_contact" id="add-wife-contact" type="tel" class="form-control">
-                  @error('wife_contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-philhealth">Philhealth</label>
-                  <select wire:model.defer="wife_philhealth" id="add-wife-philhealth" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
-                  @error('wife_philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-1st-dose">1st Dose</label>
-                  <input wire:model.defer="wife_first_dose_date" id="add-wife-1st-dose" type="date" class="form-control">
-                  @error('wife_first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-2nd-dose">2nd Dose</label>
-                  <input wire:model.defer="wife_second_dose_date" id="add-wife-2nd-dose" type="date" class="form-control">
-                  @error('wife_second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-brand">Brand</label>
-                  <select  wire:model.defer="wife_vaccine_brand" id="add-wife-brand" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Sinovac Biotech">Sinovac Biotech</option>
-                    <option value="AstraZeneca">AstraZeneca</option>
-                    <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
-                    <option value="Moderna">Moderna</option>
-                    <option value="Johnson & Johnson">Johnson & Johnson</option>
-                    <option value="Sputnik V">Sputnik V</option>
-                  </select>
-                  @error('wife_vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-booster">Booster</label>
-                  <input wire:model.defer="wife_booster_date" id="add-wife-booster" type="date" class="form-control">
-                  @error('wife_booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-wife-booster-brand">Brand</label>
-                  <select  wire:model.defer="wife_booster_brand" id="add-wife-booster-brand" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Sinovac Biotech">Sinovac Biotech</option>
-                    <option value="AstraZeneca">AstraZeneca</option>
-                    <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
-                    <option value="Moderna">Moderna</option>
-                    <option value="Johnson & Johnson">Johnson & Johnson</option>
-                    <option value="Sputnik V">Sputnik V</option>
-                  </select>
-                  @error('wife_booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <h4>Wife</h1>
+                @if ($wife->isEmpty())
+                  <span wire:click="addWife" class="fs-1" style="cursor: pointer;">&#43;</span>
+                @else
+                  <span wire:click="removeWife" class="fs-1" style="cursor: pointer;">&times;</span>
+                @endif
               </div>
+              @foreach ($wife as $index => $wf)
+                <div class="col mt-4">
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-lname">Last Name</label>
+                    <input wire:model.defer="wife.{{ $index }}.lname" id="add-wife-lname" type="text" class="form-control">
+                    @error('wife.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-fname">First Name</label>
+                    <input wire:model.defer="wife.{{ $index }}.fname" id="add-wife-fname" type="text" class="form-control">
+                    @error('wife.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-mname">Middle Name</label>
+                    <input wire:model.defer="wife.{{ $index }}.mname" id="add-wife-mname" type="text" class="form-control">
+                    @error('wife.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-sname">Suffix (Optional)</label>
+                    <input wire:model.defer="wife.{{ $index }}.sname" id="add-wife-sname" type="text" class="form-control">
+                    @error('wife.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-bday">Birthday</label>
+                    <input wire:model.defer="wife.{{ $index }}.bday" id="add-wife-bday" type="date" class="form-control">
+                    @error('wife.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-bplace">Birthplace</label>
+                    <input wire:model.defer="wife.{{ $index }}.bplace" id="add-wife-bplace" type="text" class="form-control">
+                    @error('wife.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-civil-status">Civil Status</label>
+                    <select wire:model.defer="wife.{{ $index }}.civil_status" id="add-wife-civil-status" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                      <option value="Divorced">Divorced</option>
+                      <option value="Separated">Separated</option>
+                      <option value="Widowed">Widowed</option>
+                    </select>
+                    @error('wife.' . $index . '.civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-educ-attain">Educational Attainment</label>
+                    <input wire:model.defer="wife.{{ $index }}.educ_attainment" id="add-wife-educ-attain" type="text" class="form-control">
+                    @error('wife.' . $index . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-zone">Zone</label>
+                    <select  wire:model.defer="wife.{{ $index }}.zone" id="add-wife-zone" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                    @error('wife.' . $index . '.zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-religion">Religion</label>
+                    <input wire:model.defer="wife.{{ $index }}.religion" id="add-wife-religion" type="text" class="form-control">
+                    @error('wife.' . $index . '.religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-occupation">Occupation</label>
+                    <input wire:model.defer="wife.{{ $index }}.occupation" id="add-wife-occupation" type="text" class="form-control">
+                    @error('wife.' . $index . '.occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-contact">Contact</label>
+                    <input wire:model.defer="wife.{{ $index }}.contact" id="add-wife-contact" type="tel" class="form-control">
+                    @error('wife.' . $index . '.contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-philhealth">Philhealth</label>
+                    <select wire:model.defer="wife.{{ $index }}.philhealth" id="add-wife-philhealth" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                    @error('wife.' . $index . '.philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <h6 class="mt-5 mb-3">Vaccination Status</h6>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-1st-dose">1st Dose</label>
+                    <input wire:model.defer="wife.{{ $index }}.first_dose" id="add-wife-1st-dose" type="date" class="form-control">
+                    @error('wife.' . $index . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-2nd-dose">2nd Dose</label>
+                    <input wire:model.defer="wife.{{ $index }}.second_dose" id="add-wife-2nd-dose" type="date" class="form-control">
+                    @error('wife.' . $index . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-brand">Brand</label>
+                    <select  wire:model.defer="wife.{{ $index }}.vaccine_brand" id="add-wife-brand" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="Sinovac Biotech">Sinovac Biotech</option>
+                      <option value="AstraZeneca">AstraZeneca</option>
+                      <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                      <option value="Moderna">Moderna</option>
+                      <option value="Johnson & Johnson">Johnson & Johnson</option>
+                      <option value="Sputnik V">Sputnik V</option>
+                    </select>
+                    @error('wife.' . $index . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-booster">Booster</label>
+                    <input wire:model.defer="wife.{{ $index }}.booster" id="add-wife-booster" type="date" class="form-control">
+                    @error('wife.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-wife-booster-brand">Brand</label>
+                    <select  wire:model.defer="wife.{{ $index }}.booster_brand" id="add-wife-booster-brand" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="Sinovac Biotech">Sinovac Biotech</option>
+                      <option value="AstraZeneca">AstraZeneca</option>
+                      <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                      <option value="Moderna">Moderna</option>
+                      <option value="Johnson & Johnson">Johnson & Johnson</option>
+                      <option value="Sputnik V">Sputnik V</option>
+                    </select>
+                    @error('wife.' . $index . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+              @endforeach
             </div>
 
             {{-- Family Member --}}
@@ -674,61 +685,61 @@
               <div class="d-flex justify-content-end mb-3">
                 <button wire:click.prevent="addMember" type="button" class="btn btn-secondary">Add a Member</button>
               </div>
-              @foreach ($members as $key => $member)
+              @foreach ($members as $index => $member)
                 <div class="d-flex flex-row align-items-center justify-content-between bg-light">
-                  <h5 class="m-0">Member {{ $key + 1 }}</h5>
-                  <span wire:click="removeMember({{ $key }})" class="fs-4 remove-member">&times;</span>
+                  <h5 class="m-0">Member {{ $index + 1 }}</h5>
+                  <span wire:click="removeMember({{ $index }})" class="fs-4 remove-member">&times;</span>
                 </div>
                 <div class="col mt-4">
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-lname">Last Name</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_last_name" id="add-family-member-{{ $key }}-lname" type="text" class="form-control">
-                    @error('members.' . $key . '.family_member_last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-lname">Last Name</label>
+                    <input wire:model.defer="members.{{ $index }}.lname" id="add-family-member-{{ $index }}-lname" type="text" class="form-control">
+                    @error('members.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-fname">First Name</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_first_name" id="add-family-member-{{ $key }}-fname" type="text" class="form-control">
-                    @error('members.' . $key . '.family_member_first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-fname">First Name</label>
+                    <input wire:model.defer="members.{{ $index }}.fname" id="add-family-member-{{ $index }}-fname" type="text" class="form-control">
+                    @error('members.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-mname">Middle Name</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_middle_name" id="add-family-member-{{ $key }}-mname" type="text" class="form-control">
-                    @error('members.' . $key . '.family_member_middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-mname">Middle Name</label>
+                    <input wire:model.defer="members.{{ $index }}.mname" id="add-family-member-{{ $index }}-mname" type="text" class="form-control">
+                    @error('members.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-sname">Suffix (Optional)</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_suffix_name" id="add-family-member-{{ $key }}-sname" type="text" class="form-control">
-                    @error('members.' . $key . '.family_member_suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-sname">Suffix (Optional)</label>
+                    <input wire:model.defer="members.{{ $index }}.sname" id="add-family-member-{{ $index }}-sname" type="text" class="form-control">
+                    @error('members.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-bday">Birthday</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_birthday" id="add-family-member-{{ $key }}-bday" type="date" class="form-control">
-                    @error('members.' . $key . '.family_member_birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-bday">Birthday</label>
+                    <input wire:model.defer="members.{{ $index }}.bday" id="add-family-member-{{ $index }}-bday" type="date" class="form-control">
+                    @error('members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-bplace">Birthplace</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_birthplace" id="add-family-member-{{ $key }}-bplace" type="text" class="form-control">
-                    @error('members.' . $key . '.family_member_birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-bplace">Birthplace</label>
+                    <input wire:model.defer="members.{{ $index }}.bplace" id="add-family-member-{{ $index }}-bplace" type="text" class="form-control">
+                    @error('members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-educ-attain">Educational Attainment</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_educational_attainment" id="add-family-member-{{ $key }}-educ-attain" type="text" class="form-control">
-                    @error('members.' . $key . '.family_member_educational_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-educ-attain">Educational Attainment</label>
+                    <input wire:model.defer="members.{{ $index }}.educ_attain" id="add-family-member-{{ $index }}-educ-attain" type="text" class="form-control">
+                    @error('members.' . $index . '.educ_attain') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <h6 class="mt-5">Vaccination Status</h6>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-1st-dose">1st Dose</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_first_dose_date" id="add-family-member-{{ $key }}-1st-dose" type="date" class="form-control">
-                    @error('members.' . $key . '.family_member_first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-1st-dose">1st Dose</label>
+                    <input wire:model.defer="members.{{ $index }}.fdose" id="add-family-member-{{ $index }}-1st-dose" type="date" class="form-control">
+                    @error('members.' . $index . '.fdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-2nd-dose">2nd Dose</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_second_dose_date" id="add-family-member-{{ $key }}-2nd-dose" type="date" class="form-control">
-                    @error('members.' . $key . '.family_member_second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-2nd-dose">2nd Dose</label>
+                    <input wire:model.defer="members.{{ $index }}.sdose" id="add-family-member-{{ $index }}-2nd-dose" type="date" class="form-control">
+                    @error('members.' . $index . '.sdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-brand">Brand</label>
-                    <select  wire:model.defer="members.{{ $key }}.family_member_vaccine_brand" id="add-family-member-{{ $key }}-brand" class="form-select">
+                    <label for="add-family-member-{{ $index }}-brand">Brand</label>
+                    <select  wire:model.defer="members.{{ $index }}.brand" id="add-family-member-{{ $index }}-brand" class="form-select">
                       <option value="">Choose one...</option>
                       <option value="Sinovac Biotech">Sinovac Biotech</option>
                       <option value="AstraZeneca">AstraZeneca</option>
@@ -737,16 +748,16 @@
                       <option value="Johnson & Johnson">Johnson & Johnson</option>
                       <option value="Sputnik V">Sputnik V</option>
                     </select>
-                    @error('members.' . $key . '.family_member_vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('members.' . $index . '.brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-booster">Booster</label>
-                    <input wire:model.defer="members.{{ $key }}.family_member_booster_date" id="add-family-member-{{ $key }}-booster" type="date" class="form-control">
-                    @error('members.' . $key . '.family_member_booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    <label for="add-family-member-{{ $index }}-booster">Booster</label>
+                    <input wire:model.defer="members.{{ $index }}.booster" id="add-family-member-{{ $index }}-booster" type="date" class="form-control">
+                    @error('members.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
-                    <label for="add-family-member-{{ $key }}-booster-brand">Brand</label>
-                    <select  wire:model.defer="members.{{ $key }}.family_member_booster_brand" id="add-family-member-{{ $key }}-booster-brand" class="form-select">
+                    <label for="add-family-member-{{ $index }}-booster-brand">Brand</label>
+                    <select  wire:model.defer="members.{{ $index }}.bbrand" id="add-family-member-{{ $index }}-booster-brand" class="form-select">
                       <option value="">Choose one...</option>
                       <option value="Sinovac Biotech">Sinovac Biotech</option>
                       <option value="AstraZeneca">AstraZeneca</option>
@@ -755,7 +766,7 @@
                       <option value="Johnson & Johnson">Johnson & Johnson</option>
                       <option value="Sputnik V">Sputnik V</option>
                     </select>
-                    @error('members.' . $key . '.family_member_booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('members.' . $index . '.bbrand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <hr class="my-5" style="border-top: dotted;">
                 </div>
@@ -766,11 +777,6 @@
             <div id="add-info-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
               <h4>Additional Info</h4>
               <div class="col mt-4">
-                <div class="row-auto mb-3">
-                  <label for="add-head-total-member">Total Member of the Family</label>
-                  <input wire:model.defer="total_family_member" id="add-head-total-member" type="number" min="0" class="form-control">
-                  @error('total_family_member') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
                 <div class="row-auto mb-3">
                   <label for="add-water">Water Source</label>
                   <select wire:model.defer="water_source" id="add-water" class="form-select">
@@ -817,6 +823,11 @@
                     <option value="Sharing">Sharing</option>
                   </select>
                   @error('electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                </div>
+                <div class="row-auto mb-3">
+                  <label for="add-house-no">House No.</label>
+                  <input type="text" wire:model.defer="house_no" id="add-house-no" class="form-control">
+                  @error('house_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
               </div>
             </div>
@@ -873,67 +884,69 @@
           <h4 class="py-2">Family Head</h4>
           <div class="row p-2">
             <div class="col-4">
-              <p class="fw-bold">Last Name: <span class="fw-normal">{{ $family->head_lname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">First Name: <span class="fw-normal">{{ $family->head_fname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Middle Name: <span class="fw-normal">{{ $family->head_mname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Suffix Name: <span class="fw-normal">{{ $family->head_sname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Birthday: <span class="fw-normal">{{ isset($family->head_bday) ? date('F d, Y', strtotime($family->head_bday)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Birthplace: <span class="fw-normal">{{ $family->head_bplace ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Last Name: <span class="fw-normal">{{ $family_head->lname ?? 'N/A' }}</span></p>
+              <p class="fw-bold">First Name: <span class="fw-normal">{{ $family_head->fname ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Middle Name: <span class="fw-normal">{{ $family_head->mname ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Suffix Name: <span class="fw-normal">{{ $family_head->sname ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Birthday: <span class="fw-normal">{{ isset($family_head->bday) ? date('F d, Y', strtotime($family_head->bday)) : 'N/A' }}</span></p>
+              <p class="fw-bold">Birthplace: <span class="fw-normal">{{ $family_head->bplace ?? 'N/A' }}</span></p>
             </div>
             <div class="col-4">
-              <p class="fw-bold">Status: <span class="fw-normal">{{ $family->head_civil_status ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Education Attainment: <span class="fw-normal">{{ $family->head_educ_attainment ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Zone: <span class="fw-normal">{{ $family->head_zone ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Religion: <span class="fw-normal">{{ $family->head_religion ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Occupation: <span class="fw-normal">{{ $family->head_occupation ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Contact: <span class="fw-normal">{{ $family->head_contact ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Status: <span class="fw-normal">{{ $family_head->civil_status ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Education Attainment: <span class="fw-normal">{{ $family_head->educ_attainment ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Zone: <span class="fw-normal">{{ $family_head->zone ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Religion: <span class="fw-normal">{{ $family_head->religion ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Occupation: <span class="fw-normal">{{ $family_head->occupation ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Contact: <span class="fw-normal">{{ $family_head->contact ?? 'N/A' }}</span></p>
             </div>
             <div class="col-4">
-              <p class="fw-bold">Philhealth: <span class="fw-normal">{{ $family->head_philhealth ?? 'N/A' }}</span></p>
-              <p class="fw-bold">First Dose: <span class="fw-normal">{{ isset($family->head_first_dose) ? date('F d, Y', strtotime($family->head_first_dose)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Second Dose: <span class="fw-normal">{{ isset($family->head_second_dose) ? date('F d, Y', strtotime($family->head_second_dose)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Vaccine Brand: <span class="fw-normal">{{ $family->head_vaccine_brand ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Booster: <span class="fw-normal">{{ isset($family->head_booster) ? date('F d, Y', strtotime($family->head_booster)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Booster Brand: <span class="fw-normal">{{ $family->head_booster_brand ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Philhealth: <span class="fw-normal">{{ $family_head->philhealth ?? 'N/A' }}</span></p>
+              <p class="fw-bold">First Dose: <span class="fw-normal">{{ isset($family_head->first_dose) ? date('F d, Y', strtotime($family_head->first_dose)) : 'N/A' }}</span></p>
+              <p class="fw-bold">Second Dose: <span class="fw-normal">{{ isset($family_head->second_dose) ? date('F d, Y', strtotime($family_head->second_dose)) : 'N/A' }}</span></p>
+              <p class="fw-bold">Vaccine Brand: <span class="fw-normal">{{ $family_head->vaccine_brand ?? 'N/A' }}</span></p>
+              <p class="fw-bold">Booster: <span class="fw-normal">{{ isset($family_head->booster) ? date('F d, Y', strtotime($family_head->booster)) : 'N/A' }}</span></p>
+              <p class="fw-bold">Booster Brand: <span class="fw-normal">{{ $family_head->booster_brand ?? 'N/A' }}</span></p>
             </div>
           </div>
           <hr style="border-top: dotted;">
         </div>
-        <div class="w-100 my-4">
-          <h4 class="py-2">Wife</h4>
-          <div class="row p-2">
-            <div class="col-4">
-              <p class="fw-bold">Last Name: <span class="fw-normal">{{ $family->wife_lname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">First Name: <span class="fw-normal">{{ $family->wife_fname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Middle Name: <span class="fw-normal">{{ $family->wife_mname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Suffix Name: <span class="fw-normal">{{ $family->wife_sname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Birthday: <span class="fw-normal">{{ isset($family->wife_bday) ? date('F d, Y', strtotime($family->wife_bday)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Birthplace: <span class="fw-normal">{{ $family->wife_bplace ?? 'N/A' }}</span></p>
+        @isset ($family_head->wife)
+          <div class="w-100 my-4">
+            <h4 class="py-2">Wife</h4>
+            <div class="row p-2">
+              <div class="col-4">
+                <p class="fw-bold">Last Name: <span class="fw-normal">{{ $family_head->wife->lname ?? 'N/A' }}</span></p>
+                <p class="fw-bold">First Name: <span class="fw-normal">{{ $family_head->wife->fname ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Middle Name: <span class="fw-normal">{{ $family_head->wife->mname ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Suffix Name: <span class="fw-normal">{{ $family_head->wife->sname ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Birthday: <span class="fw-normal">{{ isset($family_head->wife->bday) ? date('F d, Y', strtotime($family_head->wife->bday)) : 'N/A' }}</span></p>
+                <p class="fw-bold">Birthplace: <span class="fw-normal">{{ $family_head->wife->bplace ?? 'N/A' }}</span></p>
+              </div>
+              <div class="col-4">
+                <p class="fw-bold">Status: <span class="fw-normal">{{ $family_head->wife->civil_status ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Education Attainment: <span class="fw-normal">{{ $family_head->wife->educ_attainment ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Zone: <span class="fw-normal">{{ $family_head->wife->zone ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Religion: <span class="fw-normal">{{ $family_head->wife->religion ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Occupation: <span class="fw-normal">{{ $family_head->wife->occupation ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Contact: <span class="fw-normal">{{ $family_head->wife->contact ?? 'N/A' }}</span></p>
+              </div>
+              <div class="col-4">
+                <p class="fw-bold">Philhealth: <span class="fw-normal">{{ $family_head->wife->philhealth ?? 'N/A' }}</span></p>
+                <p class="fw-bold">First Dose: <span class="fw-normal">{{ isset($family_head->wife->first_dose) ? date('F d, Y', strtotime($family_head->wife->first_dose)) : 'N/A' }}</span></p>
+                <p class="fw-bold">Second Dose: <span class="fw-normal">{{ isset($family_head->wife->second_dose) ? date('F d, Y', strtotime($family_head->wife->second_dose)) : 'N/A' }}</span></p>
+                <p class="fw-bold">Vaccine Brand: <span class="fw-normal">{{ $family_head->wife->vaccine_brand ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Booster: <span class="fw-normal">{{ isset($family_head->wife->booster) ? date('F d, Y', strtotime($family_head->wife->booster)) : 'N/A' }}</span></p>
+                <p class="fw-bold">Booster Brand: <span class="fw-normal">{{ $family_head->wife->booster_brand ?? 'N/A' }}</span></p>
+              </div>
             </div>
-            <div class="col-4">
-              <p class="fw-bold">Status: <span class="fw-normal">{{ $family->wife_civil_status ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Education Attainment: <span class="fw-normal">{{ $family->wife_educ_attainment ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Zone: <span class="fw-normal">{{ $family->wife_zone ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Religion: <span class="fw-normal">{{ $family->wife_religion ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Occupation: <span class="fw-normal">{{ $family->wife_occupation ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Contact: <span class="fw-normal">{{ $family->wife_contact ?? 'N/A' }}</span></p>
-            </div>
-            <div class="col-4">
-              <p class="fw-bold">Philhealth: <span class="fw-normal">{{ $family->wife_philhealth ?? 'N/A' }}</span></p>
-              <p class="fw-bold">First Dose: <span class="fw-normal">{{ isset($family->wife_first_dose) ? date('F d, Y', strtotime($family->wife_first_dose)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Second Dose: <span class="fw-normal">{{ isset($family->wife_second_dose) ? date('F d, Y', strtotime($family->wife_second_dose)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Vaccine Brand: <span class="fw-normal">{{ $family->wife_vaccine_brand ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Booster: <span class="fw-normal">{{ isset($family->wife_booster) ? date('F d, Y', strtotime($family->wife_booster)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Booster Brand: <span class="fw-normal">{{ $family->wife_booster_brand ?? 'N/A' }}</span></p>
-            </div>
+            <hr style="border-top: dotted;">
           </div>
-          <hr style="border-top: dotted;">
-        </div>
-        @if (isset($family->familyMembers))
-          @if (count($family->familyMembers) > 0)
+        @endif
+        @isset ($family_head->familyMembers)
+          @if (count($family_head->familyMembers) > 0)
             <div class="w-100 my-4">
               <h4 class="py-2">Family Members</h4>
-              @foreach ($family->familyMembers as $index => $member)
+              @foreach ($family_head->familyMembers as $index => $member)
                 <div class="row p-2">
                   <h5 class="py-2">Member {{ $index + 1 }}</h5>
                   <div class="row px-4">
@@ -965,20 +978,21 @@
             <div class="col-6">
               <h4 class="py-2">Additional Information</h4>
               <div class="row">
-                <p class="fw-bold">Water Source: <span class="fw-normal">{{ $family->water_source ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Type of House: <span class="fw-normal">{{ $family->house ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Toilet: <span class="fw-normal">{{ $family->toilet ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Garden: <span class="fw-normal">{{ $family->garden ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Electricity: <span class="fw-normal">{{ $family->electricity ?? 'N/A' }}</span></p>
+                <p class="fw-bold">House No.: <span class="fw-normal">{{ $family_head->house_no ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Water Source: <span class="fw-normal">{{ $family_head->water_source ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Type of House: <span class="fw-normal">{{ $family_head->house ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Toilet: <span class="fw-normal">{{ $family_head->toilet ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Garden: <span class="fw-normal">{{ $family_head->garden ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Electricity: <span class="fw-normal">{{ $family_head->electricity ?? 'N/A' }}</span></p>
               </div>
             </div>
             <div class="col-6">
               <h4 class="py-2">Beneficiary Members</h4>
               <div class="row">
-                <p class="fw-bold">PWD: <span class="fw-normal">{{ $family->pwd ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Solo Parent: <span class="fw-normal">{{ $family->solo_parent ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Senior Citizen: <span class="fw-normal">{{ $family->senior_citizen ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Pregnant: <span class="fw-normal">{{ $family->pregnant ?? 'N/A' }}</span></p>
+                <p class="fw-bold">PWD: <span class="fw-normal">{{ $family_head->pwd ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Solo Parent: <span class="fw-normal">{{ $family_head->solo_parent ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Senior Citizen: <span class="fw-normal">{{ $family_head->senior_citizen ?? 'N/A' }}</span></p>
+                <p class="fw-bold">Pregnant: <span class="fw-normal">{{ $family_head->pregnant ?? 'N/A' }}</span></p>
               </div>
             </div>
           </div>
@@ -1009,232 +1023,232 @@
             <div>
               <div id="edit-family-head" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 border-black resident-category">
                 <span class="material-symbols-outlined
-                @error('family_head_last_name')
+                @error('last_name')
                   text-danger
                 @enderror
-                @error('family_head_middle_name')
+                @error('middle_name')
                   text-danger
                 @enderror
-                @error('family_head_first_name')
+                @error('first_name')
                   text-danger
                 @enderror
-                @error('family_head_suffix_name')
+                @error('suffix_name')
                   text-danger
                 @enderror
-                @error('family_head_birthday')
+                @error('birthday')
                   text-danger
                 @enderror
-                @error('family_head_birthplace')
+                @error('birthplace')
                   text-danger
                 @enderror
-                @error('family_head_civil_status')
+                @error('civil_status')
                   text-danger
                 @enderror
-                @error('family_head_eductaional_attainment')
+                @error('educational_attainment')
                   text-danger
                 @enderror
-                @error('family_head_zone')
+                @error('zone')
                   text-danger
                 @enderror
-                @error('family_head_religion')
+                @error('religion')
                   text-danger
                 @enderror
-                @error('family_head_occupation')
+                @error('occupation')
                   text-danger
                 @enderror
-                @error('family_head_contact')
+                @error('contact')
                   text-danger
                 @enderror
-                @error('family_head_philhealth')
+                @error('philhealth')
                   text-danger
                 @enderror
-                @error('family_head_first_dose_date')
+                @error('first_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_second_dose_date')
+                @error('second_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_vaccine_brand')
+                @error('vaccine_brand')
                   text-danger
                 @enderror
-                @error('family_head_booster_date')
+                @error('booster_date')
                   text-danger
                 @enderror
-                @error('family_head_booster_brand')
+                @error('booster_brand')
                   text-danger
                 @enderror
                 ">
                 counter_1
                 </span>
                 <p class="m-0 ms-1
-                @error('family_head_last_name')
+                @error('last_name')
                   text-danger
                 @enderror
-                @error('family_head_middle_name')
+                @error('middle_name')
                   text-danger
                 @enderror
-                @error('family_head_first_name')
+                @error('first_name')
                   text-danger
                 @enderror
-                @error('family_head_suffix_name')
+                @error('suffix_name')
                   text-danger
                 @enderror
-                @error('family_head_birthday')
+                @error('birthday')
                   text-danger
                 @enderror
-                @error('family_head_birthplace')
+                @error('birthplace')
                   text-danger
                 @enderror
-                @error('family_head_civil_status')
+                @error('civil_status')
                   text-danger
                 @enderror
-                @error('family_head_eductaional_attainment')
+                @error('educational_attainment')
                   text-danger
                 @enderror
-                @error('family_head_zone')
+                @error('zone')
                   text-danger
                 @enderror
-                @error('family_head_religion')
+                @error('religion')
                   text-danger
                 @enderror
-                @error('family_head_occupation')
+                @error('occupation')
                   text-danger
                 @enderror
-                @error('family_head_contact')
+                @error('contact')
                   text-danger
                 @enderror
-                @error('family_head_philhealth')
+                @error('philhealth')
                   text-danger
                 @enderror
-                @error('family_head_first_dose_date')
+                @error('first_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_second_dose_date')
+                @error('second_dose_date')
                   text-danger
                 @enderror
-                @error('family_head_vaccine_brand')
+                @error('vaccine_brand')
                   text-danger
                 @enderror
-                @error('family_head_booster_date')
+                @error('booster_date')
                   text-danger
                 @enderror
-                @error('family_head_booster_brand')
+                @error('booster_brand')
                   text-danger
                 @enderror
                 ">Head of Family</p>
               </div>
               <div id="edit-wife" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
                 <span class="material-symbols-outlined
-                @error('wife_last_name')
+                @error('wife.*.lname')
                   text-danger
                 @enderror
-                @error('wife_middle_name')
+                @error('wife.*.mname')
                   text-danger
                 @enderror
-                @error('wife_first_name')
+                @error('wife.*.fname')
                   text-danger
                 @enderror
-                @error('wife_suffix_name')
+                @error('wife.*.sname')
                   text-danger
                 @enderror
-                @error('wife_birthday')
+                @error('wife.*.bday')
                   text-danger
                 @enderror
-                @error('wife_birthplace')
+                @error('wife.*.bplace')
                   text-danger
                 @enderror
-                @error('wife_civil_status')
+                @error('wife.*.civil_status')
                   text-danger
                 @enderror
-                @error('wife_eductaional_attainment')
+                @error('wife.*.educ_attainment')
                   text-danger
                 @enderror
-                @error('wife_zone')
+                @error('wife.*.zone')
                   text-danger
                 @enderror
-                @error('wife_religion')
+                @error('wife.*.religion')
                   text-danger
                 @enderror
-                @error('wife_occupation')
+                @error('wife.*.occupation')
                   text-danger
                 @enderror
-                @error('wife_contact')
+                @error('wife.*.contact')
                   text-danger
                 @enderror
-                @error('wife_philhealth')
+                @error('wife.*.philhealth')
                   text-danger
                 @enderror
-                @error('wife_first_dose_date')
+                @error('wife.*.first_dose')
                   text-danger
                 @enderror
-                @error('wife_second_dose_date')
+                @error('wife.*.second_dose')
                   text-danger
                 @enderror
-                @error('wife_vaccine_brand')
+                @error('wife.*.vaccine_brand')
                   text-danger
                 @enderror
-                @error('wife_booster_date')
+                @error('wife.*.booster')
                   text-danger
                 @enderror
-                @error('wife_booster_brand')
+                @error('wife.*.booster_brand')
                   text-danger
                 @enderror
                 ">
                 counter_2
                 </span>
                 <p class="m-0 ms-1
-                @error('wife_last_name')
+                @error('wife.*.lname')
                   text-danger
                 @enderror
-                @error('wife_middle_name')
+                @error('wife.*.mname')
                   text-danger
                 @enderror
-                @error('wife_first_name')
+                @error('wife.*.fname')
                   text-danger
                 @enderror
-                @error('wife_suffix_name')
+                @error('wife.*.sname')
                   text-danger
                 @enderror
-                @error('wife_birthday')
+                @error('wife.*.bday')
                   text-danger
                 @enderror
-                @error('wife_birthplace')
+                @error('wife.*.bplace')
                   text-danger
                 @enderror
-                @error('wife_civil_status')
+                @error('wife.*.civil_status')
                   text-danger
                 @enderror
-                @error('wife_eductaional_attainment')
+                @error('wife.*.educ_attainment')
                   text-danger
                 @enderror
-                @error('wife_zone')
+                @error('wife.*.zone')
                   text-danger
                 @enderror
-                @error('wife_religion')
+                @error('wife.*.religion')
                   text-danger
                 @enderror
-                @error('wife_occupation')
+                @error('wife.*.occupation')
                   text-danger
                 @enderror
-                @error('wife_contact')
+                @error('wife.*.contact')
                   text-danger
                 @enderror
-                @error('wife_philhealth')
+                @error('wife.*.philhealth')
                   text-danger
                 @enderror
-                @error('wife_first_dose_date')
+                @error('wife.*.first_dose')
                   text-danger
                 @enderror
-                @error('wife_second_dose_date')
+                @error('wife.*.second_dose')
                   text-danger
                 @enderror
-                @error('wife_vaccine_brand')
+                @error('wife.*.vaccine_brand')
                   text-danger
                 @enderror
-                @error('wife_booster_date')
+                @error('wife.*.booster')
                   text-danger
                 @enderror
-                @error('wife_booster_brand')
+                @error('wife.*.booster_brand')
                   text-danger
                 @enderror
                 ">Wife</p>
@@ -1277,40 +1291,40 @@
                 @error('old_members.*.booster_brand')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_last_name')
+                @error('new_members.*.lname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_first_name')
+                @error('new_members.*.fname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_middle_name')
+                @error('new_members.*.mname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_suffix_name')
+                @error('new_members.*.sname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_birthday')
+                @error('new_members.*.bday')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_birthplace')
+                @error('new_members.*.bplace')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_educational_attainment')
+                @error('new_members.*.educ_attain')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_first_dose_date')
+                @error('new_members.*.fdose')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_second_dose_date')
+                @error('new_members.*.sdose')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_vaccine_brand')
+                @error('new_members.*.brand')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_booster_date')
+                @error('new_members.*.booster')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_booster_brand')
+                @error('new_members.*.bbrand')
                   text-danger
                 @enderror
                 ">
@@ -1353,47 +1367,47 @@
                 @error('old_members.*.booster_brand')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_last_name')
+                @error('new_members.*.lname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_first_name')
+                @error('new_members.*.fname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_middle_name')
+                @error('new_members.*.mname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_suffix_name')
+                @error('new_members.*.sname')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_birthday')
+                @error('new_members.*.bday')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_birthplace')
+                @error('new_members.*.bplace')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_educational_attainment')
+                @error('new_members.*.educ_attain')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_first_dose_date')
+                @error('new_members.*.fdose')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_second_dose_date')
+                @error('new_members.*.sdose')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_vaccine_brand')
+                @error('new_members.*.brand')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_booster_date')
+                @error('new_members.*.booster')
                   text-danger
                 @enderror
-                @error('new_members.*.family_member_booster_brand')
+                @error('new_members.*.bbrand')
                   text-danger
                 @enderror
                 ">Member of the Family</p>
               </div>
               <div id="edit-info" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
                 <span class="material-symbols-outlined
-                @error('total_family_member')
+                @error('house_no')
                   text-danger
                 @enderror
                 @error('water_source')
@@ -1415,7 +1429,7 @@
                 counter_4
                 </span>
                 <p class="m-0 ms-1
-                @error('total_family_member')
+                @error('house_no')
                   text-danger
                 @enderror
                 @error('water_source')
@@ -1475,37 +1489,37 @@
               <div class="col mt-4">
                 <div class="row-auto mb-3">
                   <label for="edit-head-lname">Last Name</label>
-                  <input wire:model.defer="family_head_last_name" id="edit-head-lname" type="text" class="form-control">
-                  @error('family_head_last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="last_name" id="edit-head-lname" type="text" class="form-control">
+                  @error('last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-fname">First Name</label>
-                  <input wire:model.defer="family_head_first_name" id="edit-head-fname" type="text" class="form-control">
-                  @error('family_head_first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="first_name" id="edit-head-fname" type="text" class="form-control">
+                  @error('first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-mname">Middle Name</label>
-                  <input wire:model.defer="family_head_middle_name" id="edit-head-mname" type="text" class="form-control">
-                  @error('family_head_middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="middle_name" id="edit-head-mname" type="text" class="form-control">
+                  @error('middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-sname">Suffix (Optional)</label>
-                  <input wire:model.defer="family_head_suffix_name" id="edit-head-sname" type="text" class="form-control">
-                  @error('family_head_suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="suffix_name" id="edit-head-sname" type="text" class="form-control">
+                  @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-bday">Birthday</label>
-                  <input wire:model.defer="family_head_birthday" id="edit-head-bday" type="date" class="form-control">
-                  @error('family_head_birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="birthday" id="edit-head-bday" type="date" class="form-control">
+                  @error('birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-bplace">Birthplace</label>
-                  <input wire:model.defer="family_head_birthplace" id="edit-head-bplace" type="text" class="form-control">
-                  @error('family_head_birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="birthplace" id="edit-head-bplace" type="text" class="form-control">
+                  @error('birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-civil-status">Civil Status</label>
-                  <select wire:model.defer="family_head_civil_status" id="edit-head-civil-status" class="form-select">
+                  <select wire:model.defer="civil_status" id="edit-head-civil-status" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="Single">Single</option>
                     <option value="Married">Married</option>
@@ -1513,16 +1527,16 @@
                     <option value="Separated">Separated</option>
                     <option value="Widowed">Widowed</option>
                   </select>
-                  @error('family_head_civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-educ-attain">Educational Attainment</label>
-                  <input wire:model.defer="family_head_eductaional_attainment" id="edit-head-educ-attain" type="text" class="form-control">
-                  @error('family_head_eductaional_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="educational_attainment" id="edit-head-educ-attain" type="text" class="form-control">
+                  @error('educational_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-zone">Zone</label>
-                  <select  wire:model.defer="family_head_zone" id="edit-head-zone" class="form-select">
+                  <select  wire:model.defer="zone" id="edit-head-zone" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -1531,45 +1545,46 @@
                     <option value="5">5</option>
                     <option value="6">6</option>
                   </select>
-                  @error('family_head_zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-religion">Religion</label>
-                  <input wire:model.defer="family_head_religion" id="edit-head-religion" type="text" class="form-control">
-                  @error('family_head_religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="religion" id="edit-head-religion" type="text" class="form-control">
+                  @error('religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-occupation">Occupation</label>
-                  <input wire:model.defer="family_head_occupation" id="edit-head-occupation" type="text" class="form-control">
-                  @error('family_head_occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="occupation" id="edit-head-occupation" type="text" class="form-control">
+                  @error('occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-contact">Contact</label>
-                  <input wire:model.defer="family_head_contact" id="edit-head-contact" type="tel" class="form-control">
-                  @error('family_head_contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="contact" id="edit-head-contact" type="tel" class="form-control">
+                  @error('contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-philhealth">Philhealth</label>
-                  <select wire:model.defer="family_head_philhealth" id="edit-head-philhealth" class="form-select">
+                  <select wire:model.defer="philhealth" id="edit-head-philhealth" class="form-select">
                     <option value="">Choose one...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
                   </select>
-                  @error('family_head_philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
+                <h6 class="mt-5 mb-3">Vaccination Status</h6>
                 <div class="row-auto mb-3">
                   <label for="edit-head-1st-dose">1st Dose</label>
-                  <input wire:model.defer="family_head_first_dose_date" id="edit-head-1st-dose" type="date" class="form-control">
-                  @error('family_head_first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="first_dose_date" id="edit-head-1st-dose" type="date" class="form-control">
+                  @error('first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-2nd-dose">2nd Dose</label>
-                  <input wire:model.defer="family_head_second_dose_date" id="edit-head-2nd-dose" type="date" class="form-control">
-                  @error('family_head_second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="second_dose_date" id="edit-head-2nd-dose" type="date" class="form-control">
+                  @error('second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-brand">Brand</label>
-                  <select  wire:model.defer="family_head_vaccine_brand" id="edit-head-brand" class="form-select">
+                  <select  wire:model.defer="vaccine_brand" id="edit-head-brand" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="Sinovac Biotech">Sinovac Biotech</option>
                     <option value="AstraZeneca">AstraZeneca</option>
@@ -1578,16 +1593,16 @@
                     <option value="Johnson & Johnson">Johnson & Johnson</option>
                     <option value="Sputnik V">Sputnik V</option>
                   </select>
-                  @error('family_head_vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-booster">Booster</label>
-                  <input wire:model.defer="family_head_booster_date" id="edit-head-booster" type="date" class="form-control">
-                  @error('family_head_booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  <input wire:model.defer="booster_date" id="edit-head-booster" type="date" class="form-control">
+                  @error('booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-booster-brand">Brand</label>
-                  <select  wire:model.defer="family_head_booster_brand" id="edit-head-booster-brand" class="form-select">
+                  <select  wire:model.defer="booster_brand" id="edit-head-booster-brand" class="form-select">
                     <option value="">Choose one...</option>
                     <option value="Sinovac Biotech">Sinovac Biotech</option>
                     <option value="AstraZeneca">AstraZeneca</option>
@@ -1596,141 +1611,151 @@
                     <option value="Johnson & Johnson">Johnson & Johnson</option>
                     <option value="Sputnik V">Sputnik V</option>
                   </select>
-                  @error('family_head_booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @error('booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
               </div>
             </div>
 
             {{-- Wife --}}
             <div id="edit-wife-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
-              <h4>Wife</h1>
-              <div class="col mt-4">
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-lname">Last Name</label>
-                  <input wire:model.defer="wife_last_name" id="edit-wife-lname" type="text" class="form-control">
-                  @error('wife_last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-fname">First Name</label>
-                  <input wire:model.defer="wife_first_name" id="edit-wife-fname" type="text" class="form-control">
-                  @error('wife_first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-mname">Middle Name</label>
-                  <input wire:model.defer="wife_middle_name" id="edit-wife-mname" type="text" class="form-control">
-                  @error('wife_middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-sname">Suffix (Optional)</label>
-                  <input wire:model.defer="wife_suffix_name" id="edit-wife-sname" type="text" class="form-control">
-                  @error('wife_suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-bday">Birthday</label>
-                  <input wire:model.defer="wife_birthday" id="edit-wife-bday" type="date" class="form-control">
-                  @error('wife_birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-bplace">Birthplace</label>
-                  <input wire:model.defer="wife_birthplace" id="edit-wife-bplace" type="text" class="form-control">
-                  @error('wife_birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-civil-status">Civil Status</label>
-                  <select wire:model.defer="wife_civil_status" id="edit-wife-civil-status" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
-                    <option value="Separated">Separated</option>
-                    <option value="Widowed">Widowed</option>
-                  </select>
-                  @error('wife_civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-educ-attain">Educational Attainment</label>
-                  <input wire:model.defer="wife_eductaional_attainment" id="edit-wife-educ-attain" type="text" class="form-control">
-                  @error('wife_eductaional_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-zone">Zone</label>
-                  <select  wire:model.defer="wife_zone" id="edit-wife-zone" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
-                  @error('wife_zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-religion">Religion</label>
-                  <input wire:model.defer="wife_religion" id="edit-wife-religion" type="text" class="form-control">
-                  @error('wife_religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-occupation">Occupation</label>
-                  <input wire:model.defer="wife_occupation" id="edit-wife-occupation" type="text" class="form-control">
-                  @error('wife_occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-contact">Contact</label>
-                  <input wire:model.defer="wife_contact" id="edit-wife-contact" type="tel" class="form-control">
-                  @error('wife_contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-philhealth">Philhealth</label>
-                  <select wire:model.defer="wife_philhealth" id="edit-wife-philhealth" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
-                  @error('wife_philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-1st-dose">1st Dose</label>
-                  <input wire:model.defer="wife_first_dose_date" id="edit-wife-1st-dose" type="date" class="form-control">
-                  @error('wife_first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-2nd-dose">2nd Dose</label>
-                  <input wire:model.defer="wife_second_dose_date" id="edit-wife-2nd-dose" type="date" class="form-control">
-                  @error('wife_second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-brand">Brand</label>
-                  <select  wire:model.defer="wife_vaccine_brand" id="edit-wife-brand" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Sinovac Biotech">Sinovac Biotech</option>
-                    <option value="AstraZeneca">AstraZeneca</option>
-                    <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
-                    <option value="Moderna">Moderna</option>
-                    <option value="Johnson & Johnson">Johnson & Johnson</option>
-                    <option value="Sputnik V">Sputnik V</option>
-                  </select>
-                  @error('wife_vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-booster">Booster</label>
-                  <input wire:model.defer="wife_booster_date" id="edit-wife-booster" type="date" class="form-control">
-                  @error('wife_booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-wife-booster-brand">Brand</label>
-                  <select  wire:model.defer="wife_booster_brand" id="edit-wife-booster-brand" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Sinovac Biotech">Sinovac Biotech</option>
-                    <option value="AstraZeneca">AstraZeneca</option>
-                    <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
-                    <option value="Moderna">Moderna</option>
-                    <option value="Johnson & Johnson">Johnson & Johnson</option>
-                    <option value="Sputnik V">Sputnik V</option>
-                  </select>
-                  @error('wife_booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <h4>Wife</h1>
+                @if ($wife->isEmpty())
+                  <span wire:click="newWife" class="fs-1" style="cursor: pointer;">&#43;</span>
+                @else
+                  <span wire:click="removeWife" class="fs-1" style="cursor: pointer;">&times;</span>
+                @endif
               </div>
+              @foreach ($wife as $index => $wf)
+                <div class="col mt-4">
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-lname">Last Name</label>
+                    <input wire:model.defer="wife.{{ $index }}.lname" id="edit-wife-lname" type="text" class="form-control">
+                    @error('wife.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-fname">First Name</label>
+                    <input wire:model.defer="wife.{{ $index }}.fname" id="edit-wife-fname" type="text" class="form-control">
+                    @error('wife.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-mname">Middle Name</label>
+                    <input wire:model.defer="wife.{{ $index }}.mname" id="edit-wife-mname" type="text" class="form-control">
+                    @error('wife.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-sname">Suffix (Optional)</label>
+                    <input wire:model.defer="wife.{{ $index }}.sname" id="edit-wife-sname" type="text" class="form-control">
+                    @error('wife.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-bday">Birthday</label>
+                    <input wire:model.defer="wife.{{ $index }}.bday" id="edit-wife-bday" type="date" class="form-control">
+                    @error('wife.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-bplace">Birthplace</label>
+                    <input wire:model.defer="wife.{{ $index }}.bplace" id="edit-wife-bplace" type="text" class="form-control">
+                    @error('wife.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-civil-status">Civil Status</label>
+                    <select wire:model.defer="wife.{{ $index }}.civil_status" id="edit-wife-civil-status" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                      <option value="Divorced">Divorced</option>
+                      <option value="Separated">Separated</option>
+                      <option value="Widowed">Widowed</option>
+                    </select>
+                    @error('wife.' . $index . '.civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-educ-attain">Educational Attainment</label>
+                    <input wire:model.defer="wife.{{ $index }}.educ_attainment" id="edit-wife-educ-attain" type="text" class="form-control">
+                    @error('wife.' . $index . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-zone">Zone</label>
+                    <select  wire:model.defer="wife.{{ $index }}.zone" id="edit-wife-zone" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                    @error('wife.' . $index . '.zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-religion">Religion</label>
+                    <input wire:model.defer="wife.{{ $index }}.religion" id="edit-wife-religion" type="text" class="form-control">
+                    @error('wife.' . $index . '.religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-occupation">Occupation</label>
+                    <input wire:model.defer="wife.{{ $index }}.occupation" id="edit-wife-occupation" type="text" class="form-control">
+                    @error('wife.' . $index . '.occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-contact">Contact</label>
+                    <input wire:model.defer="wife.{{ $index }}.contact" id="edit-wife-contact" type="tel" class="form-control">
+                    @error('wife.' . $index . '.contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-philhealth">Philhealth</label>
+                    <select wire:model.defer="wife.{{ $index }}.philhealth" id="edit-wife-philhealth" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                    @error('wife.' . $index . '.philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <h6 class="mt-5 mb-3">Vaccination Status</h6>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-1st-dose">1st Dose</label>
+                    <input wire:model.defer="wife.{{ $index }}.first_dose" id="edit-wife-1st-dose" type="date" class="form-control">
+                    @error('wife.' . $index . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-2nd-dose">2nd Dose</label>
+                    <input wire:model.defer="wife.{{ $index }}.second_dose" id="edit-wife-2nd-dose" type="date" class="form-control">
+                    @error('wife.' . $index . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-brand">Brand</label>
+                    <select  wire:model.defer="wife.{{ $index }}.vaccine_brand" id="edit-wife-brand" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="Sinovac Biotech">Sinovac Biotech</option>
+                      <option value="AstraZeneca">AstraZeneca</option>
+                      <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                      <option value="Moderna">Moderna</option>
+                      <option value="Johnson & Johnson">Johnson & Johnson</option>
+                      <option value="Sputnik V">Sputnik V</option>
+                    </select>
+                    @error('wife.' . $index . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-booster">Booster</label>
+                    <input wire:model.defer="wife.{{ $index }}.booster" id="edit-wife-booster" type="date" class="form-control">
+                    @error('wife.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="edit-wife-booster-brand">Brand</label>
+                    <select  wire:model.defer="wife.{{ $index }}.booster_brand" id="edit-wife-booster-brand" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="Sinovac Biotech">Sinovac Biotech</option>
+                      <option value="AstraZeneca">AstraZeneca</option>
+                      <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                      <option value="Moderna">Moderna</option>
+                      <option value="Johnson & Johnson">Johnson & Johnson</option>
+                      <option value="Sputnik V">Sputnik V</option>
+                    </select>
+                    @error('wife.' . $index . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+              @endforeach
             </div>
 
             {{-- Family Member --}}
@@ -1740,61 +1765,61 @@
                 <button wire:click.prevent="addNewMember" type="button" class="btn btn-secondary">Add New Member</button>
               </div>
               @isset($old_members)
-                @foreach ($old_members as $key => $old_member)
+                @foreach ($old_members as $index => $old_member)
                   <div class="d-flex flex-row align-items-center justify-content-between bg-light">
                     <h5 class="m-0">Old Member</h5>
-                    <span wire:click="removeOldMember({{ $key }})" class="fs-4 remove-member">&times;</span>
+                    <span wire:click="removeOldMember({{ $index }})" class="fs-4 remove-member">&times;</span>
                   </div>
                   <div class="col mt-4">
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-lname">Last Name</label>
-                      <input wire:model.defer="old_members.{{ $key }}.lname" id="edit-family-member-{{ $key }}-lname" type="text" class="form-control">
-                      @error('old_members.' . $key . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-lname">Last Name</label>
+                      <input wire:model.defer="old_members.{{ $index }}.lname" id="edit-family-member-{{ $index }}-lname" type="text" class="form-control">
+                      @error('old_members.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-fname">First Name</label>
-                      <input wire:model.defer="old_members.{{ $key }}.fname" id="edit-family-member-{{ $key }}-fname" type="text" class="form-control">
-                      @error('old_members.' . $key . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-fname">First Name</label>
+                      <input wire:model.defer="old_members.{{ $index }}.fname" id="edit-family-member-{{ $index }}-fname" type="text" class="form-control">
+                      @error('old_members.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-mname">Middle Name</label>
-                      <input wire:model.defer="old_members.{{ $key }}.mname" id="edit-family-member-{{ $key }}-mname" type="text" class="form-control">
-                      @error('old_members.' . $key . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-mname">Middle Name</label>
+                      <input wire:model.defer="old_members.{{ $index }}.mname" id="edit-family-member-{{ $index }}-mname" type="text" class="form-control">
+                      @error('old_members.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-sname">Suffix (Optional)</label>
-                      <input wire:model.defer="old_members.{{ $key }}.sname" id="edit-family-member-{{ $key }}-sname" type="text" class="form-control">
-                      @error('old_members.' . $key . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-sname">Suffix (Optional)</label>
+                      <input wire:model.defer="old_members.{{ $index }}.sname" id="edit-family-member-{{ $index }}-sname" type="text" class="form-control">
+                      @error('old_members.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-bday">Birthday</label>
-                      <input wire:model.defer="old_members.{{ $key }}.bday" id="edit-family-member-{{ $key }}-bday" type="date" class="form-control">
-                      @error('old_members.' . $key . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-bday">Birthday</label>
+                      <input wire:model.defer="old_members.{{ $index }}.bday" id="edit-family-member-{{ $index }}-bday" type="date" class="form-control">
+                      @error('old_members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-bplace">Birthplace</label>
-                      <input wire:model.defer="old_members.{{ $key }}.bplace" id="edit-family-member-{{ $key }}-bplace" type="text" class="form-control">
-                      @error('old_members.' . $key . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-bplace">Birthplace</label>
+                      <input wire:model.defer="old_members.{{ $index }}.bplace" id="edit-family-member-{{ $index }}-bplace" type="text" class="form-control">
+                      @error('old_members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-educ-attain">Educational Attainment</label>
-                      <input wire:model.defer="old_members.{{ $key }}.educ_attainment" id="edit-family-member-{{ $key }}-educ-attain" type="text" class="form-control">
-                      @error('old_members.' . $key . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-educ-attain">Educational Attainment</label>
+                      <input wire:model.defer="old_members.{{ $index }}.educ_attainment" id="edit-family-member-{{ $index }}-educ-attain" type="text" class="form-control">
+                      @error('old_members.' . $index . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <h6 class="mt-5">Vaccination Status</h6>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-1st-dose">1st Dose</label>
-                      <input wire:model.defer="old_members.{{ $key }}.first_dose" id="edit-family-member-{{ $key }}-1st-dose" type="date" class="form-control">
-                      @error('old_members.' . $key . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-1st-dose">1st Dose</label>
+                      <input wire:model.defer="old_members.{{ $index }}.first_dose" id="edit-family-member-{{ $index }}-1st-dose" type="date" class="form-control">
+                      @error('old_members.' . $index . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-2nd-dose">2nd Dose</label>
-                      <input wire:model.defer="old_members.{{ $key }}.second_dose" id="edit-family-member-{{ $key }}-2nd-dose" type="date" class="form-control">
-                      @error('old_members.' . $key . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-2nd-dose">2nd Dose</label>
+                      <input wire:model.defer="old_members.{{ $index }}.second_dose" id="edit-family-member-{{ $index }}-2nd-dose" type="date" class="form-control">
+                      @error('old_members.' . $index . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-brand">Brand</label>
-                      <select  wire:model.defer="old_members.{{ $key }}.vaccine_brand" id="edit-family-member-{{ $key }}-brand" class="form-select">
+                      <label for="edit-family-member-{{ $index }}-brand">Brand</label>
+                      <select  wire:model.defer="old_members.{{ $index }}.vaccine_brand" id="edit-family-member-{{ $index }}-brand" class="form-select">
                         <option value="">Choose one...</option>
                         <option value="Sinovac Biotech">Sinovac Biotech</option>
                         <option value="AstraZeneca">AstraZeneca</option>
@@ -1803,16 +1828,16 @@
                         <option value="Johnson & Johnson">Johnson & Johnson</option>
                         <option value="Sputnik V">Sputnik V</option>
                       </select>
-                      @error('old_members.' . $key . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      @error('old_members.' . $index . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-booster">Booster</label>
-                      <input wire:model.defer="old_members.{{ $key }}.booster" id="edit-family-member-{{ $key }}-booster" type="date" class="form-control">
-                      @error('old_members.' . $key . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="edit-family-member-{{ $index }}-booster">Booster</label>
+                      <input wire:model.defer="old_members.{{ $index }}.booster" id="edit-family-member-{{ $index }}-booster" type="date" class="form-control">
+                      @error('old_members.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-booster-brand">Brand</label>
-                      <select  wire:model.defer="old_members.{{ $key }}.booster_brand" id="edit-family-member-{{ $key }}-booster-brand" class="form-select">
+                      <label for="edit-family-member-{{ $index }}-booster-brand">Brand</label>
+                      <select  wire:model.defer="old_members.{{ $index }}.booster_brand" id="edit-family-member-{{ $index }}-booster-brand" class="form-select">
                         <option value="">Choose one...</option>
                         <option value="Sinovac Biotech">Sinovac Biotech</option>
                         <option value="AstraZeneca">AstraZeneca</option>
@@ -1821,68 +1846,68 @@
                         <option value="Johnson & Johnson">Johnson & Johnson</option>
                         <option value="Sputnik V">Sputnik V</option>
                       </select>
-                      @error('old_members.' . $key . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      @error('old_members.' . $index . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <hr class="my-5" style="border-top: dotted;">
                   </div>
                 @endforeach
               @endisset
               @isset($new_members)
-                @foreach ($new_members as $key => $new_member)
+                @foreach ($new_members as $index => $new_member)
                   <div class="d-flex flex-row align-items-center justify-content-between bg-light">
-                    <h5 class="m-0">New Member</h5>
-                    <span wire:click="removeNewMember({{ $key }})" class="fs-4 remove-member">&times;</span>
+                    <h5 class="m-0">New Member {{ $index + 1 }}</h5>
+                    <span wire:click="removeNewMember({{ $index }})" class="fs-4 remove-member">&times;</span>
                   </div>
                   <div class="col mt-4">
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-lname">Last Name</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_last_name" id="add-family-member-{{ $key }}-lname" type="text" class="form-control">
-                      @error('new_members.' . $key . '.family_member_last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-lname">Last Name</label>
+                      <input wire:model.defer="new_members.{{ $index }}.lname" id="add-family-member-{{ $index }}-lname" type="text" class="form-control">
+                      @error('new_members.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-fname">First Name</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_first_name" id="add-family-member-{{ $key }}-fname" type="text" class="form-control">
-                      @error('new_members.' . $key . '.family_member_first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-fname">First Name</label>
+                      <input wire:model.defer="new_members.{{ $index }}.fname" id="add-family-member-{{ $index }}-fname" type="text" class="form-control">
+                      @error('new_members.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-mname">Middle Name</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_middle_name" id="add-family-member-{{ $key }}-mname" type="text" class="form-control">
-                      @error('new_members.' . $key . '.family_member_middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-mname">Middle Name</label>
+                      <input wire:model.defer="new_members.{{ $index }}.mname" id="add-family-member-{{ $index }}-mname" type="text" class="form-control">
+                      @error('new_members.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-sname">Suffix (Optional)</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_suffix_name" id="add-family-member-{{ $key }}-sname" type="text" class="form-control">
-                      @error('new_members.' . $key . '.family_member_suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-sname">Suffix (Optional)</label>
+                      <input wire:model.defer="new_members.{{ $index }}.sname" id="add-family-member-{{ $index }}-sname" type="text" class="form-control">
+                      @error('new_members.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-bday">Birthday</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_birthday" id="add-family-member-{{ $key }}-bday" type="date" class="form-control">
-                      @error('new_members.' . $key . '.family_member_birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-bday">Birthday</label>
+                      <input wire:model.defer="new_members.{{ $index }}.bday" id="add-family-member-{{ $index }}-bday" type="date" class="form-control">
+                      @error('new_members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-bplace">Birthplace</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_birthplace" id="add-family-member-{{ $key }}-bplace" type="text" class="form-control">
-                      @error('new_members.' . $key . '.family_member_birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-bplace">Birthplace</label>
+                      <input wire:model.defer="new_members.{{ $index }}.bplace" id="add-family-member-{{ $index }}-bplace" type="text" class="form-control">
+                      @error('new_members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-educ-attain">Educational Attainment</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_educational_attainment" id="add-family-member-{{ $key }}-educ-attain" type="text" class="form-control">
-                      @error('new_members.' . $key . '.family_member_educational_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-educ-attain">Educational Attainment</label>
+                      <input wire:model.defer="new_members.{{ $index }}.educ_attain" id="add-family-member-{{ $index }}-educ-attain" type="text" class="form-control">
+                      @error('new_members.' . $index . '.educ_attain') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <h6 class="mt-5">Vaccination Status</h6>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-1st-dose">1st Dose</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_first_dose_date" id="add-family-member-{{ $key }}-1st-dose" type="date" class="form-control">
-                      @error('new_members.' . $key . '.family_member_first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-1st-dose">1st Dose</label>
+                      <input wire:model.defer="new_members.{{ $index }}.fdose" id="add-family-member-{{ $index }}-1st-dose" type="date" class="form-control">
+                      @error('new_members.' . $index . '.fdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-2nd-dose">2nd Dose</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_second_dose_date" id="add-family-member-{{ $key }}-2nd-dose" type="date" class="form-control">
-                      @error('new_members.' . $key . '.family_member_second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-2nd-dose">2nd Dose</label>
+                      <input wire:model.defer="new_members.{{ $index }}.sdose" id="add-family-member-{{ $index }}-2nd-dose" type="date" class="form-control">
+                      @error('new_members.' . $index . '.sdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-brand">Brand</label>
-                      <select  wire:model.defer="new_members.{{ $key }}.family_member_vaccine_brand" id="add-family-member-{{ $key }}-brand" class="form-select">
+                      <label for="add-family-member-{{ $index }}-brand">Brand</label>
+                      <select  wire:model.defer="new_members.{{ $index }}.brand" id="add-family-member-{{ $index }}-brand" class="form-select">
                         <option value="">Choose one...</option>
                         <option value="Sinovac Biotech">Sinovac Biotech</option>
                         <option value="AstraZeneca">AstraZeneca</option>
@@ -1891,16 +1916,16 @@
                         <option value="Johnson & Johnson">Johnson & Johnson</option>
                         <option value="Sputnik V">Sputnik V</option>
                       </select>
-                      @error('new_members.' . $key . '.family_member_vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      @error('new_members.' . $index . '.brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-booster">Booster</label>
-                      <input wire:model.defer="new_members.{{ $key }}.family_member_booster_date" id="add-family-member-{{ $key }}-booster" type="date" class="form-control">
-                      @error('new_members.' . $key . '.family_member_booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      <label for="add-family-member-{{ $index }}-booster">Booster</label>
+                      <input wire:model.defer="new_members.{{ $index }}.booster" id="add-family-member-{{ $index }}-booster" type="date" class="form-control">
+                      @error('new_members.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-booster-brand">Brand</label>
-                      <select  wire:model.defer="new_members.{{ $key }}.family_member_booster_brand" id="add-family-member-{{ $key }}-booster-brand" class="form-select">
+                      <label for="add-family-member-{{ $index }}-booster-brand">Brand</label>
+                      <select  wire:model.defer="new_members.{{ $index }}.bbrand" id="add-family-member-{{ $index }}-booster-brand" class="form-select">
                         <option value="">Choose one...</option>
                         <option value="Sinovac Biotech">Sinovac Biotech</option>
                         <option value="AstraZeneca">AstraZeneca</option>
@@ -1909,7 +1934,7 @@
                         <option value="Johnson & Johnson">Johnson & Johnson</option>
                         <option value="Sputnik V">Sputnik V</option>
                       </select>
-                      @error('new_members.' . $key . '.family_member_booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      @error('new_members.' . $index . '.bbrand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <hr class="my-5" style="border-top: dotted;">
                   </div>
@@ -1917,166 +1942,10 @@
               @endisset
             </div>
 
-            {{-- Family Member --}}
-            {{-- <div id="edit-family-member-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
-              <h4>Family Members</h4>
-              <div class="d-flex justify-content-end mb-3">
-                <button wire:click.prevent="editAddMember" type="button" class="btn btn-secondary">Add a Member</button>
-              </div>
-              @if ($old_members != null)
-                @foreach ($members as $key => $member)
-                  <div class="d-flex flex-row align-items-center justify-content-between bg-light">
-                    <h5 class="m-0">Member</h5>
-                    <span wire:click="editRemoveMember({{ $key }})" class="fs-4 remove-member">&times;</span>
-                  </div>
-                  <div class="col mt-4">
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-lname">Last Name</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_last_name" id="edit-family-member-{{ $key }}-lname" type="text" class="form-control">
-                      @error('members.' . $key . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-fname">First Name</label>
-                      <input wire:model.defer="members.{{ $key }}.fname" id="edit-family-member-{{ $key }}-fname" type="text" class="form-control">
-                      @error('members.' . $key . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-mname">Middle Name</label>
-                      <input wire:model.defer="members.{{ $key }}.mname" id="edit-family-member-{{ $key }}-mname" type="text" class="form-control">
-                      @error('members.' . $key . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-sname">Suffix (Optional)</label>
-                      <input wire:model.defer="members.{{ $key }}.sname" id="edit-family-member-{{ $key }}-sname" type="text" class="form-control">
-                      @error('members.' . $key . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-bday">Birthday</label>
-                      <input wire:model.defer="members.{{ $key }}.bday" id="edit-family-member-{{ $key }}-bday" type="date" class="form-control">
-                      @error('members.' . $key . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-bplace">Birthplace</label>
-                      <input wire:model.defer="members.{{ $key }}.bplace" id="edit-family-member-{{ $key }}-bplace" type="text" class="form-control">
-                      @error('members.' . $key . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-educ-attain">Educational Attainment</label>
-                      <input wire:model.defer="members.{{ $key }}.educ_attainment" id="edit-family-member-{{ $key }}-educ-attain" type="text" class="form-control">
-                      @error('members.' . $key . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <h6 class="mt-5">Vaccination Status</h6>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-1st-dose">1st Dose</label>
-                      <input wire:model.defer="members.{{ $key }}.first_dose" id="edit-family-member-{{ $key }}-1st-dose" type="date" class="form-control">
-                      @error('members.' . $key . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-2nd-dose">2nd Dose</label>
-                      <input wire:model.defer="members.{{ $key }}.second_dose" id="edit-family-member-{{ $key }}-2nd-dose" type="date" class="form-control">
-                      @error('members.' . $key . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-brand">Brand</label>
-                      <input wire:model.defer="members.{{ $key }}.vaccine_brand" id="edit-family-member-{{ $key }}-brand" type="text" class="form-control">
-                      @error('members.' . $key . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-booster">Booster</label>
-                      <input wire:model.defer="members.{{ $key }}.booster" id="edit-family-member-{{ $key }}-booster" type="date" class="form-control">
-                      @error('members.' . $key . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="edit-family-member-{{ $key }}-booster-brand">Brand</label>
-                      <input wire:model.defer="members.{{ $key }}.booster_brand" id="edit-family-member-{{ $key }}-booster-brand" type="text" class="form-control">
-                      @error('members.' . $key . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <hr class="my-5" style="border-top: dotted;">
-                  </div>
-                @endforeach
-              @else
-                @foreach ($members as $key => $member)
-                  <div class="d-flex flex-row align-items-center justify-content-between bg-light">
-                    <h5 class="m-0">Member</h5>
-                    <span wire:click="removeMember({{ $key }})" class="fs-4 remove-member">&times;</span>
-                  </div>
-                  <div class="col mt-4">
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-lname">Last Name</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_last_name" id="add-family-member-{{ $key }}-lname" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-fname">First Name</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_first_name" id="add-family-member-{{ $key }}-fname" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-mname">Middle Name</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_middle_name" id="add-family-member-{{ $key }}-mname" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-sname">Suffix (Optional)</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_suffix_name" id="add-family-member-{{ $key }}-sname" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-bday">Birthday</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_birthday" id="add-family-member-{{ $key }}-bday" type="date" class="form-control">
-                      @error('members.' . $key . '.family_member_birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-bplace">Birthplace</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_birthplace" id="add-family-member-{{ $key }}-bplace" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-educ-attain">Educational Attainment</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_educational_attainment" id="add-family-member-{{ $key }}-educ-attain" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_educational_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <h6 class="mt-5">Vaccination Status</h6>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-1st-dose">1st Dose</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_first_dose_date" id="add-family-member-{{ $key }}-1st-dose" type="date" class="form-control">
-                      @error('members.' . $key . '.family_member_first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-2nd-dose">2nd Dose</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_second_dose_date" id="add-family-member-{{ $key }}-2nd-dose" type="date" class="form-control">
-                      @error('members.' . $key . '.family_member_second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-brand">Brand</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_vaccine_brand" id="add-family-member-{{ $key }}-brand" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-booster">Booster</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_booster_date" id="add-family-member-{{ $key }}-booster" type="date" class="form-control">
-                      @error('members.' . $key . '.family_member_booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row-auto mb-3">
-                      <label for="add-family-member-{{ $key }}-booster-brand">Brand</label>
-                      <input wire:model.defer="members.{{ $key }}.family_member_booster_brand" id="add-family-member-{{ $key }}-booster-brand" type="text" class="form-control">
-                      @error('members.' . $key . '.family_member_booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <hr class="my-5" style="border-top: dotted;">
-                  </div>
-                @endforeach
-              @endif
-            </div> --}}
-
             {{-- Additional Info --}}
             <div id="edit-info-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
               <h4>Additional Info</h4>
               <div class="col mt-4">
-                <div class="row-auto mb-3">
-                  <label for="edit-head-total-member">Total Member of the Family</label>
-                  <input wire:model.defer="total_family_member" id="edit-head-total-member" type="number" min="0" class="form-control">
-                  @error('total_family_member') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
                 <div class="row-auto mb-3">
                   <label for="edit-water">Water Source</label>
                   <select wire:model.defer="water_source" id="edit-water" class="form-select">
@@ -2123,6 +1992,11 @@
                     <option value="Sharing">Sharing</option>
                   </select>
                   @error('electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                </div>
+                <div class="row-auto mb-3">
+                  <label for="edit-house-no">House No.</label>
+                  <input wire:model.defer="house_no" id="edit-house-no" class="form-control">
+                  @error('house_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
               </div>
             </div>
