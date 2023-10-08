@@ -17,10 +17,14 @@
             <p><strong>From: </strong>{{ $report_from }}</p>
             <p>{{ $description }}</p>
           </div>
-          @isset($report_img)
-            <img src="{{ Storage::url($report_img) }}" class="object-fit-contain border rounded" alt="image">
-          @endisset
-          <div wire:ignore id="map" class="my-3" style="height: 300px"></div>
+          <div class="row justify-content-center">
+            @isset($report_imgs)
+              @foreach ($report_imgs as $image)
+                <img src="{{ Storage::url($image->image) }}" class="object-fit-contain border rounded col-md-4" alt="image">
+              @endforeach
+            @endisset
+          </div>
+          <div wire:ignore id="map" class="my-3 border shadow-sm rounded" style="height: 300px"></div>
         </div>
       </div>
     </div>

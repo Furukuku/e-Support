@@ -12,7 +12,7 @@ class Reports extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $report_from, $report_type, $zone, $description, $report_img, $time;
+    public $report_from, $report_type, $zone, $description, $report_imgs, $time;
 
     public $status;
 
@@ -40,7 +40,7 @@ class Reports extends Component
         $this->report_from = $report->user->fname . ' ' . $report->user->lname;
         $this->zone = $report->zone;
         $this->description = $report->description;
-        $this->report_img = $report->report_img;
+        $this->report_imgs = $report->images;
         $this->time = $report->created_at;
 
         $this->dispatchBrowserEvent('set-location', [
