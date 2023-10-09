@@ -4,6 +4,10 @@ namespace App\Http\Livewire\Admin\Documents;
 
 use Livewire\Component;
 use App\Models\Document;
+use App\Models\FamilyHead;
+use App\Models\FamilyMember;
+use App\Models\Wife;
+use App\Rules\CheckIfValidResident;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 
@@ -91,17 +95,27 @@ class Indigencies extends Component
     public function addDoc()
     {
         $this->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', new CheckIfValidResident],
         ]);
 
-        Document::create([
-            'type' => 'Indigency',
-            'name' => $this->name,
-            'token' => uniqid(Str::random(10), true),
-        ]);
-
+        $this->dispatchBrowserEvent('showConfirmation');
         $this->dispatchBrowserEvent('close-modal');
+    }
+
+    public function confirmAddDoc()
+    {
+        $document = new Document();
+        $document->type = 'Indigency';
+        $document->name = $this->name;
+        $document->token = uniqid(Str::random(10), true);
+        $document->status = 'Released';
+        $document->is_released = true;
+        $document->save();
+
         $this->closeModal();
+        $this->dispatchBrowserEvent('close-modal');
+
+        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
     }
 
     public function view(Document $document)
@@ -119,29 +133,29 @@ class Indigencies extends Component
         $this->name = $document->name;
     }
 
-    public function updateDoc()
-    {
-        $document = Document::find($this->doc_id);
+    // public function updateDoc()
+    // {
+    //     $document = Document::find($this->doc_id);
 
-        if(is_null($this->user_id) && is_null($this->business_id)){
-            $this->validate([
-                'name' => ['required', 'string', 'max:255'],
-            ]);
+    //     if(is_null($this->user_id) && is_null($this->business_id)){
+    //         $this->validate([
+    //             'name' => ['required', 'string', 'max:255'],
+    //         ]);
 
-            $document->name = $this->name;
-            $document->update();
-        }else{
-            $this->validate([
-                'status' => ['required', 'string', 'max:15'],
-            ]);
+    //         $document->name = $this->name;
+    //         $document->update();
+    //     }else{
+    //         $this->validate([
+    //             'status' => ['required', 'string', 'max:15'],
+    //         ]);
 
-            $document->status = $this->status;
-            $document->update();
-        }
+    //         $document->status = $this->status;
+    //         $document->update();
+    //     }
 
-        $this->dispatchBrowserEvent('close-modal');
-        $this->closeModal();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->closeModal();
+    // }
 
     public function release()
     {
@@ -152,6 +166,12 @@ class Indigencies extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+    }
+
+    public function getResidentName($name)
+    {
+        $this->name = $name;
+        $this->dispatchBrowserEvent('hideSuggestions');
     }
     
     public function render()
@@ -201,10 +221,19 @@ class Indigencies extends Component
             })
             ->orderBy('updated_at', 'desc')
             ->paginate($this->history_paginate, ['*'], 'history');
+
+            $results = [];
+
+            if(strlen($this->name) >= 1){
+                $results['heads'] = FamilyHead::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->get();
+                $results['wives'] = Wife::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->get();
+                $results['members'] = FamilyMember::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->get();
+            }
         
         return view('livewire.admin.documents.indigencies', [
             'documents' => $documents,
             'taken_documents' => $taken_documents,
+            'results' => $results,
         ]);
     }
 }

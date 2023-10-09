@@ -54,7 +54,7 @@
         </thead>
         <tbody>
           @forelse ($documents as $document)
-            <tr wire:poll.60s>
+            <tr>
               <td class="align-middle text-center">{{ $document->name }}</td>
               <td class="align-middle text-center">{{ $document->zone }}</td>
               <td class="align-middle text-center">{{ $document->purpose }}</td>
@@ -80,7 +80,7 @@
                   </span>
                 </a>
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#brgyClearanceInfo"></i>
-                <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i>
+                {{-- <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i> --}}
                 <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
               </td>
             </tr>
@@ -125,7 +125,7 @@
             <th class="align-middle text-center">Name</th>
             <th class="align-middle text-center">Zone</th>
             <th class="align-middle text-center">Purpose</th>
-            <th class="align-middle text-center">Data/Time Claimed</th>
+            <th class="align-middle text-center">Date/Time Claimed</th>
           </tr>
         </thead>
         <tbody>

@@ -19,12 +19,20 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('zone')->nullable();
             $table->string('purpose')->nullable();
+
+            // business clearance
+            $table->string('biz_clearance_no')->nullable();
             $table->string('biz_name')->nullable();
             $table->string('biz_address')->nullable();
             $table->string('biz_nature')->nullable();
             $table->string('biz_owner')->nullable();
             $table->string('owner_address')->nullable();
             $table->string('proof')->nullable();
+
+            // date issuances
+            $table->string('ctc')->nullable();
+            $table->date('issued_at')->nullable();
+            $table->date('issued_on')->nullable();
             $table->string('status')->default('Pending');
             $table->boolean('is_used')->default(false);
             $table->string('token');

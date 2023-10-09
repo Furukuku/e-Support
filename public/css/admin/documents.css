@@ -27,3 +27,24 @@
   --bs-btn-active-bg: #713f74;
   --bs-btn-active-border-color: #713f74;
 }
+
+.modal-dialog .documents-modal-content {
+  overflow: visible !important;
+}
+
+.documents-modal-body {
+  overflow-y: visible !important;
+}
+
+.autocomplete-container {
+  max-height: 20rem;
+}
+
+.suggestions {
+  cursor: pointer;
+}
+
+.suggestions:hover {
+  background-color: #FFC03D;
+  color: #fff;
+}

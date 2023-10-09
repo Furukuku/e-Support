@@ -25,18 +25,43 @@
 <form wire:submit.prevent="addDoc">
   @csrf
   <div wire:ignore.self class="modal fade" id="addDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addDocLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
+    <div class="modal-dialog">
+      <div class="modal-content documents-modal-content">
         <div class="modal-header header-bg py-2">
           <h1 class="modal-title fs-5" id="addDocLabel">Barangay Clearance</h1>
           <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
             cancel
           </span>
         </div>
-        <div class="modal-body px-4">
-          <div class="my-3">
-            <label for="name" class="form-label m-0">Name</label>
-            <input type="text" wire:model.defer="name" id="name" class="form-control">
+        <div class="modal-body px-4 documents-modal-body">
+          <div class="my-3 position-relative">
+            <label for="add-name" class="form-label m-0">Name</label>
+            <input type="search" autocomplete="disabled" wire:model.live="name" id="add-name" class="form-control">
+            <div id="name-suggestion-container" class="border bg-light rounded-bottom position-absolute w-100 shadow overflow-y-auto autocomplete-container">
+              @if (count($results) > 0)
+                @if(!$results['heads']->isEmpty())
+                  @foreach ($results['heads'] as $head)
+                    <div wire:click="getResidentName('{{ $head->fullname }}')" class="p-2 suggestions">
+                      <p class="text-truncate m-0">{{ $head->fullname }}</p>
+                    </div>
+                  @endforeach
+                @endif
+                @if(!$results['wives']->isEmpty())
+                  @foreach ($results['wives'] as $wife)
+                    <div wire:click="getResidentName('{{ $wife->fullname }}')" class="p-2 suggestions">
+                      <p class="text-truncate m-0">{{ $wife->fullname }}</p>
+                    </div>
+                  @endforeach
+                @endif
+                @if (!$results['members']->isEmpty())
+                  @foreach ($results['members'] as $member)
+                    <div wire:click="getResidentName('{{ $member->fullname }}')" class="p-2 suggestions">
+                      <p class="text-truncate m-0">{{ $member->fullname }}</p>
+                    </div>
+                  @endforeach
+                @endif
+              @endif
+            </div>
             @error('name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
           </div>
           <div class="my-3">
@@ -65,6 +90,45 @@
     </div>
   </div>
 </form>
+
+
+{{-- Add Doc Confirmation --}}
+<div wire:ignore.self class="modal fade" id="addDocConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addDocConfirmLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-bg py-2">
+        <h1 class="modal-title fs-5" id="addDocConfirmLabel">Check Details</h1>
+        <span id="stop-sc" class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" aria-label="Close">
+          cancel
+        </span>
+      </div>
+      <div class="modal-body px-4">
+        <div class="my-3">
+          <label class="form-label">Name</label>
+          <div class="border rounded p-2">
+            <p class="m-0">{{ $name }}</p>
+          </div>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Zone</label>
+          <div class="border rounded p-2">
+            <p class="m-0">{{ $zone }}</p>
+          </div>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Purpose</label>
+          <div class="border rounded p-2">
+            <p class="m-0">{{ $purpose }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between border-0">
+        <button type="button" wire:click="closeModal" class="btn btn-secondary rounded-pill px-5" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="button" wire:click="confirmAddDoc" class="btn btn-warning rounded-pill px-5">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {{-- result --}}
@@ -191,7 +255,7 @@
 
 
 {{-- edit document --}}
-<form wire:submit.prevent="updateDoc">
+{{-- <form wire:submit.prevent="updateDoc">
   @csrf
   <div wire:ignore.self class="modal fade" id="editDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDocLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -245,4 +309,4 @@
       </div>
     </div>
   </div>
-</form>
+</form> --}}

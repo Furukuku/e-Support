@@ -40,4 +40,9 @@ class Document extends Model
     {
         return $this->belongsTo(Business::class);
     }
+
+    public function brgyClearances()
+    {
+        return $this->hasMany(BarangayClearance::class);
+    }
 }

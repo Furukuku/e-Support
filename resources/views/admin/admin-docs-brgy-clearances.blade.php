@@ -45,8 +45,40 @@
       $('#qrResult').modal('hide');
       $('#editDoc').modal('hide');
       $('#addDoc').modal('hide');
+      $('#addDocConfirm').modal('hide');
       $('#releaseDoc').modal('hide');
     });
+
+    window.addEventListener('showConfirmation', () => {
+      $('#addDocConfirm').modal('show');
+    });
+
+    const residentNameInput = document.getElementById('add-name');
+    const suggestionContainer = document.getElementById('name-suggestion-container');
+
+    document.addEventListener('click', e => {
+      if(!residentNameInput.contains(e.target)){
+        suggestionContainer.classList.add('d-none');
+      }
+    });
+    
+    window.addEventListener('hideSuggestions', () => {
+      suggestionContainer.classList.add('d-none');
+    });
+
+    residentNameInput.addEventListener('focus', () => {
+      suggestionContainer.classList.remove('d-none');
+    });
+
+    residentNameInput.addEventListener('click', () => {
+      suggestionContainer.classList.remove('d-none');
+    });
+
+    window.addEventListener('toPrint', e => {
+      console.log(e.detail.id)
+      window.open(`/admin/barangay-clearance/${e.detail.id}`, '_blank');
+    });
+
   </script>
 
 @endsection

@@ -9,13 +9,19 @@
     </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
-        <div class="col-auto">
+        <div class="col-3">
           <label for="entries">Show</label>
         </div>
-        <div class="col-2">
-          <input id="entries" wire:model="paginate" type="number" class="form-control form-control-sm">
+        <div class="col-6">
+          {{-- <input id="entries" wire:model="paginate" type="number" class="form-control form-control-sm"> --}}
+          <select id="entries" wire:model="paginate" class="form-select form-select-sm">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
         </div>
-        <div class="col-auto">
+        <div class="col-3">
           <label for="entries">entries</label>
         </div>
       </div>
@@ -24,7 +30,7 @@
           <label for="search">Search:</label>
         </div>
         <div class="col-auto">
-          <input wire:model="search" id="search" type="text" class="form-control form-control-sm">
+          <input wire:model="search" id="search" type="search" class="form-control form-control-sm">
         </div>
       </div>
     </div>
