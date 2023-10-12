@@ -34,6 +34,11 @@
             placeholder="Enter your name">
             @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
+          <div class="row mb-3">
+            <label for="purpose" class="form-label px-0">Purpose</label>
+            <input type="text" id="purpose" class="form-control mb-2" name="purpose" value="{{ old('purpose') }}" placeholder="Enter purpose (ex. Scholarship)">
+            @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
           <button type="submit" class="btn text-white my-4 rounded-pill px-4">Submit</button>
         </form>
       </div>

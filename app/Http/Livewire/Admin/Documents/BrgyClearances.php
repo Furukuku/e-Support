@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Documents;
 
+use App\Models\BarangayClearance;
 use Livewire\Component;
 use App\Models\Document;
 use App\Models\FamilyHead;
@@ -29,6 +30,8 @@ class BrgyClearances extends Component
 
     public $name, $zone, $purpose, $date_requested, $status;
 
+    public $ctc_image, $ctc, $issued_at, $issued_on;
+
     public $user_id, $business_id;
 
     public $doc_id;
@@ -55,6 +58,10 @@ class BrgyClearances extends Component
             'error_msg',
             'user_id',
             'business_id',
+            'ctc_image',
+            'ctc',
+            'issued_at',
+            'issued_on',
         );
     }
 
@@ -67,14 +74,18 @@ class BrgyClearances extends Component
                     ->where('token', $qrcode->token)
                     ->first();
     
-                if($document !== null && $document->is_released == false && $document->type === 'Barangay Clearance'){
+                if(!is_null($document) && $document->is_released == false && $document->type === 'Barangay Clearance'){
                     $this->doc_id = $document->id;
-                    $this->name = $document->name;
-                    $this->zone = $document->zone;
-                    $this->purpose = $document->purpose;
+                    $this->name = $document->brgyClearance->name;
+                    $this->zone = $document->brgyClearance->zone;
+                    $this->purpose = $document->brgyClearance->purpose;
+                    $this->ctc_image = $document->brgyClearance->ctc_photo;
+                    $this->ctc = $document->brgyClearance->ctc;
+                    $this->issued_at = $document->brgyClearance->issued_at;
+                    $this->issued_on = $document->brgyClearance->issued_on;
                     $this->date_requested = $document->created_at;
-                }else if($document !== null && $document->is_released == true && $document->type === 'Barangay Clearance'){
-                    $this->error_msg = 'Qr Code Already Used!';
+                }else if(!is_null($document) && $document->is_released == true && $document->type === 'Barangay Clearance'){
+                    $this->error_msg = 'Document already claimed!';
                 }else{
                     $this->error_msg = 'Not found!';
                 }
@@ -89,6 +100,7 @@ class BrgyClearances extends Component
     public function markAsUsed()
     {
         $document = Document::find($this->doc_id);
+        $document->status = 'Released';
         $document->is_released = true;
         $document->update();
 
@@ -104,6 +116,9 @@ class BrgyClearances extends Component
             'name' => ['required', 'string', 'max:255', new CheckIfValidResident],
             'zone' => ['required', 'string', 'max:1'],
             'purpose' => ['required', 'string', 'max:255'],
+            'ctc' => ['required', 'string', 'max:255'],
+            'issued_at' => ['required', 'string', 'max:255'],
+            'issued_on' => ['required', 'date'],
         ]);
 
         $this->dispatchBrowserEvent('showConfirmation');
@@ -114,13 +129,18 @@ class BrgyClearances extends Component
     {
         $document = new Document();
         $document->type = 'Barangay Clearance';
-        $document->name = $this->name;
-        $document->zone = $this->zone;
-        $document->purpose = $this->purpose;
         $document->token = uniqid(Str::random(10), true);
-        $document->status = 'Released';
-        $document->is_released = true;
         $document->save();
+
+        $brgyClearance = new BarangayClearance();
+        $brgyClearance->document_id = $document->id;
+        $brgyClearance->name = $this->name;
+        $brgyClearance->zone = $this->zone;
+        $brgyClearance->purpose = $this->purpose;
+        $brgyClearance->ctc = $this->ctc;
+        $brgyClearance->issued_at = $this->issued_at;
+        $brgyClearance->issued_on = $this->issued_on;
+        $brgyClearance->save();
 
         $this->closeModal();
         $this->dispatchBrowserEvent('close-modal');
@@ -130,56 +150,36 @@ class BrgyClearances extends Component
 
     public function view(Document $document)
     {
-        $this->name = $document->name;
-        $this->zone = $document->zone;
-        $this->purpose = $document->purpose;
-        $this->date_requested = $document->created_at;
+        $this->doc_id = $document->id;
+        $this->name = $document->brgyClearance->name;
+        $this->zone = $document->brgyClearance->zone;
+        $this->purpose = $document->brgyClearance->purpose;
+        $this->ctc_image = $document->brgyClearance->ctc_photo;
+        $this->ctc = $document->brgyClearance->ctc;
+        $this->issued_at = $document->brgyClearance->issued_at;
+        $this->issued_on = $document->brgyClearance->issued_on;
+    }
+
+    public function print()
+    {
+        $document = Document::find($this->doc_id);
+        
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+        $this->closeModal();
     }
 
     public function editDoc(Document $document)
     {
         $this->doc_id = $document->id;
-        $this->status = $document->status;
-        $this->user_id = $document->user_id;
-        $this->business_id = $document->business_id;
-        $this->name = $document->name;
-        $this->zone = $document->zone;
-        $this->purpose = $document->purpose;
     }
-
-    // public function updateDoc()
-    // {
-    //     $document = Document::find($this->doc_id);
-
-    //     if(is_null($this->user_id) && is_null($this->business_id)){
-    //         $this->validate([
-    //             'name' => ['required', 'string', 'max:255'],
-    //             'zone' => ['required', 'string', 'max:1'],
-    //             'purpose' => ['required', 'string', 'max:255'],
-    //         ]);
-
-    //         $document->name = $this->name;
-    //         $document->zone = $this->zone;
-    //         $document->purpose = $this->purpose;
-    //         $document->update();
-    //     }else{
-    //         $this->validate([
-    //             'status' => ['required', 'string', 'max:15'],
-    //         ]);
-    
-    //         $document->status = $this->status;
-    //         $document->update();
-    //     }
-
-    //     $this->dispatchBrowserEvent('close-modal');
-    //     $this->closeModal();
-    // }
 
     public function release()
     {
         $document = Document::find($this->doc_id);
         $document->status = 'Released';
         $document->is_released = true;
+        $document->brgyClearance->date_issued = now();
         $document->update();
 
         $this->dispatchBrowserEvent('close-modal');
@@ -194,50 +194,38 @@ class BrgyClearances extends Component
     
     public function render()
     {
-        $documents = Document::with('user')
-            ->with('business')
+        $documents = Document::with(['user', 'brgyClearance'])
             ->where('type', 'Barangay Clearance')
             ->where('is_released', false)
             ->where(function ($query) {
                 $query->where(function ($subQuery) {
-                    $subQuery->where('type', 'like', '%' . $this->search . '%')
-                        ->orWhere('name', 'like', '%' . $this->search . '%')
-                        ->orWhere('zone', 'like', '%' . $this->search . '%')
-                        ->orWhere('purpose', 'like', '%' . $this->search . '%');
-                })
-                ->orWhere(function ($subQuery) {
                     $subQuery->whereHas('user', function ($query) {
                         $query->where('fname', 'like', '%' . $this->search . '%')
                             ->orWhere('lname', 'like', '%' . $this->search . '%');
                     })
-                    ->orWhereHas('business', function ($query) {
-                        $query->where('fname', 'like', '%' . $this->search . '%')
-                            ->orWhere('lname', 'like', '%' . $this->search . '%');
+                    ->orWhereHas('brgyClearance', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%')
+                            ->orWhere('zone', 'like', '%' . $this->search . '%')
+                            ->orWhere('purpose', 'like', '%' . $this->search . '%');
                     });
                 });
             })
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate, ['*'], 'clearance');
 
-        $taken_documents = Document::with('user')
-            ->with('business')
+        $taken_documents = Document::with(['user', 'brgyClearance'])
             ->where('type', 'Barangay Clearance')
             ->where('is_released', true)
             ->where(function ($query) {
                 $query->where(function ($subQuery) {
-                    $subQuery->where('type', 'like', '%' . $this->history_search . '%')
-                        ->orWhere('name', 'like', '%' . $this->history_search . '%')
-                        ->orWhere('zone', 'like', '%' . $this->history_search . '%')
-                        ->orWhere('purpose', 'like', '%' . $this->history_search . '%');
-                })
-                ->orWhere(function ($subQuery) {
                     $subQuery->whereHas('user', function ($query) {
                         $query->where('fname', 'like', '%' . $this->history_search . '%')
                             ->orWhere('lname', 'like', '%' . $this->history_search . '%');
                     })
-                    ->orWhereHas('business', function ($query) {
-                        $query->where('fname', 'like', '%' . $this->history_search . '%')
-                            ->orWhere('lname', 'like', '%' . $this->history_search . '%');
+                    ->orWhereHas('brgyClearance', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%')
+                            ->orWhere('zone', 'like', '%' . $this->search . '%')
+                            ->orWhere('purpose', 'like', '%' . $this->search . '%');
                     });
                 });
             })
@@ -247,9 +235,9 @@ class BrgyClearances extends Component
         $results = [];
 
         if(strlen($this->name) >= 1){
-            $results['heads'] = FamilyHead::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->get();
-            $results['wives'] = Wife::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->get();
-            $results['members'] = FamilyMember::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->get();
+            $results['heads'] = FamilyHead::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->take(10)->get();
+            $results['wives'] = Wife::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->take(10)->get();
+            $results['members'] = FamilyMember::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->take(10)->get();
         }
         
         return view('livewire.admin.documents.brgy-clearances', [

@@ -28,9 +28,6 @@
     }
 
     function onScanFailure(error) {
-      // handle scan failure, usually better to ignore and keep scanning.
-      // for example:
-      // console.warn(`Code scan error = ${error}`);
     }
 
     document.getElementById('scanner-btn').addEventListener('click', () => {
@@ -47,6 +44,7 @@
       $('#addDoc').modal('hide');
       $('#addDocConfirm').modal('hide');
       $('#releaseDoc').modal('hide');
+      $('#brgyClearanceInfo').modal('hide');
     });
 
     window.addEventListener('showConfirmation', () => {
@@ -75,7 +73,6 @@
     });
 
     window.addEventListener('toPrint', e => {
-      console.log(e.detail.id)
       window.open(`/admin/barangay-clearance/${e.detail.id}`, '_blank');
     });
 

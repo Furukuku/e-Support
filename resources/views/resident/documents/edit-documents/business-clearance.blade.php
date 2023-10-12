@@ -23,30 +23,62 @@
           @csrf
           <div class="row mb-3">
             <label for="biz-nature" class="form-label px-0">Nature of Business</label>
-            <input type="text" id="biz-nature" autocomplete="false" class="form-control inputs" disabled name="business_nature" value="{{ old('business_nature', $document->biz_nature) }}">
+            <input type="text" id="biz-nature" autocomplete="false" class="form-control inputs" disabled name="business_nature" value="{{ old('business_nature', $document->bizClearance->biz_nature) }}">
             @error('business_nature') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <div class="row mb-3">
             <label for="name" class="form-label px-0">Name</label>
-            <input type="text" id="name" class="form-control mb-2 inputs" disabled  name="owner_name" value="{{ old('owner_name', $document->biz_owner) }}" placeholder="Business Owner">
+            <input type="text" id="name" class="form-control mb-2 inputs" disabled  name="owner_name" value="{{ old('owner_name', $document->bizClearance->biz_owner) }}" placeholder="Business Owner">
             @error('owner_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
-            <input type="text" class="form-control inputs" disabled name="business_name" value="{{ old('business_name', $document->biz_name) }}" placeholder="Name of Business">
+            <input type="text" class="form-control inputs" disabled name="business_name" value="{{ old('business_name', $document->bizClearance->biz_name) }}" placeholder="Name of Business">
             @error('business_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <div class="row mb-3">
             <label for="address" class="form-label px-0">Address</label>
-            <input type="text" id="address" class="form-control mb-2 inputs" disabled name="owner_address" value="{{ old('owner_address', $document->owner_address) }}" placeholder="Owner Address">
+            <input type="text" id="address" class="form-control mb-2 inputs" disabled name="owner_address" value="{{ old('owner_address', $document->bizClearance->owner_address) }}" placeholder="Owner Address">
             @error('owner_address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
-            <input type="text" class="form-control inputs" name="business_address" disabled value="{{ old('business_address', $document->biz_address) }}" placeholder="Business Address">
+            <input type="text" class="form-control inputs" name="business_address" disabled value="{{ old('business_address', $document->bizClearance->biz_address) }}" placeholder="Business Address">
             @error('business_address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <div class="d-flex justify-content-start">
-            <img id="preview-image" src="{{ Storage::url($document->proof) }}" alt="proof" style="height: 10rem; width: 10rem;">
-          </div>
-          <div class="row mb-3">
+          {{-- <div class="d-flex justify-content-start">
+            <img id="preview-image" src="{{ Storage::url($document->bizClearance->proof) }}" alt="proof" style="height: 10rem; width: 10rem;">
+          </div> --}}
+          <div id="proof-img-input" class="row mb-3 d-none">
             <label for="proof" class="form-label px-0"><b>Proof of your business </b>(DTI, Business Clearance, etc.)</label>
             <input type="file" accept="image/*" id="proof" class="form-control form-control-sm inputs" disabled name="proof" value="{{ old('proof') }}">
             @error('proof') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row justify-content-center mb-4">
+            <img id="proof-preview" src="{{ Storage::url($document->bizClearance->proof) }}" class="object-fit-scale rounded" alt="proof" style="width: 20rem;">
+          </div>
+          <div class="position-relative mb-4">
+            <hr class="border border-dark m-0 w-100">
+            <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
+              <p class="m-0 text-center">Community Tax Certificate</p>
+            </div>
+          </div>
+          <div id="ctc-img-input" class="row mb-2 d-none">
+            <label for="ctc-img" class="form-label px-0">Please insert a clear image of your CTC</label>
+            <input type="file" accept="image/*" id="ctc-img" disabled class="form-control form-control-sm inputs" name="ctc_image" value="{{ old('ctc_image') }}">
+            @error('ctc_image') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row justify-content-center mb-3">
+            <img id="ctc-preview" src="{{ Storage::url($document->bizClearance->ctc_photo) }}" class="object-fit-scale rounded" alt="ctc-image" style="width: 20rem;">
+          </div>
+          <div class="row mb-3">
+            <label for="ctc" class="form-label px-0">CTC #</label>
+            <input type="text" id="ctc" disabled class="form-control inputs" name="ctc" value="{{ old('ctc',$document->bizClearance->ctc) }}">
+            @error('ctc') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row mb-3">
+            <label for="issued-at" class="form-label px-0">Issued at</label>
+            <input type="text" id="issued-at" disabled class="form-control inputs" name="issued_at" value="{{ old('issued_at',$document->bizClearance->issued_at) }}">
+            @error('issued_at') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row mb-3">
+            <label for="issued-on" class="form-label px-0">Issued on</label>
+            <input type="date" id="issued-on" disabled class="form-control inputs" name="issued_on" value="{{ old('issued_on',$document->bizClearance->issued_on) }}">
+            @error('issued_on') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <button id="confirmation" hidden type="submit" class="btn text-white my-4 rounded-pill px-4">Update</button>
         </form>
@@ -62,12 +94,8 @@
   <script>
 
     const confirmBtn = document.getElementById('confirmation');
-    const proof = document.getElementById('proof');
-    const previewImage = document.getElementById('preview-image');
-
-    proof.addEventListener('change', () => {
-      previewImage.src = URL.createObjectURL(event.target.files[0]);
-    });
+    const ctcImgInputCont = document.getElementById('ctc-img-input');
+    const proofImgInputCont = document.getElementById('proof-img-input');
 
     document.getElementById('edit-btn').addEventListener('click', () => {
       const inputs = document.querySelectorAll('.inputs');
@@ -76,6 +104,8 @@
           input.toggleAttribute('disabled');
         });
         confirmBtn.toggleAttribute('hidden');
+        ctcImgInputCont.classList.toggle('d-none');
+        proofImgInputCont.classList.toggle('d-none');
       }, 300);
     });
 
@@ -94,6 +124,20 @@
           $('#biz-clearance-form').submit();
         }
       });
+    });
+
+    const ctcImgInput = document.getElementById('ctc-img');
+    const previewImg = document.getElementById('ctc-preview');
+
+    ctcImgInput.addEventListener('change', () => {
+      previewImg.src = URL.createObjectURL(event.target.files[0]);
+    });
+
+    const proofImgInput = document.getElementById('proof');
+    const proofPreviewImage = document.getElementById('proof-preview');
+
+    proofImgInput.addEventListener('change', () => {
+      proofPreviewImage.src = URL.createObjectURL(event.target.files[0]);
     });
 
   </script>

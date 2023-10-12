@@ -5,18 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BarangayClearance extends Model
+class BusinessClearance extends Model
 {
     use HasFactory;
 
-    protected $table = 'barangay_clearances';
+    protected $table = 'business_clearances';
 
     protected $fillable = [
         'document_id',
-        'name',
-        'zone',
-        'purpose',
+        'clearance_no',
+        'biz_name',
+        'biz_address',
+        'biz_nature',
+        'biz_owner',
+        'owner_address',
+        'proof',
         'date_issued',
+        'expiry_date',
         'ctc',
         'issued_at',
         'issued_on',

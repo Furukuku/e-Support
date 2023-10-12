@@ -69,8 +69,8 @@
                 <label class="input-labels" for="resident-employment-status">Employment Status</label>
                 <select wire:model="employment_status" id="resident-employment-status" class="form-select">
                   <option value="">Choose one...</option>
-                  <option value="Employed">Employed</option>
-                  <option value="Unemployed">Unemployed</option>
+                  <option value="1">Employed</option>
+                  <option value="0">Unemployed</option>
                 </select>
                 @error('employment_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
@@ -78,8 +78,8 @@
                 <label class="input-labels" for="resident-family-head">Family Head</label>
                 <select wire:model="family_head" id="resident-family-head" class="form-select">
                   <option value="">Choose one...</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
                 </select>
                 @error('family_head') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>

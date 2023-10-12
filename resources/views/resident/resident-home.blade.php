@@ -4,7 +4,7 @@
 
   <div class="py-5">
 
-    @if ($jobs->count() > 0 && auth()->guard('web')->user()->employ_status === 'Employed')
+    @if ($jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true)
       <div class="position-relative mx-5 home-start">
         <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 end-0 translate-middle-y d-none" id="scroll-right">
           <span class="material-symbols-outlined">
@@ -151,7 +151,7 @@
 
 @endsection
 
-@if ($jobs->count() > 0 && auth()->guard('web')->user()->employ_status === 'Employed')
+@if ($jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true)
   @section('scripts')
 
     <script>

@@ -82,6 +82,21 @@
             <input type="text" wire:model.defer="purpose" id="purpose" class="form-control">
             @error('purpose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
           </div>
+          <div class="p-2">
+            <label for="ctc" class="form-label">Community Tax Certificate</label>
+            <input type="text" id="ctc" wire:model.defer="ctc" class="form-control">
+            @error('ctc') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="p-2">
+            <label for="issued_at" class="form-label">Issued at</label>
+            <input type="text" id="issued_at" wire:model.defer="issued_at" class="form-control">
+            @error('issued_at') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="p-2">
+            <label for="issued_on" class="form-label">Issued on</label>
+            <input type="date" id="issued_on" wire:model.defer="issued_on" class="form-control">
+            @error('issued_on') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          </div>
         </div>
         <div class="modal-footer justify-content-center border-0">
           <button type="submit" class="btn btn-warning rounded-pill px-5">Submit</button>
@@ -106,25 +121,43 @@
         <div class="my-3">
           <label class="form-label">Name</label>
           <div class="border rounded p-2">
-            <p class="m-0">{{ $name }}</p>
+            <p class="m-0 text-truncate">{{ $name }}</p>
           </div>
         </div>
         <div class="my-3">
           <label class="form-label">Zone</label>
           <div class="border rounded p-2">
-            <p class="m-0">{{ $zone }}</p>
+            <p class="m-0 text-truncate">{{ $zone }}</p>
           </div>
         </div>
         <div class="my-3">
           <label class="form-label">Purpose</label>
           <div class="border rounded p-2">
-            <p class="m-0">{{ $purpose }}</p>
+            <p class="m-0 text-truncate">{{ $purpose }}</p>
+          </div>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Community Tax Certificate</label>
+          <div class="border rounded p-2">
+            <p class="m-0 text-truncate">{{ $ctc }}</p>
+          </div>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Issued_at</label>
+          <div class="border rounded p-2">
+            <p class="m-0 text-truncate">{{ $issued_at }}</p>
+          </div>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Issued_on</label>
+          <div class="border rounded p-2">
+            <p class="m-0 text-truncate">{{ $issued_on }}</p>
           </div>
         </div>
       </div>
       <div class="modal-footer justify-content-between border-0">
         <button type="button" wire:click="closeModal" class="btn btn-secondary rounded-pill px-5" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-        <button type="button" wire:click="confirmAddDoc" class="btn btn-warning rounded-pill px-5">Confirm</button>
+        <button type="button" wire:click="confirmAddDoc" class="btn btn-warning rounded-pill px-5">Print</button>
       </div>
     </div>
   </div>
@@ -161,6 +194,32 @@
               <p class="m-0 text-truncate">{{ $purpose }}</p>
             </div>
           </div>
+          @if (!is_null($ctc_image))
+          <div>
+            <p class="m-0">Community Tax Certificate Image</p>
+            <div class="d-flex justify-content-center rounded p-2">
+              <img src="{{ Storage::url($ctc_image) }}" class="object-fit-scale rounded" alt="ctc-image" style="width: 20rem;">
+            </div>
+          </div>
+        @endif
+          <div class="p-2">
+            <p class="m-0">CTC #</p>
+            <div class="border rounded p-2">
+              <p class="m-0 text-truncate">{{ $ctc }}</p>
+            </div>
+          </div>
+          <div class="p-2">
+            <p class="m-0">Issued at</p>
+            <div class="border rounded p-2">
+              <p class="m-0 text-truncate">{{ $issued_at }}</p>
+            </div>
+          </div>
+          <div class="p-2">
+            <p class="m-0">Issued on</p>
+            <div class="border rounded p-2">
+              <p class="m-0 text-truncate">{{ $issued_on }}</p>
+            </div>
+          </div>
           <div class="p-2">
             <p class="m-0">Date Requested</p>
             <div class="border rounded p-2">
@@ -175,7 +234,7 @@
       </div>
       <div class="modal-footer justify-content-end border-0">
         @if (!is_null($doc_id))
-          <button type="button" class="btn btn-success" wire:click="markAsUsed">Mark as released</button>
+          <button type="button" class="btn btn-success" wire:click="markAsUsed">Release</button>
           <button type="button" class="btn btn-secondary" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
         @endif
       </div>
@@ -196,31 +255,52 @@
       </div>
       <div class="modal-body">
         <div class="p-2">
-          <p class="m-0">Name</p>
+          <p class="mb-2">Name</p>
           <div class="border rounded p-2">
             <p class="m-0 text-truncate">{{ $name }}</p>
           </div>
         </div>
         <div class="p-2">
-          <p class="m-0">Zone</p>
+          <p class="mb-2">Zone</p>
           <div class="border rounded p-2">
             <p class="m-0 text-truncate">{{ $zone }}</p>
           </div>
         </div>
         <div class="p-2">
-          <p class="m-0">Purpose</p>
+          <p class="mb-2">Purpose</p>
           <div class="border rounded p-2">
             <p class="m-0 text-truncate">{{ $purpose }}</p>
           </div>
         </div>
+        @if (!is_null($ctc_image))
+          <div class="my-3">
+            <p class="mb-2">Community Tax Certificate Image</p>
+            <div class="d-flex justify-content-center rounded p-2">
+              <img src="{{ Storage::url($ctc_image) }}" class="object-fit-scale rounded" alt="ctc-image" style="width: 20rem;">
+            </div>
+          </div>
+        @endif
         <div class="p-2">
-          <p class="m-0">Date Requested</p>
+          <p class="mb-2">CTC #</p>
           <div class="border rounded p-2">
-            <p class="m-0 text-truncate">{{ is_null($date_requested) ? '' : $date_requested->format('h:i A - M d, Y') }}</p>
+            <p class="m-0 text-truncate">{{ $ctc }}</p>
+          </div>
+        </div>
+        <div class="p-2">
+          <p class="mb-2">Issued_at</p>
+          <div class="border rounded p-2">
+            <p class="m-0 text-truncate">{{ $issued_at }}</p>
+          </div>
+        </div>
+        <div class="p-2">
+          <p class="mb-2">Issued_on</p>
+          <div class="border rounded p-2">
+            <p class="m-0 text-truncate">{{ $issued_on }}</p>
           </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-end border-0">
+      <div class="modal-footer justify-content-center border-0">
+        <button type="button" wire:click="print" class="btn btn-warning rounded-pill px-5">Print</button>
       </div>
     </div>
   </div>
@@ -243,7 +323,7 @@
           </span>
         </div>
         <h4 class="text-center mb-3">Release Barangay Clearance?</h4>
-        <p class="text-center">Are you sure you want to release this document?</p>
+        <p class="text-center">Are you sure you're done printing this document?</p>
       </div>
       <div class="modal-footer d-flex justify-content-center border-0">
         <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>

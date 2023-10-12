@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('barangay_clearances', function (Blueprint $table) {
+        Schema::create('business_clearances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('document_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('name');
-            $table->string('zone');
-            $table->string('purpose');
+            $table->string('clearance_no')->nullable();
+            $table->string('biz_name');
+            $table->string('biz_address');
+            $table->string('biz_nature');
+            $table->string('biz_owner');
+            $table->string('owner_address');
+            $table->string('proof');
             $table->timestamp('date_issued')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->string('ctc')->nullable();
             $table->string('issued_at')->nullable();
             $table->date('issued_on')->nullable();
@@ -30,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('barangay_clearances');
+        Schema::dropIfExists('business_clearances');
     }
 };

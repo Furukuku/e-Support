@@ -1,7 +1,15 @@
-p,
+.doc-font-family,
 h5,
 h3 {
   font-family: 'Times New Roman', Times, serif;
+}
+
+.confirm-fs {
+  font-size: 1rem;
+}
+
+.modal-close-icon {
+  cursor: pointer;
 }
 
 body {
@@ -10,6 +18,15 @@ body {
 
 p {
   font-size: 20px;
+}
+
+.print-btn {
+  background-color: #432344 !important;
+  border: none !important;
+}
+
+.print-btn:hover {
+  background-color: #351c36 !important;
 }
 
 footer p {
@@ -42,29 +59,39 @@ footer p {
 
 @media print {
   @page {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   body {
-    padding: 0;
+    padding: 0 !important;
+  }
+
+  body.bg-light {
+    background-color: #ffffff !important;
   }
 
   body * {
-    visibility: hidden;
+    visibility: hidden !important;
   }
 
   p {
-    font-size: 16px;
+    font-size: 16px !important;
+  }
+
+  header {
+    margin-top: 0 !important;
   }
 
   .printing-file {
-    width: 100%;
+    width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
   .printing-file,
   .printing-file * {
-    visibility: visible;
+    visibility: visible !important;
   }
 
   .heading-container > div:first-child {

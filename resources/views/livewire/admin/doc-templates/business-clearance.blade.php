@@ -1,6 +1,66 @@
 <div class="container py-4 doc-container" style="width: 800px;">
-  <button class="btn btn-primary" id="print-btn">Print</button>
-  <div class="border border-dark position-relative overflow-hidden content-container printing-file">
+
+  <div class="container d-flex gap-3 justify-content-end mb-2 w-100">
+    <button class="btn btn-primary print-btn" id="print-btn">
+      <span class="material-symbols-outlined align-middle">print</span>
+    </button>
+    <button class="btn {{ is_null($document->user_id) && is_null($document->business_id) ? 'btn-success' : 'btn-primary' }} px-3" data-bs-toggle="modal" data-bs-target="#confirm">
+      <i class="fa-solid fa-file-circle-check"></i>
+    </button>
+  </div>
+  @if (is_null($document->user_id) && is_null($document->business_id))
+    <div wire:ignore.self class="modal fade release-modal" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0 justify-content-end">
+            <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" aria-label="Close">
+              cancel
+            </span>
+          </div>
+          <div class="modal-body pt-0">
+            <div class="d-flex justify-content-center mb-3">
+              <span class="material-symbols-outlined fs-1 text-warning">
+                warning
+              </span>
+            </div>
+            <h4 class="text-center mb-3">Release Business Clearance?</h4>
+            <p class="text-center confirm-fs">Are you sure you're done printing this document?</p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center border-0">
+            <button type="button" class="btn btn-secondary px-4 mx-3" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="confirm-btn" class="btn btn-success px-4 mx-3">Release</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  @else
+    <div wire:ignore.self class="modal fade release-modal" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0 justify-content-end">
+            <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" aria-label="Close">
+              cancel
+            </span>
+          </div>
+          <div class="modal-body pt-0">
+            <div class="d-flex justify-content-center mb-3">
+              <span class="material-symbols-outlined fs-1 text-warning">
+                warning
+              </span>
+            </div>
+            <h4 class="text-center mb-3">Mark as Ready to Pickup?</h4>
+            <p class="text-center confirm-fs px-3">Are you sure you want to mark this document as ready to pickup?</p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center border-0">
+            <button type="button" class="btn btn-secondary px-4 mx-3" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="confirm-btn" class="btn btn-primary px-4 mx-3">Confrim</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
+
+  <div class="border border-dark position-relative shadow overflow-hidden content-container printing-file">
     <header class="border-bottom border-2 border-dark header-container">
       <div class="wrapper">
         <div class="decoration"></div>
@@ -47,30 +107,32 @@
           <h3 class="text-center"><u>BUSINESS CLEARANCE</u></h3>
         </div>
         <div class="p-3">
-          <h6>Business Clearance No.: </h6>
+        @if (!is_null($document))
+          <h6>Business Clearance No.: {{ $document->bizClearance->clearance_no }}</h6>
+        @endif
           <p style="text-indent: 50px;">This is to certify this Barangay Business Clearance is hereby granted to the person/corp./Inc. whose name appeared below with the following information:</p>
         </div>
         <div class="py-3 ps-1 pe-3  fields-container">
           @if (!is_null($document))
             <div class="row justify-content-start">
               <h6 class="col-4 text-end">Business Name:</h6>
-              <h6 class="col-8 ps-0">{{ $document->biz_name }}</h6>
+              <h6 class="col-8 ps-0">{{ $document->bizClearance->biz_name }}</h6>
             </div>
             <div class="row justify-content-start">
               <h6 class="col-4 text-end">Business Address:</h6>
-              <h6 class="col-8 ps-0">{{ $document->biz_address }}</h6>
+              <h6 class="col-8 ps-0">{{ $document->bizClearance->biz_address }}</h6>
             </div>
             <div class="row justify-content-start">
               <h6 class="col-4 text-end">Nature of Business:</h6>
-              <h6 class="col-8 ps-0">{{ $document->biz_nature }}</h6>
+              <h6 class="col-8 ps-0">{{ $document->bizClearance->biz_nature }}</h6>
             </div>
             <div class="row justify-content-start">
               <h6 class="col-4 text-end">Name of Owner:</h6>
-              <h6 class="col-8 ps-0">{{ $document->biz_owner }}</h6>
+              <h6 class="col-8 ps-0">{{ $document->bizClearance->biz_owner }}</h6>
             </div>
             <div class="row justify-content-start">
               <h6 class="col-4 text-end">Owner's Address:</h6>
-              <h6 class="col-8 ps-0">{{ $document->owner_address }}</h6>
+              <h6 class="col-8 ps-0">{{ $document->bizClearance->owner_address }}</h6>
             </div>
             <div class="row justify-content-start">
               <h6 class="col-4 text-end">Date Issued:</h6>

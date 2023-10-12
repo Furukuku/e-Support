@@ -13,7 +13,7 @@
 
       <button type="button" wire:loading.class="disabled" class="btn px-4 ms-2 shadow print-btn" data-bs-toggle="modal" data-bs-target="#addDoc">
         <span class="material-symbols-outlined">
-          print
+          directions_walk
         </span>
       </button>
     </div>
@@ -45,6 +45,7 @@
         <thead>
           <tr>
             <th class="align-middle text-center">Name</th>
+            <th class="align-middle text-center">Purpose</th>
             <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Date/Time Requested</th>
             <th class="align-middle text-center">Action</th>
@@ -53,7 +54,8 @@
         <tbody>
           @forelse ($documents as $document)
             <tr wire:poll.60s>
-              <td class="align-middle text-center">{{ $document->name }}</td>
+              <td class="align-middle text-center">{{ $document->indigency->name }}</td>
+              <td class="align-middle text-center">{{ $document->indigency->purpose }}</td>
               <td class="align-middle text-center">
                 <div class="px-1 rounded-pill 
                 @if ($document->status === 'Pending')
@@ -70,12 +72,10 @@
               </td>
               <td class="align-middle text-center">{{ $document->created_at->format('h:i A - M d, Y') }}</td>
               <td class="d-flex gap-1 align-items-center justify-content-center">
-                <a href="{{ route('admin.templates.indigency', ['document' => $document]) }}" target="_blank" class="text-dark pt-1">
-                  <span class="material-symbols-outlined">
-                    print
-                  </span>
-                </a>
-                <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#indigencyInfo"></i>
+                <span class="material-symbols-outlined" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#indigencyInfo" style="cursor: pointer;">
+                  print
+                </span>
+                {{-- <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#indigencyInfo"></i> --}}
                 {{-- <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i> --}}
                 <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
               </td>
@@ -125,7 +125,8 @@
         <tbody>
           @forelse ($taken_documents as $taken_doc)
             <tr>
-              <td class="align-middle text-center">{{ $taken_doc->name }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->indigency->name }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->indigency->purpose }}</td>
               <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>
             </tr>
           @empty

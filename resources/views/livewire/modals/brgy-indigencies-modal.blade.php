@@ -64,6 +64,11 @@
             </div>
             @error('name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
           </div>
+          <div class="my-3">
+            <label for="purpose" class="form-label m-0">Purpose</label>
+            <input type="text" wire:model.defer="purpose" id="purpose" class="form-control">
+            @error('purpose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          </div>
         </div>
         <div class="modal-footer justify-content-center border-0">
           <button type="submit" class="btn btn-warning rounded-pill px-5">Submit</button>
@@ -89,6 +94,12 @@
           <label class="form-label">Name</label>
           <div class="border rounded p-2">
             <p class="m-0">{{ $name }}</p>
+          </div>
+        </div>
+        <div class="my-3">
+          <label class="form-label">Purpose</label>
+          <div class="border rounded p-2">
+            <p class="m-0">{{ $purpose }}</p>
           </div>
         </div>
       </div>
@@ -120,6 +131,12 @@
             </div>
           </div>
           <div class="p-2">
+            <p class="m-0">Purpose</p>
+            <div class="border rounded p-2">
+              <p class="m-0 text-truncate">{{ $purpose }}</p>
+            </div>
+          </div>
+          <div class="p-2">
             <p class="m-0">Date Requested</p>
             <div class="border rounded p-2">
               <p class="m-0 text-truncate">{{ is_null($date_requested) ? '' : $date_requested->format('h:i A - M d, Y') }}</p>
@@ -133,7 +150,7 @@
       </div>
       <div class="modal-footer justify-content-end border-0">
         @if (!is_null($doc_id))
-          <button type="button" class="btn btn-success" wire:click="markAsUsed">Mark as released</button>
+          <button type="button" class="btn btn-success" wire:click="markAsUsed">Release</button>
           <button type="button" class="btn btn-secondary" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
         @endif
       </div>
@@ -160,13 +177,20 @@
           </div>
         </div>
         <div class="p-2">
+          <p class="m-0">Purpose</p>
+          <div class="border rounded p-2">
+            <p class="m-0 text-truncate">{{ $purpose }}</p>
+          </div>
+        </div>
+        <div class="p-2">
           <p class="m-0">Date Requested</p>
           <div class="border rounded p-2">
             <p class="m-0 text-truncate">{{ is_null($date_requested) ? '' : $date_requested->format('h:i A - M d, Y') }}</p>
           </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-end border-0">
+      <div class="modal-footer justify-content-center border-0">
+        <button type="button" wire:click="print" class="btn btn-warning rounded-pill px-5">Print</button>
       </div>
     </div>
   </div>
@@ -200,7 +224,7 @@
 </div>
 
 {{-- edit document --}}
-<form wire:submit.prevent="updateDoc">
+{{-- <form wire:submit.prevent="updateDoc">
   @csrf
   <div wire:ignore.self class="modal fade" id="editDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDocLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -236,4 +260,4 @@
       </div>
     </div>
   </div>
-</form>
+</form> --}}

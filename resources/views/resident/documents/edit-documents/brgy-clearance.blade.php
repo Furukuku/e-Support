@@ -23,7 +23,7 @@
           @csrf
           <div class="row mb-3">
             <label for="name" class="form-label px-0">Name</label>
-            <input type="text" id="name" class="form-control mb-2 inputs" disabled name="name" value="{{ old('name', $document->name) }}" placeholder="Enter your name">
+            <input type="text" id="name" class="form-control mb-2 inputs" disabled name="name" value="{{ old('name', $document->brgyClearance->name) }}" placeholder="Enter your name">
             @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <div class="row mb-3">
@@ -32,7 +32,7 @@
               <option value="">Choose one...</option>
               @for ($i = 1; $i <= 6; $i++)
                 <option value="{{ $i }}"
-                @if (old('zone', $document->zone) == $i)
+                @if (old('zone', $document->brgyClearance->zone) == $i)
                   selected
                 @endif
                 >{{ $i }}</option>
@@ -40,10 +40,39 @@
             </select>
             @error('zone') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <div class="row mb-3">
+          <div class="row mb-4">
             <label for="purpose" class="form-label px-0">Purpose</label>
-            <input type="text" id="purpose" class="form-control mb-2 inputs" disabled name="purpose" value="{{ old('purpose', $document->purpose) }}" placeholder="Enter purpose (ex. Scholarship)">
+            <input type="text" id="purpose" class="form-control mb-2 inputs" disabled name="purpose" value="{{ old('purpose', $document->brgyClearance->purpose) }}" placeholder="Enter purpose (ex. Scholarship)">
             @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="position-relative mb-4">
+            <hr class="border border-dark m-0 w-100">
+            <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
+              <p class="m-0 text-center">Community Tax Certificate</p>
+            </div>
+          </div>
+          <div id="insert-img-input" class="row mb-2 d-none">
+            <label for="ctc-img" class="form-label px-0">Please insert a clear image of your CTC</label>
+            <input type="file" accept="image/*" id="ctc-img" disabled class="form-control form-control-sm inputs" name="ctc_image" value="{{ old('ctc_image') }}">
+            @error('ctc_image') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row justify-content-center mb-3">
+            <img id="ctc-preview" src="{{ Storage::url($document->brgyClearance->ctc_photo) }}" class="object-fit-scale rounded" alt="ctc-image" style="width: 20rem;">
+          </div>
+          <div class="row mb-3">
+            <label for="ctc" class="form-label px-0">CTC #</label>
+            <input type="text" id="ctc" disabled class="form-control inputs" name="ctc" value="{{ old('ctc',$document->brgyClearance->ctc) }}">
+            @error('ctc') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row mb-3">
+            <label for="issued-at" class="form-label px-0">Issued at</label>
+            <input type="text" id="issued-at" disabled class="form-control inputs" name="issued_at" value="{{ old('issued_at',$document->brgyClearance->issued_at) }}">
+            @error('issued_at') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row mb-3">
+            <label for="issued-on" class="form-label px-0">Issued on</label>
+            <input type="date" id="issued-on" disabled class="form-control inputs" name="issued_on" value="{{ old('issued_on',$document->brgyClearance->issued_on) }}">
+            @error('issued_on') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <button id="confirmation" type="submit" hidden class="btn text-white my-4 rounded-pill px-4">Update</button>
         </form>
@@ -59,6 +88,7 @@
   <script>
 
     const confirmBtn = document.getElementById('confirmation');
+    const ImgInput = document.getElementById('insert-img-input');
 
     document.getElementById('edit-btn').addEventListener('click', () => {
       const inputs = document.querySelectorAll('.inputs');
@@ -67,7 +97,17 @@
           input.toggleAttribute('disabled');
         });
         confirmBtn.toggleAttribute('hidden');
+        ImgInput.classList.toggle('d-none');
       }, 300);
+    });
+
+    const ctcImgInput = document.getElementById('ctc-img');
+    const previewImg = document.getElementById('ctc-preview');
+
+    ctcImgInput.addEventListener('change', e => {
+      if(e.target.files){
+        previewImg.src = URL.createObjectURL(e.target.files[0]);
+      }
     });
     
     // confirmBtn.addEventListener('click', () => {

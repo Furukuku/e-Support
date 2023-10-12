@@ -23,7 +23,7 @@
         {{-- <div class="d-flex align-items-center">
         </div> --}}
         <span class="material-symbols-outlined">
-          print
+          directions_walk
         </span>
         {{-- <p class="m-0">Print</p> --}}
       </button>
@@ -66,9 +66,9 @@
         <tbody>
           @forelse ($documents as $document)
             <tr wire:poll.60s>
-              <td class="align-middle text-center">{{ $document->biz_name }}</td>
-              <td class="align-middle text-center">{{ $document->biz_nature }}</td>
-              <td class="align-middle text-center">{{ $document->biz_owner }}</td>
+              <td class="align-middle text-center">{{ $document->bizClearance->biz_name }}</td>
+              <td class="align-middle text-center">{{ $document->bizClearance->biz_nature }}</td>
+              <td class="align-middle text-center">{{ $document->bizClearance->biz_owner }}</td>
               <td class="align-middle text-center">
                 <div class="px-1 rounded-pill 
                 @if ($document->status === 'Pending')
@@ -86,13 +86,11 @@
               </td>
               <td class="align-middle text-center">{{ $document->created_at->format('h:i A - M d, Y') }}</td>
               <td class="d-flex gap-1 align-items-center justify-content-center">
-                <a href="{{ route('admin.templates.biz-clearance', ['document' => $document]) }}" target="_blank" class="text-dark pt-1">
-                  <span class="material-symbols-outlined ms-1">
-                    print
-                  </span>
-                </a>
-                <i class="fa-solid fa-eye ms-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#bizClearanceInfo"></i>
-                <i class="fa-solid fa-pen ms-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i>
+                <span class="material-symbols-outlined ms-1" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#bizClearanceInfo" style="cursor: pointer;">
+                  print
+                </span>
+                {{-- <i class="fa-solid fa-eye ms-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#bizClearanceInfo"></i> --}}
+                {{-- <i class="fa-solid fa-pen ms-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i> --}}
                 <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
               </td>
             </tr>
@@ -144,9 +142,9 @@
         <tbody>
           @forelse ($taken_documents as $taken_doc)
             <tr>
-              <td class="align-middle text-center">{{ $taken_doc->biz_name }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->biz_nature }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->biz_owner }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->bizClearance->biz_name }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->bizClearance->biz_nature }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->bizClearance->biz_owner }}</td>
               <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>
               {{-- <td class="d-flex gap-2 align-items-center justify-content-center">
                 <a href="{{ route('admin.templates.biz-clearance', ['taken_doc' => $taken_doc]) }}" target="_blank" class="text-dark pt-1">

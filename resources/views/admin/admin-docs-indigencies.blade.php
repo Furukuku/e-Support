@@ -75,7 +75,6 @@
     });
 
     window.addEventListener('toPrint', e => {
-      console.log(e.detail.id)
       window.open(`/admin/indigency/${e.detail.id}`, '_blank');
     });
   </script>

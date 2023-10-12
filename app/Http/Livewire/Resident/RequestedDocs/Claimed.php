@@ -14,7 +14,8 @@ class Claimed extends Component
 
     public function render()
     {
-        $myClaimedDocs = Document::where('user_id', auth()->guard('web')->id())
+        $myClaimedDocs = Document::with(['brgyClearance', 'bizClearance', 'indigency'])
+            ->where('user_id', auth()->guard('web')->id())
             ->where('status', 'Released')
             ->where('is_released', true)
             ->orderBy('created_at', 'desc')

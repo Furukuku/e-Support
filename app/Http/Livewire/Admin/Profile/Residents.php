@@ -2,15 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Profile;
 
-use App\Models\Family;
 use App\Models\FamilyHead;
 use Livewire\Component;
 use App\Models\FamilyMember;
 use App\Models\Wife;
 use Livewire\WithPagination;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\NullableType;
 
 class Residents extends Component
 {

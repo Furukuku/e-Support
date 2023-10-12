@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chatbots', function (Blueprint $table) {
-            $table->id();
-            $table->text('question');
-            $table->text('response');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('barangay_clearances', function (Blueprint $table) {
+            $table->string('ctc_photo')->nullable()->after('date_issued');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chatbots');
+        Schema::table('barangay_clearances', function (Blueprint $table) {
+            $table->dropColumn('ctc_photo');
+        });
     }
 };

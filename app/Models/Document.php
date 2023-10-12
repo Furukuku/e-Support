@@ -16,17 +16,7 @@ class Document extends Model
         'user_id',
         'business_id',
         'type',
-        'name',
-        'zone',
-        'purpose',
-        'biz_name',
-        'biz_address',
-        'biz_nature',
-        'biz_owner',
-        'owner_address',
-        'proof',
         'status',
-        'is_used',
         'token',
         'is_released',
     ];
@@ -41,8 +31,19 @@ class Document extends Model
         return $this->belongsTo(Business::class);
     }
 
-    public function brgyClearances()
+    
+    public function brgyClearance()
     {
-        return $this->hasMany(BarangayClearance::class);
+        return $this->hasOne(BarangayClearance::class);
+    }
+
+    public function bizClearance()
+    {
+        return $this->hasOne(BusinessClearance::class);
+    }
+
+    public function indigency()
+    {
+        return $this->hasOne(Indigency::class);
     }
 }

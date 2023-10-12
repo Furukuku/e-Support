@@ -6,6 +6,9 @@ use App\Models\Document;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BarangayClearance;
+use App\Models\BusinessClearance;
+use App\Models\Indigency;
 use App\Models\Job;
 use App\Models\Report;
 use App\Models\ReportImage;
@@ -120,14 +123,15 @@ class ResidentController extends Controller
 
     public function updateIndigency(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:155'],
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'purpose' => ['required', 'string', 'max:255'],
         ]);
 
-        if($validated){
-            $document = Document::find($id);
-            $document->update($validated);
-        }
+        $document = Document::find($id);
+        $document->indigency->name = $request->name;
+        $document->indigency->purpose = $request->purpose;
+        $document->indigency->update();
 
         return redirect()->route('resident.services');
     }
@@ -140,54 +144,75 @@ class ResidentController extends Controller
             'owner_address' => ['required', 'string', 'max:255'],
             'business_address' => ['required', 'string', 'max:255'],
             'proof' => [File::image()],
+            'ctc_image' => [File::image()],
+            'ctc' => ['required', 'string', 'max:255'],
+            'issued_at' => ['required', 'string', 'max:255'],
+            'issued_on' => ['required', 'date'],
         ]);
-        // dd($request->proof);
+
+        $document = Document::find($id);
+
         if($request->hasFile('proof')){
-            $document = Document::find($id);
-
-            $proof_filename = $request->proof->store('public/images/biz-clearances/proofs');
-            Storage::delete($document->proof);
-
-            $document->biz_nature = $request->business_nature;
-            $document->biz_owner = $request->owner_name;
-            $document->biz_name = $request->business_name;
-            $document->owner_address = $request->owner_address;
-            $document->biz_address = $request->business_address;
-            $document->proof = $proof_filename;
-            $document->update();
-        }else{
-            $document = Document::find($id);
-            $document->biz_nature = $request->business_nature;
-            $document->biz_owner = $request->owner_name;
-            $document->biz_name = $request->business_name;
-            $document->owner_address = $request->owner_address;
-            $document->biz_address = $request->business_address;
-            $document->update();
+            Storage::delete($document->bizClearance->proof);
+            $proof_filename = $request->proof->store('public/images/clearances/business/proofs');
+            $document->bizClearance->proof = $proof_filename;
         }
+
+        if($request->hasFile('ctc_image')){
+            Storage::delete($document->bizClearance->ctc_photo);
+            $ctc_filename = $request->ctc_image->store('public/images/clearances/business/ctc');
+            $document->bizClearance->ctc_photo = $ctc_filename;
+        }
+
+        $document->bizClearance->biz_nature = $request->business_nature;
+        $document->bizClearance->biz_owner = $request->owner_name;
+        $document->bizClearance->biz_name = $request->business_name;
+        $document->bizClearance->owner_address = $request->owner_address;
+        $document->bizClearance->biz_address = $request->business_address;
+        $document->bizClearance->ctc = $request->ctc;
+        $document->bizClearance->issued_at = $request->issued_at;
+        $document->bizClearance->issued_on = $request->issued_on;
+        $document->bizClearance->update();
 
         return redirect()->route('resident.services');
     }
 
     public function updateBrgyClearance(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:155'],
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
             'zone' => ['required', 'string', 'max:1'],
-            'purpose' => ['required', 'string', 'max:155'],
+            'purpose' => ['required', 'string', 'max:255'],
+            'ctc_image' => [File::image()],
+            'ctc' => ['required', 'string', 'max:255'],
+            'issued_at' => ['required', 'string', 'max:255'],
+            'issued_on' => ['required', 'date'],
         ]);
 
         $document = Document::find($id);
 
-        if($validated){
-            $document->update($validated);
-
-            return redirect()->route('resident.services');
+        if($request->hasFile('ctc_image')){
+            Storage::delete($document->brgyClearance->ctc_photo);
+            $ctc_filename = $request->ctc_image->store('public/images/clearances/barangay');
+            $document->brgyClearance->ctc_photo = $ctc_filename;
         }
+        
+        $document->brgyClearance->name = $request->name;
+        $document->brgyClearance->zone = $request->zone;
+        $document->brgyClearance->purpose = $request->purpose;
+        $document->brgyClearance->ctc = $request->ctc;
+        $document->brgyClearance->issued_at = $request->issued_at;
+        $document->brgyClearance->issued_on = $request->issued_on;
+        $document->brgyClearance->update();
+
+
+        return redirect()->route('resident.services');
     }
 
     public function editDocs($id, $token)
     {
-        $document = Document::where('id', $id)
+        $document = Document::with(['brgyClearance', 'bizClearance', 'indigency'])
+            ->where('id', $id)
             ->where('token', $token)
             ->first();
 
@@ -209,17 +234,21 @@ class ResidentController extends Controller
     public function showQr($token)
     {
         $document = Document::where('token', $token)
-            ->select('id')
+            ->select('id', 'user_id')
             ->first();
 
-        $qr = collect([
-            'id' => $document->id,
-            'token' => $token,
-        ]);
-
-        $qr_code = QrCode::size(200)->generate($qr);
-
-        return view('resident.qr-code', ['qr_code' => $qr_code]);
+        if($document->user_id == auth()->guard('web')->id()){
+            $qr = collect([
+                'id' => $document->id,
+                'token' => $token,
+            ]);
+    
+            $qr_code = QrCode::size(200)->generate($qr);
+    
+            return view('resident.qr-code', ['qr_code' => $qr_code]);
+        }else{
+            abort(404);
+        }
     }
 
     public function storeBizClearance(Request $request)
@@ -230,25 +259,38 @@ class ResidentController extends Controller
             'business_name' => ['required', 'string', 'max:255'],
             'owner_address' => ['required', 'string', 'max:255'],
             'business_address' => ['required', 'string', 'max:255'],
-            'proof' => ['required', File::image(),],
+            'proof' => ['required', File::image()],
+            'ctc_image' => ['required', File::image()],
+            'ctc' => ['required', 'string', 'max:255'],
+            'issued_at' => ['required', 'string', 'max:255'],
+            'issued_on' => ['required', 'date'],
         ]);
 
         if(Auth::guard('web')->check()){
-            $proof_filename = $request->proof->store('public/images/biz-clearances/proofs');
+            $proof_filename = $request->proof->store('public/images/clearances/business/proofs');
+            $ctc_filename = $request->ctc_image->store('public/images/clearances/business/ctc');
             $token = uniqid(Str::random(10), true);
             
 
             $document = new Document();
             $document->user_id = auth()->guard('web')->id();
             $document->type = 'Business Clearance';
-            $document->biz_name = $request->business_name;
-            $document->biz_address = $request->business_address;
-            $document->biz_nature = $request->business_nature;
-            $document->biz_owner = $request->owner_name;
-            $document->owner_address = $request->owner_address;
-            $document->proof = $proof_filename;
             $document->token = $token;
             $document->save();
+
+            $bizClearance = new BusinessClearance();
+            $bizClearance->document_id = $document->id;
+            $bizClearance->biz_name = $request->business_name;
+            $bizClearance->biz_address = $request->business_address;
+            $bizClearance->biz_nature = $request->business_nature;
+            $bizClearance->biz_owner = $request->owner_name;
+            $bizClearance->owner_address = $request->owner_address;
+            $bizClearance->proof = $proof_filename;
+            $bizClearance->ctc_photo = $ctc_filename;
+            $bizClearance->ctc = $request->ctc;
+            $bizClearance->issued_at = $request->issued_at;
+            $bizClearance->issued_on = $request->issued_on;
+            $bizClearance->save();
 
             return redirect()->route('resident.qr-code', ['token' => $token]);
         }else{
@@ -259,7 +301,8 @@ class ResidentController extends Controller
     public function storeIndigency(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:155'],
+            'name' => ['required', 'string', 'max:255'],
+            'purpose' => ['required', 'string', 'max:255'],
         ]);
 
         if(Auth::guard('web')->check()){
@@ -268,9 +311,14 @@ class ResidentController extends Controller
             $document = new Document();
             $document->user_id = auth()->guard('web')->id();
             $document->type = 'Indigency';
-            $document->name = $request->name;
             $document->token = $token;
             $document->save();
+
+            $indigency = new Indigency();
+            $indigency->document_id = $document->id;
+            $indigency->name = $request->name;
+            $indigency->purpose = $request->purpose;
+            $indigency->save();
 
             return redirect()->route('resident.qr-code', ['token' => $token]);
         }else{
@@ -281,22 +329,35 @@ class ResidentController extends Controller
     public function storeBrgyClearance(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:155'],
+            'name' => ['required', 'string', 'max:255'],
             'zone' => ['required', 'string', 'max:1'],
-            'purpose' => ['required', 'string', 'max:155'],
+            'purpose' => ['required', 'string', 'max:255'],
+            'ctc_image' => ['required', File::image()],
+            'ctc' => ['required', 'string', 'max:255'],
+            'issued_at' => ['required', 'string', 'max:255'],
+            'issued_on' => ['required', 'date'],
         ]);
 
         if(Auth::guard('web')->check()){
+            $ctc_filename = $request->ctc_image->store('public/images/clearances/barangay');
             $token = uniqid(Str::random(10), true);
 
             $document = new Document();
             $document->user_id = auth()->guard('web')->id();
             $document->type = 'Barangay Clearance';
-            $document->name = $request->name;
-            $document->zone = $request->zone;
-            $document->purpose = $request->purpose;
             $document->token = $token;
             $document->save();
+
+            $brgyClearance = new BarangayClearance();
+            $brgyClearance->document_id = $document->id;
+            $brgyClearance->name = $request->name;
+            $brgyClearance->zone = $request->zone;
+            $brgyClearance->purpose = $request->purpose;
+            $brgyClearance->ctc_photo = $ctc_filename;
+            $brgyClearance->ctc = $request->ctc;
+            $brgyClearance->issued_at = $request->issued_at;
+            $brgyClearance->issued_on = $request->issued_on;
+            $brgyClearance->save();
 
             return redirect()->route('resident.qr-code', ['token' => $token]);
         }else{

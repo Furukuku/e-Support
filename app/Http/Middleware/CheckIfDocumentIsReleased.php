@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Document;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckResidentIfFamilyHead
+class CheckIfDocumentIsReleased
 {
     /**
      * Handle an incoming request.
@@ -15,8 +16,8 @@ class CheckResidentIfFamilyHead
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && $request->user()->is_head == false){
-            return redirect()->back();
+        if($request->document->is_released == true && $request->document->status === 'Released'){
+            abort(404);
         }
 
         return $next($request);

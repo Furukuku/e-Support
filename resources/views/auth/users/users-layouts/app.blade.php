@@ -18,7 +18,7 @@
 
   @livewireStyles
 </head>
-<body class="{{ str_contains(Route::currentRouteName(), 'resident.login') ? 'users-auth-bg' : '' }}">
+<body class="bg-white {{ str_contains(Route::currentRouteName(), 'resident.login') ? 'users-auth-bg' : '' }}">
 
   @yield('users.auth')
 

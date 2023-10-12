@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Document;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
+use App\Models\Indigency;
 use App\Models\Wife;
 use App\Rules\CheckIfValidResident;
 use Illuminate\Support\Str;
@@ -27,9 +28,7 @@ class Indigencies extends Component
     
     protected $listeners = ['getDocDetails'];
 
-    public $name, $date_requested, $status;
-
-    public $user_id, $business_id;
+    public $name, $purpose, $date_requested;
 
     public $doc_id;
 
@@ -46,13 +45,11 @@ class Indigencies extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->reset(
-            'name', 
+            'name',
+            'purpose',
             'date_requested',
             'doc_id',
             'error_msg',
-            'status',
-            'user_id',
-            'business_id',
         );
     }
 
@@ -65,12 +62,13 @@ class Indigencies extends Component
                     ->where('token', $qrcode->token)
                     ->first();
     
-                if($document !== null && $document->is_released == false && $document->type === 'Indigency'){
+                if(!is_null($document) && $document->is_released == false && $document->type === 'Indigency'){
                     $this->doc_id = $document->id;
-                    $this->name = $document->name;
+                    $this->name = $document->indigency->name;
+                    $this->purpose = $document->indigency->purpose;
                     $this->date_requested = $document->created_at;
-                }else if($document !== null && $document->is_released == true && $document->type === 'Indigency'){
-                    $this->error_msg = 'Qr Code Already Used!';
+                }else if(!is_null($document) && $document->is_released == true && $document->type === 'Indigency'){
+                    $this->error_msg = 'Document already claimed!';
                 }else{
                     $this->error_msg = 'Not found!';
                 }
@@ -85,6 +83,7 @@ class Indigencies extends Component
     public function markAsUsed()
     {
         $document = Document::find($this->doc_id);
+        $document->status = 'Released';
         $document->is_released = true;
         $document->update();
 
@@ -96,6 +95,7 @@ class Indigencies extends Component
     {
         $this->validate([
             'name' => ['required', 'string', 'max:255', new CheckIfValidResident],
+            'purpose' => ['required', 'string', 'max:255'],
         ]);
 
         $this->dispatchBrowserEvent('showConfirmation');
@@ -106,11 +106,14 @@ class Indigencies extends Component
     {
         $document = new Document();
         $document->type = 'Indigency';
-        $document->name = $this->name;
         $document->token = uniqid(Str::random(10), true);
-        $document->status = 'Released';
-        $document->is_released = true;
         $document->save();
+        
+        $indigency = new Indigency();
+        $indigency->document_id = $document->id;
+        $indigency->name = $this->name;
+        $indigency->purpose = $this->purpose;
+        $indigency->save();
 
         $this->closeModal();
         $this->dispatchBrowserEvent('close-modal');
@@ -120,42 +123,25 @@ class Indigencies extends Component
 
     public function view(Document $document)
     {
-        $this->name = $document->name;
+        $this->doc_id = $document->id;
+        $this->name = $document->indigency->name;
+        $this->purpose = $document->indigency->purpose;
         $this->date_requested = $document->created_at;
+    }
+
+    public function print()
+    {
+        $document = Document::find($this->doc_id);
+        
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+        $this->closeModal();
     }
 
     public function editDoc(Document $document)
     {
         $this->doc_id = $document->id;
-        $this->status = $document->status;
-        $this->user_id = $document->user_id;
-        $this->business_id = $document->business_id;
-        $this->name = $document->name;
     }
-
-    // public function updateDoc()
-    // {
-    //     $document = Document::find($this->doc_id);
-
-    //     if(is_null($this->user_id) && is_null($this->business_id)){
-    //         $this->validate([
-    //             'name' => ['required', 'string', 'max:255'],
-    //         ]);
-
-    //         $document->name = $this->name;
-    //         $document->update();
-    //     }else{
-    //         $this->validate([
-    //             'status' => ['required', 'string', 'max:15'],
-    //         ]);
-
-    //         $document->status = $this->status;
-    //         $document->update();
-    //     }
-
-    //     $this->dispatchBrowserEvent('close-modal');
-    //     $this->closeModal();
-    // }
 
     public function release()
     {
@@ -176,46 +162,36 @@ class Indigencies extends Component
     
     public function render()
     {
-        $documents = Document::with('user')
-            ->with('business')
+        $documents = Document::with(['user', 'indigency'])
             ->where('type', 'Indigency')
             ->where('is_released', false)
             ->where(function ($query) {
                 $query->where(function ($subQuery) {
-                    $subQuery->where('type', 'like', '%' . $this->search . '%')
-                        ->orWhere('name', 'like', '%' . $this->search . '%');
-                })
-                ->orWhere(function ($subQuery) {
                     $subQuery->whereHas('user', function ($query) {
                         $query->where('fname', 'like', '%' . $this->search . '%')
                             ->orWhere('lname', 'like', '%' . $this->search . '%');
                     })
-                    ->orWhereHas('business', function ($query) {
-                        $query->where('fname', 'like', '%' . $this->search . '%')
-                            ->orWhere('lname', 'like', '%' . $this->search . '%');
+                    ->orWhereHas('indigency', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%')
+                            ->orWhere('purpose', 'like', '%' . $this->search . '%');
                     });
                 });
             })
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate, ['*'], 'clearance');
 
-        $taken_documents = Document::with('user')
-            ->with('business')
+        $taken_documents = Document::with(['user', 'indigency'])
             ->where('type', 'Indigency')
             ->where('is_released', true)
             ->where(function ($query) {
                 $query->where(function ($subQuery) {
-                    $subQuery->where('type', 'like', '%' . $this->history_search . '%')
-                        ->orWhere('name', 'like', '%' . $this->history_search . '%');
-                })
-                ->orWhere(function ($subQuery) {
                     $subQuery->whereHas('user', function ($query) {
                         $query->where('fname', 'like', '%' . $this->history_search . '%')
                             ->orWhere('lname', 'like', '%' . $this->history_search . '%');
                     })
-                    ->orWhereHas('business', function ($query) {
-                        $query->where('fname', 'like', '%' . $this->history_search . '%')
-                            ->orWhere('lname', 'like', '%' . $this->history_search . '%');
+                    ->orWhereHas('indigency', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%')
+                            ->orWhere('purpose', 'like', '%' . $this->search . '%');
                     });
                 });
             })

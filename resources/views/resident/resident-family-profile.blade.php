@@ -13,3 +13,9 @@
   @livewire('resident.family-profile')
 
 @endsection
+
+@section('scripts')
+
+  @stack('fam-profiling-script')
+
+@endsection

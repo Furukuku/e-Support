@@ -24,8 +24,13 @@
           <div class="row mb-3">
             <p class="p-0" style="font-size: 14px;">Confirm your name...</p>
             <label for="name" class="form-label px-0">Name</label>
-            <input type="text" id="name" class="form-control mb-2" disabled  name="name" value="{{ old('name', $document->name) }}" placeholder="Enter your name">
+            <input type="text" id="name" class="form-control mb-2 inputs" disabled  name="name" value="{{ old('name', $document->indigency->name) }}" placeholder="Enter your name">
             @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row mb-3">
+            <label for="purpose" class="form-label px-0">Purpose</label>
+            <input type="text" id="purpose" class="form-control mb-2 inputs" disabled name="purpose" value="{{ old('purpose', $document->indigency->purpose) }}" placeholder="Enter purpose (ex. Scholarship)">
+            @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <button id="confirmation" type="submit" hidden class="btn text-white my-4 rounded-pill px-4">Update</button>
         </form>
@@ -43,9 +48,11 @@
     const confirmBtn = document.getElementById('confirmation');
 
     document.getElementById('edit-btn').addEventListener('click', () => {
-      const input = document.getElementById('name');
+      const inputs = document.querySelectorAll('.inputs');
       setTimeout(() => {
-        input.toggleAttribute('disabled');
+        inputs.forEach(input => {
+          input.toggleAttribute('disabled');
+        });
         confirmBtn.toggleAttribute('hidden');
       }, 300);
     });

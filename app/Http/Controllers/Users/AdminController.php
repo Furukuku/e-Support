@@ -3,10 +3,26 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Document;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function indigencyTemplate(Document $document)
+    {
+        return view('admin.admin-template-indigency', ['document' => $document]);
+    }
+
+    public function bizClearanceTemplate(Document $document)
+    {
+        return view('admin.admin-template-biz-clearance', ['document' => $document]);
+    }
+
+    public function brgyClearanceTemplate(Document $document)
+    {
+        return view('admin.admin-template-brgy-clearance', ['document' => $document]);
+    }
+
     public function showLoginForm()
     {
         return view('auth.admins.admins-login');

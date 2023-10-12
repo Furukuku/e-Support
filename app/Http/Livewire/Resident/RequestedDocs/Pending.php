@@ -14,7 +14,8 @@ class Pending extends Component
 
     public function render()
     {
-        $myPendingDocs = Document::where('user_id', auth()->guard('web')->id())
+        $myPendingDocs = Document::with(['brgyClearance', 'bizClearance', 'indigency'])
+            ->where('user_id', auth()->guard('web')->id())
             ->where('status', 'Pending')
             ->orderBy('created_at', 'desc')
             ->paginate(5, ['*'], 'pendingDocs');

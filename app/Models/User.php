@@ -41,7 +41,7 @@ class User extends Authenticatable implements IMustVerifyMobile
         'mobile_verify_code',
         'mobile_verify_code_exp',
         'zone',
-        'employ_status',
+        'is_employed',
         'gender',
         'is_head',
         'is_approved',

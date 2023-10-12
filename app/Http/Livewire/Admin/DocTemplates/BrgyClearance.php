@@ -8,11 +8,26 @@ use App\Models\BrgyOfficial;
 
 class BrgyClearance extends Component
 {
-    public $document;
+    public Document $document;
 
-    public function mount(Document $document)
+    protected $listeners = ['confirm'];
+
+    public function confirm()
     {
-        $this->document = $document;
+        if(is_null($this->document->user_id) && is_null($this->document->business_id)){
+            $this->document->status = 'Released';
+            $this->document->is_released = true;
+            $this->document->update();
+
+            $this->document->brgyClearance->date_issued = now();
+            $this->document->brgyClearance->update();
+        }else{
+            $this->document->status = 'Ready to Pickup';
+            $this->document->update();
+        }
+
+        $this->dispatchBrowserEvent('close-modal');
+        return redirect()->route('admin.docs.brgy-clearance');
     }
     
     public function render()

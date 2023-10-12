@@ -14,7 +14,8 @@ class ReadyToPickup extends Component
 
     public function render()
     {
-        $myPickupDocs = Document::where('user_id', auth()->guard('web')->id())
+        $myPickupDocs = Document::with(['brgyClearance', 'bizClearance', 'indigency'])
+            ->where('user_id', auth()->guard('web')->id())
             ->where('status', 'Ready to Pickup')
             ->orderBy('created_at', 'desc')
             ->paginate(5, ['*'], 'toPickupDocs');

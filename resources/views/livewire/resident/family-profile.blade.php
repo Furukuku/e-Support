@@ -1,6 +1,6 @@
 <div class="d-flex py-5 fam-profile-main-container">
   
-  @if (auth()->guard('web')->user()->is_head == 'Yes' && !is_null(auth()->guard('web')->user()->familyHead))
+  @if (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == false && !is_null(auth()->guard('web')->user()->familyHead))
     <div class="row w-100 px-5 fam-profile-viewing">
       <div class="col-md-3">
         <div class="fam-profile-viewing-tab">
@@ -430,7 +430,9 @@
         </div>
       </div>
     </div>
-  @else
+
+  {{-- Edit Family Profile --}}
+  @elseif (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead))
     <div class="w-25 d-flex justify-content-center">
       <img class="rounded-circle" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="logo" style="height: 13rem">
     </div>
@@ -449,7 +451,653 @@
         </div>
       </div>
       <div class="overflow-hidden fam-form-inner-container">
-        <form>
+        <form id="update-family-profile-form">
+          <div class="d-flex {{ $page }}">
+            <div class="d-flex flex-column justify-content-start px-2 family-head">
+              <div>
+                <h5 class="mb-3">Head of the Family</h5>
+                <div class="{{ $page === 'from-head-to-wife' || $page === 'from-members-to-wife' || $page === 'from-wife-to-members' || $page === 'from-others-to-members' || $page === 'to-others' ? 'form-height' : '' }}">
+                  <div class="row mb-3 fam-row-3">
+                    <div class="col-4">
+                      <label for="head-lname" class="form-label">Last Name</label>
+                      <input type="text" wire:model.defer="last_name" id="head-lname" class="form-control">
+                      @error('last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-fname" class="form-label">First Name</label>
+                      <input type="text" wire:model.defer="first_name" id="head-fname" class="form-control">
+                      @error('first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-mname" class="form-label">Middle Name</label>
+                      <input type="text" wire:model.defer="middle_name" id="head-mname" class="form-control">
+                      @error('middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3 fam-row-2">
+                    <div class="col-3">
+                      <label for="head-sname" class="form-label">Suffix Name (Optional)</label>
+                      <input type="text" wire:model.defer="suffix_name" id="head-sname" class="form-control">
+                      @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-3">
+                      <label for="head-bday" class="form-label">Birthday</label>
+                      <input type="date" wire:model.defer="birthday" id="head-bday" class="form-control">
+                      @error('birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3 fam-row-2">
+                    <div class="col-8">
+                      <label for="head-bplace" class="form-label">Birthplace</label>
+                      <input type="text" wire:model.defer="birthplace" id="head-bplace" class="form-control">
+                      @error('birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-status" class="form-label">Civil Status</label>
+                      <select id="head-status" wire:model.defer="civil_status" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Separated">Separated</option>
+                        <option value="Widowed">Widowed</option>
+                      </select>
+                      @error('civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3 fam-row-2">
+                    <div class="col-8">
+                      <label for="head-educ-attain" class="form-label">Educational Attainment</label>
+                      <input type="text" wire:model.defer="educational_attainment" id="head-educ-attain" class="form-control">
+                      @error('educational_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-zone" class="form-label">Zone</label>
+                      <select id="head-zone" wire:model.defer="zone" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      @error('zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3 fam-row-2">
+                    <div class="col-6">
+                      <label for="head-religion" class="form-label">Religion</label>
+                      <input type="text" wire:model.defer="religion" id="head-religion" class="form-control">
+                      @error('religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-6">
+                      <label for="head-occupation" class="form-label">Occupation</label>
+                      <input type="text" wire:model.defer="occupation" id="head-occupation" class="form-control">
+                      @error('occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-4 fam-row-2">
+                    <div class="col-6">
+                      <label for="head-contact" class="form-label">Contact No.</label>
+                      <input type="tel" wire:model.defer="contact" id="head-contact" class="form-control">
+                      @error('contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-6">
+                      <label for="head-philhealth" class="form-label">Philhealth</label>
+                      <select id="head-philhealth" wire:model.defer="philhealth" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                      @error('philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <h5 class="opacity-75">Vaccination Status</h5>
+                  <div class="row mb-3 fam-row-3">
+                    <div class="col-4">
+                      <label for="head-first-dose" class="form-label">First Dose</label>
+                      <input type="date" wire:model.defer="first_dose_date" id="head-first-dose" class="form-control">
+                      @error('first_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-second-dose" class="form-label">Second Dose</label>
+                      <input type="date" wire:model.defer="second_dose_date" id="head-second-dose" class="form-control">
+                      @error('second_dose_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-brand" class="form-label">Brand</label>
+                      <select id="head-brand" wire:model.defer="vaccine_brand" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Sinovac Biotech">Sinovac Biotech</option>
+                        <option value="AstraZeneca">AstraZeneca</option>
+                        <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                        <option value="Moderna">Moderna</option>
+                        <option value="Johnson & Johnson">Johnson & Johnson</option>
+                        <option value="Sputnik V">Sputnik V</option>
+                      </select>
+                      @error('vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-5 fam-row-2">
+                    <div class="col-4">
+                      <label for="head-booster" class="form-label">Booster</label>
+                      <input type="date" wire:model.defer="booster_date" id="head-booster" class="form-control">
+                      @error('booster_date') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-booster-brand" class="form-label">Brand</label>
+                      <select id="head-booster-brand" wire:model.defer="booster_brand" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Sinovac Biotech">Sinovac Biotech</option>
+                        <option value="AstraZeneca">AstraZeneca</option>
+                        <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                        <option value="Moderna">Moderna</option>
+                        <option value="Johnson & Johnson">Johnson & Johnson</option>
+                        <option value="Sputnik V">Sputnik V</option>
+                      </select>
+                      @error('booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="button" wire:click="fromHeadToWife" class="btn btn-success px-4 next-btn">Next</button>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column justify-content-start px-2 wife">
+              <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h5 class="m-0">Wife</h5>
+                  @if ($wife->isEmpty())
+                    <span wire:click="newWife" class="fs-1" style="cursor: pointer;">&#43;</span>
+                  @else
+                    <span wire:click="removeWife" class="fs-1" style="cursor: pointer;">&times;</span>
+                  @endif
+                </div>
+                <div class="{{ $page === 'to-head' || $page === 'from-wife-to-members' || $page === 'from-others-to-members' || $page === 'to-others' ? 'form-height' : '' }}">
+                  @foreach ($wife as $index => $wf)
+                    <div class="row mb-3 fam-row-3">
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-lname" class="form-label">Last Name</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.lname" id="wife-{{ $index }}-lname" class="form-control">
+                        @error('wife.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-fname" class="form-label">First Name</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.fname" id="wife-{{ $index }}-fname" class="form-control">
+                        @error('wife.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-mname" class="form-label">Middle Name</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.mname" id="wife-{{ $index }}-mname" class="form-control">
+                        @error('wife.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="row mb-3 fam-row-2">
+                      <div class="col-3">
+                        <label for="wife-{{ $index }}-sname" class="form-label">Suffix Name (Optional)</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.sname" id="wife-{{ $index }}-sname" class="form-control">
+                        @error('wife.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-3">
+                        <label for="wife-{{ $index }}-bday" class="form-label">Birthday</label>
+                        <input type="date" wire:model.defer="wife.{{ $index }}.bday" id="wife-{{ $index }}-bday" class="form-control">
+                        @error('wife.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="row mb-3 fam-row-2">
+                      <div class="col-8">
+                        <label for="wife-{{ $index }}-bplace" class="form-label">Birthplace</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.bplace" id="wife-{{ $index }}-bplace" class="form-control">
+                        @error('wife.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-status" class="form-label">Civil Status</label>
+                        <select id="wife-{{ $index }}-status" wire:model.defer="wife.{{ $index }}.civil_status" class="form-select">
+                          <option value="">Choose one...</option>
+                          <option value="Single">Single</option>
+                          <option value="Married">Married</option>
+                          <option value="Divorced">Divorced</option>
+                          <option value="Separated">Separated</option>
+                          <option value="Widowed">Widowed</option>
+                        </select>
+                        @error('wife.' . $index . '.civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="row mb-3 fam-row-2">
+                      <div class="col-8">
+                        <label for="wife-{{ $index }}-educ-attain" class="form-label">Educational Attainment</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.educ_attainment" id="wife-{{ $index }}-educ-attain" class="form-control">
+                        @error('wife.' . $index . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-zone" class="form-label">Zone</label>
+                        <select id="wife-{{ $index }}-zone" wire:model.defer="wife.{{ $index }}.zone" class="form-select">
+                          <option value="">Choose one...</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
+                        @error('wife.' . $index . '.zone') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="row mb-3 fam-row-2">
+                      <div class="col-6">
+                        <label for="wife-{{ $index }}-religion" class="form-label">Religion</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.religion" id="wife-{{ $index }}-religion" class="form-control">
+                        @error('wife.' . $index . '.religion') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-6">
+                        <label for="wife-{{ $index }}-occupation" class="form-label">Occupation</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.occupation" id="wife-{{ $index }}-occupation" class="form-control">
+                        @error('wife.' . $index . '.occupation') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="row mb-4 fam-row-2">
+                      <div class="col-6">
+                        <label for="wife-{{ $index }}-contact" class="form-label">Contact No.</label>
+                        <input type="text" wire:model.defer="wife.{{ $index }}.contact" id="wife-{{ $index }}-contact" class="form-control">
+                        @error('wife.' . $index . '.contact') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-6">
+                        <label for="wife-{{ $index }}-philhealth" class="form-label">Philhealth</label>
+                        <select id="wife-{{ $index }}-philhealth" wire:model.defer="wife.{{ $index }}.philhealth" class="form-select">
+                          <option value="">Choose one...</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        @error('wife.' . $index . '.philhealth') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <h5 class="opacity-75">Vaccination Status</h5>
+                    <div class="row mb-3 fam-row-3">
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-first-dose" class="form-label">First Dose</label>
+                        <input type="date" wire:model.defer="wife.{{ $index }}.first_dose" id="wife-{{ $index }}-first-dose" class="form-control">
+                        @error('wife.' . $index . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-second-dose" class="form-label">Second Dose</label>
+                        <input type="date" wire:model.defer="wife.{{ $index }}.second_dose" id="wife-{{ $index }}-second-dose" class="form-control">
+                        @error('wife.' . $index . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-brand" class="form-label">Brand</label>
+                        <select id="wife-{{ $index }}-brand" wire:model.defer="wife.{{ $index }}.vaccine_brand" class="form-select">
+                          <option value="">Choose one...</option>
+                          <option value="Sinovac Biotech">Sinovac Biotech</option>
+                          <option value="AstraZeneca">AstraZeneca</option>
+                          <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                          <option value="Moderna">Moderna</option>
+                          <option value="Johnson & Johnson">Johnson & Johnson</option>
+                          <option value="Sputnik V">Sputnik V</option>
+                        </select>
+                        @error('wife.' . $index . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="row mb-5 fam-row-2">
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-booster" class="form-label">Booster</label>
+                        <input type="date" wire:model.defer="wife.{{ $index }}.booster" id="wife-{{ $index }}-booster" class="form-control">
+                        @error('wife.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                      <div class="col-4">
+                        <label for="wife-{{ $index }}-booster-brand" class="form-label">Brand</label>
+                        <select id="wife-{{ $index }}-booster-brand" wire:model.defer="wife.{{ $index }}.booster_brand" class="form-select">
+                          <option value="">Choose one...</option>
+                          <option value="Sinovac Biotech">Sinovac Biotech</option>
+                          <option value="AstraZeneca">AstraZeneca</option>
+                          <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                          <option value="Moderna">Moderna</option>
+                          <option value="Johnson & Johnson">Johnson & Johnson</option>
+                          <option value="Sputnik V">Sputnik V</option>
+                        </select>
+                        @error('wife.' . $index . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                  @endforeach
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="button" wire:click="toHead" class="btn btn-secondary px-4">Back</button>
+                <button type="button" wire:click="fromWifeToMembers" class="btn btn-success px-4 next-btn">Next</button>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column justify-content-start px-2 members">
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-4">
+                  <h5 class="mb-3">Member of the Family</h5>
+                  <button type="button" wire:click="addNewMember" class="btn btn-secondary">Add New Member</button>
+                </div>
+                <div class="overflow-y-auto overflow-x-hidden px-2 {{ $page === 'to-head' || $page === 'from-head-to-wife' || $page === 'from-members-to-wife' || $page === 'to-others' ? 'form-height' : '' }}" style="max-height: 44.5rem">
+                  @isset($old_members)
+                    @foreach ($old_members as $index => $old_member)
+                      <div class="mb-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                          <h6>Member</h6>
+                          <span wire:click="removeOldMember({{ $index }})" class="fs-2" style="cursor: pointer;">&times;</span>
+                        </div>
+                        <div class="row mb-3 fam-row-3">
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-lname" class="form-label">Last Name</label>
+                            <input type="text" wire:model.defer="old_members.{{ $index }}.lname" id="old_members-{{ $index }}-lname" class="form-control">
+                            @error('old_members.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-fname" class="form-label">First Name</label>
+                            <input type="text" wire:model.defer="old_members.{{ $index }}.fname" id="old_members-{{ $index }}-fname" class="form-control">
+                            @error('old_members.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-mname" class="form-label">Middle Name</label>
+                            <input type="text" wire:model.defer="old_members.{{ $index }}.mname" id="old_members-{{ $index }}-mname" class="form-control">
+                            @error('old_members.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <div class="row mb-3 fam-row-2">
+                          <div class="col-3">
+                            <label for="old_members-{{ $index }}-sname" class="form-label">Suffix Name (Optional)</label>
+                            <input type="text" wire:model.defer="old_members.{{ $index }}.sname" id="old_members-{{ $index }}-sname" class="form-control">
+                            @error('old_members.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-3">
+                            <label for="old_members-{{ $index }}-bday" class="form-label">Birthday</label>
+                            <input type="date" wire:model.defer="old_members.{{ $index }}.bday" id="old_members-{{ $index }}-bday" class="form-control">
+                            @error('old_members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <div class="row mb-3 fam-row-2">
+                          <div class="col-6">
+                            <label for="old_members-{{ $index }}-bplace" class="form-label">Birthplace</label>
+                            <input type="text" wire:model.defer="old_members.{{ $index }}.bplace" id="old_members-{{ $index }}-bplace" class="form-control">
+                            @error('old_members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-6">
+                            <label for="old_members-{{ $index }}-educ-attain" class="form-label">Educational Attainment</label>
+                            <input type="text" wire:model.defer="old_members.{{ $index }}.educ_attainment" id="old_members-{{ $index }}-educ-attain" class="form-control">
+                            @error('old_members.' . $index . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <h5 class="opacity-75">Vaccination Status</h5>
+                        <div class="row mb-3 fam-row-3">
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-first-dose" class="form-label">First Dose</label>
+                            <input type="date" wire:model.defer="old_members.{{ $index }}.first_dose" id="old_members-{{ $index }}-first-dose" class="form-control">
+                            @error('old_members.' . $index . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-second-dose" class="form-label">Second Dose</label>
+                            <input type="date" wire:model.defer="old_members.{{ $index }}.second_dose" id="old_members-{{ $index }}-second-dose" class="form-control">
+                            @error('old_members.' . $index . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-brand" class="form-label">Brand</label>
+                            <select id="old_members-{{ $index }}-brand" wire:model.defer="old_members.{{ $index }}.vaccine_brand" class="form-select">
+                              <option value="">Choose one...</option>
+                              <option value="Sinovac Biotech">Sinovac Biotech</option>
+                              <option value="AstraZeneca">AstraZeneca</option>
+                              <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                              <option value="Moderna">Moderna</option>
+                              <option value="Johnson & Johnson">Johnson & Johnson</option>
+                              <option value="Sputnik V">Sputnik V</option>
+                            </select>
+                            @error('old_members.' . $index . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <div class="row mb-5 fam-row-2">
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-booster" class="form-label">Booster</label>
+                            <input type="date" wire:model.defer="old_members.{{ $index }}.booster" id="old_members-{{ $index }}-booster" class="form-control">
+                            @error('old_members.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-booster-brand" class="form-label">Brand</label>
+                            <select id="old_members-{{ $index }}-booster-brand" wire:model.defer="old_members.{{ $index }}.booster_brand" class="form-select">
+                              <option value="">Choose one...</option>
+                              <option value="Sinovac Biotech">Sinovac Biotech</option>
+                              <option value="AstraZeneca">AstraZeneca</option>
+                              <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                              <option value="Moderna">Moderna</option>
+                              <option value="Johnson & Johnson">Johnson & Johnson</option>
+                              <option value="Sputnik V">Sputnik V</option>
+                            </select>
+                            @error('old_members.' . $index . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                      </div>
+                      <hr style="border-top: dotted;">
+                    @endforeach
+                  @endisset
+                  @isset($new_members)
+                    @foreach ($new_members as $index => $new_member)
+                      <div class="mb-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                          <h6>Member {{ $index + 1 }}</h6>
+                          <span wire:click="removeNewMember({{ $index }})" class="fs-2" style="cursor: pointer;">&times;</span>
+                        </div>
+                        <div class="row mb-3 fam-row-3">
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-lname" class="form-label">Last Name</label>
+                            <input type="text" wire:model.defer="new_members.{{ $index }}.lname" id="new_members-{{ $index }}-lname" class="form-control">
+                            @error('new_members.' . $index . '.lname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-fname" class="form-label">First Name</label>
+                            <input type="text" wire:model.defer="new_members.{{ $index }}.fname" id="new_members-{{ $index }}-fname" class="form-control">
+                            @error('new_members.' . $index . '.fname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-mname" class="form-label">Middle Name</label>
+                            <input type="text" wire:model.defer="new_members.{{ $index }}.mname" id="new_members-{{ $index }}-mname" class="form-control">
+                            @error('new_members.' . $index . '.mname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <div class="row mb-3 fam-row-2">
+                          <div class="col-3">
+                            <label for="new_members-{{ $index }}-sname" class="form-label">Suffix Name (Optional)</label>
+                            <input type="text" wire:model.defer="new_members.{{ $index }}.sname" id="new_members-{{ $index }}-sname" class="form-control">
+                            @error('new_members.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-3">
+                            <label for="new_members-{{ $index }}-bday" class="form-label">Birthday</label>
+                            <input type="date" wire:model.defer="new_members.{{ $index }}.bday" id="new_members-{{ $index }}-bday" class="form-control">
+                            @error('new_members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <div class="row mb-3 fam-row-2">
+                          <div class="col-6">
+                            <label for="new_members-{{ $index }}-bplace" class="form-label">Birthplace</label>
+                            <input type="text" wire:model.defer="new_members.{{ $index }}.bplace" id="new_members-{{ $index }}-bplace" class="form-control">
+                            @error('new_members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-6">
+                            <label for="new_members-{{ $index }}-educ-attain" class="form-label">Educational Attainment</label>
+                            <input type="text" wire:model.defer="new_members.{{ $index }}.educ_attain" id="new_members-{{ $index }}-educ-attain" class="form-control">
+                            @error('new_members.' . $index . '.educ_attain') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <h5 class="opacity-75">Vaccination Status</h5>
+                        <div class="row mb-3 fam-row-3">
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-first-dose" class="form-label">First Dose</label>
+                            <input type="date" wire:model.defer="new_members.{{ $index }}.fdose" id="new_members-{{ $index }}-first-dose" class="form-control">
+                            @error('new_members.' . $index . '.fdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-second-dose" class="form-label">Second Dose</label>
+                            <input type="date" wire:model.defer="new_members.{{ $index }}.sdose" id="new_members-{{ $index }}-second-dose" class="form-control">
+                            @error('new_members.' . $index . '.sdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-brand" class="form-label">Brand</label>
+                            <select id="new_members-{{ $index }}-brand" wire:model.defer="new_members.{{ $index }}.brand" class="form-select">
+                              <option value="">Choose one...</option>
+                              <option value="Sinovac Biotech">Sinovac Biotech</option>
+                              <option value="AstraZeneca">AstraZeneca</option>
+                              <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                              <option value="Moderna">Moderna</option>
+                              <option value="Johnson & Johnson">Johnson & Johnson</option>
+                              <option value="Sputnik V">Sputnik V</option>
+                            </select>
+                            @error('new_members.' . $index . '.brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                        <div class="row mb-5 fam-row-2">
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-booster" class="form-label">Booster</label>
+                            <input type="date" wire:model.defer="new_members.{{ $index }}.booster" id="new_members-{{ $index }}-booster" class="form-control">
+                            @error('new_members.' . $index . '.booster') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-booster-brand" class="form-label">Brand</label>
+                            <select id="new_members-{{ $index }}-booster-brand" wire:model.defer="new_members.{{ $index }}.bbrand" class="form-select">
+                              <option value="">Choose one...</option>
+                              <option value="Sinovac Biotech">Sinovac Biotech</option>
+                              <option value="AstraZeneca">AstraZeneca</option>
+                              <option value="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                              <option value="Moderna">Moderna</option>
+                              <option value="Johnson & Johnson">Johnson & Johnson</option>
+                              <option value="Sputnik V">Sputnik V</option>
+                            </select>
+                            @error('new_members.' . $index . '.bbrand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                        </div>
+                      </div>
+                      <hr style="border-top: dotted;">
+                    @endforeach
+                  @endisset
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="button" wire:click="fromMembersToWife" class="btn btn-secondary px-4">Back</button>
+                <button type="button" wire:click="toOthers" class="btn btn-success px-4 next-btn">Next</button>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column justify-content-start px-2 members">
+              <div>
+                <h5 class="mb-3">Others Information</h5>
+                <div class="{{ $page === 'from-head-to-wife' || $page === 'from-members-to-wife' || $page === 'to-head' || $page === 'from-wife-to-members' || $page === 'from-others-to-members' ? 'form-height' : '' }}">
+                  <div class="row mb-3 fam-row-3">
+                    <div class="col-4">
+                      <label for="water" class="form-label">Water Source</label>
+                      <select id="water" wire:model.defer="water_source" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Pipe Nawasa">Pipe Nawasa</option>
+                        <option value="Deep Well">Deep Well</option>
+                      </select>
+                      @error('water_source') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="house" class="form-label">Type of House</label>
+                      <select wire:model.defer="type_of_house" id="house" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Nipa">Nipa</option>
+                        <option value="Concrete">Concrete</option>
+                        <option value="Sem">Sem</option>
+                        <option value="Wood">Wood</option>
+                      </select>
+                      @error('type_of_house') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="toilet" class="form-label">Toilet</label>
+                      <select wire:model.defer="toilet" id="toilet" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Owned">Owned</option>
+                        <option value="Sharing">Sharing</option>
+                      </select>
+                      @error('toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3 fam-row-3">
+                    <div class="col-4">
+                      <label for="garden" class="form-label">Garden</label>
+                      <select wire:model.defer="garden" id="garden" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Poultry-Livestock">Poultry-Livestock</option>
+                        <option value="Iodized Salt">Iodized Salt</option>
+                      </select>
+                      @error('garden') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="electric" class="form-label">Electricity</label>
+                      <select wire:model.defer="electricity" id="electric" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Owned">Owned</option>
+                        <option value="Sharing">Sharing</option>
+                      </select>
+                      @error('electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="house-no" class="form-label">House No.</label>
+                      <input type="text" wire:model.defer="house_no" id="house-no" class="form-control">
+                      @error('house_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <h5 class="opacity-75">Membership</h5>
+                  <div class="row mb-3 fam-row-2">
+                    <div class="col-6">
+                      <label for="add-pwd">PWD</label>
+                      <input wire:model.defer="pwd" id="add-pwd" type="number" min="0" class="form-control">
+                      @error('pwd') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-6">
+                      <label for="add-solo-parent">Solo Parent</label>
+                      <input wire:model.defer="solo_parent" id="add-solo-parent" type="number" min="0" class="form-control">
+                      @error('solo_parent') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-5 fam-row-2">
+                    <div class="col-6">
+                      <label for="add-senior">Senior Citizen</label>
+                      <input wire:model.defer="senior_citizen" id="add-senior" type="number" min="0" class="form-control">
+                      @error('senior_citizen') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-6">
+                      <label for="add-pregnant">Pregnant</label>
+                      <input wire:model.defer="pregnant" id="add-pregnant" type="number" min="0" class="form-control">
+                      @error('pregnant') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="button" wire:click="fromOthersToMembers" class="btn btn-secondary px-4">Back</button>
+                <button type="submit" class="btn btn-success px-4 next-btn">Submit</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  {{-- Add Family Profile --}}
+  @elseif (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead))
+    <div class="w-25 d-flex justify-content-center">
+      <img class="rounded-circle" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="logo" style="height: 13rem">
+    </div>
+    <div class="w-75 px-5 fam-form-container">
+      <h3>Family Profile</h3>
+      <p class="opacity-75"><small>Please fill all the needed information...</small></p>
+      <div class="px-3">
+        <div class="position-relative my-5 mx-auto progress-container">
+          <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 2px;">
+            <div class="progress-bar" style="width: @if($page === 'to-head' || $page === null) 0% @elseif($page === 'from-head-to-wife' || $page === 'from-members-to-wife') 33% @elseif($page === 'from-wife-to-members' || $page === 'from-others-to-members') 66% @elseif($page === 'to-others') 100% @endif;"></div>
+          </div>
+          <button type="button" class="position-absolute pe-none top-0 start-0 translate-middle btn btn-sm btn-secondary rounded-pill progress-step" style="width: 2rem; height:2rem;">1</button>
+          <button type="button" class="position-absolute pe-none top-0 translate-middle btn btn-sm btn-secondary rounded-pill {{ $page === 'from-head-to-wife' || $page === 'from-members-to-wife' || $page === 'from-wife-to-members' || $page === 'from-others-to-members' || $page === 'to-others' ? 'progress-step-color' : '' }}" style="width: 2rem; height:2rem;">2</button>
+          <button type="button" class="position-absolute pe-none top-0 translate-middle btn btn-sm btn-secondary rounded-pill {{ $page === 'from-wife-to-members' || $page === 'from-others-to-members' || $page === 'to-others' ? 'progress-step-color' : '' }}" style="width: 2rem; height:2rem;">3</button>
+          <button type="button" class="position-absolute pe-none top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill {{ $page === 'to-others' ? 'progress-step-color' : '' }}" style="width: 2rem; height:2rem;">4</button>
+        </div>
+      </div>
+      <div class="overflow-hidden fam-form-inner-container">
+        <form id="family-profile-form">
           <div class="d-flex {{ $page }}">
             <div class="d-flex flex-column justify-content-start px-2 family-head">
               <div>
@@ -653,7 +1301,7 @@
                       </div>
                       <div class="col-4">
                         <label for="wife-{{ $index }}-status" class="form-label">Civil Status</label>
-                        <select id="wife-{{ $index }}-status" wire:model.defer="wife.{{ $index }}.status" class="form-select">
+                        <select id="wife-{{ $index }}-status" wire:model.defer="wife.{{ $index }}.civil_status" class="form-select">
                           <option value="">Choose one...</option>
                           <option value="Single">Single</option>
                           <option value="Married">Married</option>
@@ -661,14 +1309,14 @@
                           <option value="Separated">Separated</option>
                           <option value="Widowed">Widowed</option>
                         </select>
-                        @error('wife.' . $index . '.status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('wife.' . $index . '.civil_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                       </div>
                     </div>
                     <div class="row mb-3 fam-row-2">
                       <div class="col-8">
                         <label for="wife-{{ $index }}-educ-attain" class="form-label">Educational Attainment</label>
-                        <input type="text" wire:model.defer="wife.{{ $index }}.educ_attain" id="wife-{{ $index }}-educ-attain" class="form-control">
-                        @error('wife.' . $index . '.educ_attain') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        <input type="text" wire:model.defer="wife.{{ $index }}.educ_attainment" id="wife-{{ $index }}-educ-attain" class="form-control">
+                        @error('wife.' . $index . '.educ_attainment') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                       </div>
                       <div class="col-4">
                         <label for="wife-{{ $index }}-zone" class="form-label">Zone</label>
@@ -716,17 +1364,17 @@
                     <div class="row mb-3 fam-row-3">
                       <div class="col-4">
                         <label for="wife-{{ $index }}-first-dose" class="form-label">First Dose</label>
-                        <input type="date" wire:model.defer="wife.{{ $index }}.fdose" id="wife-{{ $index }}-first-dose" class="form-control">
-                        @error('wife.' . $index . '.fdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        <input type="date" wire:model.defer="wife.{{ $index }}.first_dose" id="wife-{{ $index }}-first-dose" class="form-control">
+                        @error('wife.' . $index . '.first_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                       </div>
                       <div class="col-4">
                         <label for="wife-{{ $index }}-second-dose" class="form-label">Second Dose</label>
-                        <input type="date" wire:model.defer="wife.{{ $index }}.sdose" id="wife-{{ $index }}-second-dose" class="form-control">
-                        @error('wife.' . $index . '.sdose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        <input type="date" wire:model.defer="wife.{{ $index }}.second_dose" id="wife-{{ $index }}-second-dose" class="form-control">
+                        @error('wife.' . $index . '.second_dose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                       </div>
                       <div class="col-4">
                         <label for="wife-{{ $index }}-brand" class="form-label">Brand</label>
-                        <select id="wife-{{ $index }}-brand" wire:model.defer="wife.{{ $index }}.brand" class="form-select">
+                        <select id="wife-{{ $index }}-brand" wire:model.defer="wife.{{ $index }}.vaccine_brand" class="form-select">
                           <option value="">Choose one...</option>
                           <option value="Sinovac Biotech">Sinovac Biotech</option>
                           <option value="AstraZeneca">AstraZeneca</option>
@@ -735,7 +1383,7 @@
                           <option value="Johnson & Johnson">Johnson & Johnson</option>
                           <option value="Sputnik V">Sputnik V</option>
                         </select>
-                        @error('wife.' . $index . '.brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('wife.' . $index . '.vaccine_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                       </div>
                     </div>
                     <div class="row mb-5 fam-row-2">
@@ -746,7 +1394,7 @@
                       </div>
                       <div class="col-4">
                         <label for="wife-{{ $index }}-booster-brand" class="form-label">Brand</label>
-                        <select id="wife-{{ $index }}-booster-brand" wire:model.defer="wife.{{ $index }}.bbrand" class="form-select">
+                        <select id="wife-{{ $index }}-booster-brand" wire:model.defer="wife.{{ $index }}.booster_brand" class="form-select">
                           <option value="">Choose one...</option>
                           <option value="Sinovac Biotech">Sinovac Biotech</option>
                           <option value="AstraZeneca">AstraZeneca</option>
@@ -755,7 +1403,7 @@
                           <option value="Johnson & Johnson">Johnson & Johnson</option>
                           <option value="Sputnik V">Sputnik V</option>
                         </select>
-                        @error('wife.' . $index . '.bbrand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('wife.' . $index . '.booster_brand') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                       </div>
                     </div>
                   @endforeach
@@ -967,13 +1615,65 @@
               </div>
               <div class="d-flex justify-content-between">
                 <button type="button" wire:click="fromOthersToMembers" class="btn btn-secondary px-4">Back</button>
-                <button type="button" wire:click="submit" class="btn btn-success px-4 next-btn">Submit</button>
+                <button type="submit" class="btn btn-success px-4 next-btn">Submit</button>
               </div>
             </div>
           </div>
         </form>
       </div>
     </div>
+  @endif
+
+  @if (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead))
+    @push('fam-profiling-script')
+      <script>
+
+        const submitFamProfile = document.getElementById('family-profile-form');
+
+        submitFamProfile.addEventListener('submit', e => {
+          e.preventDefault();
+          Swal.fire({
+            title: 'Submit Family Profile?',
+            text: "Are you sure you already want to submit this form?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0e2c15dc',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Livewire.emit('submit');
+            }
+          });
+        });update-family-profile-form
+
+      </script>
+    @endpush
+  @elseif (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead))
+    @push('fam-profiling-script')
+      <script>
+
+        const updateFamProfile = document.getElementById('update-family-profile-form');
+
+        updateFamProfile.addEventListener('submit', e => {
+          e.preventDefault();
+          Swal.fire({
+            title: 'Submit Family Profile?',
+            text: "Are you sure you already want to submit this form?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0e2c15dc',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Livewire.emit('update');
+            }
+          });
+        });
+
+      </script>
+    @endpush
   @endif
 
 </div>

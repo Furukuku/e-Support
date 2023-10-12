@@ -47,138 +47,127 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make('123456'),
         // ]);
 
-        // User::insert([
-        //     'email' => 'resident@sample.com',
-        //     'username' => 'resident',
-        //     'password' => Hash::make('123456'),
-        // ]);
-
-        // Chatbot::insert([
-        //     'question' => 'badwords',
-        //     'response' => "Please don't send unnecessary words!",
-        // ]);
-
         // ChatBotTag::insert([
         //     'tag' => 'badwords',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'putang',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'putanginamo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'putangina',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'putang ina mo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'putang inamo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'putangina mo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'fuck',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'fucker',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'fucking',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'fuckin',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'fuck u',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'fuck you',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'taenamo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'taena mo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'taena',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'tanginamo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'puta',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'tangina mo',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'tangina',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'tang ina',
         // ]);
 
         // ChatBotPattern::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'keyword' => 'ina mo',
         // ]);
 
         // ChatBotResponse::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'response' => "Please don't send unnecessary words :(.",
         // ]);
 
         // ChatBotResponse::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'response' => "We strive to maintain a respectful environment. Please refrain from using offensive words.",
         // ]);
 
         // ChatBotResponse::insert([
-        //     'chat_bot_tag_id' => 2,
+        //     'chat_bot_tag_id' => 1,
         //     'response' => "Oops! It seems you've used inappropriate language.",
         // ]);
 

@@ -2,15 +2,11 @@
   --header-bg: #FFC03D;
   --main-color: #BD00FF;
   --links-color: #0000FF;
+  --theme-color: #0E2C15;
 }
 
 body {
   height: 100vh;
-}
-
-.users-auth-bg {
-  background: rgb(67,35,68);
-  background: radial-gradient(circle, rgba(67,35,68,1) 0%, rgba(255,192,61,1) 100%);
 }
 
 .header-bg {
@@ -18,11 +14,23 @@ body {
 }
 
 .login-container {
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.login-card {
-  width: 40rem;
+.nancayasan-img {
+  background-image: url('../../images/welcome-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+.back-btn span {
+  font-size: 2rem;
 }
 
 .brgy-logo {
@@ -30,13 +38,36 @@ body {
   width: 6rem;
 }
 
-.links-color {
-  color: var(--links-color);
+.forgot-pass {
+  text-decoration: none !important;
 }
 
-.modal-close-icon,
-.registers {
-  cursor: pointer;
+.forgot-pass:hover,
+.forgot-pass:active {
+  text-decoration: underline !important;
+}
+
+.login-btn {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+}
+
+.login-btn:hover {
+  opacity: 0.95;
+}
+
+.login-btn:active {
+  opacity: 0.9;
+}
+
+.register-btn {
+  border-color: var(--theme-color) !important;
+}
+
+.register-btn:hover,
+.register-btn:active {
+  background-color: var(--theme-color) !important;
+  color: #fff !important;
 }
 
 .sign-up-link {
@@ -112,33 +143,30 @@ body {
   }
 }
 
+@media (max-width: 1000px){
+  .nancayasan-img {
+    width: 40% !important;
+  }
+
+  .login-form-container {
+    width: 60% !important;
+  }
+}
+
 @media (max-width: 870px){
-  .login-container {
-    height: 80vh;
+
+  .nancayasan-img {
+    display: none !important;
   }
 
-  .login-card {
-    width: 20rem;
+  .login-form-container {
+    width: 100% !important;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
-  .login-card * {
-    font-size: 13px;
-    margin: 0;
-  }
-
-  .login-btn {
-    margin-bottom: 0 !important;
-  }
-
-  .brgy-logo {
-    height: 4rem;
-    width: 4rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .forgot-pwd-link {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
+  .login-form-container div:nth-of-type(1) {
+    width: 100% !important;
   }
 }
 

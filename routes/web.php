@@ -105,9 +105,9 @@ Route::middleware('admin.auth:admin')->group(function() {
         });
 
         Route::name('templates.')->group(function(){
-            Route::view('/business-clearance/{document}', 'admin.admin-template-biz-clearance')->name('biz-clearance');
-            Route::view('/barangay-clearance/{document}', 'admin.admin-template-brgy-clearance')->name('brgy-clearance');
-            Route::view('/indigency/{document}', 'admin.admin-template-indigency')->name('indigency');
+            Route::get('/business-clearance/{document}', [AdminController::class, 'bizClearanceTemplate'])->middleware('docs.is-released')->name('biz-clearance');
+            Route::get('/barangay-clearance/{document}', [AdminController::class, 'brgyClearanceTemplate'])->middleware('docs.is-released')->name('brgy-clearance');
+            Route::get('/indigency/{document}', [AdminController::class, 'indigencyTemplate'])->middleware('docs.is-released')->name('indigency');
         });
     });
 });

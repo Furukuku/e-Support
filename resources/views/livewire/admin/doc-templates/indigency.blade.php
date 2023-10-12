@@ -1,5 +1,5 @@
-<div class="container bg-white py-2 printing-file" style="width: 800px;">
-  <header>
+<div class="container bg-white py-2 border shadow printing-file" style="width: 800px;">
+  <header class="mt-3">
     <div class="d-flex flex-row gap-3 justify-content-center align-items-center heading-container">
       <div class="">
         <img class="" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="img" style="height: 110px;">
@@ -25,7 +25,7 @@
     <h3 class="text-center mt-3 mb-3"><strong>CERTIFICATE OF INDIGENCY</strong></h3>
     <div class="py-5">
       <p>To Whom It May Concern:</p>
-      <p class="my-5" style="text-indent: 50px;">This is to certify that <u>&nbsp;{{ $document->name }}&nbsp;</u> Of legal age, Filipino citizen, bonafide resident at Barangay Nancayasan, City of Urdaneta, is personally known to me that he/she has NO permanent source of  income to sustain their daily expenses. Further more, he/she is considered one of the indigent families in the Barangay.</p>
+      <p class="my-5" style="text-indent: 50px;">This is to certify that <u>&nbsp;{{ $document->indigency->name }}&nbsp;</u> Of legal age, Filipino citizen, bonafide resident at Barangay Nancayasan, City of Urdaneta, is personally known to me that he/she has NO permanent source of  income to sustain their daily expenses. Further more, he/she is considered one of the indigent families in the Barangay.</p>
       <p style="text-indent: 50px;">Issued this <u>&nbsp;{{ $date }}<sup>{{ $suffix }}</sup>&nbsp;</u> day of <u>&nbsp;{{ now()->monthName }}&nbsp;</u> {{ now()->year }} upon the request of  for whatever purpose it may serve.</p>
     </div>
   </main>
