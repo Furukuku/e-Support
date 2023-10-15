@@ -6,21 +6,21 @@ use Livewire\Component;
 
 class RequestedDocs extends Component
 {
-    public $tab = 'pending';
+    public $docs_tab = 'pending';
 
     public function pending()
     {
-        $this->tab = 'pending';
+        $this->docs_tab = 'pending';
     }
 
     public function pickup()
     {
-        $this->tab = 'pickup';
+        $this->docs_tab = 'pickup';
     }
 
     public function claimed()
     {
-        $this->tab = 'claimed';
+        $this->docs_tab = 'claimed';
     }
 
     public function render()

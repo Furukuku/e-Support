@@ -33,6 +33,9 @@
         <li class="nav-item px-4">
           <a class="nav-link text-white {{ str_contains(Route::currentRouteName(), 'bhw.patients') ? 'active' : '' }}" href="{{ route('bhw.patients') }}">Patients</a>
         </li>
+        <li class="nav-item px-4">
+          <a class="nav-link text-white {{ str_contains(Route::currentRouteName(), 'bhw.resident-accounts') ? 'active' : '' }}" aria-current="page" href="{{ route('bhw.resident-accounts') }}">Resident Accounts</a>
+        </li>
         <li class="nav-item px-2">
           <div class="btn-group">
             <button type="button" class="btn btn-dark bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

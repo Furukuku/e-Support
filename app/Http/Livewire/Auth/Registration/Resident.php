@@ -12,7 +12,7 @@ class Resident extends Component
 {
     use WithFileUploads;
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $family_head, $username, $password, $password_confirmation, $verification_image;
+    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $username, $password, $password_confirmation, $verification_image, $agreement;
 
     public $mobile;
 
@@ -27,7 +27,8 @@ class Resident extends Component
             'birthday' => 'required|date',
             'gender' => 'required|string|max:6',
             'employment_status' => 'required|boolean',
-            'family_head' => 'required|boolean',
+            'agreement' => 'accepted',
+            // 'family_head' => 'required|boolean',
         ],
         2 => [
             'email' => 'required|email|unique:users|max:255',
@@ -87,7 +88,7 @@ class Resident extends Component
             'zone' => $this->zone,
             'is_employed' => $this->employment_status,
             'gender' => $this->gender,
-            'is_head' => $this->family_head,
+            // 'is_head' => $this->family_head,
             'username' => $this->username,
             'email' => $this->email,
             'password' => $this->password,

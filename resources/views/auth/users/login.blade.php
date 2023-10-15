@@ -39,6 +39,12 @@
                 <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
+            @if (session('status'))
+              <div class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert">
+                <p class="mb-0">{{ session('status') }}</p>
+                <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
     
             <div class="form-floating mb-2">
               <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Enter username" autofocus>
@@ -55,7 +61,7 @@
               @enderror
             </div>
             <div class="d-flex justify-content-end mt-0 mb-3">
-              <a href="#" class="text-dark forgot-pass"><small>Forgot Password?</small></a>
+              <a href="{{ route('users.forgot-password') }}" class="text-dark forgot-pass"><small>Forgot Password?</small></a>
             </div>
             <div class="mb-4">
               <button type="submit" class="btn btn-success w-100 rounded login-btn">Login</button>

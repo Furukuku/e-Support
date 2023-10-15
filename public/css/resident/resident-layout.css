@@ -744,6 +744,10 @@ label[for="proof"] {
   .chat-box.show {
     bottom: 9.3rem;
   }
+
+  .services-child {
+    display: none;
+  }
 }
 
 

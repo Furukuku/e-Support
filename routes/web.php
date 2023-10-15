@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Users\AdminController;
 use App\Http\Controllers\Users\BHWController;
 use App\Http\Controllers\Users\BusinessController;
@@ -35,12 +36,18 @@ Route::view('/indigency', 'admin.admin-indigency');
 
 /*------------------------- Guest Middleware for residents/companies -------------------------*/
 Route::middleware(['guest:web', 'guest:business'])->group(function(){
-    // Route::get('/login', [ResidentController::class, 'showLoginForm'])->name('resident.login'); // to login form route
     Route::view('/login', 'auth.users.login')->name('resident.login'); // to login form route
-    // Route::get('/register-resident', [ResidentController::class, 'showRegisterForm'])->name('resident.register');
+    
     Route::view('/register-resident', 'auth.users.register-resident')->name('resident.register');
-    // Route::get('/register-company', [BusinessController::class, 'showRegisterForm'])->name('company.register');
+    Route::view('/privacy-policy', 'auth.users.agreements.privacy-policy')->name('privacy-policy');
+    Route::view('/terms-and-conditions', 'auth.users.agreements.terms-conditions')->name('terms-conditions');
+
     Route::view('/register-company', 'auth.users.register-company')->name('company.register');
+
+    Route::view('/forgot-password', 'auth.users.forgot-password')->name('users.forgot-password');
+    Route::post('/forgot-password', [ResetPasswordController::class, 'sendLink'])->name('users.password-reset.send-link');
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPasswordForm'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 });
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome'); // welcome route
@@ -143,6 +150,7 @@ Route::middleware(['sub-admin.auth:sub-admin', 'bhw:bhw'])->group(function() {
         Route::post('/logout', [LogoutController::class, 'BHWLogout'])->name('logout');
         Route::get('/residents', [BHWController::class, 'residents'])->name('residents');
         Route::get('/patients', [BHWController::class, 'patients'])->name('patients');
+        Route::view('/resident-accounts', 'bhw.bhw-resident-accounts')->name('resident-accounts');
         Route::view('/health-records/{patient}', 'bhw.bhw-health-records')->name('health-records');
         Route::view('/account', 'bhw.bhw-account')->name('account');
     });
@@ -173,13 +181,11 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 
         Route::get('/qr-code/{token}', [ResidentController::class, 'showQr'])->name('qr-code');
         Route::get('/edit/documents/{id}/{token}', [ResidentController::class, 'editDocs'])->name('edit.docs');
-        Route::view('/documents', 'resident.documents.request-list')->name('docs-list');
 
         Route::patch('/update/brgy-clearance/{id}', [ResidentController::class, 'updateBrgyClearance'])->name('update.brgy-clearnce');
         Route::patch('/update/business-clearance/{id}', [ResidentController::class, 'updateBizClearance'])->name('update.biz-clearnce');
         Route::patch('/update/indigency/{id}', [ResidentController::class, 'updateIndigency'])->name('update.indigency');
 
-        Route::view('/reports', 'resident.reports.report-list')->name('report-list');
         Route::view('/add-report', 'resident.reports.add-report')->name('add-report');
         Route::post('/report', [ResidentController::class, 'report'])->name('report');
         Route::get('/report/{report}', [ResidentController::class, 'viewReport'])->name('view.report');

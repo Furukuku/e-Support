@@ -15,8 +15,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Interfaces\MustVerifyMobile as IMustVerifyMobile;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
-class User extends Authenticatable implements IMustVerifyMobile
+class User extends Authenticatable implements IMustVerifyMobile, CanResetPassword
 {
     use HasApiTokens, HasFactory, Notifiable;
 

@@ -2,15 +2,17 @@
 
 @section('content')
 
-  @yield('services')
+  {{-- @yield('services') --}}
 
-  <div class="request-report">
+  @livewire('resident.services')
+
+  {{-- <div class="request-report">
     @livewire('resident.requested-docs')
   
     @livewire('resident.reports')
-  </div>
+  </div> --}}
 
-  <div class="position-fixed bottom-0 w-100 d-flex z-3 bg-white rounded-top shadow-lg border-top services-bot-nav">
+  {{-- <div class="position-fixed bottom-0 w-100 d-flex z-3 bg-white rounded-top shadow-lg border-top services-bot-nav">
     <div class="col-4 py-3">
       <a href="{{ route('resident.services') }}" class="link-underline link-underline-opacity-0 d-flex flex-column align-items-center justify-content-center {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'text-success' : 'main-color' }}">
         <span class="material-symbols-outlined">help_clinic</span>
@@ -29,6 +31,26 @@
         <small>Reports</small>
       </a>
     </div>
-  </div>
+  </div> --}}
+
+@endsection
+
+@section('scripts')
+
+  <script>
+
+    const mediaQuery = matchMedia('(max-width: 870px)');
+
+    mediaQuery.addListener((mediaQueryList) => {
+      if (!mediaQueryList.matches) {
+        Livewire.emit('changeTabValue');
+      }
+    });
+
+    if (!mediaQuery.matches) {
+      Livewire.emit('changeTabValue');
+    }
+
+  </script>
 
 @endsection

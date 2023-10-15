@@ -103,12 +103,12 @@ body {
 }
 
 .progress-btn-color {
-  background-color: var(--main-color);
+  background-color: var(--theme-color);
   color: white;
 }
 
 .progress-bar {
-  background-color: var(--main-color);
+  background-color: var(--theme-color);
 }
 
 .progress-btn {
@@ -132,7 +132,51 @@ body {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
-  }
+}
+
+.next-btn {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color);
+}
+
+.next-btn:hover,
+.next-btn:active,
+.next-btn:disabled {
+  border-color: var(--theme-color) !important;
+}
+
+.privacy-brgy-logo {
+  height: 3rem;
+}
+
+.privacy-icon {
+  margin-bottom: -2.3rem;
+}
+
+.privacy-icon > span {
+  font-size: 2.5rem;
+}
+
+.dropdown-btn {
+  background-color: var(--theme-color);
+  cursor: pointer;
+}
+
+.dropdown-info {
+  max-height: 0;
+  padding: 0 1rem !important;
+  transition: max-height 300ms ease-in, padding 200ms ease-in 300ms;
+}
+
+.open {
+  max-height: 100rem;
+  padding: 1rem !important;
+}
+
+.rotate {
+  transform: rotate(-90deg);
+}
+
 
 @keyframes rotation {
   0% {
@@ -165,8 +209,28 @@ body {
     padding-right: 3rem;
   }
 
-  .login-form-container div:nth-of-type(1) {
+  .login-form-container > div:nth-of-type(1) {
     width: 100% !important;
+  }
+
+  .reg-resident-container > div:first-child {
+    width: 100% !important;
+  }
+
+  .reg-resident-bg {
+    display: none;
+  }
+
+  .privacy-header {
+    padding: 1rem 0.5rem !important;
+  }
+
+  .privacy-brgy-logo-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .privacy-brgy-logo {
+    height: 2rem;
   }
 }
 
