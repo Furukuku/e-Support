@@ -39,6 +39,12 @@
                 <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
+            @if ($message = Session::get('not-send'))
+              <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert">
+                <p class="mb-0">{{ $message }}</p>
+                <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
             @if (session('status'))
               <div class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert">
                 <p class="mb-0">{{ session('status') }}</p>

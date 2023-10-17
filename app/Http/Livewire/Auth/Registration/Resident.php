@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Auth\Registration;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -94,7 +95,11 @@ class Resident extends Component
             'password' => $this->password,
         ]);
 
-        event(new Registered($user));
+        try{
+            event(new Registered($user));
+        }catch(Exception $e){
+            return redirect()->route('resident.login')->with('not-send', 'Please check your internet connection and login your account then resend an otp code.');
+        }
 
         Auth::login($user);
 
