@@ -1,6 +1,6 @@
 <div class="p-4 d-flex justify-content-center">
   
-  <div style="width: 80vw;">
+  <div style="width: 75vw;">
     <div class="row">
       <div class="col-sm-6 mb-3">
         <div class="card shadow">
@@ -31,7 +31,7 @@
       </div>
     </div>
   
-    <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 100%;">
+    <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 ps-2 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 100%;">
       <canvas id="population"></canvas>
     </div>
   
@@ -49,12 +49,12 @@
         type: 'bar',
         data: {
           labels: [
-            'Zone 1',
-            'Zone 2', 
-            'Zone 3', 
-            'Zone 4', 
-            'Zone 5', 
-            'Zone 6',
+            '1',
+            '2', 
+            '3', 
+            '4', 
+            '5', 
+            '6',
           ],
           datasets: [
             {
@@ -89,7 +89,19 @@
           maintainAspectRatio: true,
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Residents',
+                padding: 20,
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Zone',
+                padding: 20,
+              }
             }
           },
           plugins: {
