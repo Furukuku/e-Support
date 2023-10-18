@@ -34,11 +34,35 @@ class BusinessClearances extends Component
 
     public $ctc_image, $ctc, $issued_at, $issued_on;
 
+    public $ctc_update, $issued_on_update, $issued_at_update, $fee, $clearance_no_update;
+
     public $clearance_no;
 
     public $doc_id;
 
     public $error_msg = '';
+
+    protected $messages = [
+        'ctc_update' => [
+            'required' => 'The ctc field is required.',
+            'string' => 'The ctc field must be a string type.',
+            'max' => 'The ctc field must not exceed 255 characters.',
+        ],
+        'issued_at_update' => [
+            'required' => 'The issued at field is required.',
+            'string' => 'The issued at field must be a string type.',
+            'max' => 'The issued at field must not exceed 255 characters.',
+        ],
+        'issued_on_update' => [
+            'required' => 'The issued on field is required.',
+            'date' => 'The issued on field must be a valid date.',
+        ],
+        'clearance_no_update' => [
+            'required' => 'The clearance no field is required.',
+            'string' => 'The clearance no field must be a string type.',
+            'max' => 'The clearance no field must not exceed 255 characters.',
+        ],
+    ];
 
     public function updatingSearch()
     {
@@ -65,6 +89,11 @@ class BusinessClearances extends Component
             'issued_at',
             'issued_on',
             'clearance_no',
+            'ctc_update',
+            'issued_at_update',
+            'issued_on_update',
+            'fee',
+            'clearance_no_update',
         );
     }
 
@@ -79,14 +108,18 @@ class BusinessClearances extends Component
     
                 if(!is_null($document) && $document->is_released == false && $document->type === 'Business Clearance'){
                     $this->doc_id = $document->id;
+                    $this->clearance_no = $document->bizClearance->clearance_no;
                     $this->business_name = $document->bizClearance->biz_name;
                     $this->business_address = $document->bizClearance->biz_address;
                     $this->business_nature = $document->bizClearance->biz_nature;
                     $this->owner_name = $document->bizClearance->biz_owner;
                     $this->owner_address = $document->bizClearance->owner_address;
+                    $this->proof = $document->bizClearance->proof;
+                    $this->ctc_image = $document->bizClearance->ctc_photo;
                     $this->ctc = $document->bizClearance->ctc;
                     $this->issued_at = $document->bizClearance->issued_at;
                     $this->issued_on = $document->bizClearance->issued_on;
+                    $this->fee = $document->bizClearance->fee;
                     $this->date_requested = $document->created_at;
                 }else if(!is_null($document) && $document->is_released == true && $document->type === 'Business Clearance'){
                     $this->error_msg = 'Document already claimed!';
@@ -101,15 +134,51 @@ class BusinessClearances extends Component
         }
     }
 
-    public function markAsUsed()
+    public function print()
     {
         $document = Document::find($this->doc_id);
-        $document->status = 'Released';
-        $document->is_released = true;
-        $document->update();
+
+        if(is_null($this->ctc) && is_null($this->issued_at) && is_null($this->issued_on) && is_null($this->clearance_no)){
+            $this->validate([
+                'clearance_no_update' => ['required', 'string', 'max:255'],
+                'ctc_update' => ['required', 'string', 'max:255'],
+                'issued_at_update' => ['required', 'string', 'max:255'],
+                'issued_on_update' => ['required', 'date'],
+                'fee' => ['required', 'numeric', 'min:0.01'],
+            ]);
+
+            $document->bizClearance->clearance_no = $this->clearance_no_update;
+            $document->bizClearance->ctc = $this->ctc_update;
+            $document->bizClearance->issued_at = $this->issued_at_update;
+            $document->bizClearance->issued_on = $this->issued_on_update;
+            $document->bizClearance->fee = $this->fee;
+            $document->bizClearance->update();
+        }else if(is_null($this->ctc) && is_null($this->issued_at) && is_null($this->issued_on)){
+            $this->validate([
+                'ctc_update' => ['required', 'string', 'max:255'],
+                'issued_at_update' => ['required', 'string', 'max:255'],
+                'issued_on_update' => ['required', 'date'],
+                'fee' => ['required', 'numeric', 'min:0.01'],
+            ]);
+
+            $document->bizClearance->ctc = $this->ctc_update;
+            $document->bizClearance->issued_at = $this->issued_at_update;
+            $document->bizClearance->issued_on = $this->issued_on_update;
+            $document->bizClearance->fee = $this->fee;
+            $document->bizClearance->update();
+        }else If(is_null($this->clearance_no)){
+            $this->validate([
+                'clearance_no_update' => ['required', 'string', 'max:255'],
+            ]);
+
+            $document->bizClearance->clearance_no = $this->clearance_no_update;
+            $document->bizClearance->update();
+        }
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+
+        return redirect()->route('admin.templates.biz-clearance', ['document' => $document]);
     }
 
     public function addDoc()
@@ -126,6 +195,7 @@ class BusinessClearances extends Component
             'ctc' => ['required', 'string', 'max:255'],
             'issued_at' => ['required', 'string', 'max:255'],
             'issued_on' => ['required', 'date'],
+            'fee' => ['required', 'numeric', 'min:0.01'],
         ]);
 
         $this->dispatchBrowserEvent('showConfirmation');
@@ -150,17 +220,19 @@ class BusinessClearances extends Component
         $bizClearance->ctc = $this->ctc;
         $bizClearance->issued_at = $this->issued_at;
         $bizClearance->issued_on = $this->issued_on;
+        $bizClearance->fee = $this->fee;
         $bizClearance->save();
 
         $this->closeModal();
         $this->dispatchBrowserEvent('close-modal');
 
-        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+        return redirect()->route('admin.templates.biz-clearance', ['document' => $document]);
     }
 
     public function view(Document $document)
     {
         $this->doc_id = $document->id;
+        $this->clearance_no = $document->bizClearance->clearance_no;
         $this->business_name = $document->bizClearance->biz_name;
         $this->business_address = $document->bizClearance->biz_address;
         $this->business_nature = $document->bizClearance->biz_nature;
@@ -171,17 +243,18 @@ class BusinessClearances extends Component
         $this->ctc = $document->bizClearance->ctc;
         $this->issued_at = $document->bizClearance->issued_at;
         $this->issued_on = $document->bizClearance->issued_on;
+        $this->fee = $document->bizClearance->fee;
         $this->date_requested = $document->created_at;
     }
 
-    public function print()
-    {
-        $document = Document::find($this->doc_id);
+    // public function print()
+    // {
+    //     $document = Document::find($this->doc_id);
         
-        $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
-        $this->closeModal();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+    //     $this->closeModal();
+    // }
 
     public function editDoc(Document $document)
     {
@@ -267,11 +340,13 @@ class BusinessClearances extends Component
             $results['members'] = FamilyMember::select('fullname')->where('fullname', 'like', '%' . $this->owner_name . '%')->take(10)->get();
         }
 
+        $total_fee = BusinessClearance::whereDate('date_issued', today())->sum('fee');
 
         return view('livewire.admin.documents.business-clearances', [
             'documents' => $documents,
             'taken_documents' => $taken_documents,
             'results' => $results,
+            'total_fee' => $total_fee,
         ]);
     }
 }

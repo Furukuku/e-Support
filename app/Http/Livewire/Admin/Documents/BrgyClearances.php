@@ -10,11 +10,12 @@ use App\Models\FamilyMember;
 use App\Models\Wife;
 use App\Rules\CheckIfValidResident;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class BrgyClearances extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -32,11 +33,30 @@ class BrgyClearances extends Component
 
     public $ctc_image, $ctc, $issued_at, $issued_on;
 
+    public $ctc_update, $issued_on_update, $issued_at_update, $fee;
+
     public $user_id, $business_id;
 
     public $doc_id;
 
     public $error_msg = '';
+
+    protected $messages = [
+        'ctc_update' => [
+            'required' => 'The ctc field is required.',
+            'string' => 'The ctc field must be a string type.',
+            'max' => 'The ctc field must not exceed 255 characters.',
+        ],
+        'issued_at_update' => [
+            'required' => 'The issued at field is required.',
+            'string' => 'The issued at field must be a string type.',
+            'max' => 'The issued at field must not exceed 255 characters.',
+        ],
+        'issued_on_update' => [
+            'required' => 'The issued on field is required.',
+            'date' => 'The issued on field must be a valid date.',
+        ]
+    ];
 
     public function updatingSearch()
     {
@@ -62,6 +82,10 @@ class BrgyClearances extends Component
             'ctc',
             'issued_at',
             'issued_on',
+            'ctc_update',
+            'issued_at_update',
+            'issued_on_update',
+            'fee',
         );
     }
 
@@ -83,6 +107,7 @@ class BrgyClearances extends Component
                     $this->ctc = $document->brgyClearance->ctc;
                     $this->issued_at = $document->brgyClearance->issued_at;
                     $this->issued_on = $document->brgyClearance->issued_on;
+                    $this->fee = $document->brgyClearance->fee;
                     $this->date_requested = $document->created_at;
                 }else if(!is_null($document) && $document->is_released == true && $document->type === 'Barangay Clearance'){
                     $this->error_msg = 'Document already claimed!';
@@ -97,15 +122,30 @@ class BrgyClearances extends Component
         }
     }
 
-    public function markAsUsed()
+    public function print()
     {
         $document = Document::find($this->doc_id);
-        $document->status = 'Released';
-        $document->is_released = true;
-        $document->update();
+        
+        if(is_null($this->ctc) && is_null($this->issued_at) && is_null($this->issued_on)){
+            $this->validate([
+                'ctc_update' => ['required', 'string', 'max:255'],
+                'issued_at_update' => ['required', 'string', 'max:255'],
+                'issued_on_update' => ['required', 'date'],
+                'fee' => ['required', 'numeric', 'min:0.01'],
+            ]);
+            
+            $document->brgyClearance->ctc = $this->ctc_update;
+            $document->brgyClearance->issued_at = $this->issued_at_update;
+            $document->brgyClearance->issued_on = $this->issued_on_update;
+            $document->brgyClearance->fee = $this->fee;
+            $document->brgyClearance->update();
+        }
 
+        
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+
+        return redirect()->route('admin.templates.brgy-clearance', ['document' => $document]);
     }
 
     public function addDoc()
@@ -119,6 +159,7 @@ class BrgyClearances extends Component
             'ctc' => ['required', 'string', 'max:255'],
             'issued_at' => ['required', 'string', 'max:255'],
             'issued_on' => ['required', 'date'],
+            'fee' => ['required', 'numeric', 'min:0.01'],
         ]);
 
         $this->dispatchBrowserEvent('showConfirmation');
@@ -140,12 +181,13 @@ class BrgyClearances extends Component
         $brgyClearance->ctc = $this->ctc;
         $brgyClearance->issued_at = $this->issued_at;
         $brgyClearance->issued_on = $this->issued_on;
+        $brgyClearance->fee = $this->fee;
         $brgyClearance->save();
 
         $this->closeModal();
         $this->dispatchBrowserEvent('close-modal');
 
-        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+        return redirect()->route('admin.templates.brgy-clearance', ['document' => $document]);
     }
 
     public function view(Document $document)
@@ -158,16 +200,17 @@ class BrgyClearances extends Component
         $this->ctc = $document->brgyClearance->ctc;
         $this->issued_at = $document->brgyClearance->issued_at;
         $this->issued_on = $document->brgyClearance->issued_on;
+        $this->fee = $document->brgyClearance->fee;
     }
 
-    public function print()
-    {
-        $document = Document::find($this->doc_id);
+    // public function print()
+    // {
+    //     $document = Document::find($this->doc_id);
         
-        $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
-        $this->closeModal();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+    //     $this->closeModal();
+    // }
 
     public function editDoc(Document $document)
     {
@@ -239,11 +282,14 @@ class BrgyClearances extends Component
             $results['wives'] = Wife::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->take(10)->get();
             $results['members'] = FamilyMember::select('fullname')->where('fullname', 'like', '%' . $this->name . '%')->take(10)->get();
         }
+
+        $total_fee = BarangayClearance::whereDate('date_issued', today())->sum('fee');
         
         return view('livewire.admin.documents.brgy-clearances', [
             'documents' => $documents,
             'taken_documents' => $taken_documents,
             'results' => $results,
+            'total_fee' => $total_fee,
         ]);
     }
 }

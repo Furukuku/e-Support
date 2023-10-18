@@ -112,9 +112,9 @@ Route::middleware('admin.auth:admin')->group(function() {
         });
 
         Route::name('templates.')->group(function(){
-            Route::get('/business-clearance/{document}', [AdminController::class, 'bizClearanceTemplate'])->middleware('docs.is-released')->name('biz-clearance');
-            Route::get('/barangay-clearance/{document}', [AdminController::class, 'brgyClearanceTemplate'])->middleware('docs.is-released')->name('brgy-clearance');
-            Route::get('/indigency/{document}', [AdminController::class, 'indigencyTemplate'])->middleware('docs.is-released')->name('indigency');
+            Route::get('/business-clearance/{document}', [AdminController::class, 'bizClearanceTemplate'])->middleware('docs.document-type')->name('biz-clearance');
+            Route::get('/barangay-clearance/{document}', [AdminController::class, 'brgyClearanceTemplate'])->middleware('docs.document-type')->name('brgy-clearance');
+            Route::get('/indigency/{document}', [AdminController::class, 'indigencyTemplate'])->middleware('docs.document-type')->name('indigency');
         });
     });
 });

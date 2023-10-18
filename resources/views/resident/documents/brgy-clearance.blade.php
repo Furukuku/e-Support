@@ -52,6 +52,7 @@
             <input type="text" id="purpose" class="form-control mb-2" name="purpose" value="{{ old('purpose') }}" placeholder="Enter purpose (ex. Scholarship)">
             @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
+          <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it blank. And if you do, please bring it with you upon claiming your request.</small></p>
           <div class="position-relative mb-4">
             <hr class="border border-dark m-0 w-100">
             <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
@@ -59,7 +60,7 @@
             </div>
           </div>
           <div class="row mb-2">
-            <label for="ctc-img" class="form-label px-0">Please insert a clear image of your CTC</label>
+            <label for="ctc-img" class="form-label px-0"><small>Please insert a clear image of your CTC</small></label>
             <input type="file" accept="image/*" id="ctc-img" class="form-control form-control-sm" name="ctc_image" value="{{ old('ctc_image') }}">
             @error('ctc_image') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>

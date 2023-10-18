@@ -145,9 +145,9 @@ class ResidentController extends Controller
             'business_address' => ['required', 'string', 'max:255'],
             'proof' => [File::image()],
             'ctc_image' => [File::image()],
-            'ctc' => ['required', 'string', 'max:255'],
-            'issued_at' => ['required', 'string', 'max:255'],
-            'issued_on' => ['required', 'date'],
+            'ctc' => ['nullable', 'string', 'max:255'],
+            'issued_at' => ['nullable', 'string', 'max:255'],
+            'issued_on' => ['nullable', 'date'],
         ]);
 
         $document = Document::find($id);
@@ -158,10 +158,27 @@ class ResidentController extends Controller
             $document->bizClearance->proof = $proof_filename;
         }
 
-        if($request->hasFile('ctc_image')){
-            Storage::delete($document->bizClearance->ctc_photo);
+        if($request->hasFile('ctc_image') && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on) && is_null($document->bizClearance->ctc_photo)){
+
             $ctc_filename = $request->ctc_image->store('public/images/clearances/business/ctc');
             $document->bizClearance->ctc_photo = $ctc_filename;
+
+            $document->bizClearance->ctc = $request->ctc;
+            $document->bizClearance->issued_at = $request->issued_at;
+            $document->bizClearance->issued_on = $request->issued_on;
+        }else if($request->hasFile('ctc_image') && !is_null($document->bizClearance->ctc_photo) && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on)){
+            Storage::delete($document->bizClearance->ctc_photo);
+
+            $ctc_filename = $request->ctc_image->store('public/images/clearances/business/ctc');
+            $document->bizClearance->ctc_photo = $ctc_filename;
+
+            $document->bizClearance->ctc = $request->ctc;
+            $document->bizClearance->issued_at = $request->issued_at;
+            $document->bizClearance->issued_on = $request->issued_on;
+        }else if(!$request->hasFile('ctc_image') && !is_null($document->bizClearance->ctc_photo) && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on)){
+            $document->bizClearance->ctc = $request->ctc;
+            $document->bizClearance->issued_at = $request->issued_at;
+            $document->bizClearance->issued_on = $request->issued_on;
         }
 
         $document->bizClearance->biz_nature = $request->business_nature;
@@ -169,9 +186,6 @@ class ResidentController extends Controller
         $document->bizClearance->biz_name = $request->business_name;
         $document->bizClearance->owner_address = $request->owner_address;
         $document->bizClearance->biz_address = $request->business_address;
-        $document->bizClearance->ctc = $request->ctc;
-        $document->bizClearance->issued_at = $request->issued_at;
-        $document->bizClearance->issued_on = $request->issued_on;
         $document->bizClearance->update();
 
         return redirect()->route('resident.services');
@@ -184,25 +198,39 @@ class ResidentController extends Controller
             'zone' => ['required', 'string', 'max:1'],
             'purpose' => ['required', 'string', 'max:255'],
             'ctc_image' => [File::image()],
-            'ctc' => ['required', 'string', 'max:255'],
-            'issued_at' => ['required', 'string', 'max:255'],
-            'issued_on' => ['required', 'date'],
+            'ctc' => ['nullable', 'string', 'max:255'],
+            'issued_at' => ['nullable', 'string', 'max:255'],
+            'issued_on' => ['nullable', 'date'],
         ]);
 
         $document = Document::find($id);
 
-        if($request->hasFile('ctc_image')){
-            Storage::delete($document->brgyClearance->ctc_photo);
+        if($request->hasFile('ctc_image') && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on) && is_null($document->brgyClearance->ctc_photo)){
+
             $ctc_filename = $request->ctc_image->store('public/images/clearances/barangay');
             $document->brgyClearance->ctc_photo = $ctc_filename;
+
+            $document->brgyClearance->ctc = $request->ctc;
+            $document->brgyClearance->issued_at = $request->issued_at;
+            $document->brgyClearance->issued_on = $request->issued_on;
+        }else if($request->hasFile('ctc_image') && !is_null($document->brgyClearance->ctc_photo) && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on)){
+            Storage::delete($document->brgyClearance->ctc_photo);
+
+            $ctc_filename = $request->ctc_image->store('public/images/clearances/barangay');
+            $document->brgyClearance->ctc_photo = $ctc_filename;
+
+            $document->brgyClearance->ctc = $request->ctc;
+            $document->brgyClearance->issued_at = $request->issued_at;
+            $document->brgyClearance->issued_on = $request->issued_on;
+        }else if(!$request->hasFile('ctc_image') && !is_null($document->brgyClearance->ctc_photo) && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on)){
+            $document->brgyClearance->ctc = $request->ctc;
+            $document->brgyClearance->issued_at = $request->issued_at;
+            $document->brgyClearance->issued_on = $request->issued_on;
         }
         
         $document->brgyClearance->name = $request->name;
         $document->brgyClearance->zone = $request->zone;
         $document->brgyClearance->purpose = $request->purpose;
-        $document->brgyClearance->ctc = $request->ctc;
-        $document->brgyClearance->issued_at = $request->issued_at;
-        $document->brgyClearance->issued_on = $request->issued_on;
         $document->brgyClearance->update();
 
 
@@ -260,25 +288,33 @@ class ResidentController extends Controller
             'owner_address' => ['required', 'string', 'max:255'],
             'business_address' => ['required', 'string', 'max:255'],
             'proof' => ['required', File::image()],
-            'ctc_image' => ['required', File::image()],
-            'ctc' => ['required', 'string', 'max:255'],
-            'issued_at' => ['required', 'string', 'max:255'],
-            'issued_on' => ['required', 'date'],
+            'ctc_image' => ['nullable', File::image()],
+            'ctc' => ['nullable', 'string', 'max:255'],
+            'issued_at' => ['nullable', 'string', 'max:255'],
+            'issued_on' => ['nullable', 'date'],
         ]);
 
         if(Auth::guard('web')->check()){
             $proof_filename = $request->proof->store('public/images/clearances/business/proofs');
-            $ctc_filename = $request->ctc_image->store('public/images/clearances/business/ctc');
             $token = uniqid(Str::random(10), true);
             
-
             $document = new Document();
             $document->user_id = auth()->guard('web')->id();
             $document->type = 'Business Clearance';
             $document->token = $token;
             $document->save();
-
+            
             $bizClearance = new BusinessClearance();
+
+            if($request->hasFile('ctc_image') && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on)){
+                $ctc_filename = $request->ctc_image->store('public/images/clearances/business/ctc');
+                $bizClearance->ctc_photo = $ctc_filename;
+
+                $bizClearance->ctc = $request->ctc;
+                $bizClearance->issued_at = $request->issued_at;
+                $bizClearance->issued_on = $request->issued_on;
+            }
+            
             $bizClearance->document_id = $document->id;
             $bizClearance->biz_name = $request->business_name;
             $bizClearance->biz_address = $request->business_address;
@@ -286,10 +322,6 @@ class ResidentController extends Controller
             $bizClearance->biz_owner = $request->owner_name;
             $bizClearance->owner_address = $request->owner_address;
             $bizClearance->proof = $proof_filename;
-            $bizClearance->ctc_photo = $ctc_filename;
-            $bizClearance->ctc = $request->ctc;
-            $bizClearance->issued_at = $request->issued_at;
-            $bizClearance->issued_on = $request->issued_on;
             $bizClearance->save();
 
             return redirect()->route('resident.qr-code', ['token' => $token]);
@@ -332,31 +364,36 @@ class ResidentController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'zone' => ['required', 'string', 'max:1'],
             'purpose' => ['required', 'string', 'max:255'],
-            'ctc_image' => ['required', File::image()],
-            'ctc' => ['required', 'string', 'max:255'],
-            'issued_at' => ['required', 'string', 'max:255'],
-            'issued_on' => ['required', 'date'],
+            'ctc_image' => ['nullable', File::image()],
+            'ctc' => ['nullable', 'string', 'max:255'],
+            'issued_at' => ['nullable', 'string', 'max:255'],
+            'issued_on' => ['nullable', 'date'],
         ]);
 
         if(Auth::guard('web')->check()){
-            $ctc_filename = $request->ctc_image->store('public/images/clearances/barangay');
             $token = uniqid(Str::random(10), true);
-
+            
             $document = new Document();
             $document->user_id = auth()->guard('web')->id();
             $document->type = 'Barangay Clearance';
             $document->token = $token;
             $document->save();
-
+            
             $brgyClearance = new BarangayClearance();
+
+            if($request->hasFile('ctc_image') && !is_null($request->ctc) && !is_null($request->issued_at) && !is_null($request->issued_on)){
+                $ctc_filename = $request->ctc_image->store('public/images/clearances/barangay');
+                $brgyClearance->ctc_photo = $ctc_filename;
+                
+                $brgyClearance->ctc = $request->ctc;
+                $brgyClearance->issued_at = $request->issued_at;
+                $brgyClearance->issued_on = $request->issued_on;
+            }
+            
             $brgyClearance->document_id = $document->id;
             $brgyClearance->name = $request->name;
             $brgyClearance->zone = $request->zone;
             $brgyClearance->purpose = $request->purpose;
-            $brgyClearance->ctc_photo = $ctc_filename;
-            $brgyClearance->ctc = $request->ctc;
-            $brgyClearance->issued_at = $request->issued_at;
-            $brgyClearance->issued_on = $request->issued_on;
             $brgyClearance->save();
 
             return redirect()->route('resident.qr-code', ['token' => $token]);

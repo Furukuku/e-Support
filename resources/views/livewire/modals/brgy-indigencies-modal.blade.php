@@ -150,7 +150,7 @@
       </div>
       <div class="modal-footer justify-content-end border-0">
         @if (!is_null($doc_id))
-          <button type="button" class="btn btn-success" wire:click="markAsUsed">Release</button>
+          <button type="button" class="btn btn-success" wire:click="print">Print</button>
           <button type="button" class="btn btn-secondary" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
         @endif
       </div>

@@ -26,22 +26,24 @@
 
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-  <script>
-    const printBtn = document.getElementById('print-btn');
-    const confirmBtn = document.getElementById('confirm-btn');
+  @if ($document->is_released == false && $document->status == 'Pending')
+    <script>
+      const printBtn = document.getElementById('print-btn');
+      const confirmBtn = document.getElementById('confirm-btn');
 
-    printBtn.addEventListener('click', () => {
-      window.print();
-    })
+      printBtn.addEventListener('click', () => {
+        window.print();
+      })
 
-    confirmBtn.addEventListener('click', () => {
-      Livewire.emit('confirm');
-    });
+      confirmBtn.addEventListener('click', () => {
+        Livewire.emit('confirm');
+      });
 
-    window.addEventListener('close-modal', () => {
-      $('#confirm').modal('hide');
-    });
+      window.addEventListener('close-modal', () => {
+        $('#confirm').modal('hide');
+      });
 
-  </script>
+    </script>
+  @endif
 </body>
 </html>

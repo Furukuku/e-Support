@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\DocTemplates;
 use App\Models\BrgyOfficial;
 use Livewire\Component;
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
 
 class Indigency extends Component
 {
@@ -14,17 +15,19 @@ class Indigency extends Component
 
     public function confirm()
     {
-        if(is_null($this->document->user_id) && is_null($this->document->business_id)){
-            $this->document->status = 'Released';
-            $this->document->is_released = true;
-            $this->document->update();
+        $this->document->status = 'Released';
+        $this->document->is_released = true;
 
-            $this->document->indigency->date_issued = now();
-            $this->document->indigency->update();
-        }else{
-            $this->document->status = 'Ready to Pickup';
-            $this->document->update();
+        if(Auth::guard('admin')->check()){
+            $this->document->issued_by = auth()->guard('admin')->user()->username;
+        }else if(Auth::guard('sub-admin')->check()){
+            $this->document->issued_by = auth()->guard('sub-admin')->user()->fname . ' ' . auth()->guard('sub-admin')->user()->lname;
         }
+
+        $this->document->update();
+
+        $this->document->indigency->date_issued = now();
+        $this->document->indigency->update();
 
         $this->dispatchBrowserEvent('close-modal');
         return redirect()->route('admin.docs.indigency');

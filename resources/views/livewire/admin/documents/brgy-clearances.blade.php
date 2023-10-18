@@ -44,10 +44,10 @@
       <table class="table border rounded table-striped">
         <thead>
           <tr>
+            <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Name</th>
             <th class="align-middle text-center">Zone</th>
             <th class="align-middle text-center">Purpose</th>
-            <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Date/Time Requested</th>
             <th class="align-middle text-center">Action</th>
           </tr>
@@ -55,23 +55,12 @@
         <tbody>
           @forelse ($documents as $document)
             <tr wire:poll.60s>
+              <td class="align-middle text-center">
+                <div class="px-1 rounded-pill bg-warning">{{ $document->status }}</div>
+              </td>
               <td class="align-middle text-center">{{ $document->brgyClearance->name }}</td>
               <td class="align-middle text-center">{{ $document->brgyClearance->zone }}</td>
               <td class="align-middle text-center">{{ $document->brgyClearance->purpose }}</td>
-              <td class="align-middle text-center">
-                <div class="px-1 rounded-pill 
-                @if ($document->status === 'Pending')
-                  bg-warning
-                @elseif ($document->status === 'Ready to Pickup')
-                  bg-primary text-light
-                @elseif ($document->status === 'Released' && $document->is_released == true)
-                  bg-success text-light
-                @else
-                  bg-dark text-light
-                @endif">
-                  {{ $document->status }}
-                </div>
-              </td>
               <td class="align-middle text-center">{{ $document->created_at->format('h:i A - M d, Y') }}</td>
               <td class="d-flex gap-1 align-items-center justify-content-center">
                 <span class="material-symbols-outlined" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#brgyClearanceInfo" style="cursor: pointer;">
@@ -79,7 +68,7 @@
                 </span>
                 {{-- <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#brgyClearanceInfo"></i> --}}
                 {{-- <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i> --}}
-                <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
+                {{-- <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i> --}}
               </td>
             </tr>
           @empty
@@ -94,7 +83,10 @@
   </div>
 
   <div class="bg-white officials-profile-table shadow rounded pt-3 my-5">
-    <h4 class="px-2">History</h4>
+    <div class="d-flex justify-content-start gap-2 mx-2 mb-3 fs-5">
+      <p class="m-0">Today's Total Collected Fee:</p>
+      <p class="m-0">&#8369;{{ $total_fee }}</p>
+    </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
         <div class="col-auto">
@@ -120,19 +112,33 @@
       <table class="table border rounded table-striped">
         <thead>
           <tr>
+            <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Name</th>
-            <th class="align-middle text-center">Zone</th>
-            <th class="align-middle text-center">Purpose</th>
+            <th class="align-middle text-center">CTC #</th>
+            <th class="align-middle text-center">Issued at</th>
+            <th class="align-middle text-center">Issued by</th>
+            <th class="align-middle text-center">Fee</th>
             <th class="align-middle text-center">Date/Time Claimed</th>
+            <th class="align-middle text-center">Action</th>
           </tr>
         </thead>
         <tbody>
           @forelse ($taken_documents as $taken_doc)
             <tr>
+              <td class="align-middle text-center">
+                <div class="px-1 rounded-pill bg-success text-white">{{ $taken_doc->status }}</div>
+              </td>
               <td class="align-middle text-center">{{ $taken_doc->brgyClearance->name }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->brgyClearance->zone }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->brgyClearance->purpose }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->brgyClearance->ctc }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->brgyClearance->issued_at }}</td>
+              <td class="align-middle text-center">{{ $taken_doc->issued_by }}</td>
+              <td class="align-middle text-center">{{ is_null($taken_doc->brgyClearance->fee) ? '0' : $taken_doc->brgyClearance->fee }}</td>
               <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>
+              <td class="align-middle text-center">
+                <a href="{{ route('admin.templates.brgy-clearance', ['document' => $taken_doc]) }}">
+                  <i class="fa-solid fa-eye mx-1 align-middle view-icon"></i>
+                </a>
+              </td>
             </tr>
           @empty
             <tr>

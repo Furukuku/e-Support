@@ -57,6 +57,7 @@
           <div class="row justify-content-center mb-4">
             <img id="proof-preview" class="object-fit-scale rounded d-none" alt="proof" style="width: 20rem;">
           </div>
+          <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it as it is.</small></p>
           <div class="position-relative mb-4">
             <hr class="border border-dark m-0 w-100">
             <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">

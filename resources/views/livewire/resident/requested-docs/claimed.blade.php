@@ -10,15 +10,12 @@
               <p class="card-text text-white fw-bold m-0">Purpose: <span class="fw-normal">{{ $doc->brgyClearance->purpose }}</span></p>
               <p class="card-text text-white m-0" style="font-size: 13px;">{{ $doc->created_at->format('h:i A - M d, Y') }}</p>
             </div>
-            <div class="card-footer d-flex justify-content-between bg-white">
+            <div class="card-footer d-flex justify-content-start bg-white">
               <div class="d-flex">
                 <p class="m-0 text-dark">Status:</p>
                 <div class="rounded-pill bg-success text-light ms-2 px-3">
                   Claimed
                 </div>
-              </div>
-              <div class="">
-                <a href="{{ route('resident.qr-code', ['token' => $doc->token]) }}" class="text-dark" style="text-decoration: none;"><span class="material-symbols-outlined align-middle">qr_code_2</span></a>
               </div>
             </div>
           </div>
@@ -31,15 +28,12 @@
               <p class="card-text text-white fw-bold m-0">Business Name: <span class="fw-normal">{{ $doc->bizClearance->biz_name }}</span></p>
               <p class="card-text text-white m-0" style="font-size: 13px;">{{ $doc->created_at->format('h:i A - M d, Y') }}</p>
             </div>
-            <div class="card-footer d-flex justify-content-between bg-white">
+            <div class="card-footer d-flex justify-content-start bg-white">
               <div class="d-flex">
                 <p class="m-0 text-dark">Status:</p>
                 <div class="rounded-pill bg-success text-light ms-2 px-3">
                   Claimed
                 </div>
-              </div>
-              <div class="">
-                <a href="{{ route('resident.qr-code', ['token' => $doc->token]) }}" class="text-dark" style="text-decoration: none;"><span class="material-symbols-outlined align-middle">qr_code_2</span></a>
               </div>
             </div>
           </div>
@@ -52,15 +46,12 @@
               <p class="card-text text-white fw-bold m-0">Purpose: <span class="fw-normal">{{ $doc->indigency->purpose }}</span></p>
               <p class="card-text text-white m-0" style="font-size: 13px;">{{ $doc->created_at->format('h:i A - M d, Y') }}</p>
             </div>
-            <div class="card-footer d-flex justify-content-between bg-white">
+            <div class="card-footer d-flex justify-content-start bg-white">
               <div class="d-flex">
                 <p class="m-0 text-dark">Status:</p>
                 <div class="rounded-pill bg-success text-light ms-2 px-3">
                   Claimed
                 </div>
-              </div>
-              <div class="">
-                <span class="material-symbols-outlined align-middle">qr_code_2</span>
               </div>
             </div>
           </div>

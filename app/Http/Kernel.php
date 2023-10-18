@@ -77,6 +77,6 @@ class Kernel extends HttpKernel
         'company-mobile.verified' => \App\Http\Middleware\EnsureCompanyMobileIsVerified::class,
         'company.approval' => \App\Http\Middleware\CheckIfCompanyApproved::class,
         'company.active' => \App\Http\Middleware\CheckIfCompanyAccountIsActive::class,
-        'docs.is-released' => \App\Http\Middleware\CheckIfDocumentIsReleased::class,
+        'docs.document-type' => \App\Http\Middleware\CheckTypeOfDocument::class,
     ];
 }

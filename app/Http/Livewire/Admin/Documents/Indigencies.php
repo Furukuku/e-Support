@@ -80,15 +80,14 @@ class Indigencies extends Component
         }
     }
 
-    public function markAsUsed()
+    public function print()
     {
         $document = Document::find($this->doc_id);
-        $document->status = 'Released';
-        $document->is_released = true;
-        $document->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+
+        return redirect()->route('admin.templates.indigency', ['document' => $document]);
     }
 
     public function addDoc()
@@ -118,7 +117,7 @@ class Indigencies extends Component
         $this->closeModal();
         $this->dispatchBrowserEvent('close-modal');
 
-        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+        return redirect()->route('admin.templates.indigency', ['document' => $document]);
     }
 
     public function view(Document $document)
@@ -129,14 +128,14 @@ class Indigencies extends Component
         $this->date_requested = $document->created_at;
     }
 
-    public function print()
-    {
-        $document = Document::find($this->doc_id);
+    // public function print()
+    // {
+    //     $document = Document::find($this->doc_id);
         
-        $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
-        $this->closeModal();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
+    //     $this->closeModal();
+    // }
 
     public function editDoc(Document $document)
     {

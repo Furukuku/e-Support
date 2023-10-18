@@ -51,6 +51,7 @@
           <div class="row justify-content-center mb-4">
             <img id="proof-preview" src="{{ Storage::url($document->bizClearance->proof) }}" class="object-fit-scale rounded" alt="proof" style="width: 20rem;">
           </div>
+          <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it as it is.</small></p>
           <div class="position-relative mb-4">
             <hr class="border border-dark m-0 w-100">
             <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
@@ -62,9 +63,15 @@
             <input type="file" accept="image/*" id="ctc-img" disabled class="form-control form-control-sm inputs" name="ctc_image" value="{{ old('ctc_image') }}">
             @error('ctc_image') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <div class="row justify-content-center mb-3">
-            <img id="ctc-preview" src="{{ Storage::url($document->bizClearance->ctc_photo) }}" class="object-fit-scale rounded" alt="ctc-image" style="width: 20rem;">
-          </div>
+          @if (!is_null($document->bizClearance->ctc_photo))
+            <div class="row justify-content-center mb-3">
+              <img id="ctc-preview" src="{{ Storage::url($document->bizClearance->ctc_photo) }}" class="object-fit-scale rounded" alt="ctc-image" style="width: 20rem;">
+            </div>
+          @else
+            <div id="ctc-preview-container" class="row justify-content-center mb-3 d-none">
+              <img id="ctc-preview" class="object-fit-scale rounded" alt="ctc-image" style="width: 20rem;">
+            </div>
+          @endif
           <div class="row mb-3">
             <label for="ctc" class="form-label px-0">CTC #</label>
             <input type="text" id="ctc" disabled class="form-control inputs" name="ctc" value="{{ old('ctc',$document->bizClearance->ctc) }}">
@@ -128,9 +135,13 @@
 
     const ctcImgInput = document.getElementById('ctc-img');
     const previewImg = document.getElementById('ctc-preview');
+    const ctcPreviewCont = document.getElementById('ctc-preview-container');
 
     ctcImgInput.addEventListener('change', () => {
       previewImg.src = URL.createObjectURL(event.target.files[0]);
+      if(ctcPreviewCont){
+        ctcPreviewCont.classList.remove('d-none');
+      }
     });
 
     const proofImgInput = document.getElementById('proof');

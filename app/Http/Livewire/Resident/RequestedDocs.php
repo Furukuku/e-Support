@@ -13,11 +13,6 @@ class RequestedDocs extends Component
         $this->docs_tab = 'pending';
     }
 
-    public function pickup()
-    {
-        $this->docs_tab = 'pickup';
-    }
-
     public function claimed()
     {
         $this->docs_tab = 'claimed';
