@@ -48,10 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'sub-admins',
         ],
-        // 'bhw' => [
-        //     'driver' => 'session',
-        //     'provider' => 'sub-admins',
-        // ],
+        'bhw' => [
+            'driver' => 'session',
+            'provider' => 'bhws',
+        ],
         'business' => [
             'driver' => 'session',
             'provider' => 'businesses',
@@ -88,10 +88,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\SubAdmin::class,
         ],
-        // 'bhws' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\BrgyHealthWorker::class,
-        // ],
+        'bhws' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\BarangayHealthWorker::class,
+        ],
         'businesses' => [
             'driver' => 'eloquent',
             'model' => App\Models\Business::class,

@@ -31,7 +31,7 @@ class BusinessClearance extends Component
         $this->document->bizClearance->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        return redirect()->route('admin.docs.biz-clearance');
+        return redirect()->route('admin.docs.biz-clearances');
     }
 
     public function render()

@@ -1,3 +1,7 @@
+html {
+  font-size: 14px;
+}
+
 :root {
   --header-bg: #FFC03D;
   --add-btn-color: #432344;
@@ -15,10 +19,116 @@ body {
   background-color: #432344;
 }
 
+.main-container {
+  display: flex;
+  width: 100%;
+  gap: 0.2rem;
+}
+
+.block-sidebar {
+  min-width: 17rem;
+  max-width: 17rem;
+  flex-grow: 3;
+  transition: margin-left 0.4s ease-out;
+}
+
+.sidebar {
+  background-color: #432344;
+  min-width: 17rem;
+  max-width: 17rem;
+  flex-grow: 3;
+  transition: margin-left 0.4s ease-out;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar-close {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: -2px;
+  cursor: pointer;
+}
+
+#toggle-sidebar2 {
+  display: none;
+}
+
+.scrollbar {
+  overflow-y: scroll;
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.right-content {
+  flex-grow: 8;
+  position: relative;
+}
+
+.horizontal-line {
+  width: 90%;
+}
+
+.sidebar-navigate {
+  height: 50px;
+  cursor: pointer;
+}
+
+.sidebar-navigate:active {
+  opacity: 0.7;
+}
+
+.navigate-active {
+  background-color: #FFC03D;
+}
+
+.logout-btn {
+  height: 100%;
+}
+
+.sidebar-active {
+  margin-left: -17.2rem;
+}
+
+.submenu-link {
+  position: relative;
+}
+
+.submenu-active {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.arrow3 {
+  transition: transform 0.2s;
+}
+
+.arrow3.rotate3 {
+  transform: rotate(-90deg);
+}
+
+.u-submenu {
+  display: none;
+}
 
 .dropdown-menu {
   --bs-dropdown-link-active-bg: #cacaca;
 }
+
 
 .officials-header,
 .btn-warning,
@@ -47,7 +157,7 @@ body {
 }
 
 .officials-profile-table {
-  width: 70%;
+  /* width: 95%; */
 }
 
 .sorting-arrow {
@@ -85,8 +195,8 @@ body {
 }
 
 .view-image {
-  height: 5rem;
-  width: 5rem;
+  height: 7rem;
+  width: 7rem;
 }
 
 .delete-warning {
@@ -120,4 +230,23 @@ body {
 
 .patient-details-container {
   margin-top: -8rem;
+}
+
+
+@media (max-width: 1070px) {
+  .block-sidebar {
+    display: none;
+  }
+
+  #toggle-sidebar2 {
+    display: block;
+  }
+
+  #toggle-sidebar {
+    display: none;
+  }
+
+  .sidebar-close {
+    display: block;
+  }
 }

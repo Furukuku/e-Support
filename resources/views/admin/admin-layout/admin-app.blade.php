@@ -111,34 +111,57 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->count() > 0)
+            <span class="position-absolute translate-middle p-1 bg-danger rounded-circle" style="top: 1.6rem;right: 2rem;">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          @endif
           <a id="d-submenu-toggle" class="nav-link p-0 d-flex align-items-center sidebar-navigate submenu-link">
             @if (str_contains(Route::currentRouteName(), 'admin.docs.'))
               <div class="submenu-active"></div>
             @endif
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">print</span>
-              <p class="col-7 m-0 ps-0">Printing Documents</p>
+              <p class="col-7 m-0 ps-0 text-truncate">Printing Documents</p>
               <span id="d-submenu-arrow" class="material-symbols-outlined col-2 arrow3 {{ str_contains(Route::currentRouteName(), 'admin.docs.') ? 'rotate3' : '' }}">chevron_left</span>
             </div>
           </a>
           <ul id="d-sub-menu" class="navbar-nav text-white {{ !str_contains(Route::currentRouteName(), 'admin.docs.') ? 'd-submenu' : '' }}">
-            <li class="nav-item">
-              <a href="{{ route('admin.docs.brgy-clearance') }}" id="clearance" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.brgy-clearance') ? 'navigate-active' : '' }}">
+            <li class="position-relative nav-item">
+              @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Barangay Clearance')->count() > 0)
+                <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+                  {{ auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Barangay Clearance')->count() }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              @endif
+              <a href="{{ route('admin.mark-brgy-clearance') }}" id="clearance" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.brgy-clearances') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Barangay Clearance</p>
                 </div>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="{{ route('admin.docs.biz-clearance') }}" id="business-permit" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.biz-clearance') ? 'navigate-active' : '' }}">
+            <li class="position-relative nav-item">
+              @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Business Clearance')->count() > 0)
+                <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+                  {{ auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Business Clearance')->count() }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              @endif
+              <a href="{{ route('admin.mark-biz-clearance') }}" id="business-permit" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.biz-clearance') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Business Clearance</p>
                 </div>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="{{ route('admin.docs.indigency') }}" id="indigency" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.indigency') ? 'navigate-active' : '' }}">
+            <li class="position-relative nav-item">
+              @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Indigency')->count() > 0)
+                <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+                  {{ auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Indigency')->count() }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              @endif
+              <a href="{{ route('admin.mark-indigency') }}" id="indigency" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.indigencies') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Indigency</p>
                 </div>
@@ -146,8 +169,14 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item text-white sidebar-list">
-          <a href="{{ route('admin.reports') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.reports') ? 'navigate-active' : '' }}">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\ReportNotification')->count() > 0)
+            <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+              {{ auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\ReportNotification')->count() }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          @endif
+          <a href="{{ route('admin.mark-report') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.reports') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">report</span>
               <p class="col-9 m-0 ps-0">Reports</p>
@@ -241,5 +270,25 @@
   @livewireScripts
 
   @yield('script')
+
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script>
+
+    var pusher = new Pusher('126cc80fca70f6124e8e', {
+      cluster: 'ap1',
+    });
+
+    var channel = pusher.subscribe('report-channel');
+
+    Notification.requestPermission().then(perm => {
+      if(perm === 'granted'){
+        channel.bind('report-notif', function(data) {
+          const notif = new Notification('e-Support', {
+            body: 'New report from ' + JSON.stringify(data.name),
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

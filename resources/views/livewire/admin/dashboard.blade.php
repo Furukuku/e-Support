@@ -2,12 +2,12 @@
   
   <div style="width: 75vw;">
     <div class="row">
-      <div class="col-sm-6 mb-3">
+      <div class="col-sm-4 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
               <div class="rounded-circle card-icon">
-                <span class="material-symbols-outlined">patient_list</span>
+                <span class="material-symbols-outlined">groups</span>
               </div>
             </div>
             <h3 class="m-0">{{ array_sum($population) }}</h3>
@@ -16,12 +16,26 @@
         </div>
       </div>
   
-      <div class="col-sm-6 mb-3">
+      <div class="col-sm-4 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
               <div class="rounded-circle card-icon">
-                <span class="material-symbols-outlined">patient_list</span>
+                <span class="material-symbols-outlined">store</span>
+              </div>
+            </div>
+            <h3 class="m-0">{{ $businessUsers }}</h3>
+            <p class="m-0">Total Business Users</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 mb-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="d-flex justify-content-end mb-3">
+              <div class="rounded-circle card-icon">
+                <span class="material-symbols-outlined">group</span>
               </div>
             </div>
             <h3 class="m-0">{{ array_sum($employStatus) }}</h3>

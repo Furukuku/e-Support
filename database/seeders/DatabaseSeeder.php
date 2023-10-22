@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Admin;
+use App\Models\BarangayHealthWorker;
 use App\Models\Chatbot;
 use App\Models\ChatBotPattern;
 use App\Models\ChatBotResponse;

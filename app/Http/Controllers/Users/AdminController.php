@@ -8,6 +8,34 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function markIndigency()
+    {
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document', 'Indigency')->markAsRead();
+
+        return redirect()->route('admin.docs.indigencies');
+    }
+
+    public function markBizClearance()
+    {
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document', 'Business Clearance')->markAsRead();
+
+        return redirect()->route('admin.docs.biz-clearances');
+    }
+
+    public function markBrgyClearance()
+    {
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document', 'Barangay Clearance')->markAsRead();
+
+        return redirect()->route('admin.docs.brgy-clearances');
+    }
+
+    public function markReport()
+    {
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\ReportNotification')->markAsRead();
+
+        return redirect()->route('admin.reports');
+    }
+
     public function indigencyTemplate(Document $document)
     {
         return view('admin.admin-template-indigency', ['document' => $document]);
@@ -58,23 +86,31 @@ class AdminController extends Controller
         return view('admin.admin-manage-approval');
     }
 
-    public function clearance()
+    public function brgyClearances()
     {
-        return view('admin.admin-print-clearance');
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document', 'Barangay Clearance')->markAsRead();
+
+        return view('admin.admin-docs-brgy-clearances');
     }
 
-    public function permit()
+    public function bizClearances()
     {
-        return view('admin.admin-print-biz-permit');
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document', 'Business Clearance')->markAsRead();
+
+        return view('admin.admin-docs-biz-clearances');
     }
 
-    public function indigency()
+    public function indigencies()
     {
-        return view('admin.admin-print-indigency');
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document', 'Indigency')->markAsRead();
+
+        return view('admin.admin-docs-indigencies');
     }
 
     public function reports()
     {
+        auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\ReportNotification')->markAsRead();
+
         return view('admin.admin-reports');
     }
 

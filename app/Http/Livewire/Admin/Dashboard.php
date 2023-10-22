@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\FamilyHead;
 use App\Models\User;
 use App\Models\Wife;
+use App\Models\Report;
 use Livewire\Component;
+use App\Models\Business;
+use App\Models\FamilyHead;
+use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
 {
@@ -64,6 +67,75 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('livewire.admin.dashboard');
+        $businessUsers = Business::count();
+
+        // $interval = 30; // Interval in minutes
+
+        // $count = Report::select(DB::raw('COUNT(*) as count'))
+        //     ->groupBy(DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / (60 * :interval))'))
+        //     ->setBindings(['interval' => $interval])
+        //     ->get();
+
+        // $complaints = [];
+        // $sample = Report::select('zone', 'report_name', DB::raw('COUNT(*) as count'), 'created_at')->groupBy('zone', 'report_name', DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / (60 * :interval))'))->setBindings(['interval' => $interval])->get();
+
+        // $sample = Report::select('zone', 'report_name', DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / (60 * :interval)) as time_interval'), DB::raw('COUNT(*) as count'))->groupBy('zone', 'report_name', 'created_at')->setBindings(['interval' => $interval])->get();
+
+
+        // foreach($sample as $sam){
+        //     $x = $sam->count . ' ' . $sam->report_name . ' on zone ' . $sam->zone . ' at ' . $sam->time_interval;
+        //     array_push($complaints, $x);
+        // }
+
+        // dd($complaints);
+        // $reports = Report::select('zone', 'report_name')
+        //     ->selectRaw('COUNT(*) as count')
+        //     ->groupBy('zone', 'report_name')
+        //     ->havingRaw('COUNT(*) = 1') 
+        //     ->orWhere(function ($query) {
+        //         $query->selectRaw('COUNT(*)')
+        //             ->from('reports as sub')
+        //             ->whereRaw('reports.zone = sub.zone')
+        //             ->whereRaw('reports.report_name = sub.report_name')
+        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) <= 30')
+        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) >= -30');
+        //     })
+        //     ->get();
+
+        // $reports = DB::table('reports')
+        //     ->select('zone', 'report_name')
+        //     ->selectRaw('COUNT(*) as count')
+        //     ->groupBy('zone', 'report_name')
+        //     ->havingRaw('COUNT(*) = 1')
+        //     ->orWhere(function ($query) {
+        //         $query->selectRaw('COUNT(*)')
+        //             ->from('reports as sub')
+        //             ->whereRaw('reports.zone = sub.zone')
+        //             ->whereRaw('reports.report_name = sub.report_name')
+        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) <= 30')
+        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) >= -30');
+        //     })
+        //     ->get();
+
+        // dd($reports);
+        // $reports = Report::select('zone', 'report_name')
+        //     ->selectRaw('COUNT(*) as count')
+        //     ->groupBy('zone', 'report_name')
+        //     ->havingRaw('COUNT(*) = 1') 
+        //     ->orWhere(function ($query) {
+        //         $query->selectRaw('COUNT(*)')
+        //             ->from('reports as sub')
+        //             ->whereRaw('reports.zone = sub.zone')
+        //             ->whereRaw('reports.report_name = sub.report_name')
+        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) <= 30')
+        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) >= -30');
+        //     })
+        //     ->get();
+
+        // dd($reports);
+
+        return view('livewire.admin.dashboard', [
+            'businessUsers' => $businessUsers
+        ]);
     }
 }

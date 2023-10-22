@@ -13,6 +13,13 @@
   <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}"> --}}
 
+  <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+  <link rel="apple-touch-icon" href="{{ asset('images/pwa_icons/logo-512x512.png') }}">
+  <meta name="apple-moble-web-app-status-bar" content="#0E2C15">
+
+  <meta name="theme-color" content="#0E2C15">
+
   @stack('page-name')
 
   @if (str_contains(Route::currentRouteName(), 'resident.home'))
@@ -126,6 +133,7 @@
             @csrf
             <button type="submit" class="logout-btn"><span class="material-symbols-outlined pe-2">logout</span>Logout</button>
           </form>
+          {{-- <a href="{{ route('resident.logout') }}" class="logout-btn"><span class="material-symbols-outlined pe-2">logout</span>Logout</a> --}}
           {{-- <a href="{{  }}" class="d-flex align-items-center">
           </a> --}}
         </li>
@@ -144,7 +152,7 @@
   @livewireScripts
   {{-- scripts --}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
+  
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -152,10 +160,11 @@
   <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
   
   <script src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
-
+  
   @yield('scripts')
-
+  
   @stack('chatbot-js')
 
+  <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

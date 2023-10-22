@@ -25,7 +25,7 @@ use App\Http\Livewire\Admin\DocTemplates\BusinessClearance;
 
 
 /*------------------------- Guest Middleware for Admins/Sub-admins -------------------------*/
-Route::middleware(['guest:admin', 'guest:sub-admin'])->group(function(){
+Route::middleware(['guest:admin', 'guest:sub-admin', 'guest:bhw'])->group(function(){
     // Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
     Route::view('/admin/login', 'auth.admins.admins-login')->name('admin.login');
 });
@@ -65,10 +65,15 @@ Route::middleware('admin.auth:admin')->group(function() {
     Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::post('/logout', [LogoutController::class, 'adminLogout'])->name('logout');
+
+        Route::get('/mark-as-read-report', [AdminController::class, 'markReport'])->name('mark-report');
+        Route::get('/mark-as-read-brgy-clearance', [AdminController::class, 'markBrgyClearance'])->name('mark-brgy-clearance');
+        Route::get('/mark-as-read-biz-clearance', [AdminController::class, 'markBizClearance'])->name('mark-biz-clearance');
+        Route::get('/mark-as-read-indigency', [AdminController::class, 'markIndigency'])->name('mark-indigency');
         // Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::view('/dashboard', 'admin.admin-dashboard')->name('dashboard');
-        // Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
-        Route::view('/reports', 'admin.admin-reports')->name('reports');
+        Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
+        // Route::view('/reports', 'admin.admin-reports')->name('reports');
         // Route::get('/message', [AdminController::class, 'message'])->name('message');
         Route::view('/message', 'admin.admin-message')->name('message');
         // Route::get('/programs', [AdminController::class, 'programs'])->name('programs');
@@ -99,12 +104,12 @@ Route::middleware('admin.auth:admin')->group(function() {
         });
 
         Route::name('docs.')->group(function(){
-            // Route::get('/clearance', [AdminController::class, 'clearance'])->name('clearance');
-            Route::view('/clearance', 'admin.admin-docs-brgy-clearances')->name('brgy-clearance');
-            // Route::get('/permit', [AdminController::class, 'permit'])->name('permit');
-            Route::view('/permit', 'admin.admin-docs-biz-clearances')->name('biz-clearance');
-            // Route::get('/indigency', [AdminController::class, 'indigency'])->name('indigency');
-            Route::view('/indigency', 'admin.admin-docs-indigencies')->name('indigency');
+            Route::get('/brgy-clearances', [AdminController::class, 'brgyClearances'])->name('brgy-clearances');
+            // Route::view('/clearance', 'admin.admin-docs-brgy-clearances')->name('brgy-clearance');
+            Route::get('/biz-clearances', [AdminController::class, 'bizClearances'])->name('biz-clearances');
+            // Route::view('/permit', 'admin.admin-docs-biz-clearances')->name('biz-clearance');
+            Route::get('/indigencies', [AdminController::class, 'indigencies'])->name('indigencies');
+            // Route::view('/indigency', 'admin.admin-docs-indigencies')->name('indigency');
         });
 
         Route::name('scan.')->group(function(){
@@ -148,11 +153,28 @@ Route::middleware(['sub-admin.auth:sub-admin', 'bhw:bhw'])->group(function() {
     Route::prefix('bhw')->name('bhw.')->group(function(){
 
         Route::post('/logout', [LogoutController::class, 'BHWLogout'])->name('logout');
-        Route::get('/residents', [BHWController::class, 'residents'])->name('residents');
-        Route::get('/patients', [BHWController::class, 'patients'])->name('patients');
-        Route::view('/resident-accounts', 'bhw.bhw-resident-accounts')->name('resident-accounts');
+        Route::view('/dashboard', 'bhw.bhw-dashboard')->name('dashboard');
+        Route::view('/family-profile', 'bhw.bhw-family-profiles')->name('family-profiles');
+        Route::view('/patients', 'bhw.bhw-patients')->name('patients');
         Route::view('/health-records/{patient}', 'bhw.bhw-health-records')->name('health-records');
+        Route::view('/programs', 'bhw.bhw-programs')->name('programs');
         Route::view('/account', 'bhw.bhw-account')->name('account');
+        
+        Route::name('manage.')->group(function () {
+            Route::view('/resident-accounts', 'bhw.bhw-resident-accounts')->name('resident-accounts');
+            Route::view('/bhw-accounts', 'bhw.bhw-bhw-accounts')->name('bhw-accounts');
+        });
+    });
+});
+
+
+Route::middleware(['bhw.auth:bhw', 'bhw.active'])->group(function() {
+    Route::prefix('sub-bhw')->name('sub-bhw.')->group(function() {
+        Route::post('/logout', [LogoutController::class, 'subBHWLogout'])->name('logout');
+        Route::view('/dashboard', 'sub-bhw.sub-bhw-dashboard')->name('dashboard');
+        Route::view('/resident-accounts', 'sub-bhw.sub-bhw-resident-accounts')->name('resident-accounts');
+        Route::view('/family-profile', 'sub-bhw.sub-bhw-family-profiles')->name('family-profiles');
+        Route::view('/account', 'sub-bhw.sub-bhw-account')->name('account');
     });
 });
 /*------------------------- End of BHW Routes -------------------------*/

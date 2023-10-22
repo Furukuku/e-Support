@@ -1,0 +1,59 @@
+{
+  "name": "e-Support",
+  "short_name": "e-Support",
+  "start_url": "/login",
+  "display": "standalone",
+  "background_color": "#696969",
+  "theme_color": "#0E2C15",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/pwa_icons/icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa_icons/icon-72x72.png",
+      "type": "image/png",
+      "sizes": "72x72",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa_icons/icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa_icons/icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa_icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa_icons/icon-240x240.png",
+      "type": "image/png",
+      "sizes": "240x240",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa_icons/icon-384x384.png",
+      "type": "image/png",
+      "sizes": "384x384",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa_icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ]
+}

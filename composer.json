@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "laravel/vonage-notification-channel": "^3.2",
         "livewire/livewire": "^2.12",
+        "pusher/pusher-php-server": "^7.2",
         "simplesoftwareio/simple-qrcode": "~4",
         "spatie/laravel-activitylog": "^4.7"
     },

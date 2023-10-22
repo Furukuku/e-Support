@@ -67,6 +67,8 @@ class Kernel extends HttpKernel
         // 'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
         'admin.auth' => \App\Http\Middleware\AdminAuthenticate::class,
         'sub-admin.auth' => \App\Http\Middleware\SubAdminAuthenticate::class,
+        'bhw.auth' => \App\Http\Middleware\BHWAuthenticate::class,
+        'bhw.active' => \App\Http\Middleware\CheckIfBHWAccountIsActive::class,
         'business.auth' => \App\Http\Middleware\BusinessAuthenticate::class,
         'official' => \App\Http\Middleware\BarangayOfficial::class,
         'bhw' => \App\Http\Middleware\BHW::class,

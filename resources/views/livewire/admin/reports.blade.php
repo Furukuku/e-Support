@@ -2,38 +2,46 @@
   
   @include('livewire.modals.reports-modals')
 
-  <div class="w-100 d-flex flex-row justify-content-evenly mb-5">
-    <div class="card shadow" style="width: 21rem;">
-      <div class="card-body">
-        <div class="d-flex justify-content-end mb-3">
-          <div class="rounded-circle card-icon">
-            <span class="material-symbols-outlined">pending</span>
+  <div class="row w-100 px-4 mb-5">
+    <div class="col-sm-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="d-flex justify-content-end mb-3">
+            <div class="rounded-circle card-icon">
+              <span class="material-symbols-outlined">pending</span>
+            </div>
           </div>
+          <h3 class="m-0">{{ $totalPendingReports }}</h3>
+          <p class="m-0">Pending Cases</p>
         </div>
-        <h3 class="m-0">{{ $reports->where('status', 'Pending')->count() }}</h3>
-        <p class="m-0">Pending Cases</p>
       </div>
     </div>
-    <div class="card shadow" style="width: 21rem;">
-      <div class="card-body">
-        <div class="d-flex justify-content-end mb-3">
-          <div class="rounded-circle card-icon">
-            <span class="material-symbols-outlined">cached</span>
+
+    <div class="col-sm-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="d-flex justify-content-end mb-3">
+            <div class="rounded-circle card-icon">
+              <span class="material-symbols-outlined">cached</span>
+            </div>
           </div>
+          <h3 class="m-0">{{ $totalOngoingReports }}</h3>
+          <p class="m-0">Ongoing Cases</p>
         </div>
-        <h3 class="m-0">{{ $reports->where('status', 'Ongoing')->count() }}</h3>
-        <p class="m-0">Ongoing Cases</p>
       </div>
     </div>
-    <div class="card shadow" style="width: 21rem;">
-      <div class="card-body">
-        <div class="d-flex justify-content-end mb-3">
-          <div class="rounded-circle card-icon">
-            <span class="material-symbols-outlined">done</span>
+
+    <div class="col-sm-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="d-flex justify-content-end mb-3">
+            <div class="rounded-circle card-icon">
+              <span class="material-symbols-outlined">done</span>
+            </div>
           </div>
+          <h3 class="m-0">{{ $totalSolvedReports }}</h3>
+          <p class="m-0">Solved Cases</p>
         </div>
-        <h3 class="m-0">{{ $reports->where('status', 'Solved')->count() }}</h3>
-        <p class="m-0">Solved Cases</p>
       </div>
     </div>
   </div>

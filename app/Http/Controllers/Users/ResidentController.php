@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Events\SendReport;
 use App\Models\Document;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\BarangayClearance;
 use App\Models\BusinessClearance;
 use App\Models\Indigency;
 use App\Models\Job;
 use App\Models\Report;
 use App\Models\ReportImage;
+use App\Models\SubAdmin;
+use App\Notifications\DocumentNotification;
+use App\Notifications\ReportNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Notification;
 
 class ResidentController extends Controller
 {
@@ -98,7 +104,7 @@ class ResidentController extends Controller
         );
 
         if(Auth::guard('web')->check()){
-            
+
             $report = new Report();
             $report->user_id = auth()->guard('web')->id();
             $report->report_name = $request->kind_of_report;
@@ -116,6 +122,14 @@ class ResidentController extends Controller
                     'image' => $photo_filename,
                 ]);
             }
+
+            $user = auth()->guard('web')->user();
+
+            $admins = Admin::all();
+
+            Notification::send($admins, new ReportNotification($user, $report));
+
+            event(new SendReport($user->username));
         }
 
         return redirect()->route('resident.services');
@@ -324,6 +338,11 @@ class ResidentController extends Controller
             $bizClearance->proof = $proof_filename;
             $bizClearance->save();
 
+            $user = auth()->guard('web')->user();
+            $admins = Admin::all();
+
+            Notification::send($admins, new DocumentNotification($user, $document));
+
             return redirect()->route('resident.qr-code', ['token' => $token]);
         }else{
             return redirect()->route('resident.biz-clearance');
@@ -351,6 +370,11 @@ class ResidentController extends Controller
             $indigency->name = $request->name;
             $indigency->purpose = $request->purpose;
             $indigency->save();
+
+            $user = auth()->guard('web')->user();
+            $admins = Admin::all();
+
+            Notification::send($admins, new DocumentNotification($user, $document));
 
             return redirect()->route('resident.qr-code', ['token' => $token]);
         }else{
@@ -395,6 +419,11 @@ class ResidentController extends Controller
             $brgyClearance->zone = $request->zone;
             $brgyClearance->purpose = $request->purpose;
             $brgyClearance->save();
+
+            $user = auth()->guard('web')->user();
+            $admins = Admin::all();
+
+            Notification::send($admins, new DocumentNotification($user, $document));
 
             return redirect()->route('resident.qr-code', ['token' => $token]);
         }else{

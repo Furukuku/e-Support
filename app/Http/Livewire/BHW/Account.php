@@ -108,7 +108,7 @@ class Account extends Component
     {
         $this->validate([
             'current_password' => 'required|current_password:sub-admin',
-            'new_password' => 'required|string|confirmed',
+            'new_password' => ['required', 'string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
         ]);
 
         if(Hash::check($this->current_password, auth()->guard('sub-admin')->user()->password)){

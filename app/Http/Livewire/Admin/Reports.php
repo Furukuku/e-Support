@@ -34,6 +34,11 @@ class Reports extends Component
         $this->reset();
     }
 
+    // public function mount()
+    // {
+    //     auth()->guard('admin')->user()->unreadNotifications->markAsRead();
+    // }
+
     public function viewReport(Report $report)
     {
         $this->report_type = $report->report_name;
@@ -82,6 +87,15 @@ class Reports extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate);
 
-        return view('livewire.admin.reports', ['reports' => $reports]);
+        $totalPendingReports = Report::where('status', 'Pending')->count();
+        $totalOngoingReports = Report::where('status', 'Ongoing')->count();
+        $totalSolvedReports = Report::where('status', 'Solved')->count();
+
+        return view('livewire.admin.reports', [
+            'reports' => $reports,
+            'totalPendingReports' => $totalPendingReports,
+            'totalOngoingReports' => $totalOngoingReports,
+            'totalSolvedReports' => $totalSolvedReports,
+        ]);
     }
 }

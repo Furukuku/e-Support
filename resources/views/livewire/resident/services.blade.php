@@ -55,7 +55,7 @@
         </div>
       </div>
   
-      <div class="d-flex justify-content-between align-items-center py-4 px-5 mb-4 bg-success bg-opacity-25 home-middle">
+      <div class="d-flex justify-content-between align-items-center py-4 px-5 mb-4 bg-success bg-opacity-25 home-middle concern-btn">
         <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
           <h5 class="m-0 align-center">Do you have concern?</h5>
           <p class="m-0 align-center">Just send a report to the barangay.</p>

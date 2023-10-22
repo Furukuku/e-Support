@@ -30,7 +30,7 @@ class BrgyClearance extends Component
         $this->document->brgyClearance->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        return redirect()->route('admin.docs.brgy-clearance');
+        return redirect()->route('admin.docs.brgy-clearances');
     }
     
     public function render()

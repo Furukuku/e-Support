@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div wire:click="toggleChat" class="rounded-circle shadow chatbot-circle {{ str_contains(Route::currentRouteName(), 'resident.services') || str_contains(Route::currentRouteName(), 'resident.docs-list') || str_contains(Route::currentRouteName(), 'resident.report-list') ? 'move-up' : '' }}">
+  <div wire:click="toggleChat" class="rounded-circle shadow chatbot-circle {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'move-up' : '' }}">
     <i class="fa-regular fa-comment text-light fs-4 position-absolute top-50 start-50 translate-middle {{ $chatBox === 'hide' ||  $chatBox === '' ? '' : 'd-none' }}"></i>
     <i class="fa-solid fa-xmark text-light position-absolute top-50 start-50 close-chatbot-icon {{ $chatBox === 'hide' || $chatBox === '' ? 'd-none' : '' }}"></i>
   </div>

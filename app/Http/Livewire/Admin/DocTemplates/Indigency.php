@@ -30,7 +30,7 @@ class Indigency extends Component
         $this->document->indigency->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        return redirect()->route('admin.docs.indigency');
+        return redirect()->route('admin.docs.indigencies');
     }
     
     public function render()

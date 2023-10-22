@@ -741,12 +741,23 @@ label[for="proof"] {
     bottom: 6rem;
   }
 
+  /* .chatbot-circle.move-up {
+    bottom: 10rem;
+  } */
+
   .chat-box.show {
     bottom: 9.3rem;
   }
 
   .services-child {
     display: none;
+  }
+
+  .concern-btn {
+    display: flex;
+    flex-direction: column !important;
+    align-items: start !important;
+    gap: 1rem !important;
   }
 }
 

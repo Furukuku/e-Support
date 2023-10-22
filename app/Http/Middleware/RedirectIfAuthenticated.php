@@ -24,9 +24,12 @@ class RedirectIfAuthenticated
                 if($guard === 'admin'){
                     return redirect()->route('admin.dashboard');
                 }else if($guard === 'sub-admin'){
+                    if(auth()->guard('sub-admin')->user()->position === 'BHW'){
+                        return redirect()->route('bhw.dashboard');
+                    }
                     return redirect()->route('sub-admin.dashboard');
                 }else if($guard === 'bhw'){
-                    return redirect()->route('bhw.residents');
+                    return redirect()->route('sub-bhw.dashboard');
                 }else if($guard === 'business'){
                     return redirect()->route('business.home');
                 }else if($guard === 'web'){

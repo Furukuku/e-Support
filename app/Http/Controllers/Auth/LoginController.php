@@ -22,7 +22,7 @@ class LoginController extends Controller
             if(strtolower(Auth::guard('sub-admin')->user()->position) == 'bhw'){
                 if(Auth::guard('sub-admin')->user()->is_active == 1){
                     $request->session()->regenerate();
-                    return redirect()->route('bhw.residents');
+                    return redirect()->route('bhw.dashboard');
                 }else{
                     Auth::guard('sub-admin')->logout();
                     $request->session()->invalidate();
@@ -42,6 +42,9 @@ class LoginController extends Controller
                     return back()->with('disabled' , 'Your account has been disabled.');
                 }
             }
+        }else if(Auth::guard('bhw')->attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect()->route('sub-bhw.dashboard');
         }
 
         return back()->with('error' , 'Username or Password is incorrect.');

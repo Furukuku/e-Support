@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Manage;
 
 use Livewire\Component;
 use App\Models\SubAdmin;
+use App\Rules\MustOnlyOneBHWHead;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,15 +24,15 @@ class Staffs extends Component
 
     public $search = "";
 
-    protected $rules = [
-        'last_name' => 'required|string|max:255',
-        'first_name' => 'required|string|max:255',
-        'middle_name' => 'nullable|string|max:255',
-        'position' => 'required|string|max:20',
-        'email' => 'required|string|email|unique:sub_admins|max:255',
-        'username' => 'required|string|unique:sub_admins|unique:admins|max:255',
-        'password' => 'required|string|min:8|max:255|confirmed',
-    ];
+    // protected $rules = [
+    //     'last_name' => 'required|string|max:255',
+    //     'first_name' => 'required|string|max:255',
+    //     'middle_name' => 'nullable|string|max:255',
+    //     'position' => ['required', 'string', 'max:20', new MustOnlyOneBHWHead],
+    //     'email' => 'required|string|email|unique:sub_admins|max:255',
+    //     'username' => 'required|string|unique:sub_admins|unique:admins|max:255',
+    //     'password' => 'required|string|min:8|max:255|confirmed',
+    // ];
 
     public function updatingSearch()
     {
@@ -60,7 +61,15 @@ class Staffs extends Component
 
     public function createUser()
     {
-        $this->validate();
+        $this->validate([
+            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'position' => ['required', 'string', 'max:20', new MustOnlyOneBHWHead],
+            'email' => 'required|string|email|unique:sub_admins|max:255',
+            'username' => 'required|string|unique:barangay_health_workers|unique:sub_admins|unique:admins|max:15',
+            'password' => 'required|string|min:8|max:255|confirmed',
+        ]);
 
         SubAdmin::create([
             'lname' => $this->last_name,

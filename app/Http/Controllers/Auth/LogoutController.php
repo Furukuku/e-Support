@@ -41,6 +41,17 @@ class LogoutController extends Controller
         return redirect()->route('admin.login');
     }
 
+    public function subBHWLogout(Request $request)
+    {
+        Auth::guard('bhw')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+    
+        return redirect()->route('admin.login');
+    }
+
     public function businessLogout(Request $request)
     {
         Auth::guard('business')->logout();
@@ -60,6 +71,6 @@ class LogoutController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect()->route('welcome');
+        return redirect()->route('resident.login');
     }
 }
