@@ -799,6 +799,16 @@ label[for="proof"] {
   .requested-docs-card {
     width: 18rem;
   }
+
+  .places-card {
+    width: 16rem !important;
+  }
+}
+
+@media (max-width: 250px) {
+  .places-card {
+    width: 13rem !important;
+  }
 }
 
 

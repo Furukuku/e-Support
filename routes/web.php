@@ -193,6 +193,8 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
         Route::view('/services', 'resident.request-report')->name('services');
         Route::view('/profile', 'resident.resident-profile')->name('profile');
 
+        Route::get('/place/{place}', [ResidentController::class, 'place'])->name('place');
+
         Route::view('/business-clearance', 'resident.documents.business-clearance')->name('biz-clearance');
         Route::view('/indigency', 'resident.documents.indigency')->name('indigency');
         Route::view('/brgy-clearance', 'resident.documents.brgy-clearance')->name('brgy-clearance');

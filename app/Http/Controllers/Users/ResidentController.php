@@ -12,6 +12,7 @@ use App\Models\BarangayClearance;
 use App\Models\BusinessClearance;
 use App\Models\Indigency;
 use App\Models\Job;
+use App\Models\Place;
 use App\Models\Report;
 use App\Models\ReportImage;
 use App\Models\SubAdmin;
@@ -450,7 +451,17 @@ class ResidentController extends Controller
     {
         $jobs = Job::with('business')->where('done_hiring', false)->inRandomOrder()->take(10)->get();
 
-        return view('resident.resident-home', ['jobs' => $jobs]);
+        $places = Place::all();
+
+        return view('resident.resident-home', [
+            'jobs' => $jobs,
+            'places' => $places,
+        ]);
+    }
+
+    public function place(Place $place)
+    {
+        return view('resident.resident-place', ['place' => $place]);
     }
 
     public function documents()

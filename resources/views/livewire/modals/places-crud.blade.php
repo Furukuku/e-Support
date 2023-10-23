@@ -52,7 +52,7 @@
               <label for="add-location">Location</label>
               <div class="input-group">
                 <input disabled wire:model.defer="location" id="add-location" type="text" class="form-control">
-                <span id="location-btn" class="material-symbols-outlined input-group-text" style="cursor: pointer;">location_on</span>
+                <span id="location-btn" class="material-symbols-outlined input-group-text">location_on</span>
               </div>
               @error('coordinates') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
@@ -177,7 +177,7 @@
               <label for="edit-location">Location</label>
               <div class="input-group">
                 <input disabled wire:model.defer="location" id="edit-location" type="text" class="form-control">
-                <span id="location-btn" class="material-symbols-outlined input-group-text" style="cursor: pointer;">location_on</span>
+                <span id="location-btn" class="material-symbols-outlined input-group-text">location_on</span>
               </div>
               @error('coordinates') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>

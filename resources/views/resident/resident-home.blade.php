@@ -44,7 +44,7 @@
       </div>
     @endif
   
-    <div class="d-flex justify-content-between align-items-center py-4 px-5 my-5 bg-success bg-opacity-25 home-middle">
+    <div class="d-flex justify-content-between align-items-center py-4 px-5 {{ $jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true ? 'my-5' : 'mb-5' }} bg-success bg-opacity-25 home-middle">
       <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
         <h5 class="m-0 align-center">Where do you want to go?</h5>
         <p class="m-0 align-center">Explore some places around Barangay Nancayasan.</p>
@@ -59,91 +59,23 @@
     </div>
 
     <div class="mx-5 home-end">
-      <div>
-        <h6>PLACES</h6>
+      <div class="mb-4">
+        <h6 class="text-center">PLACES</h6>
       </div>
-      <div class="row gap-2 justify-content-center p-2">
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+      <div class="row gap-4 justify-content-center p-2">
+        @forelse ($places as $place)
+          <div class="card shadow-sm mb-4 px-0 places-card" style="width: 18rem; cursor: pointer;">
+            <a href="{{ route('resident.place', ['place' => $place]) }}" class="text-dark" style="text-decoration: none;">
+              <img src="{{ Storage::url($place->display_img) }}" class="card-img-top object-fit-cover" style="height: 13rem;" alt="...">
+              <div class="card-body">
+                <h5 class="card-title mb-3 text-nowrap text-truncate">{{ $place->name }}</h5>
+                <h6 class="card-subtitle text-body-secondary text-nowrap text-truncate">{{ $place->location }}</h6>
+              </div>
+            </a>
           </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto mb-5">
-          <div class="card shadow-sm" style="max-width: 24rem;">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
+        @empty
+          <p class="text-center">There is no places.</p>
+        @endforelse
       </div>
     </div>
 
