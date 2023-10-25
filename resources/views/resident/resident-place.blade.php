@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="container p-0 mb-3">
+  <div class="container mb-3">
     <div id="map" class="border rounded shadow w-100" style="height: 20rem;"></div>
   </div>
 

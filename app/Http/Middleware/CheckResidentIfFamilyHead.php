@@ -15,7 +15,7 @@ class CheckResidentIfFamilyHead
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && $request->user()->is_head == false){
+        if($request->user() && ($request->user()->is_head == false || $request->user()->can_edit_profiling == false)){
             return redirect()->back();
         }
 

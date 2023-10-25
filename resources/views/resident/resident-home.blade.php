@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="py-5">
+  <div class="{{ $jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true ? 'py-5' : 'py-4' }}">
 
     @if ($jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true)
       <div class="position-relative mx-5 home-start">
@@ -74,7 +74,7 @@
             </a>
           </div>
         @empty
-          <p class="text-center">There is no places.</p>
+          <p class="text-center">There are no places to show.</p>
         @endforelse
       </div>
     </div>

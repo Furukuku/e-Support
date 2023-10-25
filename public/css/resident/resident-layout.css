@@ -309,32 +309,24 @@ label[for="proof"] {
 }
 
 .close-chatbot-icon {
-  /* visibility: hidden; */
   transform: translate(-50%, -50%) rotate(0deg);
   font-size: 1.2rem;
 }
 
-/* .close-chatbot-icon.show {
-  animation: showCloseChatbotIcon 300ms ease-in-out forwards;
-}
-
-.close-chatbot-icon.hide {
-  animation: hideCloseChatbotIcon 300ms ease-in-out reverse;
-} */
-
 .chat-box {
-  display: none;
-  height: 1rem;
-  width: 1rem;
+  visibility: hidden;
+  height: 0;
+  width: 5rem;
   position: fixed;
   bottom: 4.8rem;
   right: 2rem;
   overflow: hidden;
   z-index: 4 !important;
+  transition: all 200ms ease-in-out;
 }
 
 .chat-box.show {
-  display: block;
+  visibility: visible;
   height: 25rem;
   width: 20rem;
   position: fixed;
@@ -342,20 +334,6 @@ label[for="proof"] {
   right: 2rem;
   z-index: 4 !important;
 }
-
-/* .chat-box.show {
-  display: block;
-  height: 25rem;
-  width: 20rem;
-  position: fixed;
-  bottom: 4.8rem;
-  right: 2rem;
-  animation: chatBoxShow 150ms ease-in-out reverse;
-}
-
-.chat-box.hide {
-  animation: chatBoxHide 150ms ease-in-out forwards;
-} */
 
 .chat-box > .message-header {
   background-color: var(--theme-color);
@@ -390,16 +368,8 @@ label[for="proof"] {
   border-color: #edf2f7 transparent transparent transparent;
 }
 
-.bot-icon {
-  background-color: var(--theme-color);
-  height: 1.5rem;
+.bot-icon img {
   width: 1.5rem;
-  display: grid;
-  place-items: center;
-}
-
-.bot-icon i {
-  font-size: 0.65rem;
 }
 
 .my-message {
@@ -448,74 +418,6 @@ label[for="proof"] {
 .chat-box .message-box > textarea::placeholder {
   font-size: 0.8rem;
   padding-top: 0.15rem;
-}
-
-
-
-@keyframes chatBoxShow {
-  from {
-    display: none;
-    height: 1rem;
-    width: 1rem;
-    position: fixed;
-    bottom: 4.8rem;
-    right: 2rem;
-    overflow: hidden;
-  }
-  to {
-    display: block;
-    height: 25rem;
-    width: 20rem;
-    position: fixed;
-    bottom: 4.8rem;
-    right: 2rem;
-  }
-}
-
-@keyframes chatBoxHide {
-  from {
-    display: block;
-    height: 25rem;
-    width: 20rem;
-    position: fixed;
-    bottom: 4.8rem;
-    right: 2rem;
-  }
-  to {
-    display: none;
-    height: 1rem;
-    width: 1rem;
-    position: fixed;
-    bottom: 4.8rem;
-    right: 2rem;
-    overflow: hidden;
-  }
-}
-
-
-@keyframes showCloseChatbotIcon {
-  from {
-    font-size: 0.5rem;
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
-  to {
-    visibility: visible;
-    font-size: 1.5rem;
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-}
-
-
-@keyframes hideCloseChatbotIcon {
-  from {
-    visibility: visible;
-    font-size: 1.5rem;
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  ro {
-    font-size: 0.5rem;
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
 }
 
 
@@ -782,6 +684,25 @@ label[for="proof"] {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .chat-box.show {
+  visibility: visible;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  z-index: 10 !important;
+  }
+
+  .chat-messages {
+    height: calc(100% - (3.5rem + 3rem)) !important;
+  }
+
+  .chatbot-close-btn {
+    display: block !important;
   }
 }
 

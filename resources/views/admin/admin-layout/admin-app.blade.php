@@ -224,6 +224,14 @@
           </a>
         </li>
         <li class="nav-item text-white sidebar-list">
+          <a href="{{ route('admin.chat-support.tag') }}" id="chat-support" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.chat-support') ? 'navigate-active' : '' }}">
+            <div class="container-fluid row p-0 ps-2 m-0">
+              <span class="material-symbols-outlined col-3 text-center">forum</span>
+              <p class="col-9 m-0 ps-0">Chat Support</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item text-white sidebar-list">
           <a href="{{ route('admin.account') }}" id="account" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.account') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">manage_accounts</span>

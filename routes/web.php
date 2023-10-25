@@ -86,14 +86,14 @@ Route::middleware('admin.auth:admin')->group(function() {
         Route::view('/archives', 'admin.admin-archives')->name('archives');
         // Route::get('/account', [AdminController::class, 'account'])->name('account');
         Route::view('/account', 'admin.admin-account')->name('account');
-
+        
         Route::name('profile.')->group(function(){
             // Route::get('/officials', [AdminController::class, 'brgyOfficials'])->name('officials');
             Route::view('/officials', 'admin.admin-profile-brgy-officials')->name('officials');
             // Route::get('/residents', [AdminController::class, 'residents'])->name('residents');
             Route::view('/residents', 'admin.admin-profile-residents')->name('residents');
         });
-
+        
         Route::name('manage.')->group(function(){
             // Route::get('/staffs', [AdminController::class, 'staffs'])->name('staffs');
             Route::view('/staffs', 'admin.admin-manage-staffs')->name('staffs');
@@ -102,7 +102,7 @@ Route::middleware('admin.auth:admin')->group(function() {
             // Route::get('/approval', [AdminController::class, 'approval'])->name('approval');
             Route::view('/approval', 'admin.admin-manage-approval')->name('approval');
         });
-
+        
         Route::name('docs.')->group(function(){
             Route::get('/brgy-clearances', [AdminController::class, 'brgyClearances'])->name('brgy-clearances');
             // Route::view('/clearance', 'admin.admin-docs-brgy-clearances')->name('brgy-clearance');
@@ -111,15 +111,20 @@ Route::middleware('admin.auth:admin')->group(function() {
             Route::get('/indigencies', [AdminController::class, 'indigencies'])->name('indigencies');
             // Route::view('/indigency', 'admin.admin-docs-indigencies')->name('indigency');
         });
-
+        
         Route::name('scan.')->group(function(){
             Route::view('/scan/business-clearance', 'admin.scan-biz-clearance')->name('biz-clearance');
         });
-
+        
         Route::name('templates.')->group(function(){
             Route::get('/business-clearance/{document}', [AdminController::class, 'bizClearanceTemplate'])->middleware('docs.document-type')->name('biz-clearance');
             Route::get('/barangay-clearance/{document}', [AdminController::class, 'brgyClearanceTemplate'])->middleware('docs.document-type')->name('brgy-clearance');
             Route::get('/indigency/{document}', [AdminController::class, 'indigencyTemplate'])->middleware('docs.document-type')->name('indigency');
+        });
+
+        Route::name('chat-support.')->group(function() {
+            Route::view('/chat-support-tag', 'admin.admin-chat-support')->name('tag');
+            Route::view('/chat-support-tag/{tag}', 'admin.admin-chat-support-conversation')->name('conversation');
         });
     });
 });

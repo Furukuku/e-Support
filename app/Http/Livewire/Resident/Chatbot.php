@@ -46,57 +46,39 @@ class Chatbot extends Component
 
         $this->dispatchBrowserEvent('sendQuestion', ['question' => $this->question]);
 
-        // $response = '';
+        // $patterns = ChatBotPattern::inRandomOrder()->get();
+        // foreach($patterns as $index => $pattern){
+        //     $keyword = $pattern->keyword;
+        //     $question = strtolower($this->question);
 
-        // $lower_question = strtolower($this->question);
-        // if(str_contains($lower_question, 'hello') || str_contains($lower_question, 'hi') || str_contains($lower_question, 'greetings') || str_contains($lower_question, 'kamusta'))
-        // {
-        //     $chatbot = ChatbotModel::where('question', 'hello')->first();
-        //     $this->dispatchBrowserEvent('response', ['message' => $chatbot->response]);
-        // }
-        // else if(str_contains($lower_question, 'jobs') || str_contains($lower_question, 'job') || str_contains($lower_question, 'trabaho') || str_contains($lower_question, 'works') || str_contains($lower_question, 'work'))
-        // {
-        //     $chatbot = ChatbotModel::where('question', 'job')->first();
-        //     $this->dispatchBrowserEvent('response', ['message' => $chatbot->response]);
-        // }
-        // else if(str_contains($lower_question, 'putang') || str_contains($lower_question, 'putangina') || str_contains($lower_question, 'putanginamo') || str_contains($lower_question, 'inamo') || str_contains($lower_question, 'ina mo') || str_contains($lower_question, 'fuck') || str_contains($lower_question, 'fuck you'))
-        // {
-        //     $chatbot = ChatbotModel::where('question', 'badwords')->first();
-        //     $this->dispatchBrowserEvent('response', ['message' => $chatbot->response]);
-        // }
-        // else
-        // {
-        //     $chatbot = ChatbotModel::where('question', 'like', '%' . $lower_question . '%')->first();
-        //     if(is_null($chatbot)){
+        //     if(str_contains($question, $keyword)){
+        //         $response = $pattern->tag->responses()->inRandomOrder()->first();
+        //         if(!is_null($response)){
+        //             $this->dispatchBrowserEvent('response', ['message' => $response->response]);
+        //         }else{
+        //             $this->dispatchBrowserEvent('response', ['message' => "I'm sorry, I don't understand your question."]);
+        //         }
+        //         break;
+        //     }else if($index + 1 == $patterns->count()){
         //         $this->dispatchBrowserEvent('response', ['message' => "I'm sorry, I don't understand your question."]);
-        //     }else{
-        //         $this->dispatchBrowserEvent('response', ['message' => $chatbot->response]);
         //     }
         // }
-        // $tag = ChatBotTag::first();
-        // $response = ChatBotResponse::with('tag')->first();
-        // dd($response->tag);
 
-        $patterns = ChatBotPattern::inRandomOrder()->get();
-        foreach($patterns as $index => $pattern){
-            $keyword = $pattern->keyword;
-            $question = strtolower($this->question);
+        $question = strtolower($this->question);
 
-            // if($pattern->tag->is_prior == true){
-            //     if(str_contains($question, $keyword)){
-            //         $response = $pattern->tag->responses()->inRandomOrder()->first();
-            //         $this->dispatchBrowserEvent('response', ['message' => $response->response]);
-            //         break;
-            //     }
-            // }
+        $pattern = ChatBotPattern::inRandomOrder()
+            ->whereRaw("LOCATE(keyword, ?) > 0", [$question])
+            ->first();
 
-            if(str_contains($question, $keyword)){
-                $response = $pattern->tag->responses()->inRandomOrder()->first();
+        if ($pattern) {
+            $response = $pattern->tag->responses()->inRandomOrder()->first();
+            if (!is_null($response)) {
                 $this->dispatchBrowserEvent('response', ['message' => $response->response]);
-                break;
-            }else if($index + 1 == $patterns->count()){
+            } else {
                 $this->dispatchBrowserEvent('response', ['message' => "I'm sorry, I don't understand your question."]);
             }
+        } else {
+            $this->dispatchBrowserEvent('response', ['message' => "I'm sorry, I don't understand your question."]);
         }
 
         $this->reset('question');

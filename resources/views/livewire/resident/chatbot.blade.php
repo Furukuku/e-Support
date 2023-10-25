@@ -1,8 +1,9 @@
 <div>
   
   <div id="chat-box" class="bg-white border rounded shadow chat-box {{ $chatBox }}">
-    <div class="d-flex justify-content-center align-items-center rounded-top message-header">
-      <h5 class="text-white text-center m-0">Chatbot</h5>
+    <div class="d-flex justify-content-center align-items-center rounded-top position-relative message-header">
+      <h5 class="text-white text-center m-0">Chat Support</h5>
+      <span class="position-absolute top-0 d-none chatbot-close-btn" wire:click="toggleChat" style="right: 0.5rem; cursor: pointer;"><i class="fa-solid fa-xmark text-light"></i></span>
     </div>
     <div wire:ignore id="chat-messages" class="d-flex flex-column gap-3 px-2 py-4 overflow-y-auto chat-messages">
 
@@ -61,7 +62,7 @@
           botMessage.className = "d-flex flex-column-reverse gap-2 align-items-start pe-5 w-100";
           botMessage.innerHTML = `
             <div class="rounded-circle bot-icon">
-              <i class="fa-solid fa-robot text-white"></i>
+              <img src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" class="rounded-circle">
             </div>
             <div class="p-2 px-3 text-wrap text-break bot-message">
               <p class="m-0">${e.detail.message}</p>
@@ -74,6 +75,7 @@
 
       window.addEventListener('focus', () => {
         if(chatBox.classList.contains('show')){
+          console.log('hello');
           qField.focus();
         }
       });
