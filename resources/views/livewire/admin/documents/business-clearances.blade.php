@@ -59,7 +59,7 @@
             <th class="align-middle text-center">Business Name</th>
             <th class="align-middle text-center">Nature of Business</th>
             <th class="align-middle text-center">Owner</th>
-            <th class="align-middle text-center">Date/Time</th>
+            <th class="align-middle text-center">Date/Time Requested</th>
             <th class="align-middle text-center">Action</th>
           </tr>
         </thead>
@@ -67,7 +67,11 @@
           @forelse ($documents as $document)
             <tr wire:poll.60s>
               <td class="align-middle text-center">
-                <div class="px-1 rounded-pill bg-warning">{{ $document->status }}</div>
+                @if ($document->status === 'Pending')
+                  <div class="px-1 rounded-pill bg-warning">{{ $document->status }}</div>
+                @elseif ($document->status === 'Ready To Pickup')
+                  <div class="px-1 rounded-pill bg-primary text-white">For Pickup</div>
+                @endif
               </td>
               <td class="align-middle text-center">{{ $document->bizClearance->biz_name }}</td>
               <td class="align-middle text-center">{{ $document->bizClearance->biz_nature }}</td>
@@ -79,7 +83,7 @@
                 </span>
                 {{-- <i class="fa-solid fa-eye ms-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#bizClearanceInfo"></i> --}}
                 {{-- <i class="fa-solid fa-pen ms-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i> --}}
-                {{-- <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i> --}}
+                <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="releaseConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
               </td>
             </tr>
           @empty
@@ -126,8 +130,6 @@
             <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Business Name</th>
             <th class="align-middle text-center">Owner</th>
-            <th class="align-middle text-center">CTC #</th>
-            <th class="align-middle text-center">Issued at</th>
             <th class="align-middle text-center">Issued by</th>
             <th class="align-middle text-center">Fee</th>
             <th class="align-middle text-center">Data/Time Claimed</th>
@@ -142,8 +144,6 @@
               </td>
               <td class="align-middle text-center">{{ $taken_doc->bizClearance->biz_name }}</td>
               <td class="align-middle text-center">{{ $taken_doc->bizClearance->biz_owner }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->bizClearance->ctc }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->bizClearance->issued_at }}</td>
               <td class="align-middle text-center">{{ $taken_doc->issued_by }}</td>
               <td class="align-middle text-center">{{ is_null($taken_doc->bizClearance->fee) ? '0' : $taken_doc->bizClearance->fee }}</td>
               <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>

@@ -53,6 +53,10 @@
       $('#addDocConfirm').modal('show');
     });
 
+    window.addEventListener('showReleaseConfirm', () => {
+      $('#releaseDoc').modal('show');
+    });
+
     const residentNameInput = document.getElementById('add-name');
     const suggestionContainer = document.getElementById('name-suggestion-container');
 

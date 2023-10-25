@@ -11,10 +11,21 @@ class BusinessClearance extends Component
 {
     public Document $document;
 
-    protected $listeners = ['confirm'];
+    public $fee;
 
-    public function confirm()
+    public function closeModal()
     {
+        $this->resetValidation();
+        $this->resetErrorBag();
+        $this->reset('fee');
+    }
+
+    public function release()
+    {
+        $this->validate([
+            'fee' => ['required', 'numeric', 'min:0.01'],
+        ]);
+
         $this->document->status = 'Released';
         $this->document->is_released = true;
         
@@ -26,9 +37,20 @@ class BusinessClearance extends Component
         
         $this->document->update();
 
+        $this->document->bizClearance->fee = $this->fee;
         $this->document->bizClearance->date_issued = now();
         $this->document->bizClearance->expiry_date = now()->addMonths(6);
         $this->document->bizClearance->update();
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
+        return redirect()->route('admin.docs.biz-clearances');
+    }
+
+    public function forPickup()
+    {
+        $this->document->status = 'Ready To Pickup';
+        $this->document->update();
 
         $this->dispatchBrowserEvent('close-modal');
         return redirect()->route('admin.docs.biz-clearances');

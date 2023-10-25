@@ -9,6 +9,7 @@ use App\Models\FamilyMember;
 use App\Models\Indigency;
 use App\Models\Wife;
 use App\Rules\CheckIfValidResident;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 
@@ -80,6 +81,12 @@ class Indigencies extends Component
         }
     }
 
+    public function qrReleaseConfirm()
+    {
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('showReleaseConfirm');
+    }
+
     public function print()
     {
         $document = Document::find($this->doc_id);
@@ -92,8 +99,10 @@ class Indigencies extends Component
 
     public function addDoc()
     {
+        $this->dispatchBrowserEvent('hideSuggestions');
+
         $this->validate([
-            'name' => ['required', 'string', 'max:255', new CheckIfValidResident],
+            'name' => ['required', 'string', 'max:255'],
             'purpose' => ['required', 'string', 'max:255'],
         ]);
 
@@ -125,19 +134,9 @@ class Indigencies extends Component
         $this->doc_id = $document->id;
         $this->name = $document->indigency->name;
         $this->purpose = $document->indigency->purpose;
-        $this->date_requested = $document->created_at;
     }
 
-    // public function print()
-    // {
-    //     $document = Document::find($this->doc_id);
-        
-    //     $this->dispatchBrowserEvent('close-modal');
-    //     $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
-    //     $this->closeModal();
-    // }
-
-    public function editDoc(Document $document)
+    public function releaseConfirm(Document $document)
     {
         $this->doc_id = $document->id;
     }
@@ -147,7 +146,17 @@ class Indigencies extends Component
         $document = Document::find($this->doc_id);
         $document->status = 'Released';
         $document->is_released = true;
+
+        if(Auth::guard('admin')->check()){
+            $document->issued_by = auth()->guard('admin')->user()->username;
+        }else if(Auth::guard('sub-admin')->check()){
+            $document->issued_by = auth()->guard('sub-admin')->user()->fname . ' ' . auth()->guard('sub-admin')->user()->lname;
+        }
+
         $document->update();
+
+        $document->indigency->date_issued = now();
+        $document->indigency->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();

@@ -1,15 +1,46 @@
 <div class="container py-4 doc-container" style="width: 800px;">
 
-  @if ($document->is_released == false && $document->status == 'Pending')
+  @if ($document->is_released == false)
     <div class="container d-flex gap-3 justify-content-end mb-2 w-100">
       <button class="btn btn-primary print-btn" id="print-btn">
         <span class="material-symbols-outlined align-middle">print</span>
       </button>
-      <button class="btn btn-success px-3" data-bs-toggle="modal" data-bs-target="#confirm">
+      <button class="btn {{ (is_null($document->user_id) && is_null($document->business_id)) || $document->status === 'Ready To Pickup' ? 'btn-success' : 'btn-primary' }} px-3" data-bs-toggle="modal" data-bs-target="#confirm">
         <i class="fa-solid fa-file-circle-check"></i>
       </button>
     </div>
+  @endif
 
+  @if ((is_null($document->user_id) && is_null($document->business_id)) || $document->status === 'Ready To Pickup')
+    <div wire:ignore.self class="modal fade release-modal" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0 justify-content-end">
+            <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
+              cancel
+            </span>
+          </div>
+          <div class="modal-body pt-0 px-5">
+            <div class="d-flex justify-content-center mb-3">
+              <span class="material-symbols-outlined fs-1 text-warning">
+                warning
+              </span>
+            </div>
+            <h4 class="text-center mb-3">Release Business Clearance?</h4>
+            <p class="text-center px-4 confirm-fs">Are you sure you're done printing this document? You cannot revert this.</p>
+            <div class="my-3">
+              <input type="number" id="add_fee" wire:model.defer="fee" placeholder="Enter fee amount" min="0" class="form-control">
+              @error('fee') <span class="error text-danger px-2" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center border-0">
+            <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" wire:loading.attr="disabled" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" wire:click="release" wire:loading.attr="disabled" class="btn btn-success px-4 mx-3">Release</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  @else
     <div wire:ignore.self class="modal fade release-modal" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -24,12 +55,12 @@
                 warning
               </span>
             </div>
-            <h4 class="text-center mb-3">Release Business Clearance?</h4>
-            <p class="text-center px-4 confirm-fs">Are you sure you're done printing this document? You cannot revert this.</p>
+            <h4 class="text-center mb-3">Mark as Ready to Pickup?</h4>
+            <p class="text-center px-4 confirm-fs">Are you sure you want to mark this document as ready to pickup?</p>
           </div>
           <div class="modal-footer d-flex justify-content-center border-0">
-            <button type="button" class="btn btn-secondary px-4 mx-3" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" id="confirm-btn" class="btn btn-success px-4 mx-3">Release</button>
+            <button type="button" class="btn btn-secondary px-4 mx-3" wire:loading.attr="disabled" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" wire:click="forPickup" wire:loading.attr="disabled" class="btn btn-primary px-4 mx-3">Confirm</button>
           </div>
         </div>
       </div>

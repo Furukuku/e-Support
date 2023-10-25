@@ -56,7 +56,11 @@
           @forelse ($documents as $document)
             <tr wire:poll.60s>
               <td class="align-middle text-center">
-                <div class="px-1 rounded-pill bg-warning">{{ $document->status }}</div>
+                @if ($document->status === 'Pending')
+                  <div class="px-1 rounded-pill bg-warning">{{ $document->status }}</div>
+                @elseif ($document->status === 'Ready To Pickup')
+                  <div class="px-1 rounded-pill bg-primary text-white">For Pickup</div>
+                @endif
               </td>
               <td class="align-middle text-center">{{ $document->brgyClearance->name }}</td>
               <td class="align-middle text-center">{{ $document->brgyClearance->zone }}</td>
@@ -68,7 +72,7 @@
                 </span>
                 {{-- <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#brgyClearanceInfo"></i> --}}
                 {{-- <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i> --}}
-                {{-- <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i> --}}
+                <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="releaseConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
               </td>
             </tr>
           @empty
@@ -114,8 +118,6 @@
           <tr>
             <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Name</th>
-            <th class="align-middle text-center">CTC #</th>
-            <th class="align-middle text-center">Issued at</th>
             <th class="align-middle text-center">Issued by</th>
             <th class="align-middle text-center">Fee</th>
             <th class="align-middle text-center">Date/Time Claimed</th>
@@ -129,8 +131,6 @@
                 <div class="px-1 rounded-pill bg-success text-white">{{ $taken_doc->status }}</div>
               </td>
               <td class="align-middle text-center">{{ $taken_doc->brgyClearance->name }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->brgyClearance->ctc }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->brgyClearance->issued_at }}</td>
               <td class="align-middle text-center">{{ $taken_doc->issued_by }}</td>
               <td class="align-middle text-center">{{ is_null($taken_doc->brgyClearance->fee) ? '0' : $taken_doc->brgyClearance->fee }}</td>
               <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>

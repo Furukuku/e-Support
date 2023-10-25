@@ -9,6 +9,8 @@
       {{ $qr_code }}
     </div>
 
+    <a href="{{ route('resident.services') }}" class="btn btn-success my-3">Done</a>
+
   </div>
 
 @endsection

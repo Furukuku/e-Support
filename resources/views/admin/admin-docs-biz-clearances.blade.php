@@ -54,6 +54,10 @@
       $('#addDocConfirm').modal('show');
     });
 
+    window.addEventListener('showReleaseConfirm', () => {
+      $('#releaseDoc').modal('show');
+    });
+
     const residentNameInput = document.getElementById('biz_owner');
     const suggestionContainer = document.getElementById('name-suggestion-container');
 

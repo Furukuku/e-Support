@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\FamilyMember;
 use Livewire\WithPagination;
 use App\Rules\CheckIfValidResident;
+use Illuminate\Support\Facades\Auth;
 
 class BusinessClearances extends Component
 {
@@ -39,6 +40,8 @@ class BusinessClearances extends Component
     public $clearance_no;
 
     public $doc_id;
+
+    public $ctc_container = 'd-none';
 
     public $error_msg = '';
 
@@ -94,6 +97,7 @@ class BusinessClearances extends Component
             'issued_on_update',
             'fee',
             'clearance_no_update',
+            'ctc_container'
         );
     }
 
@@ -134,39 +138,17 @@ class BusinessClearances extends Component
         }
     }
 
+    public function qrReleaseConfirm()
+    {
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('showReleaseConfirm');
+    }
+
     public function print()
     {
         $document = Document::find($this->doc_id);
 
-        if(is_null($this->ctc) && is_null($this->issued_at) && is_null($this->issued_on) && is_null($this->clearance_no)){
-            $this->validate([
-                'clearance_no_update' => ['required', 'string', 'max:255'],
-                'ctc_update' => ['required', 'string', 'max:255'],
-                'issued_at_update' => ['required', 'string', 'max:255'],
-                'issued_on_update' => ['required', 'date'],
-                'fee' => ['required', 'numeric', 'min:0.01'],
-            ]);
-
-            $document->bizClearance->clearance_no = $this->clearance_no_update;
-            $document->bizClearance->ctc = $this->ctc_update;
-            $document->bizClearance->issued_at = $this->issued_at_update;
-            $document->bizClearance->issued_on = $this->issued_on_update;
-            $document->bizClearance->fee = $this->fee;
-            $document->bizClearance->update();
-        }else if(is_null($this->ctc) && is_null($this->issued_at) && is_null($this->issued_on)){
-            $this->validate([
-                'ctc_update' => ['required', 'string', 'max:255'],
-                'issued_at_update' => ['required', 'string', 'max:255'],
-                'issued_on_update' => ['required', 'date'],
-                'fee' => ['required', 'numeric', 'min:0.01'],
-            ]);
-
-            $document->bizClearance->ctc = $this->ctc_update;
-            $document->bizClearance->issued_at = $this->issued_at_update;
-            $document->bizClearance->issued_on = $this->issued_on_update;
-            $document->bizClearance->fee = $this->fee;
-            $document->bizClearance->update();
-        }else If(is_null($this->clearance_no)){
+        if(is_null($document->bizClearance->clearance_no)){
             $this->validate([
                 'clearance_no_update' => ['required', 'string', 'max:255'],
             ]);
@@ -181,22 +163,43 @@ class BusinessClearances extends Component
         return redirect()->route('admin.templates.biz-clearance', ['document' => $document]);
     }
 
+    public function addCtc()
+    {
+        if($this->ctc_container === 'd-none'){
+            $this->ctc_container = '';
+        }else{
+            $this->ctc_container = 'd-none';
+            $this->reset('ctc', 'issued_at', 'issued_on');
+            $this->resetErrorBag(['ctc', 'issued_at', 'issued_on']);
+        }
+    }
+
     public function addDoc()
     {
         $this->dispatchBrowserEvent('hideSuggestions');
 
-        $this->validate([
-            'clearance_no' => ['required', 'string', 'max:255'],
-            'business_nature' => ['required', 'string', 'max:255'],
-            'owner_name' => ['required', 'string', 'max:255', new CheckIfValidResident],
-            'business_name' => ['required', 'string', 'max:255'],
-            'owner_address' => ['required', 'string', 'max:255'],
-            'business_address' => ['required', 'string', 'max:255'],
-            'ctc' => ['required', 'string', 'max:255'],
-            'issued_at' => ['required', 'string', 'max:255'],
-            'issued_on' => ['required', 'date'],
-            'fee' => ['required', 'numeric', 'min:0.01'],
-        ]);
+        if($this->ctc_container === ''){
+            $this->validate([
+                'clearance_no' => ['required', 'string', 'max:255'],
+                'business_nature' => ['required', 'string', 'max:255'],
+                'owner_name' => ['required', 'string', 'max:255'],
+                'business_name' => ['required', 'string', 'max:255'],
+                'owner_address' => ['required', 'string', 'max:255'],
+                'business_address' => ['required', 'string', 'max:255'],
+                'ctc' => ['required', 'string', 'max:255'],
+                'issued_at' => ['required', 'string', 'max:255'],
+                'issued_on' => ['required', 'date'],
+            ]);
+        }else{
+            $this->validate([
+                'clearance_no' => ['required', 'string', 'max:255'],
+                'business_nature' => ['required', 'string', 'max:255'],
+                'owner_name' => ['required', 'string', 'max:255'],
+                'business_name' => ['required', 'string', 'max:255'],
+                'owner_address' => ['required', 'string', 'max:255'],
+                'business_address' => ['required', 'string', 'max:255'],
+            ]);
+        }
 
         $this->dispatchBrowserEvent('showConfirmation');
         $this->dispatchBrowserEvent('close-modal');
@@ -220,7 +223,6 @@ class BusinessClearances extends Component
         $bizClearance->ctc = $this->ctc;
         $bizClearance->issued_at = $this->issued_at;
         $bizClearance->issued_on = $this->issued_on;
-        $bizClearance->fee = $this->fee;
         $bizClearance->save();
 
         $this->closeModal();
@@ -243,8 +245,6 @@ class BusinessClearances extends Component
         $this->ctc = $document->bizClearance->ctc;
         $this->issued_at = $document->bizClearance->issued_at;
         $this->issued_on = $document->bizClearance->issued_on;
-        $this->fee = $document->bizClearance->fee;
-        $this->date_requested = $document->created_at;
     }
 
     // public function print()
@@ -256,19 +256,34 @@ class BusinessClearances extends Component
     //     $this->closeModal();
     // }
 
-    public function editDoc(Document $document)
+    public function releaseConfirm(Document $document)
     {
         $this->doc_id = $document->id;
     }
 
     public function release()
     {
+        $this->validate([
+            'fee' => ['required', 'numeric', 'min:0.01'],
+        ]);
+
         $document = Document::find($this->doc_id);
         $document->status = 'Released';
         $document->is_released = true;
-        $document->bizClearance->date_issued = now();
-        $document->update();
 
+        if(Auth::guard('admin')->check()){
+            $document->issued_by = auth()->guard('admin')->user()->username;
+        }else if(Auth::guard('sub-admin')->check()){
+            $document->issued_by = auth()->guard('sub-admin')->user()->fname . ' ' . auth()->guard('sub-admin')->user()->lname;
+        }
+
+        $document->update();
+        
+        $document->bizClearance->fee = $this->fee;
+        $document->bizClearance->date_issued = now();
+        $document->bizClearance->expiry_date = now()->addMonths(6);
+        $document->bizClearance->update();
+        
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
     }

@@ -26,18 +26,13 @@
 
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-  @if ($document->is_released == false && $document->status == 'Pending')
+  @if ($document->is_released == false)
     <script>
       const printBtn = document.getElementById('print-btn');
-      const confirmBtn = document.getElementById('confirm-btn');
 
       printBtn.addEventListener('click', () => {
         window.print();
       })
-
-      confirmBtn.addEventListener('click', () => {
-        Livewire.emit('confirm');
-      });
 
       window.addEventListener('close-modal', () => {
         $('#confirm').modal('hide');

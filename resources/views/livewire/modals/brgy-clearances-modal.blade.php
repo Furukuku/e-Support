@@ -82,29 +82,30 @@
             <input type="text" wire:model.defer="purpose" id="purpose" class="form-control">
             @error('purpose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
           </div>
-          <div class="my-3">
-            <label for="add_ctc" class="form-label">Community Tax Certificate</label>
-            <input type="text" id="add_ctc" wire:model.defer="ctc" class="form-control">
-            @error('ctc') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          <div class="d-flex align-items-center justify-content-between">
+            <h5 class="m-0">Add Community Tax Certificate</h5>
+            <span wire:click="addCtc" class="fs-2" style="cursor: pointer;">@if($ctc_container === 'd-none')&#43;@else&times;@endif</span>
           </div>
-          <div class="my-3">
-            <label for="add_issued_at" class="form-label">Issued at</label>
-            <input type="text" id="add_issued_at" wire:model.defer="issued_at" class="form-control">
-            @error('issued_at') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          </div>
-          <div class="my-3">
-            <label for="add_issued_on" class="form-label">Issued on</label>
-            <input type="date" id="add_issued_on" wire:model.defer="issued_on" class="form-control">
-            @error('issued_on') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          </div>
-          <div class="my-3">
-            <label for="add_fee" class="form-label">Fee</label>
-            <input type="number" id="add_fee" wire:model.defer="fee" min="0" class="form-control">
-            @error('fee') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          <div class="{{ $ctc_container }}">
+            <div class="my-3">
+              <label for="add_ctc" class="form-label">CTC#</label>
+              <input type="text" id="add_ctc" wire:model.defer="ctc" class="form-control">
+              @error('ctc') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="add_issued_at" class="form-label">Issued at</label>
+              <input type="text" id="add_issued_at" wire:model.defer="issued_at" class="form-control">
+              @error('issued_at') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="my-3">
+              <label for="add_issued_on" class="form-label">Issued on</label>
+              <input type="date" id="add_issued_on" wire:model.defer="issued_on" class="form-control">
+              @error('issued_on') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            </div>
           </div>
         </div>
         <div class="modal-footer justify-content-center border-0">
-          <button type="submit" class="btn btn-warning rounded-pill px-5">Submit</button>
+          <button type="submit" wire:loading.attr="disabled" class="btn btn-warning rounded-pill px-5">Submit</button>
         </div>
       </div>
     </div>
@@ -141,34 +142,34 @@
             <p class="m-0 text-truncate">{{ $purpose }}</p>
           </div>
         </div>
-        <div class="my-3">
-          <label class="form-label">Community Tax Certificate</label>
-          <div class="border rounded p-2">
-            <p class="m-0 text-truncate">{{ $ctc }}</p>
+        @if (!is_null($ctc))
+          <div class="my-3">
+            <label class="form-label">CTC#</label>
+            <div class="border rounded p-2">
+              <p class="m-0 text-truncate">{{ $ctc }}</p>
+            </div>
           </div>
-        </div>
-        <div class="my-3">
-          <label class="form-label">Issued_at</label>
-          <div class="border rounded p-2">
-            <p class="m-0 text-truncate">{{ $issued_at }}</p>
+        @endif
+        @if (!is_null($issued_at))
+          <div class="my-3">
+            <label class="form-label">Issued_at</label>
+            <div class="border rounded p-2">
+              <p class="m-0 text-truncate">{{ $issued_at }}</p>
+            </div>
           </div>
-        </div>
-        <div class="my-3">
-          <label class="form-label">Issued_on</label>
-          <div class="border rounded p-2">
-            <p class="m-0 text-truncate">{{ $issued_on }}</p>
+        @endif
+        @if (!is_null($issued_on))
+          <div class="my-3">
+            <label class="form-label">Issued_on</label>
+            <div class="border rounded p-2">
+              <p class="m-0 text-truncate">{{ $issued_on }}</p>
+            </div>
           </div>
-        </div>
-        <div class="my-3">
-          <label class="form-label">Fee</label>
-          <div class="border rounded p-2">
-            <p class="m-0 text-truncate">{{ $fee }}</p>
-          </div>
-        </div>
+        @endif
       </div>
-      <div class="modal-footer justify-content-between border-0">
-        <button type="button" wire:click="closeModal" class="btn btn-secondary rounded-pill px-5" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-        <button type="button" wire:click="confirmAddDoc" class="btn btn-warning rounded-pill px-5">Print</button>
+      <div class="modal-footer justify-content-end border-0">
+        <button type="button" wire:click="closeModal" wire:loading.attr="disabled" class="btn btn-secondary rounded" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="button" wire:click="confirmAddDoc" wire:loading.attr="disabled" class="btn btn-warning rounded px-3">Print</button>
       </div>
     </div>
   </div>
@@ -213,28 +214,7 @@
               </div>
             </div>
           @endif
-          @if (is_null($ctc_image) && is_null($ctc) && is_null($issued_at) && is_null($issued_on))
-            <div class="p-2">
-              <label for="print_ctc" class="form-label">Community Tax Certificate</label>
-              <input type="text" id="print_ctc" wire:model.defer="ctc_update" class="form-control">
-              @error('ctc_update') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-            </div>
-            <div class="p-2">
-              <label for="print_issued_at" class="form-label">Issued at</label>
-              <input type="text" id="print_issued_at" wire:model.defer="issued_at_update" class="form-control">
-              @error('issued_at_update') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-            </div>
-            <div class="p-2">
-              <label for="print_issued_on" class="form-label">Issued on</label>
-              <input type="date" id="print_issued_on" wire:model.defer="issued_on_update" class="form-control">
-              @error('issued_on_update') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-            </div>
-            <div class="p-2">
-              <label for="print_fee" class="form-label">Fee</label>
-              <input type="number" id="print_fee" wire:model.defer="fee" class="form-control">
-              @error('fee') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-            </div>
-          @else
+          @if (!is_null($ctc_image) && !is_null($ctc) && !is_null($issued_at) && !is_null($issued_on))
             <div class="p-2">
               <p class="m-0">CTC #</p>
               <div class="border rounded p-2">
@@ -253,14 +233,6 @@
                 <p class="m-0 text-truncate">{{ $issued_on }}</p>
               </div>
             </div>
-            @if (!is_null($fee))
-              <div class="p-2">
-                <p class="m-0">Fee</p>
-                <div class="border rounded p-2">
-                  <p class="m-0 text-truncate">{{ $fee }}</p>
-                </div>
-              </div>
-            @endif
           @endif
           {{-- <div class="p-2">
             <p class="m-0">Date Requested</p>
@@ -276,8 +248,8 @@
       </div>
       <div class="modal-footer justify-content-end border-0">
         @if (!is_null($doc_id))
-          <button type="button" class="btn btn-success" wire:click="print">Print</button>
-          <button type="button" class="btn btn-secondary" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+          <button type="button" class="btn btn-success" wire:loading.attr="disabled" wire:click="qrReleaseConfirm">Release</button>
+          <button type="button" class="btn btn-secondary" wire:loading.attr="disabled"  wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
         @endif
       </div>
     </div>
@@ -322,28 +294,7 @@
             </div>
           </div>
         @endif
-        @if (is_null($ctc_image) && is_null($ctc) && is_null($issued_at) && is_null($issued_on))
-          <div class="p-2">
-            <label for="print_ctc" class="form-label">Community Tax Certificate</label>
-            <input type="text" id="print_ctc" wire:model.defer="ctc_update" class="form-control">
-            @error('ctc_update') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          </div>
-          <div class="p-2">
-            <label for="print_issued_at" class="form-label">Issued at</label>
-            <input type="text" id="print_issued_at" wire:model.defer="issued_at_update" class="form-control">
-            @error('issued_at_update') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          </div>
-          <div class="p-2">
-            <label for="print_issued_on" class="form-label">Issued on</label>
-            <input type="date" id="print_issued_on" wire:model.defer="issued_on_update" class="form-control">
-            @error('issued_on_update') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          </div>
-          <div class="p-2">
-            <label for="print_fee" class="form-label">Fee</label>
-            <input type="number" id="print_fee" wire:model.defer="fee" class="form-control">
-            @error('fee') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          </div>
-        @else
+        @if (!is_null($ctc) && !is_null($issued_at) && !is_null($issued_on))
           <div class="p-2">
             <p class="mb-2">CTC #</p>
             <div class="border rounded p-2">
@@ -362,18 +313,10 @@
               <p class="m-0 text-truncate">{{ $issued_on }}</p>
             </div>
           </div>
-          @if(!is_null($fee))
-            <div class="p-2">
-              <p class="mb-2">Fee</p>
-              <div class="border rounded p-2">
-                <p class="m-0 text-truncate">{{ $fee }}</p>
-              </div>
-            </div>
-          @endif
         @endif
       </div>
       <div class="modal-footer justify-content-center border-0">
-        <button type="button" wire:click="print" class="btn btn-warning rounded-pill px-5">Print</button>
+        <button type="button" wire:click="print" wire:loading.attr="disabled" class="btn btn-warning rounded-pill px-5">Print</button>
       </div>
     </div>
   </div>
@@ -389,18 +332,22 @@
           cancel
         </span>
       </div>
-      <div class="modal-body pt-0">
+      <div class="modal-body pt-0 px-5">
         <div class="d-flex justify-content-center mb-3">
           <span class="material-symbols-outlined fs-1 text-warning">
             warning
           </span>
         </div>
         <h4 class="text-center mb-3">Release Barangay Clearance?</h4>
-        <p class="text-center">Are you sure you're done printing this document?</p>
+        <p class="text-center px-4 confirm-fs">Are you sure you're done printing this document? You cannot revert this.</p>
+        <div class="my-3">
+          <input type="number" id="add_fee" wire:model.defer="fee" placeholder="Enter fee amount" min="0" class="form-control">
+          @error('fee') <span class="error text-danger px-2" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+        </div>
       </div>
       <div class="modal-footer d-flex justify-content-center border-0">
-        <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" wire:loading.class="disabled" wire:click="release" class="btn btn-success px-4 mx-3">Release</button>
+        <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" wire:loading.attr="disabled" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" wire:loading.attr="disabled" wire:click="release" class="btn btn-success px-4 mx-3">Release</button>
       </div>
     </div>
   </div>

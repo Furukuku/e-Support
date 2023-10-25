@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="modal-footer justify-content-center border-0">
-          <button type="submit" class="btn btn-warning rounded-pill px-5">Submit</button>
+          <button type="submit" wire:loading.attr="disabled" class="btn btn-warning rounded-pill px-5">Submit</button>
         </div>
       </div>
     </div>
@@ -103,9 +103,9 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-between border-0">
-        <button type="button" wire:click="closeModal" class="btn btn-secondary rounded-pill px-5" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-        <button type="button" wire:click="confirmAddDoc" class="btn btn-warning rounded-pill px-5">Confirm</button>
+      <div class="modal-footer justify-content-end border-0">
+        <button type="button" wire:click="closeModal" wire:loading.attr="disabled" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="button" wire:click="confirmAddDoc" wire:loading.attr="disabled" class="btn btn-warning rounded px-3">Print</button>
       </div>
     </div>
   </div>
@@ -136,12 +136,6 @@
               <p class="m-0 text-truncate">{{ $purpose }}</p>
             </div>
           </div>
-          <div class="p-2">
-            <p class="m-0">Date Requested</p>
-            <div class="border rounded p-2">
-              <p class="m-0 text-truncate">{{ is_null($date_requested) ? '' : $date_requested->format('h:i A - M d, Y') }}</p>
-            </div>
-          </div>
         @else
           <div class="d-flex justify-content-center align-items-center" style="height: 10rem;">
             <h4>{{ $error_msg }}</h4>
@@ -150,8 +144,8 @@
       </div>
       <div class="modal-footer justify-content-end border-0">
         @if (!is_null($doc_id))
-          <button type="button" class="btn btn-success" wire:click="print">Print</button>
-          <button type="button" class="btn btn-secondary" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+          <button type="button" class="btn btn-success" wire:loading.attr="disabled" wire:click="qrReleaseConfirm">Release</button>
+          <button type="button" class="btn btn-secondary" wire:loading.attr="disabled" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
         @endif
       </div>
     </div>
@@ -182,15 +176,9 @@
             <p class="m-0 text-truncate">{{ $purpose }}</p>
           </div>
         </div>
-        <div class="p-2">
-          <p class="m-0">Date Requested</p>
-          <div class="border rounded p-2">
-            <p class="m-0 text-truncate">{{ is_null($date_requested) ? '' : $date_requested->format('h:i A - M d, Y') }}</p>
-          </div>
-        </div>
       </div>
       <div class="modal-footer justify-content-center border-0">
-        <button type="button" wire:click="print" class="btn btn-warning rounded-pill px-5">Print</button>
+        <button type="button" wire:click="print" wire:loading.attr="disabled" class="btn btn-warning rounded-pill px-5">Print</button>
       </div>
     </div>
   </div>
@@ -216,8 +204,8 @@
         <p class="text-center">Are you sure you want to release this document?</p>
       </div>
       <div class="modal-footer d-flex justify-content-center border-0">
-        <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" wire:loading.class="disabled" wire:click="release" class="btn btn-success px-4 mx-3">Release</button>
+        <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" wire:loading.attr="disabled" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" wire:loading.attr="disabled" wire:click="release" class="btn btn-success px-4 mx-3">Release</button>
       </div>
     </div>
   </div>

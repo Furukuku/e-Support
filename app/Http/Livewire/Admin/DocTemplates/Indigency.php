@@ -11,9 +11,7 @@ class Indigency extends Component
 {
     public Document $document;
 
-    protected $listeners = ['confirm'];
-
-    public function confirm()
+    public function release()
     {
         $this->document->status = 'Released';
         $this->document->is_released = true;
@@ -28,6 +26,15 @@ class Indigency extends Component
 
         $this->document->indigency->date_issued = now();
         $this->document->indigency->update();
+
+        $this->dispatchBrowserEvent('close-modal');
+        return redirect()->route('admin.docs.indigencies');
+    }
+
+    public function forPickup()
+    {
+        $this->document->status = 'Ready To Pickup';
+        $this->document->update();
 
         $this->dispatchBrowserEvent('close-modal');
         return redirect()->route('admin.docs.indigencies');

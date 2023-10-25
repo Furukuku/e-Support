@@ -9,6 +9,7 @@ use App\Models\FamilyHead;
 use App\Models\FamilyMember;
 use App\Models\Wife;
 use App\Rules\CheckIfValidResident;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -38,6 +39,8 @@ class BrgyClearances extends Component
     public $user_id, $business_id;
 
     public $doc_id;
+
+    public $ctc_container = 'd-none';
 
     public $error_msg = '';
 
@@ -86,6 +89,7 @@ class BrgyClearances extends Component
             'issued_at_update',
             'issued_on_update',
             'fee',
+            'ctc_container'
         );
     }
 
@@ -122,45 +126,53 @@ class BrgyClearances extends Component
         }
     }
 
+    public function qrReleaseConfirm()
+    {
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('showReleaseConfirm');
+    }
+
     public function print()
     {
         $document = Document::find($this->doc_id);
-        
-        if(is_null($this->ctc) && is_null($this->issued_at) && is_null($this->issued_on)){
-            $this->validate([
-                'ctc_update' => ['required', 'string', 'max:255'],
-                'issued_at_update' => ['required', 'string', 'max:255'],
-                'issued_on_update' => ['required', 'date'],
-                'fee' => ['required', 'numeric', 'min:0.01'],
-            ]);
-            
-            $document->brgyClearance->ctc = $this->ctc_update;
-            $document->brgyClearance->issued_at = $this->issued_at_update;
-            $document->brgyClearance->issued_on = $this->issued_on_update;
-            $document->brgyClearance->fee = $this->fee;
-            $document->brgyClearance->update();
-        }
 
-        
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
 
         return redirect()->route('admin.templates.brgy-clearance', ['document' => $document]);
     }
 
+    public function addCtc()
+    {
+        if($this->ctc_container === 'd-none'){
+            $this->ctc_container = '';
+        }else{
+            $this->ctc_container = 'd-none';
+            $this->reset('ctc', 'issued_at', 'issued_on');
+            $this->resetErrorBag(['ctc', 'issued_at', 'issued_on']);
+        }
+    }
+
     public function addDoc()
     {
         $this->dispatchBrowserEvent('hideSuggestions');
 
-        $this->validate([
-            'name' => ['required', 'string', 'max:255', new CheckIfValidResident],
-            'zone' => ['required', 'string', 'max:1'],
-            'purpose' => ['required', 'string', 'max:255'],
-            'ctc' => ['required', 'string', 'max:255'],
-            'issued_at' => ['required', 'string', 'max:255'],
-            'issued_on' => ['required', 'date'],
-            'fee' => ['required', 'numeric', 'min:0.01'],
-        ]);
+        if($this->ctc_container === ''){
+            $this->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'zone' => ['required', 'string', 'max:1'],
+                'purpose' => ['required', 'string', 'max:255'],
+                'ctc' => ['required', 'string', 'max:255'],
+                'issued_at' => ['required', 'string', 'max:255'],
+                'issued_on' => ['required', 'date'],
+            ]);
+        }else{
+            $this->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'zone' => ['required', 'string', 'max:1'],
+                'purpose' => ['required', 'string', 'max:255'],
+            ]);
+        }
 
         $this->dispatchBrowserEvent('showConfirmation');
         $this->dispatchBrowserEvent('close-modal');
@@ -181,7 +193,6 @@ class BrgyClearances extends Component
         $brgyClearance->ctc = $this->ctc;
         $brgyClearance->issued_at = $this->issued_at;
         $brgyClearance->issued_on = $this->issued_on;
-        $brgyClearance->fee = $this->fee;
         $brgyClearance->save();
 
         $this->closeModal();
@@ -200,30 +211,34 @@ class BrgyClearances extends Component
         $this->ctc = $document->brgyClearance->ctc;
         $this->issued_at = $document->brgyClearance->issued_at;
         $this->issued_on = $document->brgyClearance->issued_on;
-        $this->fee = $document->brgyClearance->fee;
     }
 
-    // public function print()
-    // {
-    //     $document = Document::find($this->doc_id);
-        
-    //     $this->dispatchBrowserEvent('close-modal');
-    //     $this->dispatchBrowserEvent('toPrint', ['id' => $document->id]);
-    //     $this->closeModal();
-    // }
-
-    public function editDoc(Document $document)
+    public function releaseConfirm(Document $document)
     {
         $this->doc_id = $document->id;
     }
 
     public function release()
     {
+        $this->validate([
+            'fee' => ['required', 'numeric', 'min:0.01'],
+        ]);
+
         $document = Document::find($this->doc_id);
         $document->status = 'Released';
         $document->is_released = true;
-        $document->brgyClearance->date_issued = now();
+
+        if(Auth::guard('admin')->check()){
+            $document->issued_by = auth()->guard('admin')->user()->username;
+        }else if(Auth::guard('sub-admin')->check()){
+            $document->issued_by = auth()->guard('sub-admin')->user()->fname . ' ' . auth()->guard('sub-admin')->user()->lname;
+        }
+
         $document->update();
+
+        $document->brgyClearance->fee = $this->fee;
+        $document->brgyClearance->date_issued = now();
+        $document->brgyClearance->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();

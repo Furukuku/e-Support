@@ -11,10 +11,21 @@ class BrgyClearance extends Component
 {
     public Document $document;
 
-    protected $listeners = ['confirm'];
+    public $fee;
 
-    public function confirm()
+    public function closeModal()
     {
+        $this->resetValidation();
+        $this->resetErrorBag();
+        $this->reset('fee');
+    }
+
+    public function release()
+    {
+        $this->validate([
+            'fee' => ['required', 'numeric', 'min:0.01'],
+        ]);
+
         $this->document->status = 'Released';
         $this->document->is_released = true;
 
@@ -26,8 +37,19 @@ class BrgyClearance extends Component
         
         $this->document->update();
 
+        $this->document->brgyClearance->fee = $this->fee;
         $this->document->brgyClearance->date_issued = now();
         $this->document->brgyClearance->update();
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
+        return redirect()->route('admin.docs.brgy-clearances');
+    }
+
+    public function forPickup()
+    {
+        $this->document->status = 'Ready To Pickup';
+        $this->document->update();
 
         $this->dispatchBrowserEvent('close-modal');
         return redirect()->route('admin.docs.brgy-clearances');
