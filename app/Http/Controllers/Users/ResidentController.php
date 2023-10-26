@@ -37,13 +37,46 @@ class ResidentController extends Controller
 
     public function updateReport(Request $request, Report $report)
     {
-        $request->validate([
-            'kind_of_report' => ['required', 'string', 'max:16'],
-            'zone' => ['required', 'string', 'max:1'],
-            'photo.*' => [File::image()],
-            'photo' => ['max:3'],
-            'description' => ['required', 'string'],
-        ]);
+        if($request->kind_of_report === 'Others'){
+            $request->validate(
+                [
+                    'kind_of_report' => ['required', 'string', 'max:30'],
+                    'others' => ['required', 'string', 'max:255'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'photo.*' => [File::image()],
+                    'photo' => ['max:3'],
+                    'latitude' => ['required', 'string', 'max:100'],
+                    'longitude' => ['required', 'string', 'max:100'],
+                    'description' => ['required', 'string'],
+                ],
+                [
+                    'latitude' => [
+                        'required' => 'The location is required.',
+                        'string' => 'The location must be a valid location.',
+                        'max' => 'The location must not exceed 100 characters.',
+                    ]
+                ]
+            );
+        }else{
+            $request->validate(
+                [
+                    'kind_of_report' => ['required', 'string', 'max:30'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'photo.*' => [File::image()],
+                    'photo' => ['max:3'],
+                    'latitude' => ['required', 'string', 'max:100'],
+                    'longitude' => ['required', 'string', 'max:100'],
+                    'description' => ['required', 'string'],
+                ],
+                [
+                    'latitude' => [
+                        'required' => 'The location is required.',
+                        'string' => 'The location must be a valid location.',
+                        'max' => 'The location must not exceed 100 characters.',
+                    ]
+                ]
+            );
+        }
 
         if($request->hasFile('photo')){
             $images = ReportImage::where('report_id', $report->id)->get();
@@ -52,8 +85,10 @@ class ResidentController extends Controller
                 $image->delete();
             }
             
-            $report->report_name = $request->kind_of_report;
+            $report->report_name = $request->kind_of_report === 'Others' ? $request->others : $request->kind_of_report;
             $report->zone = $request->zone;
+            $report->latitude = $request->latitude;
+            $report->longitude = $request->longitude;
             $report->description = $request->description;
             $report->update();
 
@@ -66,8 +101,10 @@ class ResidentController extends Controller
                 ]);
             }
         }else{
-            $report->report_name = $request->kind_of_report;
+            $report->report_name = $request->kind_of_report === 'Others' ? $request->others : $request->kind_of_report;
             $report->zone = $request->zone;
+            $report->latitude = $request->latitude;
+            $report->longitude = $request->longitude;
             $report->description = $request->description;
             $report->update();
         }
@@ -86,33 +123,75 @@ class ResidentController extends Controller
 
     public function report(Request $request)
     {
-        $request->validate(
-            [
-                'kind_of_report' => ['required', 'string', 'max:16'],
-                'zone' => ['required', 'string', 'max:1'],
-                'photo.*' => [File::image()],
-                'photo' => ['required', 'min:1', 'max:3'],
-                'latitude' => ['required', 'string'],
-                'longitude' => ['required', 'string'],
-                'description' => ['required', 'string'],
-            ],
-            [
-                'latitude' => [
-                    'required' => 'Your current location is required.',
-                    'string' => 'The current location must be a valid location.',
+        if($request->kind_of_report === 'Others'){
+            $request->validate(
+                [
+                    'kind_of_report' => ['required', 'string', 'max:30'],
+                    'others' => ['required', 'string', 'max:255'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'photo.*' => [File::image()],
+                    'photo' => ['required', 'min:1', 'max:3'],
+                    'latitude' => ['required', 'string', 'max:100'],
+                    'longitude' => ['required', 'string', 'max:100'],
+                    'description' => ['required', 'string'],
+                ],
+                [
+                    'latitude' => [
+                        'required' => 'The location is required.',
+                        'string' => 'The location must be a valid location.',
+                        'max' => 'The location must not exceed 100 characters.',
+                    ]
                 ]
-            ]
-        );
+            );
+        }else{
+            $request->validate(
+                [
+                    'kind_of_report' => ['required', 'string', 'max:30'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'photo.*' => [File::image()],
+                    'photo' => ['required', 'min:1', 'max:3'],
+                    'latitude' => ['required', 'string', 'max:100'],
+                    'longitude' => ['required', 'string', 'max:100'],
+                    'description' => ['required', 'string'],
+                ],
+                [
+                    'latitude' => [
+                        'required' => 'The location is required.',
+                        'string' => 'The location must be a valid location.',
+                        'max' => 'The location must not exceed 100 characters.',
+                    ]
+                ]
+            );
+        }
 
         if(Auth::guard('web')->check()){
+            if($request->kind_of_report === 'Others'){
+                $checkReport = Report::where('report_name', $request->others)
+                    ->where('zone', $request->zone)
+                    ->where('is_exist', true)
+                    ->where('time_interval', '>', now())
+                    ->where('created_at', '<', now())
+                    ->first();
+            }else{
+                $checkReport = Report::where('report_name', $request->kind_of_report)
+                    ->where('zone', $request->zone)
+                    ->where('is_exist', true)
+                    ->where('time_interval', '>', now())
+                    ->where('created_at', '<', now())
+                    ->first();
+            }
 
             $report = new Report();
             $report->user_id = auth()->guard('web')->id();
-            $report->report_name = $request->kind_of_report;
+            $report->report_name = $request->kind_of_report === 'Others' ? $request->others : $request->kind_of_report;
             $report->zone = $request->zone;
             $report->latitude = $request->latitude;
             $report->longitude = $request->longitude;
             $report->description = $request->description;
+            if(is_null($checkReport)){
+                $report->is_exist = true;
+                $report->time_interval = now()->addRealMinutes(30);
+            }
             $report->save();
             
             foreach($request->file('photo') as $photo){

@@ -69,73 +69,127 @@ class Dashboard extends Component
     {
         $businessUsers = Business::count();
 
-        // $interval = 30; // Interval in minutes
+        $va = [];
+        $cd = [];
+        $ig = [];
+        $ca = [];
+        $cc = [];
+        $psc = [];
+        $lnkd = [];
+        $eh = [];
+        $ip = [];
+        $dr = [];
+        $sc = [];
+        $cp = [];
+        $others = [];
 
-        // $count = Report::select(DB::raw('COUNT(*) as count'))
-        //     ->groupBy(DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / (60 * :interval))'))
-        //     ->setBindings(['interval' => $interval])
-        //     ->get();
+        for($i = 1; $i <= 6; $i++){
+            $va_temp = Report::where('report_name', 'Vehicle Accident')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
-        // $complaints = [];
-        // $sample = Report::select('zone', 'report_name', DB::raw('COUNT(*) as count'), 'created_at')->groupBy('zone', 'report_name', DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / (60 * :interval))'))->setBindings(['interval' => $interval])->get();
+            $cd_temp = Report::where('report_name', 'Calamity and Disaster')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
-        // $sample = Report::select('zone', 'report_name', DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / (60 * :interval)) as time_interval'), DB::raw('COUNT(*) as count'))->groupBy('zone', 'report_name', 'created_at')->setBindings(['interval' => $interval])->get();
+            $ig_temp = Report::where('report_name', 'Illegal Gambling')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
+            $ca_temp = Report::where('report_name', 'Child Abuse')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
-        // foreach($sample as $sam){
-        //     $x = $sam->count . ' ' . $sam->report_name . ' on zone ' . $sam->zone . ' at ' . $sam->time_interval;
-        //     array_push($complaints, $x);
-        // }
+            $cc_temp = Report::where('report_name', 'Community Cleanliness')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
-        // dd($complaints);
-        // $reports = Report::select('zone', 'report_name')
-        //     ->selectRaw('COUNT(*) as count')
-        //     ->groupBy('zone', 'report_name')
-        //     ->havingRaw('COUNT(*) = 1') 
-        //     ->orWhere(function ($query) {
-        //         $query->selectRaw('COUNT(*)')
-        //             ->from('reports as sub')
-        //             ->whereRaw('reports.zone = sub.zone')
-        //             ->whereRaw('reports.report_name = sub.report_name')
-        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) <= 30')
-        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) >= -30');
-        //     })
-        //     ->get();
+            $psc_temp = Report::where('report_name', 'Public Safety Concern')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
-        // $reports = DB::table('reports')
-        //     ->select('zone', 'report_name')
-        //     ->selectRaw('COUNT(*) as count')
-        //     ->groupBy('zone', 'report_name')
-        //     ->havingRaw('COUNT(*) = 1')
-        //     ->orWhere(function ($query) {
-        //         $query->selectRaw('COUNT(*)')
-        //             ->from('reports as sub')
-        //             ->whereRaw('reports.zone = sub.zone')
-        //             ->whereRaw('reports.report_name = sub.report_name')
-        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) <= 30')
-        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) >= -30');
-        //     })
-        //     ->get();
+            $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
-        // dd($reports);
-        // $reports = Report::select('zone', 'report_name')
-        //     ->selectRaw('COUNT(*) as count')
-        //     ->groupBy('zone', 'report_name')
-        //     ->havingRaw('COUNT(*) = 1') 
-        //     ->orWhere(function ($query) {
-        //         $query->selectRaw('COUNT(*)')
-        //             ->from('reports as sub')
-        //             ->whereRaw('reports.zone = sub.zone')
-        //             ->whereRaw('reports.report_name = sub.report_name')
-        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) <= 30')
-        //             ->whereRaw('TIMESTAMPDIFF(MINUTE, reports.created_at, sub.created_at) >= -30');
-        //     })
-        //     ->get();
+            $eh_temp = Report::where('report_name', 'Environmental Hazard')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
-        // dd($reports);
+            $ip_temp = Report::where('report_name', 'Infrastructure Problems')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $dr_temp = Report::where('report_name', 'Drug Racing')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $sc_temp = Report::where('report_name', 'Stoning of Car')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $cp_temp = Report::where('report_name', 'Complaint')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $others_temp = Report::where('report_name', '!=','Vehicle Accident')
+                ->where('report_name', '!=', 'Calamity and Disaster')
+                ->where('report_name', '!=', 'Illegal Gambling')
+                ->where('report_name', '!=', 'Child Abuse')
+                ->where('report_name', '!=', 'Community Cleanliness')
+                ->where('report_name', '!=', 'Public Safety Concern')
+                ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
+                ->where('report_name', '!=', 'Environmental Hazard')
+                ->where('report_name', '!=', 'Infrastructure Problems')
+                ->where('report_name', '!=', 'Drug Racing')
+                ->where('report_name', '!=', 'Stoning of Car')
+                ->where('report_name', '!=', 'Complaint')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            array_push($va, $va_temp);
+            array_push($cd, $cd_temp);
+            array_push($ig, $ig_temp);
+            array_push($ca, $ca_temp);
+            array_push($cc, $cc_temp);
+            array_push($psc, $psc_temp);
+            array_push($lnkd, $lnkd_temp);
+            array_push($eh, $eh_temp);
+            array_push($ip, $ip_temp);
+            array_push($dr, $dr_temp);
+            array_push($sc, $sc_temp);
+            array_push($cp, $cp_temp);
+            array_push($others, $others_temp);
+        }
 
         return view('livewire.admin.dashboard', [
-            'businessUsers' => $businessUsers
+            'businessUsers' => $businessUsers,
+            'va' => $va,
+            'cd' => $cd,
+            'ig' => $ig,
+            'ca' => $ca,
+            'cc' => $cc,
+            'psc' => $psc,
+            'lnkd' => $lnkd,
+            'eh' => $eh,
+            'ip' => $ip,
+            'dr' => $dr,
+            'sc' => $sc,
+            'cp' => $cp,
+            'others' => $others,
         ]);
     }
 }

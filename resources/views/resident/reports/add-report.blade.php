@@ -17,17 +17,26 @@
         <form id="report-form" class="biz-clearance-form" action="{{ route('resident.report') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="row mb-3">
-            <label for="report" class="form-label px-0">King of Report</label>
+            <label for="report" class="form-label px-0">Kind of Report</label>
             <select name="kind_of_report" class="form-select" id="report">
               <option value="">Choose One...</option>
               <option value="Vehicle Accident" {{ old('kind_of_report') == 'Vehicle Accident' ? 'selected' : '' }}>Vehicle Accident</option>
+              <option value="Calamity and Disaster" {{ old('kind_of_report') == 'Calamity and Disaster' ? 'selected' : '' }}>Calamity and Disaster</option>
+              <option value="Illegal Gambling" {{ old('kind_of_report') == 'Illegal Gambling' ? 'selected' : '' }}>Illegal Gambling</option>
+              <option value="Child Abuse" {{ old('kind_of_report') == 'Child Abuse' ? 'selected' : '' }}>Child Abuse</option>
+              <option value="Community Cleanliness" {{ old('kind_of_report') == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
+              <option value="Public Safety Concern" {{ old('kind_of_report') == 'Public Safety Concern' ? 'selected' : '' }}>Public Safety Concern</option>
+              <option value="Late-Night Karaoke Disturbance" {{ old('kind_of_report') == 'Late-Night Karaoke Disturbance' ? 'selected' : '' }}>Late-Night Karaoke Disturbance</option>
+              <option value="Environmental Hazard" {{ old('kind_of_report') == 'Environmental Hazard' ? 'selected' : '' }}>Environmental Hazard</option>
+              <option value="Infrastructure Problems" {{ old('kind_of_report') == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option>
               <option value="Drag Racing" {{ old('kind_of_report') == 'Drag Racing' ? 'selected' : '' }}>Drag Racing</option>
               <option value="Stoning of Car" {{ old('kind_of_report') == 'Stoning of Car' ? 'selected' : '' }}>Stoning of Car</option>
               <option value="Complaint" {{ old('kind_of_report') == 'Complaint' ? 'selected' : '' }}>Complaint</option>
-              <option value="Calamity" {{ old('kind_of_report') == 'Calamity' ? 'selected' : '' }}>Calamity</option>
               <option value="Others" {{ old('kind_of_report') == 'Others' ? 'selected' : '' }}>Others</option>
             </select>
             @error('kind_of_report') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            <input type="text" id="other" class="form-control mt-2 d-none" value="{{ old('others') }}" name="others" placeholder="Please specify your report here...">
+            @error('others') <span class="error text-danger px-0 d-none" id="others-error" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <div class="row mb-3">
             <label for="zone" class="form-label px-0">Zone</label>
@@ -87,15 +96,35 @@
     const errorMsg = document.getElementById('map-error');
     const submitBtn = document.getElementById('submit-btn');
     
+    const report = document.getElementById('report');
+    const other = document.getElementById('other');
+    const othersErr = document.getElementById('others-error');
 
-    // check if the input field have an old value otherwise get/ask for users permission for his current location when the page loaded
+    report.addEventListener('change', () => {
+      if(report.value === 'Others'){
+        other.classList.remove('d-none');
+        othersErr.classList.remove('d-none');
+      }else{
+        other.classList.add('d-none');
+        othersErr.classList.add('d-none');
+        other.value = '';
+      }
+    });
+
     window.addEventListener('load', () => {
+      // check if the input field have an old value otherwise get/ask for users permission for his current location when the page loaded
       if(latitude.value !== ''){
         const lat = parseFloat(latitude.value);
         const lng = parseFloat(longitude.value);
         initMap(lat, lng);
       }else{
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      }
+
+      // check if the kind of report field have an old value of others
+      if(report.value === 'Others'){
+        other.classList.remove('d-none');
+        othersErr.classList.remove('d-none');
       }
     });
 

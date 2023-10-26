@@ -9,22 +9,27 @@
           cancel
         </span>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-4">
         <div class="d-flex flex-column aling-items-center">
-          <div class="">
-            <h5><strong>Report Type: </strong>{{ $report_type }}</h5>
+          <div class="mb-3">
+            <h4><strong>Report Type: </strong>{{ $report_type }}</h4>
             <p class="m-0"><strong>Zone: </strong>{{ $zone }}</p>
             <p><strong>From: </strong>{{ $report_from }}</p>
-            <p>{{ $description }}</p>
+            <h5><strong>Description</strong></h5>
+            <div class="border p-2 rounded">
+              <p class="m-0" style="text-indent: 20px;">{{ $description }}</p>
+            </div>
           </div>
-          <div class="row justify-content-center">
+          <div class="row justify-content-start mb-4 px-3">
             @isset($report_imgs)
+            <h5 class="px-0"><strong>Images</strong></h5>
               @foreach ($report_imgs as $image)
-                <img src="{{ Storage::url($image->image) }}" class="object-fit-contain border rounded col-md-4" alt="image">
+                <img src="{{ Storage::url($image->image) }}" class="object-fit-contain border rounded" alt="image" style="max-width: 100%;">
               @endforeach
             @endisset
           </div>
-          <div wire:ignore id="map" class="my-3 border shadow-sm rounded" style="height: 300px"></div>
+          <h5><strong>Location</strong></h5>
+          <div wire:ignore id="map" class="mb-3 border shadow rounded" style="height: 300px"></div>
         </div>
       </div>
     </div>

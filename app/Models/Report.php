@@ -19,7 +19,9 @@ class Report extends Model
         'latitude',
         'longitude',
         'description',
+        'is_exist',
         'status',
+        'time_interval',
     ];
 
     public function user()

@@ -62,7 +62,7 @@ class BusinessUsers extends Component
         $this->middle_name = $business->mname;
         $this->suffix_name = $business->sname;
         $this->email = $business->email;
-        $this->contact = $business->contact;
+        $this->contact = $business->mobile;
     }
 
     public function editBusiness($id)
