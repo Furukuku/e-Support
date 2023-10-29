@@ -66,8 +66,8 @@ class Staffs extends Component
             'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
             'position' => ['required', 'string', 'max:20', new MustOnlyOneBHWHead],
-            'email' => 'required|string|email|unique:sub_admins|max:255',
-            'username' => 'required|string|unique:barangay_health_workers|unique:sub_admins|unique:admins|max:15',
+            'email' => 'required|string|email|unique:barangay_health_workers|unique:sub_admins|unique:admins|unique:users|unique:businesses|max:255',
+            'username' => 'required|string|unique:barangay_health_workers|unique:sub_admins|unique:admins|unique:users|unique:businesses|max:15',
             'password' => 'required|string|min:8|max:255|confirmed',
         ]);
 

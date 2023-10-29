@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table){
-            $table->dropColumn('is_head');
+        Schema::table('family_heads', function (Blueprint $table) {
+            $table->string('sex')->after('bplace');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table){
-            $table->boolean('is_head')->default(0);
+        Schema::table('family_heads', function (Blueprint $table) {
+            $table->dropColumn('sex');
         });
     }
 };

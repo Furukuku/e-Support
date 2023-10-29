@@ -1,39 +1,4 @@
 
-{{-- Verify Modal --}}
-{{-- <form wire:submit.prevent="acceptResident">
-  @csrf
-  <div wire:ignore.self class="modal fade" id="verifyResident" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="verifyResidentLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header header-bg py-2 justify-content-end">
-          <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
-            cancel
-          </span>
-        </div>
-        <div class="modal-body">
-          <div class="col mt-2">
-            @isset($founded_fname,  $founded_mname, $founded_lname)
-              <h3 class="text-center">Resident Found!</h3>
-            @else
-              <h3 class="text-center">{{ $not_found }}</h3>
-            @endisset
-            <div class="row-auto mb-3">
-              @isset($founded_fname,  $founded_mname, $founded_lname)
-                <p class="text-center">{{ $founded_fname }} {{ $founded_mname }} {{ $founded_lname }}</p>
-              @endisset
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer justify-content-center border-0">
-            @isset($founded_fname,  $founded_mname, $founded_lname)
-              <button type="submit" wire:loading.class="disabled" class="btn btn-warning px-5 rounded-pill">Accept</button>
-            @endisset
-          </div>
-      </div>
-    </div>
-  </div>
-</form> --}}
-
 
 <!-- View Official Modal -->
 <div wire:ignore.self class="modal fade" id="viewResident" tabindex="-1" aria-labelledby="viewResidentLabel" aria-hidden="true">
@@ -86,11 +51,6 @@
             <div class="row-auto mb-3">
               <div class="border rounded align-items-center p-2">
                 <p class="m-0 fw-bold">Gender: <span class="fw-normal">{{ $gender }}</span></p>
-              </div>
-            </div>
-            <div class="row-auto mb-3">
-              <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Family Head: <span class="fw-normal">{{ $family_head }}</span></p>
               </div>
             </div>
           </div>

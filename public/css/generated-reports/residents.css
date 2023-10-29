@@ -1,0 +1,52 @@
+html {
+  font-size: 14px !important;
+}
+
+#printing-file,
+#printing-file * {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#print-btn {
+  background-color: #432344 !important;
+  border: none !important;
+}
+
+#print-btn:hover {
+  background-color: #351c36 !important;
+}
+
+@media print {
+  @page {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body {
+    padding: 0 !important;
+  }
+
+  #body {
+    background-color: #ffffff !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #btn-container {
+    display: none !important;
+  }
+
+  #printing-file {
+    width: 100% !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  #printing-file,
+  #printing-file * {
+    visibility: visible;
+  }
+}

@@ -49,7 +49,7 @@ class Account extends Component
     public function changeUsername()
     {
         $this->validate([
-            'username' => 'required|string|unique:sub_admins,username,' . auth()->guard('admin')->user()->username . '|unique:admins,username,' . auth()->guard('admin')->user()->id,
+            'username' => 'required|string|unique:sub_admins,username,' . auth()->guard('admin')->user()->username . '|unique:admins,username,' . auth()->guard('admin')->user()->id . '|unique:barangay_health_workers,username,' . auth()->guard('admin')->user()->username . '|unique:users,username,' . auth()->guard('admin')->user()->username . '|unique:businesses,username,' . auth()->guard('admin')->user()->username,
         ]);
 
         Admin::where('id', auth()->guard('admin')->user()->id)->update([
@@ -82,7 +82,7 @@ class Account extends Component
     public function changeEmail()
     {
         $this->validate([
-            'email' => 'required|email|unique:sub_admins,email,' . auth()->guard('admin')->user()->email . '|unique:admins,email,' . auth()->guard('admin')->user()->id,
+            'email' => 'required|email|unique:sub_admins,email,' . auth()->guard('admin')->user()->email . '|unique:admins,email,' . auth()->guard('admin')->user()->id . '|unique:barangay_health_workers,email,' . auth()->guard('admin')->user()->email . '|unique:users,email,' . auth()->guard('admin')->user()->email . '|unique:businesses,email,' . auth()->guard('admin')->user()->email,
         ]);
 
         Admin::where('id', auth()->guard('admin')->user()->id)->update([

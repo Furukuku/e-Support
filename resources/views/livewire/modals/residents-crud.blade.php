@@ -14,7 +14,7 @@
         <div class="modal-body">
           <div class="d-flex flex-row justify-content-between">
             <div>
-              <div id="add-family-head" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 border-black resident-category">
+              <div id="add-family-head" wire:click="modalFamHead" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 1 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('last_name')
                   text-danger
@@ -130,7 +130,7 @@
                 @enderror
                 ">Head of Family</p>
               </div>
-              <div id="add-wife" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="add-wife" wire:click="modalFamWife" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 2 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('wife.*.lname')
                   text-danger
@@ -246,7 +246,7 @@
                 @enderror
                 ">Wife</p>
               </div>
-              <div id="add-family-member" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="add-family-member" wire:click="modalFamMembers" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 3 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('members.*.lname')
                   text-danger
@@ -326,24 +326,45 @@
                 @enderror
                 ">Member of the Family</p>
               </div>
-              <div id="add-info" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="add-info" wire:click="modalFamInfo" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 4 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('house_no')
                   text-danger
                 @enderror
-                @error('water_source')
+                @error('pipe_nawasa')
                   text-danger
                 @enderror
-                @error('type_of_house')
+                @error('deep_well')
                   text-danger
                 @enderror
-                @error('toilet')
+                @error('nipa')
                   text-danger
                 @enderror
-                @error('garden')
+                @error('concrete')
                   text-danger
                 @enderror
-                @error('electricity')
+                @error('sem')
+                  text-danger
+                @enderror
+                @error('wood')
+                  text-danger
+                @enderror
+                @error('owned_toilet')
+                  text-danger
+                @enderror
+                @error('sharing_toilet')
+                  text-danger
+                @enderror
+                @error('poultry_livestock')
+                  text-danger
+                @enderror
+                @error('iodized_salt')
+                  text-danger
+                @enderror
+                @error('owned_electricity')
+                  text-danger
+                @enderror
+                @error('sharing_electricity')
                   text-danger
                 @enderror
                 ">
@@ -353,24 +374,45 @@
                 @error('house_no')
                   text-danger
                 @enderror
-                @error('water_source')
+                @error('pipe_nawasa')
                   text-danger
                 @enderror
-                @error('type_of_house')
+                @error('deep_well')
                   text-danger
                 @enderror
-                @error('toilet')
+                @error('nipa')
                   text-danger
                 @enderror
-                @error('garden')
+                @error('concrete')
                   text-danger
                 @enderror
-                @error('electricity')
+                @error('sem')
+                  text-danger
+                @enderror
+                @error('wood')
+                  text-danger
+                @enderror
+                @error('owned_toilet')
+                  text-danger
+                @enderror
+                @error('sharing_toilet')
+                  text-danger
+                @enderror
+                @error('poultry_livestock')
+                  text-danger
+                @enderror
+                @error('iodized_salt')
+                  text-danger
+                @enderror
+                @error('owned_electricity')
+                  text-danger
+                @enderror
+                @error('sharing_electricity')
                   text-danger
                 @enderror
                 ">Additional Info.</p>
               </div>
-              <div id="add-member" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="add-member" wire:click="modalFamBenefit" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 5 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('pwd')
                   text-danger
@@ -405,7 +447,7 @@
             </div>
 
             {{-- Family Head --}}
-            <div id="add-family-head-container" class="border border-dark border-1 rounded p-3 profile-family-width">
+            <div id="add-family-head-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 1 ? '' : 'd-none' }} profile-family-width">
               <h4>Head of the Family</h4>
               <div class="col mt-4">
                 <div class="row-auto mb-3">
@@ -437,6 +479,15 @@
                   <label for="add-head-bplace">Birthplace</label>
                   <input wire:model.defer="birthplace" id="add-head-bplace" type="text" class="form-control">
                   @error('birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                </div>
+                <div class="row-auto mb-3">
+                  <label for="add-head-sex">Sex</label>
+                  <select wire:model.defer="sex" id="add-head-sex" class="form-select">
+                    <option value="">Choose one...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                  @error('sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="add-head-civil-status">Civil Status</label>
@@ -538,7 +589,7 @@
             </div>
 
             {{-- Wife --}}
-            <div id="add-wife-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="add-wife-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 2 ? '' : 'd-none' }} profile-family-width">
               <div class="d-flex justify-content-between align-items-center">
                 <h4>Wife</h1>
                 @if ($wife->isEmpty())
@@ -680,7 +731,7 @@
             </div>
 
             {{-- Family Member --}}
-            <div id="add-family-member-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="add-family-member-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 3 ? '' : 'd-none' }} profile-family-width">
               <h4>Family Members</h4>
               <div class="d-flex justify-content-end mb-3">
                 <button wire:click.prevent="addMember" type="button" class="btn btn-secondary">Add a Member</button>
@@ -720,6 +771,15 @@
                     <label for="add-family-member-{{ $index }}-bplace">Birthplace</label>
                     <input wire:model.defer="members.{{ $index }}.bplace" id="add-family-member-{{ $index }}-bplace" type="text" class="form-control">
                     @error('members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                  <div class="row-auto mb-3">
+                    <label for="add-family-member-{{ $index }}-sex">Sex</label>
+                    <select wire:model.defer="members.{{ $index }}.sex" id="add-family-member-{{ $index }}-sex" class="form-select">
+                      <option value="">Choose one...</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                    @error('members.' . $index . '.sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   </div>
                   <div class="row-auto mb-3">
                     <label for="add-family-member-{{ $index }}-educ-attain">Educational Attainment</label>
@@ -774,66 +834,114 @@
             </div>
 
             {{-- Additional Info --}}
-            <div id="add-info-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="add-info-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 4 ? '' : 'd-none' }} profile-family-width">
               <h4>Additional Info</h4>
               <div class="col mt-4">
-                <div class="row-auto mb-3">
-                  <label for="add-water">Water Source</label>
-                  <select wire:model.defer="water_source" id="add-water" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Pipe Nawasa">Pipe Nawasa</option>
-                    <option value="Deep Well">Deep Well</option>
-                  </select>
-                  @error('water_source') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-house">Type of House</label>
-                  <select wire:model.defer="type_of_house" id="add-house" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Nipa">Nipa</option>
-                    <option value="Concrete">Concrete</option>
-                    <option value="Sem">Sem</option>
-                    <option value="Wood">Wood</option>
-                  </select>
-                  @error('type_of_house') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-toilet">Toilet</label>
-                  <select wire:model.defer="toilet" id="add-toilet" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Owned">Owned</option>
-                    <option value="Sharing">Sharing</option>
-                  </select>
-                  @error('toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-garden">Garden</label>
-                  <select wire:model.defer="garden" id="add-garden" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Poultry-Livestock">Poultry-Livestock</option>
-                    <option value="Iodized Salt">Iodized Salt</option>
-                  </select>
-                  @error('garden') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="add-electic">Electricity</label>
-                  <select wire:model.defer="electricity" id="add-electic" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Owned">Owned</option>
-                    <option value="Sharing">Sharing</option>
-                  </select>
-                  @error('electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
                 <div class="row-auto mb-3">
                   <label for="add-house-no">House No.</label>
                   <input type="text" wire:model.defer="house_no" id="add-house-no" class="form-control">
                   @error('house_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Water Source</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="pipe_nawasa" class="form-check-input" id="add_pipe_nawasa">
+                      <label for="add_pipe_nawasa" class="form-label mb-0">Pipe Nawasa</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="deep_well" class="form-check-input" id="add_deep_well">
+                      <label for="add_deep_well" class="form-label mb-0">Deep Well</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('pipe_nawasa') <span class="error text-danger d-inline" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('deep_well') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Type of House</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="nipa" class="form-check-input" id="add_nipa">
+                      <label for="add_nipa" class="form-label mb-0">Nipa</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="concrete" class="form-check-input" id="add_concrete">
+                      <label for="add_concrete" class="form-label mb-0">Concrete</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="sem" class="form-check-input" id="add_sem">
+                      <label for="add_sem" class="form-label mb-0">Sem</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="wood" class="form-check-input" id="add_wood">
+                      <label for="add_wood" class="form-label mb-0">Wood</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('nipa') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('concrete') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('sem') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('wood') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Toilet</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="owned_toilet" class="form-check-input" id="add_owned_toilet">
+                      <label for="add_owned_toilet" class="form-label mb-0">Owned</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="sharing_toilet" class="form-check-input" id="add_sharing_toilet">
+                      <label for="add_sharing_toilet" class="form-label mb-0">Sharing</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('owned_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('sharing_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Garden</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="poultry_livestock" class="form-check-input" id="add_poultry_livestock">
+                      <label for="add_poultry_livestock" class="form-label mb-0">Poultry-Livestock</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="iodized_salt" class="form-check-input" id="add_iodized_salt">
+                      <label for="add_iodized_salt" class="form-label mb-0">Iodized Salt</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('poultry_livestock') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('iodized_salt') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Electricity</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="owned_electricity" class="form-check-input" id="add_owned_electricity">
+                      <label for="add_owned_electricity" class="form-label mb-0">Owned</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="sharing_electricity" class="form-check-input" id="add_sharing_electricity">
+                      <label for="add_sharing_electricity" class="form-label mb-0">Sharing</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('owned_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('sharing_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
               </div>
             </div>
 
             {{-- Member --}}
-            <div id="add-member-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="add-member-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 5 ? '' : 'd-none' }} profile-family-width">
               <h4>How many Member</h4>
               <div class="col mt-4">
                 <div class="row-auto mb-3">
@@ -870,8 +978,8 @@
 
 
 {{-- View Family Modal --}}
-<div wire:ignore.self class="modal fade" id="viewResident" tabindex="-1" aria-labelledby="viewResidentLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+<div wire:ignore.self class="modal fade" id="viewResident" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewResidentLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header header-bg py-2">
         <h1 class="modal-title fs-5" id="viewResidentLabel">View Family</h1>
@@ -879,127 +987,518 @@
           cancel
         </span>
       </div>
-      <div class="modal-body px-5 bg-light">
-        <div class="w-100 mb-4 mt-0">
-          <h4 class="py-2">Family Head</h4>
-          <div class="row p-2">
-            <div class="col-4">
-              <p class="fw-bold">Last Name: <span class="fw-normal">{{ $family_head->lname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">First Name: <span class="fw-normal">{{ $family_head->fname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Middle Name: <span class="fw-normal">{{ $family_head->mname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Suffix Name: <span class="fw-normal">{{ $family_head->sname ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Birthday: <span class="fw-normal">{{ isset($family_head->bday) ? date('F d, Y', strtotime($family_head->bday)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Birthplace: <span class="fw-normal">{{ $family_head->bplace ?? 'N/A' }}</span></p>
+      <div class="modal-body bg-white">
+        <div class="row w-100">
+          <div class="col-3">
+            <div wire:click="famHead" class="border-2 border-dark p-2 mb-3 {{ $tab === 1 ? 'border-start' : '' }}" style="cursor: pointer;">
+              <h5 class="m-0">Family Head</h5>
             </div>
-            <div class="col-4">
-              <p class="fw-bold">Status: <span class="fw-normal">{{ $family_head->civil_status ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Education Attainment: <span class="fw-normal">{{ $family_head->educ_attainment ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Zone: <span class="fw-normal">{{ $family_head->zone ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Religion: <span class="fw-normal">{{ $family_head->religion ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Occupation: <span class="fw-normal">{{ $family_head->occupation ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Contact: <span class="fw-normal">{{ $family_head->contact ?? 'N/A' }}</span></p>
-            </div>
-            <div class="col-4">
-              <p class="fw-bold">Philhealth: <span class="fw-normal">{{ $family_head->philhealth ?? 'N/A' }}</span></p>
-              <p class="fw-bold">First Dose: <span class="fw-normal">{{ isset($family_head->first_dose) ? date('F d, Y', strtotime($family_head->first_dose)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Second Dose: <span class="fw-normal">{{ isset($family_head->second_dose) ? date('F d, Y', strtotime($family_head->second_dose)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Vaccine Brand: <span class="fw-normal">{{ $family_head->vaccine_brand ?? 'N/A' }}</span></p>
-              <p class="fw-bold">Booster: <span class="fw-normal">{{ isset($family_head->booster) ? date('F d, Y', strtotime($family_head->booster)) : 'N/A' }}</span></p>
-              <p class="fw-bold">Booster Brand: <span class="fw-normal">{{ $family_head->booster_brand ?? 'N/A' }}</span></p>
+            @isset($family_head->wife)
+              <div wire:click="famWife" class="border-2 border-dark p-2 mb-3 {{ $tab === 2 ? 'border-start' : '' }}" style="cursor: pointer;">
+                <h5 class="m-0">Wife</h5>
+              </div>
+            @endisset
+            @isset($family_head->familyMembers)
+              @if (count($family_head->familyMembers) > 0)
+                <div wire:click="famMembers" class="border-2 border-dark p-2 mb-3 {{ $tab === 3 ? 'border-start' : '' }}" style="cursor: pointer;">
+                  <h5 class="m-0">Family Members</h5>
+                </div>
+              @endif
+            @endisset
+            <div wire:click="addInfo" class="border-2 border-dark p-2 mb-3 {{ $tab === 4 ? 'border-start' : '' }}" style="cursor: pointer;">
+              <h5 class="m-0">Additional Info</h5>
             </div>
           </div>
-          <hr style="border-top: dotted;">
-        </div>
-        @isset ($family_head->wife)
-          <div class="w-100 my-4">
-            <h4 class="py-2">Wife</h4>
-            <div class="row p-2">
-              <div class="col-4">
-                <p class="fw-bold">Last Name: <span class="fw-normal">{{ $family_head->wife->lname ?? 'N/A' }}</span></p>
-                <p class="fw-bold">First Name: <span class="fw-normal">{{ $family_head->wife->fname ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Middle Name: <span class="fw-normal">{{ $family_head->wife->mname ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Suffix Name: <span class="fw-normal">{{ $family_head->wife->sname ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Birthday: <span class="fw-normal">{{ isset($family_head->wife->bday) ? date('F d, Y', strtotime($family_head->wife->bday)) : 'N/A' }}</span></p>
-                <p class="fw-bold">Birthplace: <span class="fw-normal">{{ $family_head->wife->bplace ?? 'N/A' }}</span></p>
+          @if ($tab === 1)
+            <div class="col-9">
+              <div class="row">
+                <div class="col-lg-8 mb-3">
+                  <p class="mb-1">Name</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->fname ?? '' }} {{ $family_head->mname ?? '' }} {{ $family_head->lname ?? '' }} {{ $family_head->sname ?? ''  }}</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                  <p class="mb-1">Birthday</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ isset($family_head->bday) ? date('F d, Y', strtotime($family_head->bday)) : '' }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="col-4">
-                <p class="fw-bold">Status: <span class="fw-normal">{{ $family_head->wife->civil_status ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Education Attainment: <span class="fw-normal">{{ $family_head->wife->educ_attainment ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Zone: <span class="fw-normal">{{ $family_head->wife->zone ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Religion: <span class="fw-normal">{{ $family_head->wife->religion ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Occupation: <span class="fw-normal">{{ $family_head->wife->occupation ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Contact: <span class="fw-normal">{{ $family_head->wife->contact ?? 'N/A' }}</span></p>
+              <div class="row">
+                <div class="col-lg-8 mb-3">
+                  <p class="mb-1">Birthplace</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->bplace ?? '' }}</p>
+                  </div>
+                </div>
+                <div class="col-lg-2 mb-3">
+                  <p class="mb-1">Sex</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->sex ?? '' }}</p>
+                  </div>
+                </div>
+                <div class="col-lg-2 mb-3">
+                  <p class="mb-1">Zone</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">Purok {{ $family_head->zone ?? '' }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="col-4">
-                <p class="fw-bold">Philhealth: <span class="fw-normal">{{ $family_head->wife->philhealth ?? 'N/A' }}</span></p>
-                <p class="fw-bold">First Dose: <span class="fw-normal">{{ isset($family_head->wife->first_dose) ? date('F d, Y', strtotime($family_head->wife->first_dose)) : 'N/A' }}</span></p>
-                <p class="fw-bold">Second Dose: <span class="fw-normal">{{ isset($family_head->wife->second_dose) ? date('F d, Y', strtotime($family_head->wife->second_dose)) : 'N/A' }}</span></p>
-                <p class="fw-bold">Vaccine Brand: <span class="fw-normal">{{ $family_head->wife->vaccine_brand ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Booster: <span class="fw-normal">{{ isset($family_head->wife->booster) ? date('F d, Y', strtotime($family_head->wife->booster)) : 'N/A' }}</span></p>
-                <p class="fw-bold">Booster Brand: <span class="fw-normal">{{ $family_head->wife->booster_brand ?? 'N/A' }}</span></p>
+              <div class="row">
+                <div class="col-lg-6 mb-3">
+                  <p class="mb-1">Educational Attainment</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->educ_attainment ?? '' }}</p>
+                  </div>
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <p class="mb-1">Civil Status</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->civil_status ?? '' }}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <hr style="border-top: dotted;">
-          </div>
-        @endif
-        @isset ($family_head->familyMembers)
-          @if (count($family_head->familyMembers) > 0)
-            <div class="w-100 my-4">
-              <h4 class="py-2">Family Members</h4>
-              @foreach ($family_head->familyMembers as $index => $member)
-                <div class="row p-2">
-                  <h5 class="py-2">Member {{ $index + 1 }}</h5>
-                  <div class="row px-4">
-                    <div class="col-6">
-                      <p class="fw-bold">Last Name: <span class="fw-normal">{{ $member->lname !=null ? $member->lname : 'N/A' }}</span></p>
-                      <p class="fw-bold">First Name: <span class="fw-normal">{{ $member->fname !=null ? $member->fname : 'N/A' }}</span></p>
-                      <p class="fw-bold">Middle Name: <span class="fw-normal">{{ $member->mname !=null ? $member->mname : 'N/A' }}</span></p>
-                      <p class="fw-bold">Suffix Name: <span class="fw-normal">{{ $member->sname !=null ? $member->sname : 'N/A' }}</span></p>
-                      <p class="fw-bold">Birthday: <span class="fw-normal">{{ $member->bday != null ? date('F d, Y', strtotime($member->bday)) : 'N/A' }}</span></p>
-                      <p class="fw-bold">Birthplace: <span class="fw-normal">{{ $member->bplace !=null ? $member->bplace : 'N/A' }}</span></p>
+              <div class="row">
+                <div class="col-lg-8 mb-3">
+                  <p class="mb-1">Religion</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->religion ?? '' }}</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                  <p class="mb-1">Contact</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->contact ?? '' }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-8 mb-3">
+                  <p class="mb-1">Occupation</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->occupation ?? '' }}</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                  <p class="mb-1">Philhealth</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">
+                      @isset($family_head->philhealth)
+                        @if ($family_head->philhealth == true)
+                          &#10003;
+                        @else
+                          &#8722;
+                        @endif
+                      @endisset
+                  </p>
+                  </div>
+                </div>
+              </div>
+              @if (isset($family_head->first_dose) || isset($family_head->second_dose) || isset($family_head->vaccine_brand) || isset($family_head->booster) || isset($family_head->booster_brand))
+                <h5 class="mt-5">Vaccination Status</h5>
+              @endif
+              <div class="row">
+                @if(isset($family_head->first_dose) && !is_null($family_head->first_dose))
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">First Dose</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ date('F d, Y', strtotime($family_head->first_dose)) }}</p>
                     </div>
-                    <div class="col-6">
-                      <p class="fw-bold">Education Attainment: <span class="fw-normal">{{ $member->educ_attainment !=null ? $member->educ_attainment : 'N/A' }}</span></p>
-                      <p class="fw-bold">First Dose: <span class="fw-normal">{{ $member->first_dose != null ? date('F d, Y', strtotime($member->first_dose)) : 'N/A' }}</span></p>
-                      <p class="fw-bold">Second Dose: <span class="fw-normal">{{ $member->second_dose != null ? date('F d, Y', strtotime($member->dose_dose)) : 'N/A' }}</span></p>
-                      <p class="fw-bold">Vaccine Brand: <span class="fw-normal">{{ $member->vaccine_brand !=null ? $member->vaccine_brand : 'N/A' }}</span></p>
-                      <p class="fw-bold">Booster: <span class="fw-normal">{{ $member->booster != null ? date('F d, Y', strtotime($member->booster)) : 'N/A' }}</span></p>
-                      <p class="fw-bold">Booster Brand: <span class="fw-normal">{{ $member->booster_brand !=null ? $member->booster_brand : 'N/A' }}</span></p>
+                  </div>
+                @endif
+                @if(isset($family_head->second_dose) && !is_null($family_head->second_dose))
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Second Dose</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ date('F d, Y', strtotime($family_head->second_dose)) }}</p>
+                    </div>
+                  </div>
+                @endif
+                @if(isset($family_head->vaccine_brand) && !is_null($family_head->vaccine_brand))
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Vaccine Brand</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->vaccine_brand }}</p>
+                    </div>
+                  </div>
+                @endif
+              </div>
+              <div class="row">
+                @if(isset($family_head->booster) && !is_null($family_head->booster))
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Booster</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ date('F d, Y', strtotime($family_head->booster)) }}</p>
+                    </div>
+                  </div>
+                @endif
+                @if(isset($family_head->booster_brand) && !is_null($family_head->booster_brand))
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Booster Brand</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->booster_brand }}</p>
+                    </div>
+                  </div>
+                @endif
+              </div>
+            </div>
+          @elseif ($tab === 2)
+            @isset($family_head->wife)
+              <div class="col-9">
+                <div class="row">
+                  <div class="col-lg-8 mb-3">
+                    <p class="mb-1">Name</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->wife->fname ?? '' }} {{ $family_head->wife->mname ?? '' }} {{ $family_head->wife->lname ?? '' }} {{ $family_head->wife->sname ?? ''  }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Birthday</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ isset($family_head->wife->bday) ? date('F d, Y', strtotime($family_head->wife->bday)) : '' }}</p>
                     </div>
                   </div>
                 </div>
-              @endforeach
-              <hr style="border-top: dotted;">
+                <div class="row">
+                  <div class="col-lg-8 mb-3">
+                    <p class="mb-1">Birthplace</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->wife->bplace ?? '' }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Zone</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">Purok {{ $family_head->wife->zone ?? '' }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <p class="mb-1">Educational Attainment</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->wife->educ_attainment ?? '' }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <p class="mb-1">Civil Status</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->wife->civil_status ?? '' }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-8 mb-3">
+                    <p class="mb-1">Religion</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->wife->religion ?? '' }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Contact</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->wife->contact ?? '' }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-8 mb-3">
+                    <p class="mb-1">Occupation</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ $family_head->wife->occupation ?? '' }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 mb-3">
+                    <p class="mb-1">Philhealth</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">
+                        @isset($family_head->wife->philhealth)
+                          @if ($family_head->wife->philhealth == true)
+                            &#10003;
+                          @else
+                            &#8722;
+                          @endif
+                        @endisset
+                    </p>
+                    </div>
+                  </div>
+                </div>
+                @if (isset($family_head->wife->first_dose) || isset($family_head->wife->second_dose) || isset($family_head->wife->vaccine_brand) || isset($family_head->wife->booster) || isset($family_head->wife->booster_brand))
+                  <h5 class="mt-5">Vaccination Status</h5>
+                @endif
+                <div class="row">
+                  @if(isset($family_head->wife->first_dose) && !is_null($family_head->wife->first_dose))
+                    <div class="col-lg-4 mb-3">
+                      <p class="mb-1">First Dose</p>
+                      <div class="border rounded p-2">
+                        <p class="m-0">{{ date('F d, Y', strtotime($family_head->wife->first_dose)) }}</p>
+                      </div>
+                    </div>
+                  @endif
+                  @if(isset($family_head->wife->second_dose) && !is_null($family_head->wife->second_dose))
+                    <div class="col-lg-4 mb-3">
+                      <p class="mb-1">Second Dose</p>
+                      <div class="border rounded p-2">
+                        <p class="m-0">{{ date('F d, Y', strtotime($family_head->wife->second_dose)) }}</p>
+                      </div>
+                    </div>
+                  @endif
+                  @if(isset($family_head->wife->vaccine_brand) && !is_null($family_head->wife->vaccine_brand))
+                    <div class="col-lg-4 mb-3">
+                      <p class="mb-1">Vaccine Brand</p>
+                      <div class="border rounded p-2">
+                        <p class="m-0">{{ $family_head->wife->vaccine_brand }}</p>
+                      </div>
+                    </div>
+                  @endif
+                </div>
+                <div class="row">
+                  @if(isset($family_head->wife->booster) && !is_null($family_head->wife->booster))
+                    <div class="col-lg-4 mb-3">
+                      <p class="mb-1">Booster</p>
+                      <div class="border rounded p-2">
+                        <p class="m-0">{{ date('F d, Y', strtotime($family_head->wife->booster)) }}</p>
+                      </div>
+                    </div>
+                  @endif
+                  @if(isset($family_head->wife->booster_brand) && !is_null($family_head->wife->booster_brand))
+                    <div class="col-lg-4 mb-3">
+                      <p class="mb-1">Booster Brand</p>
+                      <div class="border rounded p-2">
+                        <p class="m-0">{{ $family_head->wife->booster_brand }}</p>
+                      </div>
+                    </div>
+                  @endif
+                </div>
+              </div>
+            @endisset
+          @elseif ($tab === 3)
+            @isset($family_head->familyMembers)
+              @if (count($family_head->familyMembers) > 0)
+                <div class="col-9">
+                  @foreach ($family_head->familyMembers as $index => $member)
+                    <div class="mb-5">
+                      <h4>Member {{ $index + 1 }}</h4>
+                      <div class="row">
+                        <div class="col-lg-8 mb-3">
+                          <p class="mb-1">Name</p>
+                          <div class="border rounded p-2">
+                            <p class="m-0">{{ $member->fname ?? '' }} {{ $member->mname ?? '' }} {{ $member->lname ?? '' }} {{ $member->sname ?? ''  }}</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 mb-3">
+                          <p class="mb-1">Birthday</p>
+                          <div class="border rounded p-2">
+                            <p class="m-0">{{ isset($member->bday) ? date('F d, Y', strtotime($member->bday)) : '' }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-5 mb-3">
+                          <p class="mb-1">Birthplace</p>
+                          <div class="border rounded p-2">
+                            <p class="m-0">{{ $member->bplace ?? '' }}</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-5 mb-3">
+                          <p class="mb-1">Educational Attainment</p>
+                          <div class="border rounded p-2">
+                            <p class="m-0">{{ $member->educ_attainment ?? '' }}</p>
+                          </div>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                          <p class="mb-1">Sex</p>
+                          <div class="border rounded p-2">
+                            <p class="m-0">{{ $member->sex ?? '' }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      @if (isset($member->first_dose) || isset($member->second_dose) || isset($member->vaccine_brand) || isset($member->booster) || isset($member->booster_brand))
+                        <h5 class="mt-2">Vaccination Status</h5>
+                      @endif
+                      <div class="row">
+                        @if(isset($member->first_dose) && !is_null($member->first_dose))
+                          <div class="col-lg-4 mb-3">
+                            <p class="mb-1">First Dose</p>
+                            <div class="border rounded p-2">
+                              <p class="m-0">{{ date('F d, Y', strtotime($member->first_dose)) }}</p>
+                            </div>
+                          </div>
+                        @endif
+                        @if(isset($member->second_dose) && !is_null($member->second_dose))
+                          <div class="col-lg-4 mb-3">
+                            <p class="mb-1">Second Dose</p>
+                            <div class="border rounded p-2">
+                              <p class="m-0">{{ date('F d, Y', strtotime($member->second_dose)) }}</p>
+                            </div>
+                          </div>
+                        @endif
+                        @if(isset($member->vaccine_brand) && !is_null($member->vaccine_brand))
+                          <div class="col-lg-4 mb-3">
+                            <p class="mb-1">Vaccine Brand</p>
+                            <div class="border rounded p-2">
+                              <p class="m-0">{{ $member->vaccine_brand }}</p>
+                            </div>
+                          </div>
+                        @endif
+                      </div>
+                      <div class="row">
+                        @if(isset($member->booster) && !is_null($member->booster))
+                          <div class="col-lg-4 mb-3">
+                            <p class="mb-1">Booster</p>
+                            <div class="border rounded p-2">
+                              <p class="m-0">{{ date('F d, Y', strtotime($member->booster)) }}</p>
+                            </div>
+                          </div>
+                        @endif
+                        @if(isset($member->booster_brand) && !is_null($member->booster_brand))
+                          <div class="col-lg-4 mb-3">
+                            <p class="mb-1">Booster Brand</p>
+                            <div class="border rounded p-2">
+                              <p class="m-0">{{ $member->booster_brand }}</p>
+                            </div>
+                          </div>
+                        @endif
+                      </div>
+                    </div>
+                  @endforeach
+                </div>
+              @endif
+            @endisset
+          @elseif ($tab === 4)
+            <div class="col-9">
+              <div class="row">
+                <div class="col-lg-4 mb-3">
+                  <p class="mb-1">House No.</p>
+                  <div class="border rounded p-2">
+                    <p class="m-0">{{ $family_head->house_no ?? '' }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 mb-3">
+                  <p class="mb-1">Water Source</p>
+                  <div>
+                    @if (isset($family_head->pipe_nawasa) && $family_head->pipe_nawasa == true )
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Pipe Nawasa</p>
+                      </div>
+                    @endif
+                    @if (isset($family_head->deep_well) && $family_head->deep_well == true)
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Deep Well</p>
+                      </div>
+                    @endif
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <p class="mb-1">Type of House</p>
+                  <div>
+                    @if (isset($family_head->nipa) && $family_head->nipa == true )
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Nipa</p>
+                      </div>
+                    @endif
+                    @if (isset($family_head->concrete) && $family_head->concrete == true)
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Concrete</p>
+                      </div>
+                    @endif
+                    @if (isset($family_head->sem) && $family_head->sem == true)
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Sem</p>
+                      </div>
+                    @endif
+                    @if (isset($family_head->wood) && $family_head->wood == true)
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Wood</p>
+                      </div>
+                    @endif
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <p class="mb-1">Toilet</p>
+                  <div>
+                    @if (isset($family_head->owned_toilet) && $family_head->owned_toilet == true )
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Owned</p>
+                      </div>
+                    @endif
+                    @if (isset($family_head->sharing_toilet) && $family_head->sharing_toilet == true)
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Sharing</p>
+                      </div>
+                    @endif
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <p class="mb-1">Garden</p>
+                  <div>
+                    @if (isset($family_head->poultry_livestock) && $family_head->poultry_livestock == true )
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Poultry-Livestock</p>
+                      </div>
+                    @endif
+                    @if (isset($family_head->iodized_salt) && $family_head->iodized_salt == true)
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Iodized Salt</p>
+                      </div>
+                    @endif
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <p class="mb-1">Electricity</p>
+                  <div>
+                    @if (isset($family_head->owned_electricity) && $family_head->owned_electricity == true )
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Owned</p>
+                      </div>
+                    @endif
+                    @if (isset($family_head->sharing_electricity) && $family_head->sharing_electricity == true)
+                      <div class="border rounded p-2 mb-1">
+                        <p class="m-0">Sharing</p>
+                      </div>
+                    @endif
+                  </div>
+                </div>
+              </div>
+              <h6 class="mt-4">Beneficiary Members</h6>
+              @isset($family_head)
+                <div class="row">
+                  <div class="col-lg-3 mb-3">
+                    <p class="mb-1">PWD</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ is_null($family_head->pwd) ? '0' : $family_head->pwd }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 mb-3">
+                    <p class="mb-1">Solo Parent</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ is_null($family_head->solo_parent) ? '0' : $family_head->solo_parent }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 mb-3">
+                    <p class="mb-1">Senior Citizen</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ is_null($family_head->senior_citizen) ? '0' : $family_head->senior_citizen }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 mb-3">
+                    <p class="mb-1">Pregnant</p>
+                    <div class="border rounded p-2">
+                      <p class="m-0">{{ is_null($family_head->pregnant) ? '0' : $family_head->pregnant }}</p>
+                    </div>
+                  </div>
+                </div>
+              @endisset
             </div>
           @endif
-        @endif
-        <div class="w-100 my-4">
-          <div class="row">
-            <div class="col-6">
-              <h4 class="py-2">Additional Information</h4>
-              <div class="row">
-                <p class="fw-bold">House No.: <span class="fw-normal">{{ $family_head->house_no ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Water Source: <span class="fw-normal">{{ $family_head->water_source ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Type of House: <span class="fw-normal">{{ $family_head->house ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Toilet: <span class="fw-normal">{{ $family_head->toilet ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Garden: <span class="fw-normal">{{ $family_head->garden ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Electricity: <span class="fw-normal">{{ $family_head->electricity ?? 'N/A' }}</span></p>
-              </div>
-            </div>
-            <div class="col-6">
-              <h4 class="py-2">Beneficiary Members</h4>
-              <div class="row">
-                <p class="fw-bold">PWD: <span class="fw-normal">{{ $family_head->pwd ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Solo Parent: <span class="fw-normal">{{ $family_head->solo_parent ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Senior Citizen: <span class="fw-normal">{{ $family_head->senior_citizen ?? 'N/A' }}</span></p>
-                <p class="fw-bold">Pregnant: <span class="fw-normal">{{ $family_head->pregnant ?? 'N/A' }}</span></p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="modal-footer">
-
       </div>
     </div>
   </div>
@@ -1021,7 +1520,7 @@
         <div class="modal-body">
           <div class="d-flex flex-row justify-content-between">
             <div>
-              <div id="edit-family-head" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 border-black resident-category">
+              <div id="edit-family-head" wire:click="modalFamHead" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 1 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('last_name')
                   text-danger
@@ -1137,7 +1636,7 @@
                 @enderror
                 ">Head of Family</p>
               </div>
-              <div id="edit-wife" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="edit-wife" wire:click="modalFamWife" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 2 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('wife.*.lname')
                   text-danger
@@ -1253,7 +1752,7 @@
                 @enderror
                 ">Wife</p>
               </div>
-              <div id="edit-family-member" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="edit-family-member" wire:click="modalFamMembers" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 3 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('old_members.*.lname')
                   text-danger
@@ -1405,24 +1904,45 @@
                 @enderror
                 ">Member of the Family</p>
               </div>
-              <div id="edit-info" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="edit-info" wire:click="modalFamInfo" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 4 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('house_no')
                   text-danger
                 @enderror
-                @error('water_source')
+                @error('pipe_nawasa')
                   text-danger
                 @enderror
-                @error('type_of_house')
+                @error('deep_well')
                   text-danger
                 @enderror
-                @error('toilet')
+                @error('nipa')
                   text-danger
                 @enderror
-                @error('garden')
+                @error('concrete')
                   text-danger
                 @enderror
-                @error('electricity')
+                @error('sem')
+                  text-danger
+                @enderror
+                @error('wood')
+                  text-danger
+                @enderror
+                @error('owned_toilet')
+                  text-danger
+                @enderror
+                @error('sharing_toilet')
+                  text-danger
+                @enderror
+                @error('poultry_livestock')
+                  text-danger
+                @enderror
+                @error('iodized_salt')
+                  text-danger
+                @enderror
+                @error('owned_electricity')
+                  text-danger
+                @enderror
+                @error('sharing_electricity')
                   text-danger
                 @enderror
                 ">
@@ -1432,24 +1952,45 @@
                 @error('house_no')
                   text-danger
                 @enderror
-                @error('water_source')
+                @error('pipe_nawasa')
+                text-danger
+                @enderror
+                @error('deep_well')
                   text-danger
                 @enderror
-                @error('type_of_house')
+                @error('nipa')
                   text-danger
                 @enderror
-                @error('toilet')
+                @error('concrete')
                   text-danger
                 @enderror
-                @error('garden')
+                @error('sem')
                   text-danger
                 @enderror
-                @error('electricity')
+                @error('wood')
+                  text-danger
+                @enderror
+                @error('owned_toilet')
+                  text-danger
+                @enderror
+                @error('sharing_toilet')
+                  text-danger
+                @enderror
+                @error('poultry_livestock')
+                  text-danger
+                @enderror
+                @error('iodized_salt')
+                  text-danger
+                @enderror
+                @error('owned_electricity')
+                  text-danger
+                @enderror
+                @error('sharing_electricity')
                   text-danger
                 @enderror
                 ">Additional Info.</p>
               </div>
-              <div id="edit-member" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 resident-category">
+              <div id="edit-member" wire:click="modalFamBenefit" class="d-flex flex-row align-items-center px-2 my-4 border-start border-2 {{ $modalTab === 5 ? 'border-black' : '' }} resident-category">
                 <span class="material-symbols-outlined
                 @error('pwd')
                   text-danger
@@ -1484,7 +2025,7 @@
             </div>
 
             {{-- Family Head --}}
-            <div id="edit-family-head-container" class="border border-dark border-1 rounded p-3 profile-family-width">
+            <div id="edit-family-head-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 1 ? '' : 'd-none' }} profile-family-width">
               <h4>Head of the Family</h4>
               <div class="col mt-4">
                 <div class="row-auto mb-3">
@@ -1516,6 +2057,15 @@
                   <label for="edit-head-bplace">Birthplace</label>
                   <input wire:model.defer="birthplace" id="edit-head-bplace" type="text" class="form-control">
                   @error('birthplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                </div>
+                <div class="row-auto mb-3">
+                  <label for="edit-head-sex">Sex</label>
+                  <select wire:model.defer="sex" id="edit-head-sex" class="form-select">
+                    <option value="">Choose one...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                  @error('sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 </div>
                 <div class="row-auto mb-3">
                   <label for="edit-head-civil-status">Civil Status</label>
@@ -1617,7 +2167,7 @@
             </div>
 
             {{-- Wife --}}
-            <div id="edit-wife-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="edit-wife-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 2 ? '' : 'd-none' }} profile-family-width">
               <div class="d-flex justify-content-between align-items-center">
                 <h4>Wife</h1>
                 @if ($wife->isEmpty())
@@ -1759,7 +2309,7 @@
             </div>
 
             {{-- Family Member --}}
-            <div id="edit-family-member-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="edit-family-member-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 3 ? '' : 'd-none' }} profile-family-width">
               <h4>Family Members</h4>
               <div class="d-flex justify-content-end mb-3">
                 <button wire:click.prevent="addNewMember" type="button" class="btn btn-secondary">Add New Member</button>
@@ -1800,6 +2350,15 @@
                       <label for="edit-family-member-{{ $index }}-bplace">Birthplace</label>
                       <input wire:model.defer="old_members.{{ $index }}.bplace" id="edit-family-member-{{ $index }}-bplace" type="text" class="form-control">
                       @error('old_members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="row-auto mb-3">
+                      <label for="edit-family-member-{{ $index }}-sex">Sex</label>
+                      <select wire:model.defer="old_members.{{ $index }}.sex" id="edit-family-member-{{ $index }}-sex" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      @error('old_members.' . $index . '.sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
                       <label for="edit-family-member-{{ $index }}-educ-attain">Educational Attainment</label>
@@ -1890,6 +2449,15 @@
                       @error('new_members.' . $index . '.bplace') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                     <div class="row-auto mb-3">
+                      <label for="add-family-member-{{ $index }}-sex">Sex</label>
+                      <select wire:model.defer="new_members.{{ $index }}.sex" id="add-family-member-{{ $index }}-sex" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      @error('new_members.' . $index . '.sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="row-auto mb-3">
                       <label for="add-family-member-{{ $index }}-educ-attain">Educational Attainment</label>
                       <input wire:model.defer="new_members.{{ $index }}.educ_attain" id="add-family-member-{{ $index }}-educ-attain" type="text" class="form-control">
                       @error('new_members.' . $index . '.educ_attain') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
@@ -1943,66 +2511,114 @@
             </div>
 
             {{-- Additional Info --}}
-            <div id="edit-info-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="edit-info-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 4 ? '' : 'd-none' }} profile-family-width">
               <h4>Additional Info</h4>
               <div class="col mt-4">
                 <div class="row-auto mb-3">
-                  <label for="edit-water">Water Source</label>
-                  <select wire:model.defer="water_source" id="edit-water" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Pipe Nawasa">Pipe Nawasa</option>
-                    <option value="Deep Well">Deep Well</option>
-                  </select>
-                  @error('water_source') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-house">Type of House</label>
-                  <select wire:model.defer="type_of_house" id="edit-house" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Nipa">Nipa</option>
-                    <option value="Concrete">Concrete</option>
-                    <option value="Sem">Sem</option>
-                    <option value="Wood">Wood</option>
-                  </select>
-                  @error('type_of_house') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-toilet">Toilet</label>
-                  <select wire:model.defer="toilet" id="edit-toilet" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Owned">Owned</option>
-                    <option value="Sharing">Sharing</option>
-                  </select>
-                  @error('toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-garden">Garden</label>
-                  <select wire:model.defer="garden" id="edit-garden" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Poultry-Livestock">Poultry-Livestock</option>
-                    <option value="Iodized Salt">Iodized Salt</option>
-                  </select>
-                  @error('garden') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
-                  <label for="edit-electic">Electricity</label>
-                  <select wire:model.defer="electricity" id="edit-electic" class="form-select">
-                    <option value="">Choose one...</option>
-                    <option value="Owned">Owned</option>
-                    <option value="Sharing">Sharing</option>
-                  </select>
-                  @error('electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                </div>
-                <div class="row-auto mb-3">
                   <label for="edit-house-no">House No.</label>
-                  <input wire:model.defer="house_no" id="edit-house-no" class="form-control">
+                  <input type="text" wire:model.defer="house_no" id="edit-house-no" class="form-control">
                   @error('house_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Water Source</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="pipe_nawasa" class="form-check-input" id="edit_pipe_nawasa">
+                      <label for="edit_pipe_nawasa" class="form-label mb-0">Pipe Nawasa</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="deep_well" class="form-check-input" id="edit_deep_well">
+                      <label for="edit_deep_well" class="form-label mb-0">Deep Well</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('pipe_nawasa') <span class="error text-danger d-inline" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('deep_well') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Type of House</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="nipa" class="form-check-input" id="edit_nipa">
+                      <label for="edit_nipa" class="form-label mb-0">Nipa</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="concrete" class="form-check-input" id="edit_concrete">
+                      <label for="edit_concrete" class="form-label mb-0">Concrete</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="sem" class="form-check-input" id="edit_sem">
+                      <label for="edit_sem" class="form-label mb-0">Sem</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="wood" class="form-check-input" id="edit_wood">
+                      <label for="edit_wood" class="form-label mb-0">Wood</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('nipa') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('concrete') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('sem') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('wood') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Toilet</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="owned_toilet" class="form-check-input" id="edit_owned_toilet">
+                      <label for="edit_owned_toilet" class="form-label mb-0">Owned</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="sharing_toilet" class="form-check-input" id="edit_sharing_toilet">
+                      <label for="edit_sharing_toilet" class="form-label mb-0">Sharing</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('owned_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('sharing_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Garden</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="poultry_livestock" class="form-check-input" id="edit_poultry_livestock">
+                      <label for="edit_poultry_livestock" class="form-label mb-0">Poultry-Livestock</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="iodized_salt" class="form-check-input" id="edit_iodized_salt">
+                      <label for="edit_iodized_salt" class="form-label mb-0">Iodized Salt</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('poultry_livestock') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('iodized_salt') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
+                </div>
+                <div class="row-auto mb-3 border rounded p-2">
+                  <label class="form-label fw-semibold">Electricity</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="owned_electricity" class="form-check-input" id="edit_owned_electricity">
+                      <label for="edit_owned_electricity" class="form-label mb-0">Owned</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" wire:model.defer="sharing_electricity" class="form-check-input" id="edit_sharing_electricity">
+                      <label for="edit_sharing_electricity" class="form-label mb-0">Sharing</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    @error('owned_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    @error('sharing_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  </div>
                 </div>
               </div>
             </div>
 
             {{-- Member --}}
-            <div id="edit-member-container" class="border border-dark border-1 rounded p-3 d-none profile-family-width">
+            <div id="edit-member-container" class="border border-dark border-1 rounded p-3 {{ $modalTab === 5 ? '' : 'd-none' }} profile-family-width">
               <h4>How many Member</h4>
               <div class="col mt-4">
                 <div class="row-auto mb-3">

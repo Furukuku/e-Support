@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Resident;
+namespace App\Http\Livewire\SubBHW;
 
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
@@ -9,25 +9,31 @@ use App\Rules\MustAtleastOneIsTrueOfTheFour;
 use App\Rules\MustAtleastOneIsTrueOfTheTwo;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use Livewire\WithPagination;
 
-class FamilyProfile extends Component
+class OfflineFamilyProfile extends Component
 {
-    public $family_head_view = '';
-    public $wife_view = 'd-none';
-    public $member_view = 'd-none';
-    public $others_view = 'd-none';
+    use WithPagination;
 
-    
-    protected $listeners = ['submit', 'update'];
+    protected $paginationTheme = 'bootstrap';
 
+    public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
-    public $page;
-
+    // Family Head variables
     public $last_name, $first_name, $middle_name, $suffix_name, $birthday, $birthplace, $sex, $civil_status, $educational_attainment, $zone, $religion, $occupation, $contact, $philhealth, $first_dose_date, $second_dose_date, $vaccine_brand, $booster_date, $booster_brand;
 
+    // Wife variables
+    // public $wife_last_name, $wife_first_name, $wife_middle_name, $wife_suffix_name, $wife_birthday, $wife_birthplace, $wife_civil_status, $wife_educational_attainment, $wife_zone, $wife_religion, $wife_occupation, $wife_contact, $wife_philhealth, $wife_first_dose_date, $wife_second_dose_date, $wife_vaccine_brand, $wife_booster_date, $wife_booster_brand;
+
+    // Wife
     public $wife;
 
+    // Family Members variables/collection of Family Members
     public Collection $members;
+
+    // variable for viewing family
+    public $family_head;
 
     // variable for old members
     public Collection $old_members;
@@ -41,9 +47,21 @@ class FamilyProfile extends Component
     // array of ids of members that will removed
     public $removed_members = [];
 
+    // Additional Info variables
     public $pipe_nawasa = false, $deep_well = false, $nipa = false, $concrete = false, $sem = false, $wood = false, $owned_toilet = false, $sharing_toilet = false, $poultry_livestock = false, $iodized_salt = false, $owned_electricity = false, $sharing_electricity = false, $house_no;
 
+    // Members variables
     public $pwd, $solo_parent, $senior_citizen, $pregnant;
+
+    // tabs of category of the family
+    public $tab = 1;
+
+    // tabs of modal
+    public $modalTab = 1;
+
+    public $search = "";
+
+    protected $listeners = ['closeModal'];
 
     protected $messages = [
         // family members
@@ -71,7 +89,7 @@ class FamilyProfile extends Component
         ],
         'members.*.bplace' => [
             'required' => 'The birthplace field is required.',
-            'string' => 'The birthplace  field must be a string type.',
+            'string' => 'The birthplace field must be a string type.',
             'max' => 'The birthplace field must not exceed 255 characters.',
         ],
         'members.*.sex' => [
@@ -91,15 +109,17 @@ class FamilyProfile extends Component
             'date' => 'The second dose field must be a valid date.',
         ],
         'members.*.brand' => [
+            'required' => 'The vaccine brand field is required.',
             'string' => 'The vaccine brand field must be a string type.',
-            'max' => 'The vaccine brand field must not exceed 17 characters.',
+            'max' => 'The vaccine brand field must not exceed 255 characters.',
         ],
         'members.*.booster' => [
-            'date' => 'The booster field must be a valid date.',
+            'date' => 'The booster dose field must be a valid date.',
         ],
         'members.*.bbrand' => [
+            'required' => 'The booster brand field is required.',
             'string' => 'The booster brand field must be a string type.',
-            'max' => 'The booster brand field must not exceed 17 characters.',
+            'max' => 'The booster brand field must not exceed 255 characters.',
         ],
 
         // wife
@@ -298,36 +318,112 @@ class FamilyProfile extends Component
         ],
     ];
 
-    public function viewHead()
+    public function updatingSearch()
     {
-        $this->family_head_view = '';
-        $this->wife_view = 'd-none';
-        $this->member_view = 'd-none';
-        $this->others_view = 'd-none';
+        $this->resetPage('offlineFamilyProfilePage');
     }
 
-    public function viewWife()
+    public function modalFamHead()
     {
-        $this->wife_view = '';
-        $this->family_head_view = 'd-none';
-        $this->member_view = 'd-none';
-        $this->others_view = 'd-none';
+        $this->modalTab = 1;
     }
 
-    public function viewMembers()
+    public function modalFamWife()
     {
-        $this->member_view = '';
-        $this->wife_view = 'd-none';
-        $this->family_head_view = 'd-none';
-        $this->others_view = 'd-none';
+        $this->modalTab = 2;
     }
 
-    public function viewOthers()
+    public function modalFamMembers()
     {
-        $this->others_view = '';
-        $this->member_view = 'd-none';
-        $this->wife_view = 'd-none';
-        $this->family_head_view = 'd-none';
+        $this->modalTab = 3;
+    }
+
+    public function modalFamInfo()
+    {
+        $this->modalTab = 4;
+    }
+
+    public function modalFamBenefit()
+    {
+        $this->modalTab = 5;
+    }
+    
+
+    public function famHead()
+    {
+        $this->tab = 1;
+    }
+
+    public function famWife()
+    {
+        $this->tab = 2;
+    }
+
+    public function famMembers()
+    {
+        $this->tab = 3;
+    }
+
+    public function addInfo()
+    {
+        $this->tab = 4;
+    }
+
+    public function resetInputs()
+    {
+        // Family Head
+        $this->last_name = null;
+        $this->first_name = null;
+        $this->middle_name = null;
+        $this->suffix_name = null;
+        $this->birthday = null;
+        $this->birthplace = null;
+        $this->sex = null;
+        $this->civil_status = null;
+        $this->educational_attainment = null;
+        $this->zone = null;
+        $this->religion = null;
+        $this->occupation = null;
+        $this->contact = null;
+        $this->philhealth = null;
+        $this->first_dose_date = null;
+        $this->second_dose_date = null;
+        $this->vaccine_brand = null;
+        $this->booster_date = null;
+        $this->booster_brand = null;
+
+        // Additional Info
+        $this->pipe_nawasa = false;
+        $this->deep_well = false;
+        $this->nipa = false;
+        $this->concrete = false;
+        $this->sem = false;
+        $this->wood = false;
+        $this->owned_toilet = false;
+        $this->sharing_toilet = false;
+        $this->poultry_livestock = false;
+        $this->iodized_salt = false;
+        $this->owned_electricity = false;
+        $this->sharing_electricity = false;
+        $this->house_no = null;
+
+        // Beneficiaries
+        $this->pwd = null;
+        $this->solo_parent = null;
+        $this->senior_citizen = null;
+        $this->pregnant = null;
+
+        $this->family_head = null;
+        $this->family_head_id = null;
+
+        $this->removed_members = [];
+
+        $this->mount();
+
+        $this->old_members = collect();
+        
+        $this->tab = 1;
+        $this->modalTab = 1;
     }
 
     public function mount()
@@ -352,91 +448,36 @@ class FamilyProfile extends Component
                 'vaccine_brand' => null,
                 'booster' => null,
                 'booster_brand' => null,
-            ]
+            ],
         ]);
 
         $this->fill([
-            'members' => collect([
-                [
-                    'lname' => null,
-                    'fname' => null,
-                    'mname' => null,
-                    'sname' => null,
-                    'bday' => null,
-                    'bplace' => null,
-                    'sex' => null,
-                    'educ_attain' => null,
-                    'fdose' => null,
-                    'sdose' => null,
-                    'brand' => null,
-                    'booster' => null,
-                    'bbrand' => null,
-                ],
-            ])
+            'members' => collect([[
+                'lname' => null,
+                'fname' => null,
+                'mname' => null,
+                'sname' => null,
+                'bday' => null,
+                'bplace' => null,
+                'sex' => null,
+                'educ_attain' => null,
+                'fdose' => null,
+                'sdose' => null,
+                'brand' => null,
+                'booster' => null,
+                'bbrand' => null,
+            ]]),
         ]);
 
         $this->fill([
             'new_members' => collect([]),
         ]);
+    }
 
-
-        if(auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead)){
-            $family_head = FamilyHead::with('familyMembers')
-                ->with('wife')
-                ->find(auth()->guard('web')->user()->familyHead->id);
-            
-                if($family_head->wife == null){
-                    $this->wife = collect();
-                }else{
-                    $this->wife = collect([$family_head->wife]);
-                }
-        
-                $this->old_members = collect($family_head->familyMembers);
-        
-                $this->family_head_id = $family_head->id;
-        
-                // Family Head
-                $this->last_name = $family_head->lname;
-                $this->first_name = $family_head->fname;
-                $this->middle_name = $family_head->mname;
-                $this->suffix_name = $family_head->sname;
-                $this->birthday = $family_head->bday;
-                $this->birthplace = $family_head->bplace;
-                $this->sex = $family_head->sex;
-                $this->civil_status = $family_head->civil_status;
-                $this->educational_attainment = $family_head->educ_attainment;
-                $this->zone = $family_head->zone;
-                $this->religion = $family_head->religion;
-                $this->occupation = $family_head->occupation;
-                $this->contact = $family_head->contact;
-                $this->philhealth = $family_head->philhealth;
-                $this->first_dose_date = $family_head->first_dose;
-                $this->second_dose_date = $family_head->second_dose;
-                $this->vaccine_brand = $family_head->vaccine_brand;
-                $this->booster_date = $family_head->booster;
-                $this->booster_brand = $family_head->booster_brand;
-        
-                // Additional Info
-                $this->house_no = $family_head->house_no;
-                $this->pipe_nawasa = $family_head->pipe_nawasa;
-                $this->deep_well = $family_head->deep_well;
-                $this->nipa = $family_head->nipa;
-                $this->concrete = $family_head->concrete;
-                $this->sem = $family_head->sem;
-                $this->wood = $family_head->wood;
-                $this->owned_toilet = $family_head->owned_toilet;
-                $this->sharing_toilet = $family_head->sharing_toilet;
-                $this->poultry_livestock = $family_head->poultry_livestock;
-                $this->iodized_salt = $family_head->iodized_salt;
-                $this->owned_electricity = $family_head->owned_electricity;
-                $this->sharing_electricity = $family_head->sharing_electricity;
-        
-                // Beneficiaries
-                $this->pwd = $family_head->pwd;
-                $this->solo_parent = $family_head->solo_parent;
-                $this->senior_citizen = $family_head->senior_citizen;
-                $this->pregnant = $family_head->pregnant;
-        }
+    public function closeModal()
+    {
+        $this->resetInputs();
+        $this->resetErrorBag();
     }
 
     public function addWife()
@@ -461,13 +502,17 @@ class FamilyProfile extends Component
                 'vaccine_brand' => null,
                 'booster' => null,
                 'booster_brand' => null,
-            ]
+            ],
         ]);
+
+        $this->dispatchBrowserEvent('addWife');
     }
 
     public function removeWife()
     {
         $this->wife = collect();
+
+        $this->dispatchBrowserEvent('addWife');
     }
 
     public function addMember()
@@ -487,261 +532,76 @@ class FamilyProfile extends Component
             'booster' => null,
             'bbrand' => null,
         ]);
+
+        $this->dispatchBrowserEvent('addMembers');
     }
 
     public function removeMember($index)
     {
         $this->members->pull($index);
-        $reindexed_collection = $this->members->values();
-        $this->members = $reindexed_collection;
+        $reindexed_members = $this->members->values();
+        $this->members = $reindexed_members;
+
+        $this->dispatchBrowserEvent('addMembers');
     }
 
-    public function newWife()
-    {
-        $head = FamilyHead::with('wife')->find($this->family_head_id);
-
-        if(is_null($head->wife)){
-            $this->wife = collect([
-                [
-                    'lname' => null,
-                    'fname' => null,
-                    'mname' => null,
-                    'sname' => null,
-                    'bday' => null,
-                    'bplace' => null,
-                    'civil_status' => null,
-                    'educ_attainment' => null,
-                    'zone' => null,
-                    'religion' => null,
-                    'occupation' => null,
-                    'contact' => null,
-                    'philhealth' => null,
-                    'first_dose' => null,
-                    'second_dose' => null,
-                    'vaccine_brand' => null,
-                    'booster' => null,
-                    'booster_brand' => null,
-                ]
-            ]);
-        }else{
-            $this->wife = collect([$head->wife]);
-        }
-    }
-
-    public function addNewMember()
-    {
-        $this->new_members->push([
-            'lname' => null,
-            'fname' => null,
-            'mname' => null,
-            'sname' => null,
-            'bday' => null,
-            'bplace' => null,
-            'sex' => null,
-            'educ_attain' => null,
-            'fdose' => null,
-            'sdose' => null,
-            'brand' => null,
-            'booster' => null,
-            'bbrand' => null,
-        ]);
-    }
-
-    public function removeOldMember($index)
-    {
-        array_push($this->removed_members, $this->old_members[$index]['id']);
-
-        $this->old_members->pull($index);
-    }
-
-    public function removeNewMember($index)
-    {
-        $this->new_members->pull($index);
-        $reindexed_new_members = $this->new_members->values();
-        $this->new_members = $reindexed_new_members;
-    }
-
-    public function toHead()
-    {
-        $this->page = 'to-head';
-    }
-
-    public function fromHeadToWife()
+    public function addFamily()
     {
         $this->validate([
-            'last_name' => ['required', 'string', 'max:255'],
-            'first_name' => ['required', 'string', 'max:255'],
-            'middle_name' => ['nullable', 'string', 'max:255'],
-            'suffix_name' => ['nullable', 'string', 'max:255'],
-            'birthday' => ['required', 'date'],
-            'birthplace' => ['required', 'string', 'max:255'],
-            'civil_status' => ['required', 'string', 'max:9'],
-            'sex' => ['required', 'string', 'max:6'], 
-            'educational_attainment' => ['required', 'string', 'max:255'],
-            'zone' => ['required', 'string', 'max:1'],
-            'religion' => ['required', 'string', 'max:255'],
-            'occupation' => ['required', 'string', 'max:255'],
-            'contact' => ['required', 'digits:11'],
-            'philhealth' => ['required', 'boolean'],
-            'first_dose_date' => ['nullable', 'date'],
-            'second_dose_date' => ['nullable', 'date'],
-            'vaccine_brand' => ['nullable', 'string', 'max:17'],
-            'booster_date' => ['nullable', 'date'],
-            'booster_brand' => ['nullable', 'string', 'max:17'],
-        ]);
-
-        $this->page = 'from-head-to-wife';
-    }
-
-    public function fromMembersToWife()
-    {
-        $this->page = 'from-members-to-wife';
-    }
-
-    public function fromWifeToMembers()
-    {
-        $this->validate([
-            'wife.*.lname' => ['required', 'string', 'max:255'],
-            'wife.*.fname' => ['required', 'string', 'max:255'],
-            'wife.*.mname' => ['nullable', 'string', 'max:255'],
-            'wife.*.sname' => ['nullable', 'string', 'max:255'],
-            'wife.*.bday' => ['required', 'date'],
-            'wife.*.bplace' => ['required', 'string', 'max:255'],
-            'wife.*.civil_status' => ['required', 'string', 'max:9'],
-            'wife.*.educ_attainment' => ['required', 'string', 'max:255'],
-            'wife.*.zone' => ['required', 'string', 'max:1'],
-            'wife.*.religion' => ['required', 'string', 'max:255'],
-            'wife.*.occupation' => ['required', 'string', 'max:255'],
-            'wife.*.contact' => ['required', 'digits:11'],
-            'wife.*.philhealth' => ['required', 'boolean'],
-            'wife.*.first_dose' => ['nullable', 'date'],
-            'wife.*.second_dose' => ['nullable', 'date'],
-            'wife.*.vaccine_brand' => ['nullable', 'string', 'max:17'],
-            'wife.*.booster' => ['nullable', 'date'],
-            'wife.*.booster_brand' => ['nullable', 'string', 'max:17'],
-        ]);
-
-        $this->page = 'from-wife-to-members';
-    }
-
-    public function fromOthersToMembers()
-    {
-        $this->page = 'from-others-to-members';
-    }
-
-    public function toOthers()
-    {
-        if(auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead)){
-            $this->validate([
-                'members.*.lname' => ['required', 'string', 'max:255'],
-                'members.*.fname' => ['required', 'string', 'max:255'],
-                'members.*.mname' => ['nullable', 'string', 'max:255'],
-                'members.*.sname' => ['nullable', 'string', 'max:255'],
-                'members.*.bday' => ['required', 'date'],
-                'members.*.bplace' => ['required', 'string', 'max:255'],
-                'members.*.sex' => ['required', 'string', 'max:6'], 
-                'members.*.educ_attain' => ['required', 'string', 'max:255'],
-                'members.*.fdose' => ['nullable', 'date'],
-                'members.*.sdose' => ['nullable', 'date'],
-                'members.*.brand' => ['nullable', 'string', 'max:17'],
-                'members.*.booster' => ['nullable', 'date'],
-                'members.*.bbrand' => ['nullable', 'string', 'max:17'],
-            ]);
-        }else if(auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead)){
-            $this->validate([
-                'old_members.*.lname' => 'required|string|max:255',
-                'old_members.*.fname' => 'required|string|max:255',
-                'old_members.*.mname' => 'nullable|string|max:255',
-                'old_members.*.sname' => 'nullable|string|max:255',
-                'old_members.*.bday' => 'required|date',
-                'old_members.*.bplace' => 'required|string|max:255',
-                'old_members.*.sex' => ['required', 'string', 'max:6'], 
-                'old_members.*.educ_attainment' => 'required|string|max:255',
-                'old_members.*.first_dose' => 'nullable|date',
-                'old_members.*.second_dose' => 'nullable|date',
-                'old_members.*.vaccine_brand' => 'nullable|string|max:17',
-                'old_members.*.booster' => 'nullable|date',
-                'old_members.*.booster_brand' => 'nullable|string|max:17',
+            'last_name' => 'required|string|max:255', 
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255', 
+            'suffix_name' => 'nullable|string|max:255', 
+            'birthday' => 'required|date', 
+            'birthplace' => 'required|string|max:255', 
+            'sex' => 'required|string|max:6', 
+            'civil_status' => 'required|string|max:10', 
+            'educational_attainment' => 'required|string|max:255', 
+            'zone' => 'required|string|max:2', 
+            'religion' => 'required|string|max:255', 
+            'occupation' => 'required|string|max:255', 
+            'contact' => 'required|digits:11', 
+            'philhealth' => 'required|boolean',  
+            'first_dose_date' => 'nullable|date', 
+            'second_dose_date' => 'nullable|date', 
+            'vaccine_brand' => 'nullable|string|max:255', 
+            'booster_date' => 'nullable|date', 
+            'booster_brand' => 'nullable|string|max:255',
+            
+            'wife.*.lname' => 'required|string|max:255', 
+            'wife.*.fname' => 'required|string|max:255',
+            'wife.*.mname' => 'nullable|string|max:255', 
+            'wife.*.sname' => 'nullable|string|max:255', 
+            'wife.*.bday' => 'required|date', 
+            'wife.*.bplace' => 'required|string|max:255', 
+            'wife.*.civil_status' => 'required|string|max:10', 
+            'wife.*.educ_attainment' => 'required|string|max:255', 
+            'wife.*.zone' => 'required|string|max:2', 
+            'wife.*.religion' => 'required|string|max:255', 
+            'wife.*.occupation' => 'required|string|max:255', 
+            'wife.*.contact' => 'required|digits:11', 
+            'wife.*.philhealth' => 'required|boolean', 
+            'wife.*.first_dose' => 'nullable|date', 
+            'wife.*.second_dose' => 'nullable|date', 
+            'wife.*.vaccine_brand' => 'nullable|string|max:17', 
+            'wife.*.booster' => 'nullable|date', 
+            'wife.*.booster_brand' => 'nullable|string|max:17',
     
-                'new_members.*.lname' => 'required|string|max:255',
-                'new_members.*.fname' => 'required|string|max:255',
-                'new_members.*.mname' => 'nullable|string|max:255',
-                'new_members.*.sname' => 'nullable|string|max:255',
-                'new_members.*.bday' => 'required|date',
-                'new_members.*.bplace' => 'required|string|max:255',
-                'new_members.*.sex' => ['required', 'string', 'max:6'], 
-                'new_members.*.educ_attain' => 'required|string|max:255',
-                'new_members.*.fdose' => 'nullable|date',
-                'new_members.*.sdose' => 'nullable|date',
-                'new_members.*.brand' => 'nullable|string|max:17',
-                'new_members.*.booster' => 'nullable|date',
-                'new_members.*.bbrand' => 'nullable|string|max:17',
-            ]);
-        }
-
-        $this->page = 'to-others';
-    }
-
-    public function submit()
-    {
-        $this->validate([
-            // family head
-            'last_name' => ['required', 'string', 'max:255'],
-            'first_name' => ['required', 'string', 'max:255'],
-            'middle_name' => ['nullable', 'string', 'max:255'],
-            'suffix_name' => ['nullable', 'string', 'max:255'],
-            'birthday' => ['required', 'date'],
-            'birthplace' => ['required', 'string', 'max:255'],
-            'sex' => ['required', 'string', 'max:6'], 
-            'civil_status' => ['required', 'string', 'max:9'],
-            'educational_attainment' => ['required', 'string', 'max:255'],
-            'zone' => ['required', 'string', 'max:1'],
-            'religion' => ['required', 'string', 'max:255'],
-            'occupation' => ['required', 'string', 'max:255'],
-            'contact' => ['required', 'digits:11'],
-            'philhealth' => ['required', 'boolean'],
-            'first_dose_date' => ['nullable', 'date'],
-            'second_dose_date' => ['nullable', 'date'],
-            'vaccine_brand' => ['nullable', 'string', 'max:255'],
-            'booster_date' => ['nullable', 'date'],
-            'booster_brand' => ['nullable', 'string', 'max:255'],
-
-            // wife
-            'wife.*.lname' => ['required', 'string', 'max:255'],
-            'wife.*.fname' => ['required', 'string', 'max:255'],
-            'wife.*.mname' => ['nullable', 'string', 'max:255'],
-            'wife.*.sname' => ['nullable', 'string', 'max:255'],
-            'wife.*.bday' => ['required', 'date'],
-            'wife.*.bplace' => ['required', 'string', 'max:255'],
-            'wife.*.civil_status' => ['required', 'string', 'max:9'],
-            'wife.*.educ_attainment' => ['required', 'string', 'max:255'],
-            'wife.*.zone' => ['required', 'string', 'max:1'],
-            'wife.*.religion' => ['required', 'string', 'max:255'],
-            'wife.*.occupation' => ['required', 'string', 'max:255'],
-            'wife.*.contact' => ['required', 'digits:11'],
-            'wife.*.philhealth' => ['required', 'boolean'],
-            'wife.*.first_dose' => ['nullable', 'date'],
-            'wife.*.second_dose' => ['nullable', 'date'],
-            'wife.*.vaccine_brand' => ['nullable', 'string', 'max:17'],
-            'wife.*.booster' => ['nullable', 'date'],
-            'wife.*.booster_brand' => ['nullable', 'string', 'max:17'],
-
-            // family member
-            'members.*.lname' => ['required', 'string', 'max:255'],
-            'members.*.fname' => ['required', 'string', 'max:255'],
-            'members.*.mname' => ['nullable', 'string', 'max:255'],
-            'members.*.sname' => ['nullable', 'string', 'max:255'],
-            'members.*.bday' => ['required', 'date'],
-            'members.*.bplace' => ['required', 'string', 'max:255'],
-            'members.*.sex' => ['required', 'string', 'max:6'], 
-            'members.*.educ_attain' => ['required', 'string', 'max:255'],
-            'members.*.fdose' => ['nullable', 'date'],
-            'members.*.sdose' => ['nullable', 'date'],
-            'members.*.brand' => ['nullable', 'string', 'max:255'],
-            'members.*.booster' => ['nullable', 'date'],
-            'members.*.bbrand' => ['nullable', 'string', 'max:255'],
-
-            // other info.
+            'members.*.lname' => 'required|string|max:255',
+            'members.*.fname' => 'required|string|max:255',
+            'members.*.mname' => 'nullable|string|max:255',
+            'members.*.sname' => 'nullable|string|max:255',
+            'members.*.bday' => 'required|date',
+            'members.*.bplace' => 'required|string|max:255',
+            'members.*.sex' => 'required|string|max:6',
+            'members.*.educ_attain' => 'required|string|max:255',
+            'members.*.fdose' => 'nullable|date',
+            'members.*.sdose' => 'nullable|date',
+            'members.*.brand' => 'nullable|string|max:17',
+            'members.*.booster' => 'nullable|date',
+            'members.*.bbrand' => 'nullable|string|max:17',
+    
+            'pipe_nawasa' => 'boolean',
             'deep_well' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->pipe_nawasa)],
             'nipa' => 'boolean',
             'concrete' => 'boolean',
@@ -753,11 +613,12 @@ class FamilyProfile extends Component
             'iodized_salt' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->poultry_livestock)],
             'owned_electricity' => 'boolean',
             'sharing_electricity' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->owned_electricity)],
-            'house_no' => ['required', 'string', 'max:255'],
-            'pwd' => ['nullable', 'integer', 'gte:0'],
-            'solo_parent' => ['nullable', 'integer', 'gte:0'],
-            'senior_citizen' => ['nullable', 'integer', 'gte:0'],
-            'pregnant' => ['nullable', 'integer', 'gte:0'],
+            'house_no' => 'required|string|max:255',
+    
+            'pwd' => 'nullable|integer|gte:0',
+            'solo_parent' => 'nullable|integer|gte:0',
+            'senior_citizen' => 'nullable|integer|gte:0',
+            'pregnant' => 'nullable|integer|gte:0',
         ]);
 
         $head_fullname = '';
@@ -771,7 +632,8 @@ class FamilyProfile extends Component
         }
 
         $family_head = new FamilyHead();
-        $family_head->user_id = auth()->guard('web')->id();
+        
+        // Family Head
         $family_head->lname = $this->last_name;
         $family_head->fname = $this->first_name;
         $family_head->mname = $this->middle_name;
@@ -787,11 +649,18 @@ class FamilyProfile extends Component
         $family_head->occupation = $this->occupation;
         $family_head->contact = $this->contact;
         $family_head->philhealth = $this->philhealth;
+
         $family_head->first_dose = $this->first_dose_date === '' ? null : $this->first_dose_date;
+
         $family_head->second_dose = $this->second_dose_date === '' ? null : $this->second_dose_date;
+
         $family_head->vaccine_brand = $this->vaccine_brand;
+
         $family_head->booster = $this->booster_date === '' ? null : $this->booster_date;
+
         $family_head->booster_brand = $this->booster_brand;
+
+        // Additional Info
         $family_head->pipe_nawasa = $this->pipe_nawasa;
         $family_head->deep_well = $this->deep_well;
         $family_head->nipa = $this->nipa;
@@ -805,11 +674,12 @@ class FamilyProfile extends Component
         $family_head->owned_electricity = $this->owned_electricity;
         $family_head->sharing_electricity = $this->sharing_electricity;
         $family_head->house_no = $this->house_no;
+
+        // Beneficiaries
         $family_head->pwd = $this->pwd == '0' ? null : $this->pwd;
         $family_head->solo_parent = $this->solo_parent == '0' ? null : $this->solo_parent;
         $family_head->senior_citizen = $this->senior_citizen == '0' ? null : $this->senior_citizen;
         $family_head->pregnant = $this->pregnant == '0' ? null : $this->pregnant;
-        $family_head->is_approved = false;
         $family_head->save();
 
         if(!$this->wife->isEmpty()){
@@ -849,7 +719,7 @@ class FamilyProfile extends Component
         }
 
         if(!$this->members->isEmpty()){
-            foreach($this->members as $member) {
+            foreach($this->members as $member){
 
                 $family_member_fullname = '';
                 if($member['mname'] === ''|| is_null($member['mname'])){
@@ -880,10 +750,147 @@ class FamilyProfile extends Component
             }
         }
 
-        return redirect()->route('resident.family-profile');
+        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInputs();
+        $this->resetErrorBag();
     }
 
-    public function update()
+    public function viewFamily($id)
+    {
+        $this->family_head = FamilyHead::with('familyMembers')->with('wife')->find($id);
+    }
+
+    public function editFamily($id)
+    {
+        $family_head = FamilyHead::with('familyMembers')->with('wife')->find($id);
+
+        if($family_head->wife == null){
+            $this->wife = collect();
+        }else{
+            $this->wife = collect([$family_head->wife]);
+        }
+
+        $this->old_members = collect($family_head->familyMembers);
+
+        $this->family_head_id = $family_head->id;
+
+        // Family Head
+        $this->last_name = $family_head->lname;
+        $this->first_name = $family_head->fname;
+        $this->middle_name = $family_head->mname;
+        $this->suffix_name = $family_head->sname;
+        $this->birthday = $family_head->bday;
+        $this->birthplace = $family_head->bplace;
+        $this->sex = $family_head->sex;
+        $this->civil_status = $family_head->civil_status;
+        $this->educational_attainment = $family_head->educ_attainment;
+        $this->zone = $family_head->zone;
+        $this->religion = $family_head->religion;
+        $this->occupation = $family_head->occupation;
+        $this->contact = $family_head->contact;
+        $this->philhealth = $family_head->philhealth;
+        $this->first_dose_date = $family_head->first_dose;
+        $this->second_dose_date = $family_head->second_dose;
+        $this->vaccine_brand = $family_head->vaccine_brand;
+        $this->booster_date = $family_head->booster;
+        $this->booster_brand = $family_head->booster_brand;
+
+        // Additional Info
+        $this->house_no = $family_head->house_no;
+        $this->pipe_nawasa = $family_head->pipe_nawasa;
+        $this->deep_well = $family_head->deep_well;
+        $this->nipa = $family_head->nipa;
+        $this->concrete = $family_head->concrete;
+        $this->sem = $family_head->sem;
+        $this->wood = $family_head->wood;
+        $this->owned_toilet = $family_head->owned_toilet;
+        $this->sharing_toilet = $family_head->sharing_toilet;
+        $this->poultry_livestock = $family_head->poultry_livestock;
+        $this->iodized_salt = $family_head->iodized_salt;
+        $this->owned_electricity = $family_head->owned_electricity;
+        $this->sharing_electricity = $family_head->sharing_electricity;
+
+        // Beneficiaries
+        $this->pwd = $family_head->pwd;
+        $this->solo_parent = $family_head->solo_parent;
+        $this->senior_citizen = $family_head->senior_citizen;
+        $this->pregnant = $family_head->pregnant;
+    }
+
+    public function newWife()
+    {
+        $head = FamilyHead::with('wife')->find($this->family_head_id);
+
+        if(is_null($head->wife)){
+            $this->wife = collect([
+                [
+                    'lname' => null,
+                    'fname' => null,
+                    'mname' => null,
+                    'sname' => null,
+                    'bday' => null,
+                    'bplace' => null,
+                    'civil_status' => null,
+                    'educ_attainment' => null,
+                    'zone' => null,
+                    'religion' => null,
+                    'occupation' => null,
+                    'contact' => null,
+                    'philhealth' => null,
+                    'first_dose' => null,
+                    'second_dose' => null,
+                    'vaccine_brand' => null,
+                    'booster' => null,
+                    'booster_brand' => null,
+                ]
+            ]);
+        }else{
+            $this->wife = collect([$head->wife]);
+        }
+
+        $this->dispatchBrowserEvent('addWife');
+    }
+
+    public function addNewMember()
+    {
+        $this->new_members->push([
+            'lname' => null,
+            'fname' => null,
+            'mname' => null,
+            'sname' => null,
+            'bday' => null,
+            'bplace' => null,
+            'sex' => null,
+            'educ_attain' => null,
+            'fdose' => null,
+            'sdose' => null,
+            'brand' => null,
+            'booster' => null,
+            'bbrand' => null,
+        ]);
+
+        $this->dispatchBrowserEvent('addMembers');
+    }
+
+    public function removeOldMember($index)
+    {
+        array_push($this->removed_members, $this->old_members[$index]['id']);
+
+        $this->old_members->pull($index);
+
+        $this->dispatchBrowserEvent('addMembers');
+    }
+
+    public function removeNewMember($index)
+    {
+        $this->new_members->pull($index);
+        $reindexed_new_members = $this->new_members->values();
+        $this->new_members = $reindexed_new_members;
+
+        $this->dispatchBrowserEvent('addMembers');
+    }
+    
+    public function updateFamily()
     {
         $this->validate([
             'last_name' => 'required|string|max:255', 
@@ -1031,7 +1038,6 @@ class FamilyProfile extends Component
         $updated_family_head->solo_parent = $this->solo_parent == '0' ? null : $this->solo_parent;
         $updated_family_head->senior_citizen = $this->senior_citizen == '0' ? null : $this->senior_citizen;
         $updated_family_head->pregnant = $this->pregnant == '0' ? null : $this->pregnant;
-        $updated_family_head->is_approved = false;
         $updated_family_head->update();
 
         if(!empty($this->removed_members)){
@@ -1180,11 +1186,40 @@ class FamilyProfile extends Component
             }
         }
 
-        return redirect()->route('resident.family-profile');
+        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInputs();
+        $this->resetErrorBag();
     }
 
+    public function deleteConfirmation($id)
+    {
+        $this->family_head_id = $id;
+    }
+
+    public function deleteFamily()
+    {
+        FamilyHead::find($this->family_head_id)->delete();
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInputs();
+    }
+    
     public function render()
     {
-        return view('livewire.resident.family-profile');
+        $offlineFamilies = FamilyHead::where('user_id', null)
+            ->where('zone', auth()->guard('bhw')->user()->assigned_zone)
+            ->where('is_approved', true)
+            ->where(function($query) {
+                $query->where('fullname', 'like', '%' . $this->search . '%')
+                ->orWhere('fname', 'like', '%' . $this->search . '%')
+                ->orWhere('mname', 'like', '%' . $this->search . '%')
+                ->orWhere('lname', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate, ['*'], 'offlineFamilyProfilePage');
+
+        return view('livewire.sub-b-h-w.offline-family-profile', [
+            'offlineFamilies' => $offlineFamilies,
+        ]);
     }
 }

@@ -70,7 +70,7 @@
             <li class="nav-item">
               <a href="{{ route('admin.profile.residents') }}" id="residents" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.profile.residents') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
-                  <p class="col-12 m-0 ms-3 ps-5">Residents</p>
+                  <p class="col-12 m-0 ms-3 ps-5">Families</p>
                 </div>
               </a>
             </li>

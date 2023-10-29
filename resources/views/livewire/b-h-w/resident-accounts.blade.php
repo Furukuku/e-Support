@@ -1,6 +1,6 @@
 <div class="d-flex flex-column align-items-center justify-content-center pb-5 pt-4">
   
-  <div class="row gap-5 justify-content-center w-100 mb-5 pt-5 card-container">
+  {{-- <div class="row gap-5 justify-content-center w-100 mb-5 pt-5 card-container">
     <div class="col-md-5 mt-3 card-counter">
       <div class="card">
         <div class="card-body">
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
   <div class="w-100 px-4 d-flex justify-content-end">
     <div class="w-25 mt-5 shadow-sm">
@@ -44,7 +44,7 @@
 
     <div class="bg-white officials-profile-table mb-5 shadow rounded mt-3">
       <div class="d-flex justify-content-between p-2 rounded-top officials-header">
-        <h3>RESIDENTS' ACCOUNTS</h3>
+        <h3>RESIDENT ACCOUNTS</h3>
       </div>
       <div class="d-flex justify-content-between p-2">
         <div class="row g-1 align-items-center">
@@ -52,9 +52,8 @@
             <label for="entries">Show</label>
           </div>
           <div class="col-6">
-            {{-- <input id="entries" wire:model="paginate" type="number" class="form-control form-control-sm"> --}}
             <select id="entries" wire:model="paginate" class="form-select form-select-sm">
-              @foreach ($paginate_value as $value)
+              @foreach ($paginate_values as $value)
                 <option value="{{ $value }}">{{ $value }}</option>
               @endforeach
             </select>
@@ -80,7 +79,6 @@
               <th class="align-middle text-center">Full Name</th>
               <th class="align-middle text-center">Email</th>
               <th class="align-middle text-center">Phone No.</th>
-              <th class="align-middle text-center">Family Head</th>
               <th class="align-middle text-center">Action</th>
             </tr>
           </thead>
@@ -91,7 +89,6 @@
                 <td class="align-middle text-center">{{ $resident->fname }} {{ $resident->mname }} {{ $resident->lname }} {{ $resident->sname }}</td>
                 <td class="align-middle text-center">{{ $resident->email }}</td>
                 <td class="align-middle text-center">{{ $resident->mobile }}</td>
-                <td class="align-middle text-center">{{ $resident->is_head == true ? 'Yes' : 'No' }}</td>
                 <td class="align-middle text-center">
                   <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewResident({{ $resident }})" data-bs-toggle="modal" data-bs-target="#viewResident"></i>
                   <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:loading.class="pe-none" wire:click="editResident({{ $resident }})" data-bs-toggle="modal" data-bs-target="#updateResidentAcc"></i>

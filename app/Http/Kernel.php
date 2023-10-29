@@ -75,7 +75,7 @@ class Kernel extends HttpKernel
         'resident-mobile.verified' => \App\Http\Middleware\EnsureResidentMobileIsVerified::class,
         'resident.approval' => \App\Http\Middleware\CheckIfResidentApproved::class,
         'resident.active' => \App\Http\Middleware\CheckIfResidentAccountIsActive::class,
-        'resident.head' => \App\Http\Middleware\CheckResidentIfFamilyHead::class,
+        'resident.fam-profile' => \App\Http\Middleware\CheckResidentIfCanProfiling::class,
         'company-mobile.verified' => \App\Http\Middleware\EnsureCompanyMobileIsVerified::class,
         'company.approval' => \App\Http\Middleware\CheckIfCompanyApproved::class,
         'company.active' => \App\Http\Middleware\CheckIfCompanyAccountIsActive::class,

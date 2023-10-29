@@ -4,7 +4,7 @@
 
   <div class="bg-white officials-profile-table mb-5 shadow rounded mt-3">
     <div class="d-flex justify-content-between p-2 rounded-top officials-header">
-      <h3>RESIDENTS' ACCOUNTS</h3>
+      <h3>RESIDENT ACCOUNTS</h3>
     </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
@@ -40,7 +40,6 @@
             <th class="align-middle text-center">Full Name</th>
             <th class="align-middle text-center">Email</th>
             <th class="align-middle text-center">Phone No.</th>
-            <th class="align-middle text-center">Family Head</th>
             <th class="align-middle text-center">Action</th>
           </tr>
         </thead>
@@ -51,7 +50,6 @@
               <td class="align-middle text-center">{{ $resident->fname }} {{ $resident->mname }} {{ $resident->lname }} {{ $resident->sname }}</td>
               <td class="align-middle text-center">{{ $resident->email }}</td>
               <td class="align-middle text-center">{{ $resident->mobile }}</td>
-              <td class="align-middle text-center">{{ $resident->is_head == true ? 'Yes' : 'No' }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewResident({{ $resident }})" data-bs-toggle="modal" data-bs-target="#approvalResident"></i>
                 <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="rejectResidentConfirm({{ $resident }})" data-bs-toggle="modal" data-bs-target="#rejectResident"></i>

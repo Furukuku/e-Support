@@ -63,7 +63,7 @@
               <h5 class="m-0">Profile</h5>
             </a>
           </li>
-          @if (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true)
+          @if (auth()->guard('web')->user()->can_edit_profiling == true)
             <li class="nav-item">
               <a href="{{ route('resident.family-profile') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'resident.family-profile') ? 'active' : '' }}">
                 <h5 class="m-0">Family Profile</h5>
@@ -120,7 +120,7 @@
             <span class="ps-2">Profile</span>
           </a>
         </li>
-        @if (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true)
+        @if (auth()->guard('web')->user()->can_edit_profiling == true)
           <li class="pb-3">
             <a href="{{ route('resident.family-profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.family-profile') ? 'text-success' : 'main-color' }}">
               <span class="material-symbols-outlined">manage_accounts</span>

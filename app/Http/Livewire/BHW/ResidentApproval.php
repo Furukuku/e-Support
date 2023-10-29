@@ -15,11 +15,11 @@ class ResidentApproval extends Component
     public $search = '';
     public $paginate = 5;
 
-    public $paginate_value = [5, 10, 50, 100];
+    public $paginate_values = [5, 10, 50, 100];
 
     protected $paginationTheme = 'bootstrap';
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $family_head, $resident_verification_img;
+    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $resident_verification_img;
 
     public $resident_id;
 
@@ -41,7 +41,6 @@ class ResidentApproval extends Component
             'zone',
             'employment_status',
             'gender',
-            'family_head',
             'resident_verification_img',
             'resident_id',
             'head_id',
@@ -63,49 +62,47 @@ class ResidentApproval extends Component
         $this->zone = $resident->zone;
         $this->employment_status = $resident->is_employed;
         $this->gender = $resident->gender;
-        $this->family_head = $resident->is_head;
         $this->resident_verification_img = $resident->verification_img;
     }
 
-    public function headOrNot()
-    {
-        $this->dispatchBrowserEvent('close-modal');
-        $this->dispatchBrowserEvent('headOrNot');
-    }
+    // public function headOrNot()
+    // {
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->dispatchBrowserEvent('headOrNot');
+    // }
 
-    public function isHead()
-    {
-        $head = FamilyHead::where('user_id', null)
-            ->where(DB::raw('LOWER(fname)'), strtolower($this->first_name))
-            ->where(DB::raw('LOWER(lname)'), strtolower($this->last_name))
-            ->where('zone', $this->zone)
-            ->whereDate('bday', $this->birthday)
-            ->first();
+    // public function isHead()
+    // {
+    //     $head = FamilyHead::where('user_id', null)
+    //         ->where(DB::raw('LOWER(fname)'), strtolower($this->first_name))
+    //         ->where(DB::raw('LOWER(lname)'), strtolower($this->last_name))
+    //         ->where('zone', $this->zone)
+    //         ->whereDate('bday', $this->birthday)
+    //         ->first();
         
         
-        if(is_null($head)){
-            $resident = User::find($this->resident_id);
-            $resident->is_approved = true;
-            $resident->is_head = true;
-            $resident->update();
-            $this->dispatchBrowserEvent('close-modal');
-            $this->closeModal();
-        }else{
-            $this->head_id = $head->id;
-            $this->head_fullname = $head->fullname;
-            $this->dispatchBrowserEvent('close-modal');
-            $this->dispatchBrowserEvent('headSuggest');
-        }
-    }
+    //     if(is_null($head)){
+    //         $resident = User::find($this->resident_id);
+    //         $resident->is_approved = true;
+    //         $resident->update();
+    //         $this->dispatchBrowserEvent('close-modal');
+    //         $this->closeModal();
+    //     }else{
+    //         $this->head_id = $head->id;
+    //         $this->head_fullname = $head->fullname;
+    //         $this->dispatchBrowserEvent('close-modal');
+    //         $this->dispatchBrowserEvent('headSuggest');
+    //     }
+    // }
 
-    public function notHead()
-    {
-        $resident = User::find($this->resident_id);
-        $resident->is_approved = true;
-        $resident->update();
-        $this->dispatchBrowserEvent('close-modal');
-        $this->closeModal();
-    }
+    // public function notHead()
+    // {
+    //     $resident = User::find($this->resident_id);
+    //     $resident->is_approved = true;
+    //     $resident->update();
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->closeModal();
+    // }
 
     // public function checkIfHead()
     // {
@@ -134,26 +131,24 @@ class ResidentApproval extends Component
     {
         $resident = User::find($this->resident_id);
         $resident->is_approved = true;
-        $resident->is_head = true;
         $resident->update();
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
     }
 
-    public function bindAccount()
-    {
-        $resident = User::find($this->resident_id);
-        $resident->is_approved = true;
-        $resident->is_head = true;
-        $resident->update();
+    // public function bindAccount()
+    // {
+    //     $resident = User::find($this->resident_id);
+    //     $resident->is_approved = true;
+    //     $resident->update();
 
-        $head = FamilyHead::find($this->head_id);
-        $head->user_id = $this->resident_id;
-        $head->update();
+    //     $head = FamilyHead::find($this->head_id);
+    //     $head->user_id = $this->resident_id;
+    //     $head->update();
 
-        $this->dispatchBrowserEvent('close-modal');
-        $this->closeModal();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->closeModal();
+    // }
 
     public function rejectResidentConfirm(User $resident)
     {

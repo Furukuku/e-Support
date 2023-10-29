@@ -2,34 +2,63 @@
 
 @section('content')
 
-  <main>
-    <div class="brgy-captain-bg">
-      <div class="captain-container">
-        <div class="container mx-auto">
-          <div class="row my-0 justify-content-center">
-            <div class="{{ $brgyCapt !== null ? 'col-6' : 'col-12' }} d-flex flex-column align-items-center justify-content-center">
-              <h1 class="fw-bold text-white">Barangay Nancayasan</h1>
-              <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro culpa sunt, suscipit in aliquid sed.</p>
-            </div>
-            @if($brgyCapt !== null)
-              <div class="col-6 d-flex justify-content-center">
-                <img src="{{ Storage::url($brgyCapt->display_img) }}" alt="brgy-cpt" style="height: 15rem;">
-                {{-- <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png?w=740&t=st=1682225191~exp=1682225791~hmac=35847e176c9e88801c133b577ecf852825415d5b2b3c23f9d76d6c47a5a1e5b1" alt="brgy-cpt" style="height: 15rem;"> --}}
-              </div>
-            @endif
-          </div>
-          <div class="container bg-white border border-dark rounded my-0">
-            @if($brgyCapt !== null)
-              <h1 class="fw-bold text-dark text-center">{{ $brgyCapt->fname }} {{ $brgyCapt->mname }} {{ $brgyCapt->lname }} {{ $brgyCapt->sname }}</h1>
-              <hr class="py-0 my-0">
-              <p class="text-dark text-center py-0 my-0">Barangay Captain</p>
-            @endif
-            </div>
-        </div>
+  <header class="d-flex w-100 p-0 website-header">
+    <div class="w-50 d-flex justify-content-center align-items-center">
+      <img src="{{ asset('images/logos/brgy-nancayasan-logo-removebg.png') }}" alt="logo" style="height: 15rem;">
+    </div>
+    <div class="w-50 d-flex flex-column justify-content-center pe-5">
+      <h1 class="fw-bold text-white">Barangay Nancasayan</h1>
+      <p class="text-white">There is no power for change greater than a community discovering what it cares about.</p>
+      <div class="mt-3">
+        <a href="#" class="btn btn-primary readmore-btn">Read more</a>
       </div>
     </div>
+  </header>
 
+  <main>
     <div class="py-5">
+
+      <div>
+        <h3 class="text-center">Meet Our Council</h3>
+        <div id="carouselExampleCaptions" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
 
       {{-- Programs --}}
       <span id="programs" class="program-anchor"></span>
@@ -403,7 +432,7 @@
 
   {{-- Contacts --}}
   <footer>
-    <div class="container-fluid pt-3 d-flex flex-row justify-content-center gap-5 border-top border-secondary footer-color">
+    <div class="container-fluid pt-3 d-flex flex-row justify-content-center gap-5 border-top border-secondary bg-light">
       <div class="contacts-containers">
         <div class="bg-warning rounded-pill mx-auto contact-icon-cont">
           <span class="material-symbols-outlined">

@@ -21,31 +21,31 @@
   <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
 
 </head>
-<body class="welcome-body">
-  <nav class="navbar sticky-top navbar-expand-lg ps-4" data-bs-theme="dark">
-    <a class="navbar-brand" href="#">e-Support</a>
+<body class="bg-light">
+  <nav class="navbar sticky-top navbar-expand-lg ps-4">
+    <a class="navbar-brand text-white" href="#">e-Support</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item mx-3">
-          <a class="nav-link" aria-current="page" href="/#">Home</a>
+          <a class="nav-link text-white" aria-current="page" href="/#">Home</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link" href="/#brgy-officials">Barangay Officials</a>
+          <a class="nav-link text-white" href="/#brgy-officials">Barangay Officials</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link" href="/#programs">Programs</a>
+          <a class="nav-link text-white" href="/#programs">Programs</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link" href="/#places">Places</a>
+          <a class="nav-link text-white" href="/#places">Places</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link" href="/#location">Location</a>
+          <a class="nav-link text-white" href="/#location">Location</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link" href="{{ url('/login') }}">Login</a>
+          <a class="nav-link text-white" href="{{ url('/login') }}">Login</a>
         </li>
       </ul>
     </div>

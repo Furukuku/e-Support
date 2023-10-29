@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckResidentIfFamilyHead
+class CheckResidentIfCanProfiling
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class CheckResidentIfFamilyHead
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && ($request->user()->is_head == false || $request->user()->can_edit_profiling == false)){
+        if($request->user() && $request->user()->can_edit_profiling == false){
             return redirect()->back();
         }
 

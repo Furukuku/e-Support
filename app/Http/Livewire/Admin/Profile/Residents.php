@@ -6,6 +6,8 @@ use App\Models\FamilyHead;
 use Livewire\Component;
 use App\Models\FamilyMember;
 use App\Models\Wife;
+use App\Rules\MustAtleastOneIsTrueOfTheFour;
+use App\Rules\MustAtleastOneIsTrueOfTheTwo;
 use Livewire\WithPagination;
 use Illuminate\Support\Collection;
 
@@ -18,7 +20,7 @@ class Residents extends Component
     public $paginate = 5;
 
     // Family Head variables
-    public $last_name, $first_name, $middle_name, $suffix_name, $birthday, $birthplace, $civil_status, $educational_attainment, $zone, $religion, $occupation, $contact, $philhealth, $first_dose_date, $second_dose_date, $vaccine_brand, $booster_date, $booster_brand;
+    public $last_name, $first_name, $middle_name, $suffix_name, $birthday, $birthplace, $sex, $civil_status, $educational_attainment, $zone, $religion, $occupation, $contact, $philhealth, $first_dose_date, $second_dose_date, $vaccine_brand, $booster_date, $booster_brand;
 
     // Wife variables
     // public $wife_last_name, $wife_first_name, $wife_middle_name, $wife_suffix_name, $wife_birthday, $wife_birthplace, $wife_civil_status, $wife_educational_attainment, $wife_zone, $wife_religion, $wife_occupation, $wife_contact, $wife_philhealth, $wife_first_dose_date, $wife_second_dose_date, $wife_vaccine_brand, $wife_booster_date, $wife_booster_brand;
@@ -45,79 +47,20 @@ class Residents extends Component
     public $removed_members = [];
 
     // Additional Info variables
-    public $water_source, $type_of_house, $toilet, $garden, $electricity, $house_no;
+    public $pipe_nawasa = false, $deep_well = false, $nipa = false, $concrete = false, $sem = false, $wood = false, $owned_toilet = false, $sharing_toilet = false, $poultry_livestock = false, $iodized_salt = false, $owned_electricity = false, $sharing_electricity = false, $house_no;
 
     // Members variables
     public $pwd, $solo_parent, $senior_citizen, $pregnant;
 
+    // tabs of category of the family
+    public $tab = 1;
+
+    // tabs of modal
+    public $modalTab = 1;
+
     public $search = "";
 
     protected $listeners = ['closeModal'];
-
-    protected $rules = [
-        'last_name' => 'required|string|max:255', 
-        'first_name' => 'required|string|max:255',
-        'middle_name' => 'nullable|string|max:255', 
-        'suffix_name' => 'nullable|string|max:255', 
-        'birthday' => 'required|date', 
-        'birthplace' => 'required|string|max:255', 
-        'civil_status' => 'required|string|max:10', 
-        'educational_attainment' => 'required|string|max:255', 
-        'zone' => 'required|string|max:2', 
-        'religion' => 'required|string|max:255', 
-        'occupation' => 'required|string|max:255', 
-        'contact' => 'required|digits:11', 
-        'philhealth' => 'required|boolean',  
-        'first_dose_date' => 'nullable|date', 
-        'second_dose_date' => 'nullable|date', 
-        'vaccine_brand' => 'nullable|string|max:255', 
-        'booster_date' => 'nullable|date', 
-        'booster_brand' => 'nullable|string|max:255',
-        
-        'wife.*.lname' => 'required|string|max:255', 
-        'wife.*.fname' => 'required|string|max:255',
-        'wife.*.mname' => 'nullable|string|max:255', 
-        'wife.*.sname' => 'nullable|string|max:255', 
-        'wife.*.bday' => 'required|date', 
-        'wife.*.bplace' => 'required|string|max:255', 
-        'wife.*.civil_status' => 'required|string|max:10', 
-        'wife.*.educ_attainment' => 'required|string|max:255', 
-        'wife.*.zone' => 'required|string|max:2', 
-        'wife.*.religion' => 'required|string|max:255', 
-        'wife.*.occupation' => 'required|string|max:255', 
-        'wife.*.contact' => 'required|digits:11', 
-        'wife.*.philhealth' => 'required|boolean', 
-        'wife.*.first_dose' => 'nullable|date', 
-        'wife.*.second_dose' => 'nullable|date', 
-        'wife.*.vaccine_brand' => 'nullable|string|max:17', 
-        'wife.*.booster' => 'nullable|date', 
-        'wife.*.booster_brand' => 'nullable|string|max:17',
-
-        'members.*.lname' => 'required|string|max:255',
-        'members.*.fname' => 'required|string|max:255',
-        'members.*.mname' => 'nullable|string|max:255',
-        'members.*.sname' => 'nullable|string|max:255',
-        'members.*.bday' => 'required|date',
-        'members.*.bplace' => 'required|string|max:255',
-        'members.*.educ_attain' => 'required|string|max:255',
-        'members.*.fdose' => 'nullable|date',
-        'members.*.sdose' => 'nullable|date',
-        'members.*.brand' => 'nullable|string|max:17',
-        'members.*.booster' => 'nullable|date',
-        'members.*.bbrand' => 'nullable|string|max:17',
-
-        'water_source' => 'required|string|max:12',
-        'type_of_house' => 'required|string|max:10',
-        'toilet' => 'required|string|max:8',
-        'garden' => 'required|string|max:20',
-        'electricity' => 'required|string|max:8',
-        'house_no' => 'required|string|max:255',
-
-        'pwd' => 'nullable|integer|gte:0',
-        'solo_parent' => 'nullable|integer|gte:0',
-        'senior_citizen' => 'nullable|integer|gte:0',
-        'pregnant' => 'nullable|integer|gte:0',
-    ];
 
     protected $messages = [
         // family members
@@ -147,6 +90,11 @@ class Residents extends Component
             'required' => 'The birthplace field is required.',
             'string' => 'The birthplace field must be a string type.',
             'max' => 'The birthplace field must not exceed 255 characters.',
+        ],
+        'members.*.sex' => [
+            'required' => 'The sex field is required.',
+            'string' => 'The sex field must be a string type.',
+            'max' => 'The sex field must not exceed 6 characters.',
         ],
         'members.*.educ_attain' => [
             'required' => 'The educational attainment field is required.',
@@ -280,6 +228,11 @@ class Residents extends Component
             'string' => 'The birthplace field must be a string type.',
             'max' => 'The birthplace field must not exceed 255 characters.',
         ],
+        'old_members.*.sex' => [
+            'required' => 'The sex field is required.',
+            'string' => 'The sex field must be a string type.',
+            'max' => 'The sex field must not exceed 6 characters.',
+        ],
         'old_members.*.educ_attainment' => [
             'required' => 'The educational attainment field is required.',
             'string' => 'The educational attainment field must be a string type.',
@@ -333,6 +286,11 @@ class Residents extends Component
             'string' => 'The birthplace field must be a string type.',
             'max' => 'The birthplace field must not exceed 255 characters.',
         ],
+        'new_members.*.sex' => [
+            'required' => 'The sex field is required.',
+            'string' => 'The sex field must be a string type.',
+            'max' => 'The sex field must not exceed 6 characters.',
+        ],
         'new_members.*.educ_attain' => [
             'required' => 'The educational attainment field is required.',
             'string' => 'The educational attainment field must be a string type.',
@@ -364,6 +322,52 @@ class Residents extends Component
         $this->resetPage();
     }
 
+    public function modalFamHead()
+    {
+        $this->modalTab = 1;
+    }
+
+    public function modalFamWife()
+    {
+        $this->modalTab = 2;
+    }
+
+    public function modalFamMembers()
+    {
+        $this->modalTab = 3;
+    }
+
+    public function modalFamInfo()
+    {
+        $this->modalTab = 4;
+    }
+
+    public function modalFamBenefit()
+    {
+        $this->modalTab = 5;
+    }
+
+
+    public function famHead()
+    {
+        $this->tab = 1;
+    }
+
+    public function famWife()
+    {
+        $this->tab = 2;
+    }
+
+    public function famMembers()
+    {
+        $this->tab = 3;
+    }
+
+    public function addInfo()
+    {
+        $this->tab = 4;
+    }
+
     public function resetInputs()
     {
         // Family Head
@@ -373,6 +377,7 @@ class Residents extends Component
         $this->suffix_name = null;
         $this->birthday = null;
         $this->birthplace = null;
+        $this->sex = null;
         $this->civil_status = null;
         $this->educational_attainment = null;
         $this->zone = null;
@@ -387,11 +392,18 @@ class Residents extends Component
         $this->booster_brand = null;
 
         // Additional Info
-        $this->water_source = null;
-        $this->type_of_house = null;
-        $this->toilet = null;
-        $this->garden = null;
-        $this->electricity = null;
+        $this->pipe_nawasa = false;
+        $this->deep_well = false;
+        $this->nipa = false;
+        $this->concrete = false;
+        $this->sem = false;
+        $this->wood = false;
+        $this->owned_toilet = false;
+        $this->sharing_toilet = false;
+        $this->poultry_livestock = false;
+        $this->iodized_salt = false;
+        $this->owned_electricity = false;
+        $this->sharing_electricity = false;
         $this->house_no = null;
 
         // Beneficiaries
@@ -408,6 +420,10 @@ class Residents extends Component
         $this->mount();
 
         $this->old_members = collect();
+
+        $this->tab = 1;
+
+        $this->modalTab = 1;
     }
 
     public function mount()
@@ -443,6 +459,7 @@ class Residents extends Component
                 'sname' => null,
                 'bday' => null,
                 'bplace' => null,
+                'sex' => null,
                 'educ_attain' => null,
                 'fdose' => null,
                 'sdose' => null,
@@ -507,6 +524,7 @@ class Residents extends Component
             'sname' => null,
             'bday' => null,
             'bplace' => null,
+            'sex' => null,
             'educ_attain' => null,
             'fdose' => null,
             'sdose' => null,
@@ -529,7 +547,79 @@ class Residents extends Component
 
     public function addFamily()
     {
-        $this->validate();
+        $this->validate([
+            'last_name' => 'required|string|max:255', 
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255', 
+            'suffix_name' => 'nullable|string|max:255', 
+            'birthday' => 'required|date', 
+            'birthplace' => 'required|string|max:255', 
+            'sex' => 'required|string|max:6', 
+            'civil_status' => 'required|string|max:10', 
+            'educational_attainment' => 'required|string|max:255', 
+            'zone' => 'required|string|max:2', 
+            'religion' => 'required|string|max:255', 
+            'occupation' => 'required|string|max:255', 
+            'contact' => 'required|digits:11', 
+            'philhealth' => 'required|boolean',  
+            'first_dose_date' => 'nullable|date', 
+            'second_dose_date' => 'nullable|date', 
+            'vaccine_brand' => 'nullable|string|max:255', 
+            'booster_date' => 'nullable|date', 
+            'booster_brand' => 'nullable|string|max:255',
+            
+            'wife.*.lname' => 'required|string|max:255', 
+            'wife.*.fname' => 'required|string|max:255',
+            'wife.*.mname' => 'nullable|string|max:255', 
+            'wife.*.sname' => 'nullable|string|max:255', 
+            'wife.*.bday' => 'required|date', 
+            'wife.*.bplace' => 'required|string|max:255', 
+            'wife.*.civil_status' => 'required|string|max:10', 
+            'wife.*.educ_attainment' => 'required|string|max:255', 
+            'wife.*.zone' => 'required|string|max:2', 
+            'wife.*.religion' => 'required|string|max:255', 
+            'wife.*.occupation' => 'required|string|max:255', 
+            'wife.*.contact' => 'required|digits:11', 
+            'wife.*.philhealth' => 'required|boolean', 
+            'wife.*.first_dose' => 'nullable|date', 
+            'wife.*.second_dose' => 'nullable|date', 
+            'wife.*.vaccine_brand' => 'nullable|string|max:17', 
+            'wife.*.booster' => 'nullable|date', 
+            'wife.*.booster_brand' => 'nullable|string|max:17',
+    
+            'members.*.lname' => 'required|string|max:255',
+            'members.*.fname' => 'required|string|max:255',
+            'members.*.mname' => 'nullable|string|max:255',
+            'members.*.sname' => 'nullable|string|max:255',
+            'members.*.bday' => 'required|date',
+            'members.*.bplace' => 'required|string|max:255',
+            'members.*.sex' => 'required|string|max:6',
+            'members.*.educ_attain' => 'required|string|max:255',
+            'members.*.fdose' => 'nullable|date',
+            'members.*.sdose' => 'nullable|date',
+            'members.*.brand' => 'nullable|string|max:17',
+            'members.*.booster' => 'nullable|date',
+            'members.*.bbrand' => 'nullable|string|max:17',
+    
+            'pipe_nawasa' => 'boolean',
+            'deep_well' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->pipe_nawasa)],
+            'nipa' => 'boolean',
+            'concrete' => 'boolean',
+            'sem' => 'boolean',
+            'wood' => ['boolean', new MustAtleastOneIsTrueOfTheFour($this->nipa, $this->concrete, $this->sem)],
+            'owned_toilet' => 'boolean',
+            'sharing_toilet' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->owned_toilet)],
+            'poultry_livestock' => 'boolean',
+            'iodized_salt' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->poultry_livestock)],
+            'owned_electricity' => 'boolean',
+            'sharing_electricity' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->owned_electricity)],
+            'house_no' => 'required|string|max:255',
+    
+            'pwd' => 'nullable|integer|gte:0',
+            'solo_parent' => 'nullable|integer|gte:0',
+            'senior_citizen' => 'nullable|integer|gte:0',
+            'pregnant' => 'nullable|integer|gte:0',
+        ]);
 
         $head_fullname = '';
 
@@ -551,6 +641,7 @@ class Residents extends Component
         $family_head->fullname = $head_fullname;
         $family_head->bday = $this->birthday;
         $family_head->bplace = $this->birthplace;
+        $family_head->sex = $this->sex;
         $family_head->civil_status = $this->civil_status;
         $family_head->educ_attainment = $this->educational_attainment;
         $family_head->zone = $this->zone;
@@ -570,11 +661,18 @@ class Residents extends Component
         $family_head->booster_brand = $this->booster_brand;
 
         // Additional Info
-        $family_head->water_source = $this->water_source;
-        $family_head->house = $this->type_of_house;
-        $family_head->toilet = $this->toilet;
-        $family_head->garden = $this->garden;
-        $family_head->electricity = $this->electricity;
+        $family_head->pipe_nawasa = $this->pipe_nawasa;
+        $family_head->deep_well = $this->deep_well;
+        $family_head->nipa = $this->nipa;
+        $family_head->concrete = $this->concrete;
+        $family_head->sem = $this->sem;
+        $family_head->wood = $this->wood;
+        $family_head->owned_toilet = $this->owned_toilet;
+        $family_head->sharing_toilet = $this->sharing_toilet;
+        $family_head->poultry_livestock = $this->poultry_livestock;
+        $family_head->iodized_salt = $this->iodized_salt;
+        $family_head->owned_electricity = $this->owned_electricity;
+        $family_head->sharing_electricity = $this->sharing_electricity;
         $family_head->house_no = $this->house_no;
 
         // Beneficiaries
@@ -641,6 +739,7 @@ class Residents extends Component
                 $family_member->fullname = $family_member_fullname;
                 $family_member->bday = $member['bday'];
                 $family_member->bplace = $member['bplace'];
+                $family_member->sex = $member['sex'];
                 $family_member->educ_attainment = $member['educ_attain'];
                 $family_member->first_dose = $member['fdose'] === '' ? null : $member['fdose'];
                 $family_member->second_dose = $member['sdose'] === '' ? null : $member['sdose'];
@@ -682,6 +781,7 @@ class Residents extends Component
         $this->suffix_name = $family_head->sname;
         $this->birthday = $family_head->bday;
         $this->birthplace = $family_head->bplace;
+        $this->sex = $family_head->sex;
         $this->civil_status = $family_head->civil_status;
         $this->educational_attainment = $family_head->educ_attainment;
         $this->zone = $family_head->zone;
@@ -697,11 +797,18 @@ class Residents extends Component
 
         // Additional Info
         $this->house_no = $family_head->house_no;
-        $this->water_source = $family_head->water_source;
-        $this->type_of_house = $family_head->house;
-        $this->toilet = $family_head->toilet;
-        $this->garden = $family_head->garden;
-        $this->electricity = $family_head->electricity;
+        $this->pipe_nawasa = $family_head->pipe_nawasa;
+        $this->deep_well = $family_head->deep_well;
+        $this->nipa = $family_head->nipa;
+        $this->concrete = $family_head->concrete;
+        $this->sem = $family_head->sem;
+        $this->wood = $family_head->wood;
+        $this->owned_toilet = $family_head->owned_toilet;
+        $this->sharing_toilet = $family_head->sharing_toilet;
+        $this->poultry_livestock = $family_head->poultry_livestock;
+        $this->iodized_salt = $family_head->iodized_salt;
+        $this->owned_electricity = $family_head->owned_electricity;
+        $this->sharing_electricity = $family_head->sharing_electricity;
 
         // Beneficiaries
         $this->pwd = $family_head->pwd;
@@ -753,6 +860,7 @@ class Residents extends Component
             'sname' => null,
             'bday' => null,
             'bplace' => null,
+            'sex' => null,
             'educ_attain' => null,
             'fdose' => null,
             'sdose' => null,
@@ -791,6 +899,7 @@ class Residents extends Component
             'suffix_name' => 'nullable|string|max:255', 
             'birthday' => 'required|date', 
             'birthplace' => 'required|string|max:255', 
+            'sex' => 'required|string|max:6', 
             'civil_status' => 'required|string|max:10', 
             'educational_attainment' => 'required|string|max:255', 
             'zone' => 'required|string|max:2', 
@@ -829,6 +938,7 @@ class Residents extends Component
             'old_members.*.sname' => 'nullable|string|max:255',
             'old_members.*.bday' => 'required|date',
             'old_members.*.bplace' => 'required|string|max:255',
+            'old_members.*.sex' => 'required|string|max:6',
             'old_members.*.educ_attainment' => 'required|string|max:255',
             'old_members.*.first_dose' => 'nullable|date',
             'old_members.*.second_dose' => 'nullable|date',
@@ -842,6 +952,7 @@ class Residents extends Component
             'new_members.*.sname' => 'nullable|string|max:255',
             'new_members.*.bday' => 'required|date',
             'new_members.*.bplace' => 'required|string|max:255',
+            'new_members.*.sex' => 'required|string|max:6',
             'new_members.*.educ_attain' => 'required|string|max:255',
             'new_members.*.fdose' => 'nullable|date',
             'new_members.*.sdose' => 'nullable|date',
@@ -849,11 +960,18 @@ class Residents extends Component
             'new_members.*.booster' => 'nullable|date',
             'new_members.*.bbrand' => 'nullable|string|max:17',
 
-            'water_source' => 'required|string|max:12',
-            'type_of_house' => 'required|string|max:10',
-            'toilet' => 'required|string|max:8',
-            'garden' => 'required|string|max:20',
-            'electricity' => 'required|string|max:8',
+            'pipe_nawasa' => 'boolean',
+            'deep_well' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->pipe_nawasa)],
+            'nipa' => 'boolean',
+            'concrete' => 'boolean',
+            'sem' => 'boolean',
+            'wood' => ['boolean', new MustAtleastOneIsTrueOfTheFour($this->nipa, $this->concrete, $this->sem)],
+            'owned_toilet' => 'boolean',
+            'sharing_toilet' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->owned_toilet)],
+            'poultry_livestock' => 'boolean',
+            'iodized_salt' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->poultry_livestock)],
+            'owned_electricity' => 'boolean',
+            'sharing_electricity' => ['boolean', new MustAtleastOneIsTrueOfTheTwo($this->owned_electricity)],
             'house_no' => 'required|string|max:255',
 
             'pwd' => 'nullable|integer|gte:0',
@@ -881,6 +999,7 @@ class Residents extends Component
         $updated_family_head->fullname = $head_fullname;
         $updated_family_head->bday = $this->birthday;
         $updated_family_head->bplace = $this->birthplace;
+        $updated_family_head->sex = $this->sex;
         $updated_family_head->civil_status = $this->civil_status;
         $updated_family_head->educ_attainment = $this->educational_attainment;
         $updated_family_head->zone = $this->zone;
@@ -900,11 +1019,18 @@ class Residents extends Component
         $updated_family_head->booster_brand = $this->booster_brand;
 
         // Additional Info
-        $updated_family_head->water_source = $this->water_source;
-        $updated_family_head->house = $this->type_of_house;
-        $updated_family_head->toilet = $this->toilet;
-        $updated_family_head->garden = $this->garden;
-        $updated_family_head->electricity = $this->electricity;
+        $updated_family_head->pipe_nawasa = $this->pipe_nawasa;
+        $updated_family_head->deep_well = $this->deep_well;
+        $updated_family_head->nipa = $this->nipa;
+        $updated_family_head->concrete = $this->concrete;
+        $updated_family_head->sem = $this->sem;
+        $updated_family_head->wood = $this->wood;
+        $updated_family_head->owned_toilet = $this->owned_toilet;
+        $updated_family_head->sharing_toilet = $this->sharing_toilet;
+        $updated_family_head->poultry_livestock = $this->poultry_livestock;
+        $updated_family_head->iodized_salt = $this->iodized_salt;
+        $updated_family_head->owned_electricity = $this->owned_electricity;
+        $updated_family_head->sharing_electricity = $this->sharing_electricity;
         $updated_family_head->house_no = $this->house_no;
 
         // Beneficiaries
@@ -1013,6 +1139,7 @@ class Residents extends Component
                         $familyMember->fullname = $member_fullname;
                         $familyMember->bday = $updated_member['bday'];
                         $familyMember->bplace = $updated_member['bplace'];
+                        $familyMember->sex = $updated_member['sex'];
                         $familyMember->educ_attainment = $updated_member['educ_attainment'];
                         $familyMember->first_dose = $updated_member['first_dose'] === '' ? null : $updated_member['first_dose'];
                         $familyMember->second_dose = $updated_member['second_dose'] === '' ? null : $updated_member['second_dose'];
@@ -1048,6 +1175,7 @@ class Residents extends Component
                 $family_member->fullname = $member_fullname;
                 $family_member->bday = $new_member['bday'];
                 $family_member->bplace = $new_member['bplace'];
+                $family_member->sex = $new_member['sex'];
                 $family_member->educ_attainment = $new_member['educ_attain'];
                 $family_member->first_dose = $new_member['fdose'] === '' ? null : $new_member['fdose'];
                 $family_member->second_dose = $new_member['sdose'] === '' ? null : $new_member['sdose'];
@@ -1078,10 +1206,13 @@ class Residents extends Component
 
     public function render()
     {
-        $families = FamilyHead::where('fullname', 'like', '%' . $this->search . '%')
-            ->orWhere('fname', 'like', '%' . $this->search . '%')
-            ->orWhere('mname', 'like', '%' . $this->search . '%')
-            ->orWhere('lname', 'like', '%' . $this->search . '%')
+        $families = FamilyHead::where('is_approved', true)
+            ->where(function($query) {
+                $query->where('fullname', 'like', '%' . $this->search . '%')
+                ->orWhere('fname', 'like', '%' . $this->search . '%')
+                ->orWhere('mname', 'like', '%' . $this->search . '%')
+                ->orWhere('lname', 'like', '%' . $this->search . '%');
+            })
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate);
 

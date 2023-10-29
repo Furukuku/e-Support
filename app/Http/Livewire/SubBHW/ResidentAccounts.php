@@ -19,7 +19,7 @@ class ResidentAccounts extends Component
 
     public $category = 0;
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $family_head;
+    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender;
 
     public $resident_id;
 
@@ -39,9 +39,7 @@ class ResidentAccounts extends Component
             'zone',
             'employment_status',
             'gender',
-            'family_head',
             'resident_id',
-            'family_head'
         );
     }
 
@@ -58,28 +56,25 @@ class ResidentAccounts extends Component
         $this->zone = $resident->zone;
         $this->employment_status = $resident->is_employed;
         $this->gender = $resident->gender;
-        $this->family_head = $resident->is_head;
     }
 
     public function editResident(User $resident)
     {
         $this->resident_id = $resident->id;
-        $this->family_head = $resident->is_head;
     }
 
-    public function updateResident()
-    {
-        $this->validate([
-            'family_head' => ['required', 'boolean'],
-        ]);
+    // public function updateResident()
+    // {
+    //     $this->validate([
+    //         'family_head' => ['required', 'boolean'],
+    //     ]);
 
-        $resident = User::find($this->resident_id);
-        $resident->is_head = $this->family_head;
-        $resident->update();
+    //     $resident = User::find($this->resident_id);
+    //     $resident->update();
         
-        $this->dispatchBrowserEvent('close-modal');
-        $this->closeModal();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->closeModal();
+    // }
 
     public function render()
     {
@@ -94,12 +89,12 @@ class ResidentAccounts extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate, ['*'], 'accountsPage');
 
-        $heads = User::where('is_head', true)->where('zone', auth()->guard('bhw')->user()->assigned_zone)->count();
+        // $heads = User::where('is_head', true)->where('zone', auth()->guard('bhw')->user()->assigned_zone)->count();
         $users = User::where('is_approved', true)->where('zone', auth()->guard('bhw')->user()->assigned_zone)->count();
         
         return view('livewire.sub-b-h-w.resident-accounts', [
             'residents' => $residents,
-            'heads' => $heads,
+            // 'heads' => $heads,
             'users' => $users,
         ]);
     }

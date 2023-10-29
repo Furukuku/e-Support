@@ -20,7 +20,7 @@ class ResidentUsers extends Component
 
     protected $listeners = ['closeModal'];
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $family_head;
+    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender;
 
     public $resident_id;
 
@@ -45,7 +45,6 @@ class ResidentUsers extends Component
         $this->zone = '';
         $this->employment_status = '';
         $this->gender = '';
-        $this->family_head = '';
         $this->status = '';
     }
 
@@ -68,7 +67,6 @@ class ResidentUsers extends Component
         $this->zone = $resident->zone;
         $this->employment_status = $resident->employ_status;
         $this->gender = $resident->gender;
-        $this->family_head = $resident->is_head;
     }
 
     public function editResident($id)

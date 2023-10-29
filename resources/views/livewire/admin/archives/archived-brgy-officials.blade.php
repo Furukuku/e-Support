@@ -4,7 +4,7 @@
     <div class="w-25 mb-4 shadow-sm">
       <select wire:model="d_archive" class="form-select">
         <option value="0">Barangay Officials</option>
-        <option value="1">Residents</option>
+        <option value="1">Families</option>
         <option value="2">Staffs</option>
         <option value="3">Resident Users</option>
         <option value="4">Business Users</option>

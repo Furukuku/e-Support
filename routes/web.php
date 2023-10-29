@@ -27,7 +27,7 @@ use App\Http\Livewire\Admin\DocTemplates\BusinessClearance;
 /*------------------------- Guest Middleware for Admins/Sub-admins -------------------------*/
 Route::middleware(['guest:admin', 'guest:sub-admin', 'guest:bhw'])->group(function(){
     // Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
-    Route::view('/admin/login', 'auth.admins.admins-login')->name('admin.login');
+    Route::view('/nancayasan/login', 'auth.admins.admins-login')->name('admin.login');
 });
 
 Route::view('/clearance', 'admin.admin-brgy-clearance');
@@ -62,7 +62,7 @@ Route::post('/admin/login-validate', [LoginController::class, 'adminValidate'])-
 /*------------------------- Start of Admin Routes -------------------------*/
 
 Route::middleware('admin.auth:admin')->group(function() {
-    Route::prefix('admin')->name('admin.')->group(function(){
+    Route::prefix('nancayasan')->name('admin.')->group(function(){
 
         Route::post('/logout', [LogoutController::class, 'adminLogout'])->name('logout');
 
@@ -169,6 +169,8 @@ Route::middleware(['sub-admin.auth:sub-admin', 'bhw:bhw'])->group(function() {
             Route::view('/resident-accounts', 'bhw.bhw-resident-accounts')->name('resident-accounts');
             Route::view('/bhw-accounts', 'bhw.bhw-bhw-accounts')->name('bhw-accounts');
         });
+
+        Route::get('/generate-report/residents', [ResidentController::class, 'generateReportResidents'])->name('generate-report.residents');
     });
 });
 
@@ -222,7 +224,7 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 
         Route::get('/job/{job}', [ResidentController::class, 'viewJob'])->name('view-job');
 
-        Route::view('/family-profile', 'resident.resident-family-profile')->middleware('resident.head')->name('family-profile');
+        Route::view('/family-profile', 'resident.resident-family-profile')->middleware('resident.fam-profile')->name('family-profile');
     });
 });
 /*------------------------- End of Residents Routes -------------------------*/

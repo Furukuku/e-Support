@@ -51,11 +51,6 @@
                 <p class="m-0 fw-bold">Gender: <span class="fw-normal">{{ $gender }}</span></p>
               </div>
             </div>
-            <div class="row-auto mb-3">
-              <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Family Head: <span class="fw-normal">{{ $family_head == true ? 'Yes' : 'No' }}</span></p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

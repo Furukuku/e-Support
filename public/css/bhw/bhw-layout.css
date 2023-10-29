@@ -232,6 +232,26 @@ body {
   margin-top: -8rem;
 }
 
+.print-report-btn,
+.print-report-btn:hover,
+.print-report-btn:active {
+  background-color: var(--add-btn-color) !important;
+  border-color: var(--add-btn-color) !important;
+}
+
+#online-survey:checked {
+  background-color: var(--add-btn-color) !important;
+  border-color: var(--add-btn-color) !important;
+}
+
+#online-survey {
+  transform: scale(1.3) !important;
+}
+
+#online-survey:disabled {
+  opacity: 1;
+}
+
 
 @media (max-width: 1070px) {
   .block-sidebar {

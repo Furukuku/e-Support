@@ -51,11 +51,6 @@
                 <p class="m-0 fw-bold">Gender: <span class="fw-normal">{{ $gender }}</span></p>
               </div>
             </div>
-            <div class="row-auto mb-3">
-              <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Family Head: <span class="fw-normal">{{ $family_head == true ? 'Yes' : 'No' }}</span></p>
-              </div>
-            </div>
             <div class="row-auto">
               @if (!is_null($resident_verification_img))
                 <div class="border">
@@ -68,7 +63,7 @@
       </div>
       <div class="modal-footer d-flex gap-2 justify-content-end border-0 px-4">
         <button type="button" class="btn btn-secondary rounded" wire:loading.class="disabled" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" wire:click="headOrNot" wire:loading.class="disabled" class="btn btn-warning rounded">Approve</button>
+        <button type="button" wire:click="approve" wire:loading.class="disabled" class="btn btn-warning rounded">Approve</button>
       </div>
     </div>
   </div>
@@ -76,7 +71,7 @@
 
 
 <!-- Head or Not Modal -->
-<div wire:ignore.self class="modal fade" id="headOrNot" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="headOrNotLabel" aria-hidden="true">
+{{-- <div wire:ignore.self class="modal fade" id="headOrNot" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="headOrNotLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0 justify-content-end">
@@ -98,11 +93,11 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 
 <!-- Suggest Modal -->
-<div wire:ignore.self class="modal fade" id="suggestApprove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="suggestApproveLabel" aria-hidden="true">
+{{-- <div wire:ignore.self class="modal fade" id="suggestApprove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="suggestApproveLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body pt-2">
@@ -120,7 +115,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 
 <!-- Archive Modal -->

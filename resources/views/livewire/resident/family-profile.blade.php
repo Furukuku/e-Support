@@ -1,6 +1,6 @@
 <div class="d-flex py-5 fam-profile-main-container">
   
-  @if (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == false && !is_null(auth()->guard('web')->user()->familyHead))
+  {{-- @if (auth()->guard('web')->user()->can_edit_profiling == false && !is_null(auth()->guard('web')->user()->familyHead))
     <div class="row w-100 px-5 fam-profile-viewing">
       <div class="col-md-3">
         <div class="fam-profile-viewing-tab">
@@ -429,10 +429,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
   {{-- Edit Family Profile --}}
-  @elseif (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead))
+  @if (auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead))
     <div class="w-25 d-flex justify-content-center">
       <img class="rounded-circle" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="logo" style="height: 13rem">
     </div>
@@ -475,15 +475,24 @@
                     </div>
                   </div>
                   <div class="row mb-3 fam-row-2">
-                    <div class="col-3">
+                    <div class="col-4">
                       <label for="head-sname" class="form-label">Suffix Name (Optional)</label>
                       <input type="text" wire:model.defer="suffix_name" id="head-sname" class="form-control">
                       @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                       <label for="head-bday" class="form-label">Birthday</label>
                       <input type="date" wire:model.defer="birthday" id="head-bday" class="form-control">
                       @error('birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-sex" class="form-label">Sex</label>
+                      <select wire:model.defer="sex" id="head-sex" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      @error('sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                   </div>
                   <div class="row mb-3 fam-row-2">
@@ -801,15 +810,24 @@
                           </div>
                         </div>
                         <div class="row mb-3 fam-row-2">
-                          <div class="col-3">
+                          <div class="col-4">
                             <label for="old_members-{{ $index }}-sname" class="form-label">Suffix Name (Optional)</label>
                             <input type="text" wire:model.defer="old_members.{{ $index }}.sname" id="old_members-{{ $index }}-sname" class="form-control">
                             @error('old_members.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                           </div>
-                          <div class="col-3">
+                          <div class="col-4">
                             <label for="old_members-{{ $index }}-bday" class="form-label">Birthday</label>
                             <input type="date" wire:model.defer="old_members.{{ $index }}.bday" id="old_members-{{ $index }}-bday" class="form-control">
                             @error('old_members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="old_members-{{ $index }}-sex" class="form-label">Sex</label>
+                            <select wire:model.defer="old_members.{{ $index }}.sex" id="old_members-{{ $index }}-sex" class="form-select">
+                              <option value="">Choose one...</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                            @error('old_members.' . $index . '.sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                           </div>
                         </div>
                         <div class="row mb-3 fam-row-2">
@@ -899,15 +917,24 @@
                           </div>
                         </div>
                         <div class="row mb-3 fam-row-2">
-                          <div class="col-3">
+                          <div class="col-4">
                             <label for="new_members-{{ $index }}-sname" class="form-label">Suffix Name (Optional)</label>
                             <input type="text" wire:model.defer="new_members.{{ $index }}.sname" id="new_members-{{ $index }}-sname" class="form-control">
                             @error('new_members.' . $index . '.sname') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                           </div>
-                          <div class="col-3">
+                          <div class="col-4">
                             <label for="new_members-{{ $index }}-bday" class="form-label">Birthday</label>
                             <input type="date" wire:model.defer="new_members.{{ $index }}.bday" id="new_members-{{ $index }}-bday" class="form-control">
                             @error('new_members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                          </div>
+                          <div class="col-4">
+                            <label for="new_members-{{ $index }}-sex" class="form-label">Sex</label>
+                            <select wire:model.defer="new_members.{{ $index }}.sex" id="new_members-{{ $index }}-sex" class="form-select">
+                              <option value="">Choose one...</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                            @error('new_members.' . $index . '.sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                           </div>
                         </div>
                         <div class="row mb-3 fam-row-2">
@@ -982,62 +1009,112 @@
 
             <div class="d-flex flex-column justify-content-start px-2 members">
               <div>
-                <h5 class="mb-3">Others Information</h5>
+                <h5 class="mb-3">Other Information</h5>
                 <div class="{{ $page === 'from-head-to-wife' || $page === 'from-members-to-wife' || $page === 'to-head' || $page === 'from-wife-to-members' || $page === 'from-others-to-members' ? 'form-height' : '' }}">
-                  <div class="row mb-3 fam-row-3">
-                    <div class="col-4">
-                      <label for="water" class="form-label">Water Source</label>
-                      <select id="water" wire:model.defer="water_source" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Pipe Nawasa">Pipe Nawasa</option>
-                        <option value="Deep Well">Deep Well</option>
-                      </select>
-                      @error('water_source') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="house" class="form-label">Type of House</label>
-                      <select wire:model.defer="type_of_house" id="house" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Nipa">Nipa</option>
-                        <option value="Concrete">Concrete</option>
-                        <option value="Sem">Sem</option>
-                        <option value="Wood">Wood</option>
-                      </select>
-                      @error('type_of_house') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="toilet" class="form-label">Toilet</label>
-                      <select wire:model.defer="toilet" id="toilet" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Owned">Owned</option>
-                        <option value="Sharing">Sharing</option>
-                      </select>
-                      @error('toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                  </div>
-                  <div class="row mb-3 fam-row-3">
-                    <div class="col-4">
-                      <label for="garden" class="form-label">Garden</label>
-                      <select wire:model.defer="garden" id="garden" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Poultry-Livestock">Poultry-Livestock</option>
-                        <option value="Iodized Salt">Iodized Salt</option>
-                      </select>
-                      @error('garden') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="electric" class="form-label">Electricity</label>
-                      <select wire:model.defer="electricity" id="electric" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Owned">Owned</option>
-                        <option value="Sharing">Sharing</option>
-                      </select>
-                      @error('electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="house-no" class="form-label">House No.</label>
+                  <div class="row mb-3">
+                    <div class="col-md-4">
+                      <label for="house-no" class="form-label fw-semibold">House No.</label>
                       <input type="text" wire:model.defer="house_no" id="house-no" class="form-control">
                       @error('house_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Water Source</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="pipe_nawasa" class="form-check-input" id="edit_pipe_nawasa">
+                          <label for="edit_pipe_nawasa" class="form-label mb-0">Pipe Nawasa</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="deep_well" class="form-check-input" id="edit_deep_well">
+                          <label for="edit_deep_well" class="form-label mb-0">Deep Well</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('pipe_nawasa') <span class="error text-danger d-inline" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('deep_well') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Toilet</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="owned_toilet" class="form-check-input" id="edit_owned_toilet">
+                          <label for="edit_owned_toilet" class="form-label mb-0">Owned</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="sharing_toilet" class="form-check-input" id="edit_sharing_toilet">
+                          <label for="edit_sharing_toilet" class="form-label mb-0">Sharing</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('owned_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('sharing_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Garden</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="poultry_livestock" class="form-check-input" id="edit_poultry_livestock">
+                          <label for="edit_poultry_livestock" class="form-label mb-0">Poultry-Livestock</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="iodized_salt" class="form-check-input" id="edit_iodized_salt">
+                          <label for="edit_iodized_salt" class="form-label mb-0">Iodized Salt</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('poultry_livestock') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('iodized_salt') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Electricity</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="owned_electricity" class="form-check-input" id="edit_owned_electricity">
+                          <label for="edit_owned_electricity" class="form-label mb-0">Owned</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="sharing_electricity" class="form-check-input" id="edit_sharing_electricity">
+                          <label for="edit_sharing_electricity" class="form-label mb-0">Sharing</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('owned_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('sharing_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                      <label class="form-label fw-semibold">Type of House</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="nipa" class="form-check-input" id="edit_nipa">
+                          <label for="edit_nipa" class="form-label mb-0">Nipa</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="concrete" class="form-check-input" id="edit_concrete">
+                          <label for="edit_concrete" class="form-label mb-0">Concrete</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="sem" class="form-check-input" id="edit_sem">
+                          <label for="edit_sem" class="form-label mb-0">Sem</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="wood" class="form-check-input" id="edit_wood">
+                          <label for="edit_wood" class="form-label mb-0">Wood</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('nipa') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('concrete') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('sem') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('wood') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
                     </div>
                   </div>
                   <h5 class="opacity-75">Membership</h5>
@@ -1078,7 +1155,7 @@
     </div>
 
   {{-- Add Family Profile --}}
-  @elseif (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead))
+  @elseif (auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead))
     <div class="w-25 d-flex justify-content-center">
       <img class="rounded-circle" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="logo" style="height: 13rem">
     </div>
@@ -1121,15 +1198,24 @@
                     </div>
                   </div>
                   <div class="row mb-3 fam-row-2">
-                    <div class="col-3">
+                    <div class="col-4">
                       <label for="head-sname" class="form-label">Suffix Name (Optional)</label>
                       <input type="text" wire:model.defer="suffix_name" id="head-sname" class="form-control">
                       @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                       <label for="head-bday" class="form-label">Birthday</label>
                       <input type="date" wire:model.defer="birthday" id="head-bday" class="form-control">
                       @error('birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-4">
+                      <label for="head-sex" class="form-label">Sex</label>
+                      <select wire:model.defer="sex" id="head-sex" class="form-select">
+                        <option value="">Choose one...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      @error('sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                     </div>
                   </div>
                   <div class="row mb-3 fam-row-2">
@@ -1456,6 +1542,15 @@
                           <input type="date" wire:model.defer="members.{{ $index }}.bday" id="members-{{ $index }}-bday" class="form-control">
                           @error('members.' . $index . '.bday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                         </div>
+                        <div class="col-4">
+                          <label for="members-{{ $index }}-sex" class="form-label">Sex</label>
+                          <select wire:model.defer="members.{{ $index }}.sex" id="members-{{ $index }}-sex" class="form-select">
+                            <option value="">Choose one...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                          @error('members.' . $index . '.sex') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        </div>
                       </div>
                       <div class="row mb-3 fam-row-2">
                         <div class="col-6">
@@ -1528,62 +1623,112 @@
 
             <div class="d-flex flex-column justify-content-start px-2 members">
               <div>
-                <h5 class="mb-3">Others Information</h5>
+                <h5 class="mb-3">Other Information</h5>
                 <div class="{{ $page === 'from-head-to-wife' || $page === 'from-members-to-wife' || $page === 'to-head' || $page === 'from-wife-to-members' || $page === 'from-others-to-members' ? 'form-height' : '' }}">
-                  <div class="row mb-3 fam-row-3">
-                    <div class="col-4">
-                      <label for="water" class="form-label">Water Source</label>
-                      <select id="water" wire:model.defer="water_source" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Pipe Nawasa">Pipe Nawasa</option>
-                        <option value="Deep Well">Deep Well</option>
-                      </select>
-                      @error('water_source') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="house" class="form-label">Type of House</label>
-                      <select wire:model.defer="type_of_house" id="house" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Nipa">Nipa</option>
-                        <option value="Concrete">Concrete</option>
-                        <option value="Sem">Sem</option>
-                        <option value="Wood">Wood</option>
-                      </select>
-                      @error('type_of_house') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="toilet" class="form-label">Toilet</label>
-                      <select wire:model.defer="toilet" id="toilet" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Owned">Owned</option>
-                        <option value="Sharing">Sharing</option>
-                      </select>
-                      @error('toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                  </div>
-                  <div class="row mb-3 fam-row-3">
-                    <div class="col-4">
-                      <label for="garden" class="form-label">Garden</label>
-                      <select wire:model.defer="garden" id="garden" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Poultry-Livestock">Poultry-Livestock</option>
-                        <option value="Iodized Salt">Iodized Salt</option>
-                      </select>
-                      @error('garden') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="electric" class="form-label">Electricity</label>
-                      <select wire:model.defer="electricity" id="electric" class="form-select">
-                        <option value="">Choose one...</option>
-                        <option value="Owned">Owned</option>
-                        <option value="Sharing">Sharing</option>
-                      </select>
-                      @error('electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="col-4">
-                      <label for="house-no" class="form-label">House No.</label>
+                  <div class="row mb-3">
+                    <div class="col-md-4">
+                      <label for="house-no" class="form-label fw-semibold">House No.</label>
                       <input type="text" wire:model.defer="house_no" id="house-no" class="form-control">
                       @error('house_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Water Source</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="pipe_nawasa" class="form-check-input" id="add_pipe_nawasa">
+                          <label for="add_pipe_nawasa" class="form-label mb-0">Pipe Nawasa</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="deep_well" class="form-check-input" id="add_deep_well">
+                          <label for="add_deep_well" class="form-label mb-0">Deep Well</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('pipe_nawasa') <span class="error text-danger d-inline" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('deep_well') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Toilet</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="owned_toilet" class="form-check-input" id="add_owned_toilet">
+                          <label for="add_owned_toilet" class="form-label mb-0">Owned</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="sharing_toilet" class="form-check-input" id="add_sharing_toilet">
+                          <label for="add_sharing_toilet" class="form-label mb-0">Sharing</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('owned_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('sharing_toilet') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Garden</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="poultry_livestock" class="form-check-input" id="add_poultry_livestock">
+                          <label for="add_poultry_livestock" class="form-label mb-0">Poultry-Livestock</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="iodized_salt" class="form-check-input" id="add_iodized_salt">
+                          <label for="add_iodized_salt" class="form-label mb-0">Iodized Salt</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('poultry_livestock') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('iodized_salt') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label fw-semibold">Electricity</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="owned_electricity" class="form-check-input" id="add_owned_electricity">
+                          <label for="add_owned_electricity" class="form-label mb-0">Owned</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="sharing_electricity" class="form-check-input" id="add_sharing_electricity">
+                          <label for="add_sharing_electricity" class="form-label mb-0">Sharing</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('owned_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('sharing_electricity') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                      <label class="form-label fw-semibold">Type of House</label>
+                      <div class="d-flex gap-3">
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="nipa" class="form-check-input" id="add_nipa">
+                          <label for="add_nipa" class="form-label mb-0">Nipa</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="concrete" class="form-check-input" id="add_concrete">
+                          <label for="add_concrete" class="form-label mb-0">Concrete</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="sem" class="form-check-input" id="add_sem">
+                          <label for="add_sem" class="form-label mb-0">Sem</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" wire:model.defer="wood" class="form-check-input" id="add_wood">
+                          <label for="add_wood" class="form-label mb-0">Wood</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column">
+                        @error('nipa') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('concrete') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('sem') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                        @error('wood') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                      </div>
                     </div>
                   </div>
                   <h5 class="opacity-75">Membership</h5>
@@ -1624,7 +1769,7 @@
     </div>
   @endif
 
-  @if (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead))
+  @if (auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead))
     @push('fam-profiling-script')
       <script>
 
@@ -1645,11 +1790,11 @@
               Livewire.emit('submit');
             }
           });
-        });update-family-profile-form
+        });
 
       </script>
     @endpush
-  @elseif (auth()->guard('web')->user()->is_head == true && auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead))
+  @elseif (auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead))
     @push('fam-profiling-script')
       <script>
 

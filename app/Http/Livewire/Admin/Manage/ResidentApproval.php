@@ -16,7 +16,7 @@ class ResidentApproval extends Component
 
     public $search = "";
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $family_head;
+    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender;
 
     public $resident_id;
 
@@ -46,7 +46,6 @@ class ResidentApproval extends Component
         $this->zone = '';
         $this->employment_status = '';
         $this->gender = '';
-        $this->family_head = '';
     }
 
     public function closeModal()
@@ -68,7 +67,6 @@ class ResidentApproval extends Component
         $this->zone = $resident->zone;
         $this->employment_status = $resident->employ_status;
         $this->gender = $resident->gender;
-        $this->family_head = $resident->is_head;
     }
 
     public function showVerification($id)

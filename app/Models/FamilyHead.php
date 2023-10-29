@@ -42,6 +42,7 @@ class FamilyHead extends Model
         'solo_parent',
         'senior_citizen',
         'pregnant',
+        'is_approved',
     ];
 
     public function wife()
@@ -57,5 +58,10 @@ class FamilyHead extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getAge()
+    {
+        return $this->bday->age;
     }
 }
