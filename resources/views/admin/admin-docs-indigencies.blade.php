@@ -77,10 +77,6 @@
     residentNameInput.addEventListener('click', () => {
       suggestionContainer.classList.remove('d-none');
     });
-
-    window.addEventListener('toPrint', e => {
-      window.open(`/admin/indigency/${e.detail.id}`, '_blank');
-    });
   </script>
 
 @endsection

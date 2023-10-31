@@ -125,7 +125,8 @@ class ResidentController extends Controller
 
         $total_fam = $heads->count();
 
-        $households = FamilyHead::select('house_no', DB::raw('count(*) as total'))
+        $households = FamilyHead::where('is_approved', true)
+            ->select('house_no', DB::raw('count(*) as total'))
             ->groupBy('house_no')
             ->get();
 

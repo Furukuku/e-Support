@@ -17,11 +17,11 @@ class CheckTypeOfDocument
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Route::is('admin.templates.brgy-clearance') && $request->document->type === 'Barangay Clearance'){
+        if((Route::is('admin.templates.brgy-clearance') || Route::is('sub-admin.templates.brgy-clearance')) && $request->document->type === 'Barangay Clearance'){
             return $next($request);
-        }else if(Route::is('admin.templates.indigency') && $request->document->type === 'Indigency'){
+        }else if((Route::is('admin.templates.indigency') || Route::is('sub-admin.templates.indigency')) && $request->document->type === 'Indigency'){
             return $next($request);
-        }else if(Route::is('admin.templates.biz-clearance') && $request->document->type === 'Business Clearance'){
+        }else if((Route::is('admin.templates.biz-clearance') || Route::is('sub-admin.templates.biz-clearance')) && $request->document->type === 'Business Clearance'){
             return $next($request);
         }
 

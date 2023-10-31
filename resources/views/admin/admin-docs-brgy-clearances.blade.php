@@ -76,10 +76,6 @@
       suggestionContainer.classList.remove('d-none');
     });
 
-    window.addEventListener('toPrint', e => {
-      window.open(`/admin/barangay-clearance/${e.detail.id}`, '_blank');
-    });
-
   </script>
 
 @endsection

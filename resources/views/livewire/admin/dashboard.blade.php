@@ -11,7 +11,7 @@
               </div>
             </div>
             <h3 class="m-0">{{ array_sum($population) }}</h3>
-            <p class="m-0">Total Residents</p>
+            <p class="m-0">Residents</p>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
               </div>
             </div>
             <h3 class="m-0">{{ $businessUsers }}</h3>
-            <p class="m-0">Total Business Users</p>
+            <p class="m-0">Business Users</p>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
               </div>
             </div>
             <h3 class="m-0">{{ array_sum($employStatus) }}</h3>
-            <p class="m-0">Total Resident Users</p>
+            <p class="m-0">Resident Users</p>
           </div>
         </div>
       </div>
@@ -48,8 +48,28 @@
     <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 ps-2 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 100%;">
       <canvas id="population"></canvas>
     </div>
+
+    <div class="d-flex gap-4 justify-content-center">
+      <div id="beneficiaries-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
+        <canvas id="beneficiaries"></canvas>
+      </div>
+
+      <div id="sex-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
+        <canvas id="sex"></canvas>
+      </div>
+    </div>
   
-    <div class="d-flex justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow mb-5" style="width: 100%;">
+    <div class="d-flex flex-column justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow mb-5" style="width: 100%;">
+      <div class="w-100 d-flex gap-3 justify-content-end">
+        <div class="d-flex align-items-center gap-2">
+          <label for="first-date">From:</label>
+          <input type="date" wire:model="first_date" id="first-date" class="form-control">
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <label for="second-date">To:</label>
+          <input type="date" wire:model="second_date" id="second-date" class="form-control">
+        </div>
+      </div>
       <canvas id="graph-reports"></canvas>
     </div>
 
@@ -132,6 +152,66 @@
             }
           }
         });
+
+        new Chart(beneficiaries, {
+          type: 'pie',
+          data: {
+            labels: [
+              'PWD', 
+              'Solo Parent', 
+              'Senior',
+              'Pregnant',
+            ],
+            datasets: [
+              {
+                label: 'Resident',
+                data: @json($beneficiaries),
+              }
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'Beneficiaries',
+              }
+            }
+          }
+        });
+
+        new Chart(sex, {
+          type: 'doughnut',
+          data: {
+            labels: [
+              'Male', 
+              'Female', 
+            ],
+            datasets: [
+              {
+                label: 'Resident',
+                data: @json($sex),
+              }
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'Gender',
+              }
+            }
+          }
+        });
   
         new Chart(employStatus, {
           type: 'doughnut',
@@ -144,7 +224,10 @@
               {
                 label: 'Users',
                 data: @json($employStatus),
-                borderWidth: 1
+                backgroundColor: [
+                  '#b042f5',
+                  '#f56642'
+                ]
               },
             ],
           },

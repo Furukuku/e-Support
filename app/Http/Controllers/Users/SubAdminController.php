@@ -3,10 +3,26 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Document;
 use Illuminate\Http\Request;
 
 class SubAdminController extends Controller
 {
+    public function indigencyTemplate(Document $document)
+    {
+        return view('sub-admin.sub-admin-template-indigency', ['document' => $document]);
+    }
+
+    public function bizClearanceTemplate(Document $document)
+    {
+        return view('sub-admin.sub-admin-template-biz-clearance', ['document' => $document]);
+    }
+
+    public function brgyClearanceTemplate(Document $document)
+    {
+        return view('sub-admin.sub-admin-template-brgy-clearance', ['document' => $document]);
+    }
+
     public function dashboard()
     {
         return view('sub-admin.sub-admin-dashboard');

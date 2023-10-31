@@ -141,12 +141,18 @@ Route::middleware(['sub-admin.auth:sub-admin', 'official:barangay official'])->g
         Route::get('/reports', [SubAdminController::class, 'reports'])->name('reports');
         Route::get('/programs', [SubAdminController::class, 'programs'])->name('programs');
         Route::get('/places', [SubAdminController::class, 'places'])->name('places');
-        Route::get('/account', [SubAdminController::class, 'account'])->name('account');
+        Route::view('/account', 'sub-admin.sub-admin-residents')->name('account');
 
-        Route::name('print.')->group(function(){
-            Route::get('/clearance', [SubAdminController::class, 'clearance'])->name('clearance');
-            Route::get('/permit', [SubAdminController::class, 'permit'])->name('permit');
-            Route::get('/indigency', [SubAdminController::class, 'indigency'])->name('indigency');
+        Route::name('docs.')->group(function(){
+            Route::view('/brgy-clearances', 'sub-admin.sub-admin-print-clearance')->name('brgy-clearances');
+            Route::view('/biz-clearances', 'sub-admin.sub-admin-print-biz-permit')->name('biz-clearances');
+            Route::get('/indigencies', [SubAdminController::class, 'indigency'])->name('indigencies');
+        });
+
+        Route::name('templates.')->group(function(){
+            Route::get('/business-clearance/{document}', [SubAdminController::class, 'bizClearanceTemplate'])->middleware('docs.document-type')->name('biz-clearance');
+            Route::get('/barangay-clearance/{document}', [SubAdminController::class, 'brgyClearanceTemplate'])->middleware('docs.document-type')->name('brgy-clearance');
+            Route::get('/indigency/{document}', [SubAdminController::class, 'indigencyTemplate'])->middleware('docs.document-type')->name('indigency');
         });
     });
 });

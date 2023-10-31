@@ -8,24 +8,38 @@ use App\Models\Report;
 use Livewire\Component;
 use App\Models\Business;
 use App\Models\FamilyHead;
+use App\Models\FamilyMember;
 use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
 {
-
-    public $population = [];
-    public $pwd = [];
-    public $soloParent = [];
-    public $senior = [];
-    public $pregnant = [];
-    public $familyHeads = [];
-
-    public $employStatus = [];
+    public $first_date, $second_date;
 
     public function mount()
     {
+        $date = Report::where('is_exist', true)
+            ->select('created_at')
+            ->orderBy('created_at', 'asc')
+            ->first();
+
+        $this->first_date = $date->created_at;
+        $this->second_date = now();
+
+    }
+
+    public function render()
+    {
+        $final_population = [];
+        $final_pwd = [];
+        $final_soloParent = [];
+        $final_senior = [];
+        $final_pregnant = [];
+        $male = [];
+        $female = [];
+
         for($zone = 1; $zone <= 6; $zone++){
             $family_heads = FamilyHead::with('familyMembers')
+                ->where('is_approved', true)
                 ->where('zone', $zone)
                 ->get();
                 
@@ -37,36 +51,90 @@ class Dashboard extends Component
                     }
                 }
             }
-            $wives = Wife::where('zone', $zone)->count();
+            $wives = Wife::with('familyHead')
+                ->where('zone', $zone)
+                ->whereHas('familyHead', function($query) {
+                    $query->where('is_approved', true);
+                })
+                ->count();
 
             $total_members = $family_heads->count() + $members + $wives;
 
-            array_push($this->population, $total_members);
+            array_push($final_population, $total_members);
 
             $pwd = $family_heads->sum('pwd');
-            array_push($this->pwd, $pwd);
+            array_push($final_pwd, $pwd);
 
             $solo_parent = $family_heads->sum('solo_parent');
-            array_push($this->soloParent, $solo_parent);
+            array_push($final_soloParent, $solo_parent);
 
             $senior = $family_heads->sum('senior_citizen');
-            array_push($this->senior, $senior);
+            array_push($final_senior, $senior);
 
             $pregnant = $family_heads->sum('pregnant');
-            array_push($this->pregnant, $pregnant);
+            array_push($final_pregnant, $pregnant);
 
-            $heads = $family_heads->count();
-            array_push($this->familyHeads, $heads);
+
+
+            $male_heads = FamilyHead::where('is_approved', true)
+                ->where('sex', 'Male')
+                ->where('zone', $zone)
+                ->count();
+
+            $male_members = FamilyMember::with('familyHead')
+                ->where('sex', 'Male')
+                ->whereHas('familyHead', function($query) use ($zone) {
+                    $query->where('is_approved', true)
+                        ->where('zone', $zone);
+                })
+                ->count();
+                
+            $total_male = $male_heads + $male_members;
+            array_push($male, $total_male);
+
+            $female_heads = FamilyHead::where('is_approved', true)
+                ->where('sex', 'Female')
+                ->where('zone', $zone)
+                ->count();
+
+            $female_members = FamilyMember::with('familyHead')
+                ->where('sex', 'Female')
+                ->whereHas('familyHead', function($query) use ($zone) {
+                    $query->where('is_approved', true)
+                        ->where('zone', $zone);
+                })
+                ->count();
+            
+            $females = Wife::with('familyHead')
+                ->where('zone', $zone)
+                ->whereHas('familyHead', function($query) {
+                    $query->where('is_approved', true);
+                })
+                ->count();
+
+            $total_female = $female_heads + $female_members + $females;
+            array_push($female, $total_female);
         }
 
+        $total_house_holds = FamilyHead::where('is_approved', true)
+            ->select('house_no', DB::raw('count(*) as total'))
+            ->groupBy('house_no')
+            ->get();
+
+        $total_families = FamilyHead::where('is_approved', true)->count();
+
+        $beneficiaries = [array_sum($final_pwd), array_sum($final_soloParent), array_sum($final_senior), array_sum($final_pregnant)];
+
+        $sex = [array_sum($male), array_sum($female)];
+
+
+        $employStatus = [];
         $employed = User::where('is_employed', true)->count();
         $unemployed = User::where('is_employed', false)->count();
 
-        array_push($this->employStatus, $employed, $unemployed);
-    }
+        array_push($employStatus, $employed, $unemployed);
 
-    public function render()
-    {
+
         $businessUsers = Business::count();
 
         $va = [];
@@ -87,61 +155,73 @@ class Dashboard extends Component
             $va_temp = Report::where('report_name', 'Vehicle Accident')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $cd_temp = Report::where('report_name', 'Calamity and Disaster')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $ig_temp = Report::where('report_name', 'Illegal Gambling')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $ca_temp = Report::where('report_name', 'Child Abuse')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $cc_temp = Report::where('report_name', 'Community Cleanliness')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $psc_temp = Report::where('report_name', 'Public Safety Concern')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $eh_temp = Report::where('report_name', 'Environmental Hazard')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $ip_temp = Report::where('report_name', 'Infrastructure Problems')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $dr_temp = Report::where('report_name', 'Drug Racing')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $sc_temp = Report::where('report_name', 'Stoning of Car')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $cp_temp = Report::where('report_name', 'Complaint')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $others_temp = Report::where('report_name', '!=','Vehicle Accident')
@@ -158,6 +238,7 @@ class Dashboard extends Component
                 ->where('report_name', '!=', 'Complaint')
                 ->where('zone', $i)
                 ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             array_push($va, $va_temp);
@@ -176,6 +257,18 @@ class Dashboard extends Component
         }
 
         return view('livewire.admin.dashboard', [
+            'population' => $final_population,
+            'pwd' => $final_pwd,
+            'soloParent' => $final_soloParent,
+            'senior' => $final_senior,
+            'pregnant' => $final_pregnant,
+            'male' => $male,
+            'female' => $female,
+            'beneficiaries' => $beneficiaries,
+            'sex' => $sex,
+            'total_house_holds' => $total_house_holds->count(),
+            'total_families' => $total_families,
+            'employStatus' => $employStatus,
             'businessUsers' => $businessUsers,
             'va' => $va,
             'cd' => $cd,

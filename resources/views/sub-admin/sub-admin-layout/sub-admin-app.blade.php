@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="{{ asset('css/sub-admin/sub-admin-layout.css') }}">
   <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/admin/documents.css') }}">
   <link rel="stylesheet" href="{{ asset('css/admin/profile-residents.css') }}">
   <link rel="stylesheet" href="{{ asset('css/admin/programs.css') }}">
   <link rel="stylesheet" href="{{ asset('css/admin/places.css') }}">
@@ -44,39 +45,39 @@
         <li class="nav-item text-white sidebar-list">
           <a href="{{ route('sub-admin.residents') }}" id="residents" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.residents') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
-              <span class="material-symbols-outlined col-3 text-center">patient_list</span>
-              <p class="col-9 m-0 ps-0">Residents</p>
+              <span class="material-symbols-outlined col-3 text-center">family_restroom</span>
+              <p class="col-9 m-0 ps-0">Families</p>
             </div>
           </a>
         </li>
         <li class="nav-item text-white sidebar-list">
           <a id="d-submenu-toggle" class="nav-link p-0 d-flex align-items-center sidebar-navigate submenu-link">
-            @if (str_contains(Route::currentRouteName(), 'sub-admin.print.'))
+            @if (str_contains(Route::currentRouteName(), 'sub-admin.docs.'))
               <div class="submenu-active"></div>
             @endif
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">print</span>
               <p class="col-7 m-0 ps-0">Printing Documents</p>
-              <span id="d-submenu-arrow" class="material-symbols-outlined col-2 arrow3 {{ str_contains(Route::currentRouteName(), 'sub-admin.print.') ? 'rotate3' : '' }}">chevron_left</span>
+              <span id="d-submenu-arrow" class="material-symbols-outlined col-2 arrow3 {{ str_contains(Route::currentRouteName(), 'sub-admin.docs.') ? 'rotate3' : '' }}">chevron_left</span>
             </div>
           </a>
-          <ul id="d-sub-menu" class="navbar-nav text-white {{ !str_contains(Route::currentRouteName(), 'sub-admin.print.') ? 'd-submenu' : '' }}">
+          <ul id="d-sub-menu" class="navbar-nav text-white {{ !str_contains(Route::currentRouteName(), 'sub-admin.docs.') ? 'd-submenu' : '' }}">
             <li class="nav-item">
-              <a href="{{ route('sub-admin.print.clearance') }}" id="clearance" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.print.clearance') ? 'navigate-active' : '' }}">
+              <a href="{{ route('sub-admin.docs.brgy-clearances') }}" id="clearance" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.docs.brgy-clearances') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
-                  <p class="col-12 m-0 ms-3 ps-5">Clearance</p>
+                  <p class="col-12 m-0 ms-3 ps-5">Barangay Clearance</p>
                 </div>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('sub-admin.print.permit') }}" id="business-permit" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.print.permit') ? 'navigate-active' : '' }}">
+              <a href="{{ route('sub-admin.docs.biz-clearances') }}" id="business-permit" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.docs.biz-clearances') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
-                  <p class="col-12 m-0 ms-3 ps-5">Business Permit</p>
+                  <p class="col-12 m-0 ms-3 ps-5">Business Clearance</p>
                 </div>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('sub-admin.print.indigency') }}" id="indigency" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.print.indigency') ? 'navigate-active' : '' }}">
+              <a href="{{ route('sub-admin.docs.indigencies') }}" id="indigency" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.docs.indigencies') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Indigency</p>
                 </div>

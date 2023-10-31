@@ -79,10 +79,6 @@
       suggestionContainer.classList.remove('d-none');
     });
 
-    window.addEventListener('toPrint', e => {
-      window.open(`/admin/business-clearance/${e.detail.id}`, '_blank');
-    });
-
   </script>
 
 @endsection
