@@ -51,10 +51,12 @@ Route::middleware(['guest:web', 'guest:business'])->group(function(){
 });
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome'); // welcome route
+Route::get('/about-us', [WelcomeController::class, 'aboutUs'])->name('about');
 Route::get('/program/{id}', [WelcomeController::class, 'showProgram'])->name('show.program');
 Route::get('/programs', [WelcomeController::class, 'showPrograms'])->name('show.programs');
 Route::get('/place/{id}', [WelcomeController::class, 'showPlace'])->name('show.place');
 Route::get('/places', [WelcomeController::class, 'showPlaces'])->name('show.places');
+Route::get('/search-places', [WelcomeController::class, 'searchPlace'])->name('search.place');
 
 
 Route::post('/admin/login-validate', [LoginController::class, 'adminValidate'])->name('admin.validate'); // admin, sub-admins/bhw login validation

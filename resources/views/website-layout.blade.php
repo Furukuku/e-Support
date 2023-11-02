@@ -15,6 +15,9 @@
   {{-- link for google icons --}}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
+  {{-- link for swiper js --}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
   {{-- script for bootstrap --}}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   
@@ -22,8 +25,8 @@
 
 </head>
 <body class="bg-light">
-  <nav class="navbar sticky-top navbar-expand-lg ps-4">
-    <a class="navbar-brand text-white" href="#">e-Support</a>
+  <nav class="navbar sticky-top navbar-expand-lg ps-4" data-bs-theme="dark">
+    <a class="navbar-brand" href="#">e-Support</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -36,13 +39,10 @@
           <a class="nav-link text-white" href="/#brgy-officials">Barangay Officials</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link text-white" href="/#programs">Programs</a>
+          <a class="nav-link text-white" href="/#programs">News</a>
         </li>
         <li class="nav-item mx-3">
           <a class="nav-link text-white" href="/#places">Places</a>
-        </li>
-        <li class="nav-item mx-3">
-          <a class="nav-link text-white" href="/#location">Location</a>
         </li>
         <li class="nav-item mx-3">
           <a class="nav-link text-white" href="{{ url('/login') }}">Login</a>
@@ -52,6 +52,8 @@
   </nav>
     @yield('content')
 
+    {{-- scripts --}}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     @yield('script')
 </body>
 </html>

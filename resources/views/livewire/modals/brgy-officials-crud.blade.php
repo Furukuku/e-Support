@@ -22,22 +22,22 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="add-lname">Last Name</label>
-                <input wire:model.lazy="last_name" id="add-lname" type="text" class="form-control">
+                <input wire:model.defer="last_name" id="add-lname" type="text" class="form-control">
                 @error('last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="add-fname">First Name</label>
-                <input wire:model.lazy="first_name" id="add-fname" type="text" class="form-control">
+                <input wire:model.defer="first_name" id="add-fname" type="text" class="form-control">
                 @error('first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="add-mname">Middle Name</label>
-                <input wire:model.lazy="middle_name" id="add-mname" type="text" class="form-control">
+                <input wire:model.defer="middle_name" id="add-mname" type="text" class="form-control">
                 @error('middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="add-sname">Suffix (Optional)</label>
-                <input wire:model.lazy="suffix_name" id="add-sname" type="text" class="form-control">
+                <input wire:model.defer="suffix_name" id="add-sname" type="text" class="form-control">
                 @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
@@ -64,12 +64,12 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="add-contact">Phone no.</label>
-                <input wire:model.lazy="phone_no" id="add-contact" type="tel" class="form-control">
+                <input wire:model.defer="phone_no" id="add-contact" type="tel" class="form-control">
                 @error('phone_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="add-email">Email</label>
-                <input wire:model.lazy="email" id="add-email" type="email" class="form-control">
+                <input wire:model.defer="email" id="add-email" type="email" class="form-control">
                 @error('email') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
@@ -86,7 +86,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="add-bday">Birthday</label>
-                <input wire:model.lazy="birthday" id="add-bday" type="date" class="form-control">
+                <input wire:model.defer="birthday" id="add-bday" type="date" class="form-control">
                 @error('birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
@@ -207,22 +207,22 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="update-lname">Last Name</label>
-                <input wire:model.lazy="last_name" id="update-lname" type="text" class="form-control">
+                <input wire:model.defer="last_name" id="update-lname" type="text" class="form-control">
                 @error('last_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="update-fname">First Name</label>
-                <input wire:model.lazy="first_name" id="update-fname" type="text" class="form-control">
+                <input wire:model.defer="first_name" id="update-fname" type="text" class="form-control">
                 @error('first_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="update-mname">Middle Name</label>
-                <input wire:model.lazy="middle_name" id="update-mname" type="text" class="form-control">
+                <input wire:model.defer="middle_name" id="update-mname" type="text" class="form-control">
                 @error('middle_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="update-sname">Suffix (Optional)</label>
-                <input wire:model.lazy="suffix_name" id="update-sname" type="text" class="form-control">
+                <input wire:model.defer="suffix_name" id="update-sname" type="text" class="form-control">
                 @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
@@ -249,12 +249,12 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="update-contact">Phone no.</label>
-                <input wire:model.lazy="phone_no" id="update-contact" type="tel" class="form-control">
+                <input wire:model.defer="phone_no" id="update-contact" type="tel" class="form-control">
                 @error('phone_no') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="update-email">Email</label>
-                <input wire:model.lazy="email" id="update-email" type="email" class="form-control">
+                <input wire:model.defer="email" id="update-email" type="email" class="form-control">
                 @error('email') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
@@ -271,7 +271,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="update-bday">Birthday</label>
-                <input wire:model.lazy="birthday" id="update-bday" type="date" class="form-control">
+                <input wire:model.defer="birthday" id="update-bday" type="date" class="form-control">
                 @error('birthday') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">

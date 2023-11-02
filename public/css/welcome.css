@@ -17,7 +17,7 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 30rem;
+  min-height: 30rem;
 }
 
 .readmore-btn {
@@ -48,8 +48,52 @@ html {
   background-color: var(--welcome-body-color);
 }
 
+.captain-img {
+  height: 450px;
+  object-position: center top;
+}
+
+.swiper {
+  width: 90%;
+}
+
+.swiper-wrapper:hover {
+  cursor: grab;
+}
+
+.swiper-wrapper:active {
+  cursor: grabbing;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.swiper-slide > div > img {
+  object-position: center top;
+} 
+
 .program-height {
   height: 20rem;
+}
+
+.truncate-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Adjust this value to control the number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .more-programs {
@@ -77,8 +121,8 @@ html {
 
 .officials-anchor {
   display: block;
-  height: 50px; /*same height as header*/
-  margin-top: -50px; /*same height as header*/
+  height: 80px; /*same height as header*/
+  margin-top: -80px; /*same height as header*/
   visibility: hidden;
 }
 
@@ -89,7 +133,7 @@ html {
   visibility: hidden;
 }
 
-.pointer {
+/* .pointer {
   cursor: pointer;
   box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
   transition: box-shadow 100ms ease-in;
@@ -97,7 +141,7 @@ html {
 
 .pointer:hover {
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, .50);
-}
+} */
 
 .carousel-container {
   width: 90%;
@@ -129,6 +173,10 @@ html {
   min-height: 35rem;
 }
 
+footer {
+  background-color: var(--main-color);
+}
+
 .footer-color {
   background-color: var(--welcome-body-color);
 }
@@ -148,12 +196,32 @@ html {
   place-items: center;
 }
 
-.active-image {
+/* .active-image {
   width: 30rem;
   height: 30rem;
-}
+} */
 
 #map {
   height: 20rem;
-  width: 70%;
+}
+
+@media (max-width: 870px) {
+  .website-header {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .website-header > div:last-child {
+    display: flex;
+    width: 100% !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+
+  .website-header > div:last-child > h1,
+  .website-header > div:last-child > p {
+    text-align: center !important;
+  }
 }

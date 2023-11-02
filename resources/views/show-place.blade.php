@@ -4,22 +4,23 @@
 
   <main>
 
-    <div class="container bg-light shadow rounded my-5 p-5">
-      <div class="d-flex flex-column align-items-center mb-5">
-        <img class="object-fit-contain border rounded shadow-sm active-image" src="{{ Storage::url($place->display_img) }}" alt="">
+    <div class="container bg-light my-3 p-3">
+      <div class="d-flex flex-column align-items-center mb-3">
+        <img class="object-fit-cover rounded w-100" src="{{ Storage::url($place->display_img) }}" alt="">
         <p class="my-2 fw-medium">
           <i class="fa-solid fa-location-dot text-danger me-2"></i>
           {{ $place->location }}
         </p>
       </div>
-      <div class="d-flex justify-content-center">
-        <div class="w-75">
-          <h2 class="text-uppercase">{{ $place->name }}</h2>
-          <p class="p-3">{!! nl2br(e($place->description)) !!}</p>
+      <div class="d-flex justify-content-center mb-5">
+        <div>
+          <h2 class="m-0">{{ $place->name }}</h2>
+          <p>{{ $place->type }}</p>
+          <p class="">{!! nl2br(e($place->description)) !!}</p>
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <div id="map" class="border rounded shadow"></div>
+        <div id="map" class="border rounded shadow w-100"></div>
       </div>
     </div>
 
