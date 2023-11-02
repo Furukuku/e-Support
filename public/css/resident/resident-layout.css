@@ -3,6 +3,10 @@
   --theme-color: #0E2C15;
 }
 
+.colored-toast.swal2-icon-success {
+  background-color: #33a54e !important;
+}
+
 .main-color {
   color: var(--theme-color);
 }
@@ -215,6 +219,15 @@ label[for="proof"] {
 
 .requested-docs-pagination > div > nav > ul > li > .page-link {
   color: var(--theme-color);
+}
+
+.update-profile-btn {
+  background-color: var(--theme-color) !important;
+  border: none;
+}
+
+.update-profile-btn:active {
+  opacity: 0.8 !important;
 }
 
 .back-btn {
@@ -665,6 +678,12 @@ label[for="proof"] {
 
 
 @media (max-width: 767px){
+  .profile-image-container {
+    display: flex;
+    gap: 2rem !important;
+    flex-direction: column !important;
+  }
+
   .fam-profile-viewing-tab {
     width: 100%;
     display: flex;

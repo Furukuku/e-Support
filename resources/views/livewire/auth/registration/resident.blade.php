@@ -123,7 +123,7 @@
               @error('username') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="row-auto mb-3">
-              <label class="input-labels" for="resident-password">Password</label>
+              <label class="input-labels" for="resident-password">Password <small class="fw-normal">(Must have atleast 1 uppercase, 1 lowercase and 1 number)</small></label>
               <input wire:model.defer="password" id="resident-password" type="password" class="form-control">
               @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>

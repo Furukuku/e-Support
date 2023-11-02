@@ -29,10 +29,9 @@ class Resident extends Component
             'gender' => 'required|string|max:6',
             'employment_status' => 'required|boolean',
             'agreement' => 'accepted',
-            // 'family_head' => 'required|boolean',
         ],
         2 => [
-            'email' => 'required|email|unique:users|max:255',
+            'email' => 'required|email|unique:users|unique:businesses|unique:barangay_health_workers|unique:sub_admins|unique:admins|max:255',
             'mobile' => 'required|unique:users|digits:12',
             'zone' => 'required|string|max:2',
         ],
@@ -65,8 +64,8 @@ class Resident extends Component
         $this->validate([
             'profile_image' => 'required|image',
             'verification_image' => 'required|image',
-            'username' => 'required|string|unique:users|unique:businesses|max:255',
-            'password' => 'required|string|min:8|max:255|confirmed',
+            'username' => 'required|string|unique:users|unique:businesses|unique:barangay_health_workers|unique:sub_admins|unique:admins|unique:businesses|min:4|max:20',
+            'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|max:255|confirmed',
         ]);
 
         // $this->currentPage++;
@@ -89,7 +88,6 @@ class Resident extends Component
             'zone' => $this->zone,
             'is_employed' => $this->employment_status,
             'gender' => $this->gender,
-            // 'is_head' => $this->family_head,
             'username' => $this->username,
             'email' => $this->email,
             'password' => $this->password,

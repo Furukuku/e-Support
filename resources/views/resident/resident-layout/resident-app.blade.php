@@ -74,7 +74,7 @@
       </div>
       <div class="btn-group navbar-hide-items">
         <button type="button" class="btn btn-white bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="username">{{ auth()->guard('web')->user()->username }}</span>
+          <span id="user-username" class="username">{{ auth()->guard('web')->user()->username }}</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
           <li class="dropdown-item p-0">
@@ -97,7 +97,7 @@
         <img class="rounded-circle profile-picture" src="{{ Storage::url(auth()->guard('web')->user()->profile) }}" alt="profile_picture">
       </div>
       <div class="text-truncate">
-        <p class="m-0 text-truncate fw-semibold">{{ auth()->guard('web')->user()->username }}</p>
+        <p id="mobile-user-username" class="m-0 text-truncate fw-semibold">{{ auth()->guard('web')->user()->username }}</p>
       </div>
     </div>
     <div class="w-100">
