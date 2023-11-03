@@ -47,6 +47,7 @@
         <h5>
           Change Password 
           <span class="px-1 change-password"><i wire:click="editPassword" class="fa-solid fa-pen-to-square edit-password-icon"></i></span>
+          <small class="fw-normal" style="font-size: 12px">(Your new password must be contain at least: 1 lowercase letter, 1 uppercase letter, 1 number)</small>
         </h5>
         <form wire:submit.prevent="changePassword">
           <div class="px-2" {{ $password_hidden }}>

@@ -24,16 +24,6 @@ class Staffs extends Component
 
     public $search = "";
 
-    // protected $rules = [
-    //     'last_name' => 'required|string|max:255',
-    //     'first_name' => 'required|string|max:255',
-    //     'middle_name' => 'nullable|string|max:255',
-    //     'position' => ['required', 'string', 'max:20', new MustOnlyOneBHWHead],
-    //     'email' => 'required|string|email|unique:sub_admins|max:255',
-    //     'username' => 'required|string|unique:sub_admins|unique:admins|max:255',
-    //     'password' => 'required|string|min:8|max:255|confirmed',
-    // ];
-
     public function updatingSearch()
     {
         $this->resetPage();
@@ -67,8 +57,8 @@ class Staffs extends Component
             'middle_name' => 'nullable|string|max:255',
             'position' => ['required', 'string', 'max:20', new MustOnlyOneBHWHead],
             'email' => 'required|string|email|unique:barangay_health_workers|unique:sub_admins|unique:admins|unique:users|unique:businesses|max:255',
-            'username' => 'required|string|unique:barangay_health_workers|unique:sub_admins|unique:admins|unique:users|unique:businesses|max:15',
-            'password' => 'required|string|min:8|max:255|confirmed',
+            'username' => 'required|string|min:4|max:20|unique:barangay_health_workers|unique:sub_admins|unique:admins|unique:users|unique:businesses',
+            'password' => ['required', 'min:8', 'string', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
         ]);
 
         SubAdmin::create([
@@ -97,7 +87,7 @@ class Staffs extends Component
     public function updateUser()
     {
         $validated = $this->validate([
-            'status' => 'required|integer|max:1'
+            'status' => 'required|boolean'
         ]);
 
         if($validated){

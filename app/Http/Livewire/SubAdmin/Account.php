@@ -45,8 +45,20 @@ class Account extends Component
 
     public function changeUsername()
     {
+        $subAdmin = auth()->guard('sub-admin')->user();
+
         $this->validate([
-            'username' => 'required|string|unique:admins,username,' . auth()->guard('sub-admin')->user()->username . '|unique:sub_admins,username,' . auth()->guard('sub-admin')->user()->id,
+            'username' => [
+                'required', 
+                'string', 
+                'min:4',
+                'max:20',
+                'unique:sub_admins,username,' . $subAdmin->id, 
+                'unique:admins,username,' . $subAdmin->username, 
+                'unique:barangay_health_workers,username,' . $subAdmin->username, 
+                'unique:users,username,' . $subAdmin->username, 
+                'unique:businesses,username,' . $subAdmin->username
+            ],
         ]);
 
         SubAdmin::where('id', auth()->guard('sub-admin')->user()->id)->update([
@@ -78,8 +90,19 @@ class Account extends Component
 
     public function changeEmail()
     {
+        $subAdmin = auth()->guard('sub-admin')->user();
+
         $this->validate([
-            'email' => 'required|email|unique:admins,email,' . auth()->guard('sub-admin')->user()->email . '|unique:sub_admins,email,' . auth()->guard('sub-admin')->user()->id,
+            'email' => [
+                'required', 
+                'email',
+                'max:255',
+                'unique:sub_admins,email,' . $subAdmin->id, 
+                'unique:admins,email,' . $subAdmin->email,
+                'unique:barangay_health_workers,email,' . $subAdmin->email, 
+                'unique:users,email,' . $subAdmin->email, 
+                'unique:businesses,email,' . $subAdmin->email
+            ],
         ]);
 
         SubAdmin::where('id', auth()->guard('sub-admin')->user()->id)->update([
@@ -108,7 +131,7 @@ class Account extends Component
     {
         $this->validate([
             'current_password' => 'required|current_password:sub-admin',
-            'new_password' => 'required|string|confirmed',
+            'new_password' => ['required', 'min:8', 'string', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
         ]);
 
         if(Hash::check($this->current_password, auth()->guard('sub-admin')->user()->password)){

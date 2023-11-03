@@ -143,7 +143,7 @@ Route::middleware(['sub-admin.auth:sub-admin', 'official:barangay official'])->g
         Route::get('/reports', [SubAdminController::class, 'reports'])->name('reports');
         Route::get('/programs', [SubAdminController::class, 'programs'])->name('programs');
         Route::get('/places', [SubAdminController::class, 'places'])->name('places');
-        Route::view('/account', 'sub-admin.sub-admin-residents')->name('account');
+        Route::view('/account', 'sub-admin.sub-admin-account')->name('account');
 
         Route::name('docs.')->group(function(){
             Route::view('/brgy-clearances', 'sub-admin.sub-admin-print-clearance')->name('brgy-clearances');

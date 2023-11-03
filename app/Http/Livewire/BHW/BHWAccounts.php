@@ -49,9 +49,9 @@ class BHWAccounts extends Component
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
             'assigned_zone' => ['required', 'string', 'max:1'],
-            'email' => ['required', 'email', 'max:255', 'unique:barangay_health_workers'],
-            'username' => ['required', 'string', 'max:15', 'unique:barangay_health_workers', 'unique:sub_admins', 'unique:admins'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'email' => ['required', 'email', 'max:255', 'unique:barangay_health_workers', 'unique:sub_admins', 'unique:admins', 'unique:users', 'unique:businesses'],
+            'username' => ['required', 'string', 'min:4', 'max:20', 'unique:barangay_health_workers', 'unique:sub_admins', 'unique:admins', 'unique:users', 'unique:businesses'],
+            'password' => ['required', 'min:8', 'string', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
         ]);
 
         BarangayHealthWorker::create([

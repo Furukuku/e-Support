@@ -45,8 +45,20 @@ class Account extends Component
 
     public function changeUsername()
     {
+        $bhw = auth()->guard('sub-admin')->user();
+
         $this->validate([
-            'username' => 'required|string|unique:admins,username,' . auth()->guard('sub-admin')->user()->username . '|unique:sub_admins,username,' . auth()->guard('sub-admin')->user()->id,
+            'username' => [
+                'required', 
+                'string', 
+                'min:4',
+                'max:20',
+                'unique:sub_admins,username,' . $bhw->id, 
+                'unique:admins,username,' . $bhw->username, 
+                'unique:barangay_health_workers,username,' . $bhw->username, 
+                'unique:users,username,' . $bhw->username, 
+                'unique:businesses,username,' . $bhw->username
+            ],
         ]);
 
         SubAdmin::where('id', auth()->guard('sub-admin')->user()->id)->update([
@@ -78,8 +90,19 @@ class Account extends Component
 
     public function changeEmail()
     {
+        $bhw = auth()->guard('sub-admin')->user();
+
         $this->validate([
-            'email' => 'required|email|unique:admins,email,' . auth()->guard('sub-admin')->user()->email . '|unique:sub_admins,email,' . auth()->guard('sub-admin')->user()->id,
+            'email' => [
+                'required', 
+                'email',
+                'max:255',
+                'unique:sub_admins,email,' . $bhw->id, 
+                'unique:admins,email,' . $bhw->email,
+                'unique:barangay_health_workers,email,' . $bhw->email, 
+                'unique:users,email,' . $bhw->email, 
+                'unique:businesses,email,' . $bhw->email
+            ],
         ]);
 
         SubAdmin::where('id', auth()->guard('sub-admin')->user()->id)->update([

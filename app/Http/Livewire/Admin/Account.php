@@ -4,10 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Admin;
 use Livewire\Component;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Query\Builder;
 
 class Account extends Component
 {
@@ -48,8 +45,20 @@ class Account extends Component
 
     public function changeUsername()
     {
+        $admin = auth()->guard('admin')->user();
+
         $this->validate([
-            'username' => 'required|string|unique:sub_admins,username,' . auth()->guard('admin')->user()->username . '|unique:admins,username,' . auth()->guard('admin')->user()->id . '|unique:barangay_health_workers,username,' . auth()->guard('admin')->user()->username . '|unique:users,username,' . auth()->guard('admin')->user()->username . '|unique:businesses,username,' . auth()->guard('admin')->user()->username,
+            'username' => [
+                'required', 
+                'string', 
+                'min:4',
+                'max:20',
+                'unique:admins,username,' . $admin->id, 
+                'unique:sub_admins,username,' . $admin->username, 
+                'unique:barangay_health_workers,username,' . $admin->username, 
+                'unique:users,username,' . $admin->username, 
+                'unique:businesses,username,' . $admin->username
+            ],
         ]);
 
         Admin::where('id', auth()->guard('admin')->user()->id)->update([
@@ -81,8 +90,19 @@ class Account extends Component
 
     public function changeEmail()
     {
+        $admin = auth()->guard('admin')->user();
+
         $this->validate([
-            'email' => 'required|email|unique:sub_admins,email,' . auth()->guard('admin')->user()->email . '|unique:admins,email,' . auth()->guard('admin')->user()->id . '|unique:barangay_health_workers,email,' . auth()->guard('admin')->user()->email . '|unique:users,email,' . auth()->guard('admin')->user()->email . '|unique:businesses,email,' . auth()->guard('admin')->user()->email,
+            'email' => [
+                'required', 
+                'email',
+                'max:255',
+                'unique:admins,email,' . $admin->id,
+                'unique:sub_admins,email,' . $admin->email, 
+                'unique:barangay_health_workers,email,' . $admin->email, 
+                'unique:users,email,' . $admin->email, 
+                'unique:businesses,email,' . $admin->email
+            ],
         ]);
 
         Admin::where('id', auth()->guard('admin')->user()->id)->update([
@@ -111,7 +131,7 @@ class Account extends Component
     {
         $this->validate([
             'current_password' => 'required|current_password:admin',
-            'new_password' => 'required|string|confirmed',
+            'new_password' => ['required', 'min:8', 'string', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
         ]);
 
         if(Hash::check($this->current_password, auth()->guard('admin')->user()->password)){

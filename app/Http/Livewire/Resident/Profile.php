@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Resident;
 use App\Models\User;
 use App\Rules\MobileNumberFormat;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -75,7 +74,6 @@ class Profile extends Component
                 'unique:barangay_health_workers,username,' . $user->username, 
                 'unique:sub_admins,username,' . $user->username,
                 'unique:admins,username,' . $user->username,
-                'max:255'
             ],
         ]);
 

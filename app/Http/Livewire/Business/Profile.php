@@ -74,7 +74,6 @@ class Profile extends Component
                 'unique:barangay_health_workers,username,' . $business->username, 
                 'unique:sub_admins,username,' . $business->username,
                 'unique:admins,username,' . $business->username,
-                'max:255'
             ],
         ]);
 
