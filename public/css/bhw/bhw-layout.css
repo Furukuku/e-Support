@@ -252,6 +252,15 @@ body {
   opacity: 1;
 }
 
+.program-img {
+  height: 10rem;
+  width: 10rem;
+}
+
+.pac-container {
+  z-index: 1060 !important;
+}
+
 
 @media (max-width: 1070px) {
   .block-sidebar {

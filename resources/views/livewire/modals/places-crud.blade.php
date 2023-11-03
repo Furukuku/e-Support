@@ -111,7 +111,7 @@
           <div class="row-auto mb-3">
             <h6>Description</h6>
             <div class="rounded border border-1 p-2">
-              <p class="m-0">{!! nl2br(e($place_description)) !!}</p>
+              <p class="m-0">{{ $place_description }}</p>
             </div>
           </div>
         </div>

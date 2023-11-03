@@ -2,6 +2,20 @@
 
 @section('content')
 
-  <h1>Programs</h1>
+  @livewire('b-h-w.programs')
+
+@endsection
+
+@section('script')
+
+  <script>
+
+    window.addEventListener('close-modal', () => {
+      $('#addProgram').modal('hide');
+      $('#updateProgram').modal('hide');
+      $('#archiveProgram').modal('hide');
+    });
+
+  </script>
 
 @endsection
