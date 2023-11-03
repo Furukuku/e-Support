@@ -140,15 +140,15 @@ class Dashboard extends Component
         $va = [];
         $cd = [];
         $ig = [];
-        $ca = [];
-        $cc = [];
-        $psc = [];
-        $lnkd = [];
-        $eh = [];
-        $ip = [];
         $dr = [];
         $sc = [];
-        $cp = [];
+        $tr = [];
+        $lnkd = [];
+        $cc = [];
+        $ip = [];
+        // $psc = [];
+        // $eh = [];
+        // $cp = [];
         $others = [];
 
         for($i = 1; $i <= 6; $i++){
@@ -170,43 +170,7 @@ class Dashboard extends Component
                 ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
-            $ca_temp = Report::where('report_name', 'Child Abuse')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            $cc_temp = Report::where('report_name', 'Community Cleanliness')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            $psc_temp = Report::where('report_name', 'Public Safety Concern')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            $eh_temp = Report::where('report_name', 'Environmental Hazard')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            $ip_temp = Report::where('report_name', 'Infrastructure Problems')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            $dr_temp = Report::where('report_name', 'Drug Racing')
+            $dr_temp = Report::where('report_name', 'Drag Racing')
                 ->where('zone', $i)
                 ->where('is_exist', true)
                 ->whereBetween('created_at', [$this->first_date, $this->second_date])
@@ -218,24 +182,61 @@ class Dashboard extends Component
                 ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
-            $cp_temp = Report::where('report_name', 'Complaint')
+            $tr_temp = Report::where('report_name', 'Trouble')
                 ->where('zone', $i)
                 ->where('is_exist', true)
                 ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
+            $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
+                ->count();
+
+            $cc_temp = Report::where('report_name', 'Community Cleanliness')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
+                ->count();
+
+            $ip_temp = Report::where('report_name', 'Infrastructure Problems')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->whereBetween('created_at', [$this->first_date, $this->second_date])
+                ->count();
+
+            // $psc_temp = Report::where('report_name', 'Public Safety Concern')
+            //     ->where('zone', $i)
+            //     ->where('is_exist', true)
+            //     ->whereBetween('created_at', [$this->first_date, $this->second_date])
+            //     ->count();
+
+
+            // $eh_temp = Report::where('report_name', 'Environmental Hazard')
+            //     ->where('zone', $i)
+            //     ->where('is_exist', true)
+            //     ->whereBetween('created_at', [$this->first_date, $this->second_date])
+            //     ->count();
+
+            // $cp_temp = Report::where('report_name', 'Complaint')
+            //     ->where('zone', $i)
+            //     ->where('is_exist', true)
+            //     ->whereBetween('created_at', [$this->first_date, $this->second_date])
+            //     ->count();
+
             $others_temp = Report::where('report_name', '!=','Vehicle Accident')
                 ->where('report_name', '!=', 'Calamity and Disaster')
                 ->where('report_name', '!=', 'Illegal Gambling')
-                ->where('report_name', '!=', 'Child Abuse')
-                ->where('report_name', '!=', 'Community Cleanliness')
-                ->where('report_name', '!=', 'Public Safety Concern')
-                ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
-                ->where('report_name', '!=', 'Environmental Hazard')
-                ->where('report_name', '!=', 'Infrastructure Problems')
-                ->where('report_name', '!=', 'Drug Racing')
+                ->where('report_name', '!=', 'Drag Racing')
                 ->where('report_name', '!=', 'Stoning of Car')
-                ->where('report_name', '!=', 'Complaint')
+                ->where('report_name', '!=', 'Trouble')
+                ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
+                ->where('report_name', '!=', 'Community Cleanliness')
+                ->where('report_name', '!=', 'Infrastructure Problems')
+                // ->where('report_name', '!=', 'Public Safety Concern')
+                // ->where('report_name', '!=', 'Environmental Hazard')
+                // ->where('report_name', '!=', 'Complaint')
                 ->where('zone', $i)
                 ->where('is_exist', true)
                 ->whereBetween('created_at', [$this->first_date, $this->second_date])
@@ -244,15 +245,15 @@ class Dashboard extends Component
             array_push($va, $va_temp);
             array_push($cd, $cd_temp);
             array_push($ig, $ig_temp);
-            array_push($ca, $ca_temp);
-            array_push($cc, $cc_temp);
-            array_push($psc, $psc_temp);
-            array_push($lnkd, $lnkd_temp);
-            array_push($eh, $eh_temp);
-            array_push($ip, $ip_temp);
             array_push($dr, $dr_temp);
             array_push($sc, $sc_temp);
-            array_push($cp, $cp_temp);
+            array_push($tr, $tr_temp);
+            array_push($lnkd, $lnkd_temp);
+            array_push($cc, $cc_temp);
+            array_push($ip, $ip_temp);
+            // array_push($psc, $psc_temp);
+            // array_push($eh, $eh_temp);
+            // array_push($cp, $cp_temp);
             array_push($others, $others_temp);
         }
 
@@ -273,15 +274,15 @@ class Dashboard extends Component
             'va' => $va,
             'cd' => $cd,
             'ig' => $ig,
-            'ca' => $ca,
-            'cc' => $cc,
-            'psc' => $psc,
-            'lnkd' => $lnkd,
-            'eh' => $eh,
-            'ip' => $ip,
             'dr' => $dr,
             'sc' => $sc,
-            'cp' => $cp,
+            'tr' => $tr,
+            'lnkd' => $lnkd,
+            'cc' => $cc,
+            'ip' => $ip,
+            // 'psc' => $psc,
+            // 'eh' => $eh,
+            // 'cp' => $cp,
             'others' => $others,
         ]);
     }

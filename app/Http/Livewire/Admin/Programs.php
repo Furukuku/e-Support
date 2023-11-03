@@ -22,6 +22,7 @@ class Programs extends Component
     public $view_display_image;
 
     public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
     public $search = "";
 

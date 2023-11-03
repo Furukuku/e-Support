@@ -18,7 +18,6 @@ use Livewire\WithFileUploads;
 
 class BrgyOfficials extends Component
 {
-
     use WithFileUploads;
 
     use WithPagination;
@@ -32,6 +31,7 @@ class BrgyOfficials extends Component
     public $official_id;
 
     public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
     public $search = "";
 

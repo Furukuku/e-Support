@@ -23,6 +23,7 @@ class Places extends Component
     public $place_id;
 
     public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
     public $search = "";
 

@@ -13,6 +13,7 @@ class ChatSupport extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
     public $search = "";
 

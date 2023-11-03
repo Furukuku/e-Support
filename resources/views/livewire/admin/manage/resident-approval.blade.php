@@ -3,8 +3,8 @@
   <div class="w-100 px-4 d-flex justify-content-end">
     <div class="w-25 mb-4 shadow-sm">
       <select wire:model="category" class="form-select">
-        <option value="0">RESIDENTS' ACCOUNTS</option>
-        <option value="1">BUSINESSES' ACCOUNTS</option>
+        <option value="0">RESIDENT ACCOUNTS</option>
+        <option value="1">BUSINESS ACCOUNTS</option>
       </select>
     </div>
   </div>
@@ -16,17 +16,21 @@
       {{-- Residents Accounts --}}
       <div class="bg-white officials-profile-table mb-5 shadow rounded">
         <div class="d-flex justify-content-between p-2 rounded-top officials-header">
-          <h3>PRE-REGISTERED RESIDENTS' ACCOUNTS</h3>
+          <h3>PRE-REGISTERED RESIDENT ACCOUNTS</h3>
         </div>
         <div class="d-flex justify-content-between p-2">
           <div class="row g-1 align-items-center">
-            <div class="col-auto">
+            <div class="col-3">
               <label for="entries">Show</label>
             </div>
-            <div class="col-2">
-              <input id="entries" wire:model="resident_paginate" min="1" type="number" class="form-control form-control-sm">
+            <div class="col-6">
+              <select id="entries" wire:model="resident_paginate" class="form-select form-select-sm">
+            @foreach ($paginate_values as $value)
+              <option value="{{ $value }}">{{ $value }}</option>
+            @endforeach
+          </select>
             </div>
-            <div class="col-auto">
+            <div class="col-3">
               <label for="entries">entries</label>
             </div>
           </div>

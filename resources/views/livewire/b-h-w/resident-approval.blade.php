@@ -12,7 +12,6 @@
           <label for="entries">Show</label>
         </div>
         <div class="col-6">
-          {{-- <input id="entries" wire:model="paginate" type="number" class="form-control form-control-sm"> --}}
           <select id="entries" wire:model="paginate" class="form-select form-select-sm">
             @foreach ($paginate_values as $value)
               <option value="{{ $value }}">{{ $value }}</option>

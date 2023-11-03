@@ -13,12 +13,10 @@
           <label for="entries">Show</label>
         </div>
         <div class="col-6">
-          {{-- <input id="entries" wire:model="paginate" type="number" class="form-control form-control-sm"> --}}
           <select id="entries" wire:model="paginate" class="form-select form-select-sm">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            @foreach ($paginate_values as $value)
+              <option value="{{ $value }}">{{ $value }}</option>
+            @endforeach
           </select>
         </div>
         <div class="col-3">

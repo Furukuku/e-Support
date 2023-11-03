@@ -22,15 +22,15 @@
                 <option value="Vehicle Accident" {{ old('kind_of_report', $report->report_name) == 'Vehicle Accident' ? 'selected' : '' }}>Vehicle Accident</option>
                 <option value="Calamity and Disaster" {{ old('kind_of_report', $report->report_name) == 'Calamity and Disaster' ? 'selected' : '' }}>Calamity and Disaster</option>
                 <option value="Illegal Gambling" {{ old('kind_of_report', $report->report_name) == 'Illegal Gambling' ? 'selected' : '' }}>Illegal Gambling</option>
-                <option value="Child Abuse" {{ old('kind_of_report', $report->report_name) == 'Child Abuse' ? 'selected' : '' }}>Child Abuse</option>
-                <option value="Community Cleanliness" {{ old('kind_of_report', $report->report_name) == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
-                <option value="Public Safety Concern" {{ old('kind_of_report', $report->report_name) == 'Public Safety Concern' ? 'selected' : '' }}>Public Safety Concern</option>
-                <option value="Late-Night Karaoke Disturbance" {{ old('kind_of_report', $report->report_name) == 'Late-Night Karaoke Disturbance' ? 'selected' : '' }}>Late-Night Karaoke Disturbance</option>
-                <option value="Environmental Hazard" {{ old('kind_of_report', $report->report_name) == 'Environmental Hazard' ? 'selected' : '' }}>Environmental Hazard</option>
-                <option value="Infrastructure Problems" {{ old('kind_of_report', $report->report_name) == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option>
                 <option value="Drag Racing" {{ old('kind_of_report', $report->report_name) == 'Drag Racing' ? 'selected' : '' }}>Drag Racing</option>
                 <option value="Stoning of Car" {{ old('kind_of_report', $report->report_name) == 'Stoning of Car' ? 'selected' : '' }}>Stoning of Car</option>
-                <option value="Complaint" {{ old('kind_of_report', $report->report_name) == 'Complaint' ? 'selected' : '' }}>Complaint</option>
+                <option value="Trouble" {{ old('kind_of_report', $report->report_name) == 'Trouble' ? 'selected' : '' }}>Trouble</option>
+                <option value="Late-Night Karaoke Disturbance" {{ old('kind_of_report', $report->report_name) == 'Late-Night Karaoke Disturbance' ? 'selected' : '' }}>Late-Night Karaoke Disturbance</option>
+                <option value="Community Cleanliness" {{ old('kind_of_report', $report->report_name) == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
+                <option value="Infrastructure Problems" {{ old('kind_of_report', $report->report_name) == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option>
+                {{-- <option value="Public Safety Concern" {{ old('kind_of_report', $report->report_name) == 'Public Safety Concern' ? 'selected' : '' }}>Public Safety Concern</option>
+                <option value="Environmental Hazard" {{ old('kind_of_report', $report->report_name) == 'Environmental Hazard' ? 'selected' : '' }}>Environmental Hazard</option>
+                <option value="Complaint" {{ old('kind_of_report', $report->report_name) == 'Complaint' ? 'selected' : '' }}>Complaint</option> --}}
                 <option value="Others" {{ old('kind_of_report', $report->report_name) == 'Others' ? 'selected' : '' }}>Others</option>
               </select>
               @error('kind_of_report') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
@@ -159,30 +159,6 @@
             report.value = report.value;
             other.value = '';
             break;
-          case 'Child Abuse': 
-            report.value = report.value;
-            other.value = '';
-            break;
-          case 'Community Cleanliness': 
-            report.value = report.value;
-            other.value = '';
-            break;
-          case 'Public Safety Concern': 
-            report.value = report.value;
-            other.value = '';
-            break;
-          case 'Late-Night Karaoke Disturbance': 
-            report.value = report.value;
-            other.value = '';
-            break;
-          case 'Environmental Hazard': 
-            report.value = report.value;
-            other.value = '';
-            break;
-          case 'Infrastructure Problems': 
-            report.value = report.value;
-            other.value = '';
-            break;
           case 'Drag Racing': 
             report.value = report.value;
             other.value = '';
@@ -191,10 +167,34 @@
             report.value = report.value;
             other.value = '';
             break;
-          case 'Complaint': 
+          case 'Trouble': 
             report.value = report.value;
             other.value = '';
             break;
+          case 'Late-Night Karaoke Disturbance': 
+            report.value = report.value;
+            other.value = '';
+            break;
+          case 'Community Cleanliness': 
+            report.value = report.value;
+            other.value = '';
+            break;
+          case 'Infrastructure Problems': 
+            report.value = report.value;
+            other.value = '';
+            break;
+          // case 'Public Safety Concern': 
+          //   report.value = report.value;
+          //   other.value = '';
+          //   break;
+          // case 'Environmental Hazard': 
+          //   report.value = report.value;
+          //   other.value = '';
+          //   break;
+          // case 'Complaint': 
+          //   report.value = report.value;
+          //   other.value = '';
+          //   break;
           default:
             other.value = other.value;
             report.value = 'Others';

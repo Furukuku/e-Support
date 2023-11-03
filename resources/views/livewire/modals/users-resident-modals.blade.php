@@ -44,7 +44,7 @@
             </div>
             <div class="row-auto mb-3">
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Employment Status: <span class="fw-normal">{{ $employment_status }}</span></p>
+                <p class="m-0 fw-bold">Employment Status: <span class="fw-normal">{{ $employment_status == true ? 'Employed' : 'Unemployed' }}</span></p>
               </div>
             </div>
             <div class="row-auto mb-3">

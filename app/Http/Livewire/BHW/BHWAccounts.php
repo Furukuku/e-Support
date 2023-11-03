@@ -14,7 +14,7 @@ class BHWAccounts extends Component
     public $search = '';
     public $paginate = 5;
 
-    public $paginate_value = [5, 10, 50, 100];
+    public $paginate_values = [5, 10, 50, 100];
 
     protected $paginationTheme = 'bootstrap';
 

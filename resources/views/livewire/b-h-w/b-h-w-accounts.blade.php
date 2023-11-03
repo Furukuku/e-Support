@@ -15,7 +15,7 @@
           </div>
           <div class="col-6">
             <select id="entries" wire:model="paginate" class="form-select form-select-sm">
-              @foreach ($paginate_value as $value)
+              @foreach ($paginate_values as $value)
                 <option value="{{ $value }}">{{ $value }}</option>
               @endforeach
             </select>

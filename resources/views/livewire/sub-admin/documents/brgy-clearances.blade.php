@@ -21,13 +21,17 @@
   <div class="bg-white officials-profile-table shadow rounded pt-3 documents-table">
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
-        <div class="col-auto">
+        <div class="col-3">
           <label for="entries">Show</label>
         </div>
-        <div class="col-2">
-          <input id="entries" wire:model="paginate" type="number" min="0" class="form-control form-control-sm">
+        <div class="col-6">
+          <select id="entries" wire:model="paginate" class="form-select form-select-sm">
+            @foreach ($paginate_values as $value)
+              <option value="{{ $value }}">{{ $value }}</option>
+            @endforeach
+          </select>
         </div>
-        <div class="col-auto">
+        <div class="col-3">
           <label for="entries">entries</label>
         </div>
       </div>
@@ -91,13 +95,17 @@
     </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
-        <div class="col-auto">
+        <div class="col-3">
           <label for="history-entries">Show</label>
         </div>
-        <div class="col-2">
-          <input id="history-entries" wire:model="history_paginate" type="number" min="0" class="form-control form-control-sm">
+        <div class="col-6">
+          <select id="history-entries" wire:model="history_paginate" class="form-select form-select-sm">
+            @foreach ($history_paginate_values as $value)
+              <option value="{{ $value }}">{{ $value }}</option>
+            @endforeach
+          </select>
         </div>
-        <div class="col-auto">
+        <div class="col-3">
           <label for="history-entries">entries</label>
         </div>
       </div>

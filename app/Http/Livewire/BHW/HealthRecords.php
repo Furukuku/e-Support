@@ -24,6 +24,7 @@ class HealthRecords extends Component
     public $add_error;
 
     public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
     public $search = '';
 

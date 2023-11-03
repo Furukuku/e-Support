@@ -278,55 +278,7 @@
                 tension: 0.4
               },
               {
-                label: 'Child Abuse',
-                data: @json($ca),
-                borderWidth: 1,
-                borderColor: '#9932CC',
-                backgroundColor: '#9932CC',
-                tension: 0.4
-              },
-              {
-                label: 'Community Cleanliness',
-                data: @json($cc),
-                borderWidth: 1,
-                borderColor: '#00FF00',
-                backgroundColor: '#00FF00',
-                tension: 0.4
-              },
-              {
-                label: 'Public Safety Concern',
-                data: @json($psc),
-                borderWidth: 1,
-                borderColor: '#FF1493',
-                backgroundColor: '#FF1493',
-                tension: 0.4
-              },
-              {
-                label: 'Late-Night Karaoke Disturbance',
-                data: @json($lnkd),
-                borderWidth: 1,
-                borderColor: '#1E90FF',
-                backgroundColor: '#1E90FF',
-                tension: 0.4
-              },
-              {
-                label: 'Environmental Hazard',
-                data: @json($eh),
-                borderWidth: 1,
-                borderColor: '#FFEBCD',
-                backgroundColor: '#FFEBCD',
-                tension: 0.4
-              },
-              {
-                label: 'Infrastructure Problems',
-                data: @json($ip),
-                borderWidth: 1,
-                borderColor: '#800080',
-                backgroundColor: '#800080',
-                tension: 0.4
-              },
-              {
-                label: 'Drug Racing',
+                label: 'Drag Racing',
                 data: @json($dr),
                 borderWidth: 1,
                 borderColor: '#008000',
@@ -342,13 +294,61 @@
                 tension: 0.4
               },
               {
-                label: 'Complaint',
-                data: @json($cp),
+                label: 'Trouble',
+                data: @json($tr),
                 borderWidth: 1,
-                borderColor: '#F0E68C',
-                backgroundColor: '#F0E68C',
+                borderColor: '#9932CC',
+                backgroundColor: '#9932CC',
                 tension: 0.4
               },
+              {
+                label: 'Late-Night Karaoke Disturbance',
+                data: @json($lnkd),
+                borderWidth: 1,
+                borderColor: '#1E90FF',
+                backgroundColor: '#1E90FF',
+                tension: 0.4
+              },
+              {
+                label: 'Community Cleanliness',
+                data: @json($cc),
+                borderWidth: 1,
+                borderColor: '#00FF00',
+                backgroundColor: '#00FF00',
+                tension: 0.4
+              },
+              {
+                label: 'Infrastructure Problems',
+                data: @json($ip),
+                borderWidth: 1,
+                borderColor: '#800080',
+                backgroundColor: '#800080',
+                tension: 0.4
+              },
+              // {
+              //   label: 'Public Safety Concern',
+              //   data: ($psc),
+              //   borderWidth: 1,
+              //   borderColor: '#FF1493',
+              //   backgroundColor: '#FF1493',
+              //   tension: 0.4
+              // },
+              // {
+              //   label: 'Environmental Hazard',
+              //   data: ($eh),
+              //   borderWidth: 1,
+              //   borderColor: '#FFEBCD',
+              //   backgroundColor: '#FFEBCD',
+              //   tension: 0.4
+              // },
+              // {
+              //   label: 'Complaint',
+              //   data: ($cp),
+              //   borderWidth: 1,
+              //   borderColor: '#F0E68C',
+              //   backgroundColor: '#F0E68C',
+              //   tension: 0.4
+              // },
               {
                 label: 'Others',
                 data: @json($others),

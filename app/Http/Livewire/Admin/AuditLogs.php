@@ -15,6 +15,7 @@ class AuditLogs extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
     // protected $rules = [
     //     'paginate' => 'integer|required|min:1|max:10',

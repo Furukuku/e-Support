@@ -1,33 +1,4 @@
 <div class="d-flex flex-column align-items-center justify-content-center pb-5 pt-4">
-  
-  {{-- <div class="row gap-5 justify-content-center w-100 mb-5 pt-5 card-container">
-    <div class="col-md-5 mt-3 card-counter">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex justify-content-end mb-3">
-            <div class="rounded-circle card-icon">
-              <span class="material-symbols-outlined text-white">family_restroom</span>
-            </div>
-          </div>
-          <h3 class="m-0">{{ $heads }}</h3>
-          <p class="m-0">Family Head Users</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-5 mt-3 card-counter">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex justify-content-end mb-3">
-            <div class="rounded-circle card-icon">
-              <span class="material-symbols-outlined text-white">groups</span>
-            </div>
-          </div>
-          <h3 class="m-0">{{ $users }}</h3>
-          <p class="m-0">Total Resident Users</p>
-        </div>
-      </div>
-    </div>
-  </div> --}}
 
   <div class="w-100 px-4 d-flex justify-content-end">
     <div class="w-25 mt-5 shadow-sm">

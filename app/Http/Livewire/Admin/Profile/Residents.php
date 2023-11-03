@@ -18,6 +18,7 @@ class Residents extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $paginate = 5;
+    public $paginate_values = [5, 10, 50, 100];
 
     // Family Head variables
     public $last_name, $first_name, $middle_name, $suffix_name, $birthday, $birthplace, $sex, $civil_status, $educational_attainment, $zone, $religion, $occupation, $contact, $philhealth, $first_dose_date, $second_dose_date, $vaccine_brand, $booster_date, $booster_brand;

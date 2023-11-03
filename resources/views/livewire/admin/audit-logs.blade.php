@@ -8,21 +8,17 @@
     </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
-        <div class="col-auto">
+        <div class="col-3">
           <label for="entries">Show</label>
         </div>
-        <div class="col-2">
-          <input id="entries" wire:model="paginate" type="number" min="1" class="form-control form-control-sm">
-          {{-- @error('paginate') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span>@enderror --}}
-          {{-- <select wire:model="paginate" id="entries" class="form-select form-select-sm">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="all">All</option>
-          </select> --}}
+        <div class="col-6">
+          <select id="entries" wire:model="paginate" class="form-select form-select-sm">
+            @foreach ($paginate_values as $value)
+              <option value="{{ $value }}">{{ $value }}</option>
+            @endforeach
+          </select>
         </div>
-        <div class="col-auto">
+        <div class="col-3">
           <label for="entries">entries</label>
         </div>
       </div>

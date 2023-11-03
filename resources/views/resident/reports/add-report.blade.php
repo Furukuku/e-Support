@@ -23,15 +23,12 @@
               <option value="Vehicle Accident" {{ old('kind_of_report') == 'Vehicle Accident' ? 'selected' : '' }}>Vehicle Accident</option>
               <option value="Calamity and Disaster" {{ old('kind_of_report') == 'Calamity and Disaster' ? 'selected' : '' }}>Calamity and Disaster</option>
               <option value="Illegal Gambling" {{ old('kind_of_report') == 'Illegal Gambling' ? 'selected' : '' }}>Illegal Gambling</option>
-              <option value="Child Abuse" {{ old('kind_of_report') == 'Child Abuse' ? 'selected' : '' }}>Child Abuse</option>
-              <option value="Community Cleanliness" {{ old('kind_of_report') == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
-              <option value="Public Safety Concern" {{ old('kind_of_report') == 'Public Safety Concern' ? 'selected' : '' }}>Public Safety Concern</option>
-              <option value="Late-Night Karaoke Disturbance" {{ old('kind_of_report') == 'Late-Night Karaoke Disturbance' ? 'selected' : '' }}>Late-Night Karaoke Disturbance</option>
-              <option value="Environmental Hazard" {{ old('kind_of_report') == 'Environmental Hazard' ? 'selected' : '' }}>Environmental Hazard</option>
-              <option value="Infrastructure Problems" {{ old('kind_of_report') == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option>
               <option value="Drag Racing" {{ old('kind_of_report') == 'Drag Racing' ? 'selected' : '' }}>Drag Racing</option>
               <option value="Stoning of Car" {{ old('kind_of_report') == 'Stoning of Car' ? 'selected' : '' }}>Stoning of Car</option>
-              <option value="Complaint" {{ old('kind_of_report') == 'Complaint' ? 'selected' : '' }}>Complaint</option>
+              <option value="Trouble" {{ old('kind_of_report') == 'Trouble' ? 'selected' : '' }}>Trouble</option>
+              <option value="Late-Night Karaoke Disturbance" {{ old('kind_of_report') == 'Late-Night Karaoke Disturbance' ? 'selected' : '' }}>Late-Night Karaoke Disturbance</option>
+              <option value="Community Cleanliness" {{ old('kind_of_report') == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
+              <option value="Infrastructure Problems" {{ old('kind_of_report') == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option>
               <option value="Others" {{ old('kind_of_report') == 'Others' ? 'selected' : '' }}>Others</option>
             </select>
             @error('kind_of_report') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
