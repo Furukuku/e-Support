@@ -2,6 +2,10 @@
   --theme-color: #0E2C15;
 }
 
+.colored-toast.swal2-icon-success {
+  background-color: #33a54e !important;
+}
+
 .sticky-top {
   z-index: 9 !important;
 }
@@ -185,6 +189,74 @@
 
 .requested-docs-pagination > div > nav > ul > li > .page-link {
   color: var(--theme-color);
+}
+
+.requested-docs-tabs {
+  cursor: pointer;
+}
+
+.even-requested-docs-card-body,
+.odd-requested-docs-card-footer {
+  background-color: var(--theme-color);
+}
+
+.even-requested-docs-card-body.color {
+  background-color: initial;
+}
+
+.docs-form-header {
+  background-color: var(--theme-color);
+}
+
+.docs-form-header > div {
+  height: 50px;
+  width: 50px;
+}
+
+.docs-form-header > div > span {
+  color: var(--theme-color);
+}
+
+label[for="proof"] {
+  font-size: 13px;
+}
+
+.biz-clearance-form > button,
+.biz-clearance-form > div:last-child > button,
+.add-report-btn {
+  background-color: var(--theme-color);
+}
+
+.biz-clearance-form > button:hover,
+.add-report-btn:hover {
+  background-color: var(--theme-color);
+}
+
+.biz-clearance-form > .btn,
+.biz-clearance-form > div:last-child > .btn.report-update-btn,
+.add-report-btn.btn {
+  --bs-btn-active-bg: var(--theme-color);
+  border: none;
+}
+
+.update-profile-btn {
+  background-color: var(--theme-color) !important;
+  border: none;
+}
+
+.request-btn {
+  border: 1px var(--theme-color) solid !important;
+}
+
+.request-btn:hover,
+.request-btn:active {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+  color: #fff !important;
+}
+
+.update-profile-btn:active {
+  opacity: 0.8 !important;
 }
 
 
@@ -427,6 +499,14 @@
   }
 }
 
+@media (max-width: 767px) {
+  .profile-image-container {
+    display: flex;
+    gap: 2rem !important;
+    flex-direction: column !important;
+  }
+}
+
 
 @media (max-width: 730px){
   .home-middle-texts {
@@ -435,6 +515,18 @@
 
   .home-middle *:not(span) {
     font-size: 14px;
+  }
+
+  .clearance-header {
+    display: flex;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .clearance-header > div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

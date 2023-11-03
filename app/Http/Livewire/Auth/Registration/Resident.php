@@ -64,7 +64,7 @@ class Resident extends Component
         $this->validate([
             'profile_image' => 'required|image',
             'verification_image' => 'required|image',
-            'username' => 'required|string|unique:users|unique:businesses|unique:barangay_health_workers|unique:sub_admins|unique:admins|unique:businesses|min:4|max:20',
+            'username' => 'required|string|unique:users|unique:businesses|unique:barangay_health_workers|unique:sub_admins|unique:admins|min:4|max:20',
             'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|max:255|confirmed',
         ]);
 

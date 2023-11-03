@@ -37,6 +37,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('business.services') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'business.services') ? 'active' : '' }}">
+              <h5 class="m-0">Services</h5>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('business.profile') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'business.profile') ? 'active' : '' }}">
               <h5 class="m-0">Profile</h5>
             </a>
@@ -50,7 +55,7 @@
       </div>
       <div class="btn-group navbar-hide-items">
         <button type="button" class="btn btn-white bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="username">{{ auth()->guard('business')->user()->username }}</span>
+          <span id="user-username" class="username">{{ auth()->guard('business')->user()->username }}</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
           <li class="dropdown-item p-0">
@@ -73,25 +78,31 @@
         <img class="rounded-circle profile-picture" src="{{ Storage::url(auth()->guard('business')->user()->profile) }}" alt="profile_picture">
       </div>
       <div class="text-truncate">
-        <p class="m-0 text-truncate fw-semibold">{{ auth()->guard('business')->user()->username }}</p>
+        <p id="mobile-user-username" class="m-0 text-truncate fw-semibold">{{ auth()->guard('business')->user()->username }}</p>
       </div>
     </div>
     <div class="w-100">
       <ul class="p-4 sidebar-items">
         <li class="pb-3">
-          <a href="{{ route('business.home') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.home') ? 'text-primary' : 'text-dark' }}">
+          <a href="{{ route('business.home') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.home') ? 'text-success' : 'text-dark' }}">
             <span class="material-symbols-outlined">home</span>
             <span class="ps-2">Home</span>
           </a>
         </li>
         <li class="pb-3">
-          <a href="{{ route('business.profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.profile') ? 'text-primary' : 'text-dark' }}">
+          <a href="{{ route('business.services') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.services') ? 'text-success' : 'text-dark' }}">
+            <span class="material-symbols-outlined">home</span>
+            <span class="ps-2">Services</span>
+          </a>
+        </li>
+        <li class="pb-3">
+          <a href="{{ route('business.profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.profile') ? 'text-success' : 'text-dark' }}">
             <span class="material-symbols-outlined">manage_accounts</span>
             <span class="ps-2">Profile</span>
           </a>
         </li>
         <li class="pb-3">
-          <a href="{{ route('business.archives') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.archives') ? 'text-primary' : 'text-dark' }}">
+          <a href="{{ route('business.archives') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.archives') ? 'text-success' : 'text-dark' }}">
             <span class="material-symbols-outlined">inventory_2</span>
             <span class="ps-2">Archives</span>
           </a>

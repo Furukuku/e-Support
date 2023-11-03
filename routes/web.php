@@ -247,11 +247,20 @@ Route::middleware('business.auth:business', 'company-mobile.verified', 'company.
 
         Route::post('/logout', [LogoutController::class, 'businessLogout'])->name('logout');
         Route::view('/home', 'business.business-home')->name('home');
+        Route::view('/services', 'business.business-services')->name('services');
         Route::view('/profile', 'business.business-profile')->name('profile');
         Route::view('/archives', 'business.business-archives')->name('archives');
 
         Route::view('/post-job', 'business.jobs.post-job')->name('post-job');
         Route::view('/view-job/{id}', 'business.jobs.view-job')->name('view-job');
+
+        Route::view('/business-clearance', 'business.business-request-clearance')->name('biz-clearance');
+        Route::post('/business-clearance', [BusinessController::class, 'storeBizClearance'])->name('validate.biz-clearance');
+
+        Route::get('/edit/documents/{id}/{token}', [BusinessController::class, 'editDocs'])->name('edit.docs');
+        Route::patch('/update/business-clearance/{id}', [BusinessController::class, 'updateBizClearance'])->name('update.biz-clearnce');
+
+        Route::get('/qr-code/{token}', [BusinessController::class, 'showQr'])->name('qr-code');
     });
 });
 /*------------------------- End of Business Routes -------------------------*/

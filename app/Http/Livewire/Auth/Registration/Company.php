@@ -28,9 +28,9 @@ class Company extends Component
             'suffix_name' => 'nullable|string|max:255',
         ],
         2 => [
-            'email' => 'required|email|unique:businesses|max:255',
+            'email' => 'required|email|unique:businesses|unique:users|unique:barangay_health_workers|unique:sub_admins|unique:admins|max:255',
             'mobile' => 'required|unique:businesses|digits:12',
-            'business_address' => 'required|string|max:2',
+            'business_address' => 'required|string|max:255',
             'business_clearance' => 'required|image',
             'business_name' => 'required|string|max:255',
             'business_nature' => 'required|string|max:255',
@@ -47,9 +47,6 @@ class Company extends Component
 
     public function nextPage()
     {
-        // if(isset($this->contact)){
-        //     $this->mobile = 63 . $this->contact;
-        // }
         if($this->currentPage === 2){
             $this->mobile = 63 . $this->contact;
         }
@@ -66,11 +63,9 @@ class Company extends Component
     {
         $this->validate([
             'profile_image' => 'required|image',
-            'username' => 'required|string|unique:users|unique:businesses|max:255',
-            'password' => 'required|string|min:8|max:255|confirmed',
+            'username' => 'required|string|unique:users|unique:businesses|unique:barangay_health_workers|unique:sub_admins|unique:admins|min:4|max:20',
+            'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|max:255|confirmed',
         ]);
-
-
 
         // $this->currentPage++;
 

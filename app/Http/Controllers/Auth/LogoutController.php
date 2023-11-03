@@ -60,7 +60,7 @@ class LogoutController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect()->route('welcome');
+        return redirect()->route('resident.login');
     }
 
     public function residentLogout(Request $request)

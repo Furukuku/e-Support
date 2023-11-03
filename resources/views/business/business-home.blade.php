@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="py-5">
+  <div>
     
     <div class="d-flex justify-content-between align-items-center py-4 px-5 my-5 bg-success bg-opacity-25 home-middle">
       <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
