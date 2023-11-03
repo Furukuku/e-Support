@@ -4,10 +4,31 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function generateReportBizClearances($from, $to)
+    {
+        if($from > $to){
+            return redirect()->route('admin.docs.biz-clearances');
+        }
+
+        $clearances = Document::with('bizClearance')
+            ->where('is_released', true)
+            ->where('type', 'Business Clearance')
+            ->where('status', 'Released')
+            ->whereHas('bizClearance', function($query) use ($from, $to) {
+                $query->whereBetween('date_issued', [$from . ' 00:00:00', $to . ' 23:59:59']);
+            })
+            ->get();
+
+        return view('admin.admin-business-report', [
+            'clearances' => $clearances,
+            'from' => $from,
+            'to' => $to,
+        ]);
+    }
+
     public function markIndigency()
     {
         auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document', 'Indigency')->markAsRead();

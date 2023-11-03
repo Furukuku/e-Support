@@ -12,7 +12,7 @@
         @else
           <img class="rounded-circle border object-fit-cover" src="{{ Storage::url($profile_img) }}" alt="profile_img" style="width: 6rem; height: 6rem;">
         @endif
-        <p class="m-0 fw-semibold">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</p>
+        <p class="m-0 fw-semibold">{{ $business_name }}</p>
         <input type="file" id="profile-input" wire:model="profile_image" class="d-none">
       </div>
       <div>

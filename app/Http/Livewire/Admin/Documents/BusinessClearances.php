@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\FamilyMember;
 use Livewire\WithPagination;
 use App\Rules\CheckIfValidResident;
+use App\Rules\DateInterval;
 use Illuminate\Support\Facades\Auth;
 
 class BusinessClearances extends Component
@@ -40,6 +41,9 @@ class BusinessClearances extends Component
     public $clearance_no;
 
     public $doc_id;
+
+    // properties for generating report
+    public $from, $to;
 
     public $ctc_container = 'd-none';
 
@@ -97,8 +101,25 @@ class BusinessClearances extends Component
             'issued_on_update',
             'fee',
             'clearance_no_update',
-            'ctc_container'
+            'ctc_container',
+            'from',
+            'to'
         );
+    }
+
+    public function generateReport()
+    {
+        $this->validate([
+            'from' => ['required', 'date'],
+            'to' => ['required', 'date', new DateInterval($this->from)]
+        ]);
+
+        $this->dispatchBrowserEvent('close-modal');
+
+        return redirect()->route('admin.generate-report.biz-clearance', [
+                'from' => $this->from,
+                'to' => $this->to
+            ]);
     }
 
     public function getDocDetails($decodedText)

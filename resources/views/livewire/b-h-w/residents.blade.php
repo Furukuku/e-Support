@@ -1,34 +1,5 @@
 <div class="d-flex flex-column align-items-center justify-content-center pb-5 pt-4">
 
-  {{-- <div class="row gap-5 justify-content-center w-100 mb-5 pt-5 card-container">
-    <div class="col-md-5 mt-3 card-counter">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex justify-content-end mb-3">
-            <div class="rounded-circle card-icon">
-              <span class="material-symbols-outlined text-white">family_restroom</span>
-            </div>
-          </div>
-          <h3 class="m-0">{{ $total_family }}</h3>
-          <p class="m-0">Families</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-5 mt-3 card-counter">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex justify-content-end mb-3">
-            <div class="rounded-circle card-icon">
-              <span class="material-symbols-outlined text-white">groups</span>
-            </div>
-          </div>
-          <h3 class="m-0">{{ $residents }}</h3>
-          <p class="m-0">Residents</p>
-        </div>
-      </div>
-    </div>
-  </div> --}}
-
   <div class="w-100 px-4 d-flex justify-content-between">
     <div class="d-flex align-items-center gap-5">
       <a href="{{ route('bhw.generate-report.residents') }}" class="btn btn-primary shadow print-report-btn">

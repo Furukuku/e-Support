@@ -147,6 +147,7 @@ h5 {
   @page {
     margin: 0;
     padding: 0;
+    size: portrait;
   }
 
   .doc-container {
@@ -154,7 +155,7 @@ h5 {
   }
 
   body {
-    padding: 0;
+    padding: 0 !important;
   }
 
   body * {

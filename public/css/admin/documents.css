@@ -48,3 +48,8 @@
   background-color: #FFC03D;
   color: #fff;
 }
+
+.print-report-btn {
+  background-color: #5a315c !important;
+  border-color: #5a315c !important;
+}

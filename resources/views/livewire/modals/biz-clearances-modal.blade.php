@@ -1,3 +1,32 @@
+{{-- Generate Report Modal --}}
+<div wire:ignore.self class="modal fade" id="generateReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generateReportLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-bg py-2">
+        <h1 class="modal-title fs-5" id="qrCodeScannerLabel">Generate Report</h1>
+        <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
+          cancel
+        </span>
+      </div>
+      <div class="modal-body p-4">
+        <div class="mb-3">
+          <label for="from" class="form-label">From</label>
+          <input type="date" id="from" wire:model.defer="from" class="form-control">
+          @error('from') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+        </div>
+        <div class="mb-3">
+          <label for="to" class="form-label">To</label>
+          <input type="date" id="to" wire:model.defer="to" class="form-control">
+          @error('to') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center border-0">
+        <button type="button" wire:loading.attr="disabled" wire:click="generateReport" class="btn btn-warning rounded-pill px-4">Generate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {{-- Scanner --}}
 <div wire:ignore class="modal fade" id="qrCodeScanner" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="qrCodeScannerLabel" aria-hidden="true">

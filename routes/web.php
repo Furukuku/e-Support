@@ -88,6 +88,7 @@ Route::middleware('admin.auth:admin')->group(function() {
         Route::view('/archives', 'admin.admin-archives')->name('archives');
         // Route::get('/account', [AdminController::class, 'account'])->name('account');
         Route::view('/account', 'admin.admin-account')->name('account');
+        Route::get('/generate-report/business-clearances/{from}/{to}', [AdminController::class, 'generateReportBizClearances'])->name('generate-report.biz-clearance');
         
         Route::name('profile.')->group(function(){
             // Route::get('/officials', [AdminController::class, 'brgyOfficials'])->name('officials');
@@ -178,7 +179,7 @@ Route::middleware(['sub-admin.auth:sub-admin', 'bhw:bhw'])->group(function() {
             Route::view('/bhw-accounts', 'bhw.bhw-bhw-accounts')->name('bhw-accounts');
         });
 
-        Route::get('/generate-report/residents', [ResidentController::class, 'generateReportResidents'])->name('generate-report.residents');
+        Route::get('/generate-report/residents', [BHWController::class, 'generateReportResidents'])->name('generate-report.residents');
     });
 });
 
