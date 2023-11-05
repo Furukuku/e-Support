@@ -6,11 +6,11 @@
     <div class="w-50 nancayasan-img"></div>
 
     <div class="w-50 d-flex justify-content-center align-items-center py-4 position-relative login-form-container">
-      <a href="{{ route('welcome') }}" class="text-dark back-btn">
+      {{-- <a href="{{ route('welcome') }}" class="text-dark back-btn">
         <span class="material-symbols-outlined">
           arrow_back_ios
         </span>
-      </a>
+      </a> --}}
 
       <div class="w-50">
         <div class="d-flex flex-column align-items-center w-100">

@@ -1,6 +1,6 @@
 <div class="py-2">
 
-  <div class="row gap-2 justify-content-center p-2">
+  <div class="row w-100 gap-2 justify-content-center p-2">
     @forelse ($myToPickupDocs as $index => $doc)
       @if ($doc->type === 'Barangay Clearance')
         <div wire:poll.60s class="col-auto mb-3">

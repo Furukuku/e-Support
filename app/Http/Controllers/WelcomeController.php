@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangayInfo;
 use App\Models\BrgyOfficial;
 use App\Models\Place;
 use App\Models\Program;
@@ -51,8 +52,12 @@ class WelcomeController extends Controller
     public function aboutUs()
     {
         $captain = BrgyOfficial::where('position', 'Captain')->first();
+        $brgyInfos = BarangayInfo::first();
 
-        return view('about-us', ['captain' => $captain]);
+        return view('about-us', [
+            'captain' => $captain,
+            'brgyInfos' => $brgyInfos,
+        ]);
     }
 
     public function welcome()

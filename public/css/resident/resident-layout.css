@@ -90,13 +90,13 @@
   --bs-dropdown-link-active-bg: #e0e0e0;
 }
 
-#jobs-container {
+/* #jobs-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
-  /* box-shadow: inset 0 -10px 5px black; */
-}
+  box-shadow: inset 0 -10px 5px black;
+} */
 
-#jobs-container::-webkit-scrollbar {
+/* #jobs-container::-webkit-scrollbar {
   display: none;
 }
 
@@ -112,24 +112,24 @@
 #scroll-right:hover {
   height: 42px;
   width: 42px;
-}
+} */
 
-.job-cards {
+/* .job-cards {
   min-width: 20rem; 
   width: 20rem;
   max-width: 20rem;
   max-height: 10rem;
   height: 10rem;
   min-height: 10rem;
-}
+} */
 
-.job-cards > div > div:first-child {
+/* .job-cards > div > div:first-child {
   width: 40%;
 }
 
 .job-cards > div > div:last-child {
   width: 60%;
-}
+} */
 
 /* .job-card-img {
   object-fit: scale-down !important;

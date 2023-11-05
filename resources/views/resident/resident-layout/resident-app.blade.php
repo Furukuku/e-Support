@@ -10,6 +10,8 @@
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,1,0" />
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
   <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}"> --}}
 
@@ -158,6 +160,8 @@
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   
   <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   
   <script src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
   
@@ -165,6 +169,6 @@
   
   @stack('chatbot-js')
 
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script type="module" src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

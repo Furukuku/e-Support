@@ -22,15 +22,15 @@
             <div>
               <div class="d-flex align-items-center gap-4 mb-2">
                 <span class="material-symbols-outlined">mail</span>
-                <p class="m-0">bgrynancayasan@gmail.com</p>
+                <p class="m-0">{{ !is_null($brgyInfos) ? $brgyInfos->email : '' }}</p>
               </div>
               <div class="d-flex align-items-center gap-4 mb-2">
                 <span class="material-symbols-outlined">phone_iphone</span>
-                <p class="m-0">0916 532 2574</p>
+                <p class="m-0">{{ !is_null($brgyInfos) ? $brgyInfos->phone_no : '' }}</p>
               </div>
               <div class="d-flex align-items-center gap-4 mb-2">
                 <span class="material-symbols-outlined">tty</span>
-                <p class="m-0">(02) 8355-8341 / (02) 8405-1247</p>
+                <p class="m-0">{{ !is_null($brgyInfos) ? $brgyInfos->tel_no : '' }}</p>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@
         <h4 class="mb-3">History of Barangay Nancayasan</h4>
         <hr>
       </div>
-      <div class="row mb-3 gx-5">
+      <div class="row mb-3">
         <div class="d-flex gap-3">
           <div id="history-btn" class="rounded py-2 px-4 bg-secondary text-white" style="background-color: #dfdfdf; cursor: pointer;">
             <p class="m-0">History</p>
@@ -54,15 +54,13 @@
         </div>
       </div>
       <div id="history" class="row">
-        <p>A big tree with wide spreading branches grew in the central part of the locality that people who had something to do work under its shade. Even herders of horse, carabao, and cows grouped under the tree to play and rest, people  split and planned rough pieces of lumber. At last bamboo shaving piled higher under the tree and left to be blown the wind. It was therefore referred to as NAGCAYASAN which was later change to NANCAYASAN. As Pangasinan word equivalent. It was founded In 1890. The first settlers were those of the Cuadro, Jacob, Goroza, Estrella, Andres, Bravo, Umipig, Cabacungan, Gutierrez, Ramos, Malbog, Estrada and Antolin Clans. Ambrosio Catubig was the first Teniente del Barrio. The three divisions of the barrio are Narvacan, Bantog and Casantacruzan, named after the towns where the first inhabitants came from Ilocos Sur.</p>
-        <p>It raises rice, corn, Mango, vegetables and other products like bamboo and coconuts. The people also raises chickens and pigs. Some are engaged in milking rice, carpentry, waving of barac-barac, traveling bag and slippers white some are good auto mechanics.</p>
-        <p>The establishments of Rural High School in the place in 1965 is a great boon to education in the community.</p>
+        <p>{!! !is_null($brgyInfos) ? nl2br(e($brgyInfos->history)) : '' !!}</p>
       </div>
       <div id="mission" class="row d-none">
-        <p>Buong pusong gagawin ang aming sinumpaang tungkulin na maghandog ng makatotohanan at maka diyos na serbisyo sa pamamagitan ng paglapit sa mamamayan ng kanilang pangunahing pangangailangan, sa kalusugan, edukasyon, kalinisan, seguridad, kaayusan at maraming programang pangkabuhayan tungo sa pagsugpo ng kahirapan </p>
+        <p>{!! !is_null($brgyInfos) ? nl2br(e($brgyInfos->mission)) : '' !!}</p>
       </div>
       <div id="vision" class="row d-none">
-        <p><em>Ang tapat na panglilingkod sa barangay at pagkakaisa ng mamamayan ay posibleng marating natin ang hinahangad na ginhawa ng buhay.</em></p>
+        <p><em>{!! !is_null($brgyInfos) ? nl2br(e($brgyInfos->vision)) : '' !!}</em></p>
       </div>
     </div>
   </main>

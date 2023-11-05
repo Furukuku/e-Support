@@ -1,110 +1,188 @@
-const staticCache = 'e-Support-static-v2';
-const dynamicCache = 'e-Support-dynamic-v2';
+importScripts(
+  'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js'
+);
+// workbox.setConfig({debug: false});
 
-const assets = [
-  '/login',
-  'fallback.blade.php',
-  'css/auth/users.css',
-  'css/resident/resident-layout.css',
-  'images/logos/brgy-nancayasan-logo.png',
-  'images/welcome-bg.png',
-  'js/resident/resident-sidebar.js',
-  'js/app.js',
-  'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-  'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,1,0',
-  'https://fonts.gstatic.com/s/materialsymbolsoutlined/v141/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY43zj-jCxv3fzvRNU22ZXGJpEpjC_1n-q_4MrImHCIJIZrDDxHOej.woff2',
-  'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
-  'https://cdn.jsdelivr.net/npm/sweetalert2@11',
-  'https://code.jquery.com/jquery-3.7.0.min.js',
-  'https://kit.fontawesome.com/0541fe1713.js'
-];
+const recipes = workbox.recipes;
+const precaching = workbox.precaching;
+const routing = workbox.routing;
+const strategies = workbox.strategies;
+const expiration = workbox.expiration;
+const cacheableResponse = workbox.cacheableResponse;
+const backgroundSync = workbox.backgroundSync;
+
+const queue = new backgroundSync.Queue('e-Support-queue');
 
 
-// cache size limit function
-// const limitCacheSize = (name, size) => {
-//   cache.open(name).then(cache => {
-//     cache.keys().then(keys => {
-//       if(keys.length > size){
-//         cache.delete(keys[0]).then(limitCacheSize(name, size));
-//       }
-//     })
-//   });
-// };
+// precaching assets
+precaching.precacheAndRoute([
+  // {url: '/login', revision: '383676'},
+  {url: '/offline.html', revision: null},
+  {url: '/images/fallback-icons/no-wifi.png', revision: null},
+  {url: '/css/auth/users.css', revision: null},
+  {url: 'css/resident/resident-layout.css', revision: null},
+  {url: 'images/logos/brgy-nancayasan-logo.png', revision: null},
+  {url: 'images/welcome-bg.png', revision: null},
+  {url: 'js/resident/resident-sidebar.js', revision: null},
+  {url: 'js/app.js', revision: null},
+]);
 
 
-// install service worker
-self.addEventListener("install", event => {
-  // console.log("Service worker installed", event);
-  event.waitUntil(
-    caches.open(staticCache).then(cache => {
-      return cache.addAll(assets);
+// routing.registerRoute(
+//   ({url}) => 
+//     url.origin === 'https://fonts.googleapis.com' || 
+//     url.origin === 'https://cdn.jsdelivr.net' ||
+//     url.origin === 'https://code.jquery.com' ||
+//     url.origin === 'https://kit.fontawesome.com',
+//   new strategies.StaleWhileRevalidate({
+//     cacheName: 'links',
+//   })
+// );
+
+// caching cdns and links
+routing.registerRoute(
+  ({url}) => 
+    url.origin === 'https://fonts.googleapis.com' || 
+    url.origin === 'https://cdn.jsdelivr.net' ||
+    url.origin === 'https://code.jquery.com' ||
+    url.origin === 'https://kit.fontawesome.com' ||
+    url.origin === 'https://fonts.gstatic.com',
+  new strategies.StaleWhileRevalidate({
+    cacheName: 'cdn-links',
+    plugins: [
+      new cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new expiration.ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+      }),
+    ]
+  })
+);
+
+
+
+// POST requests
+let networkOnly = new strategies.NetworkOnly({
+  plugins: [
+    new backgroundSync.BackgroundSyncPlugin(queue,{
+      maxRetentionTime: 24 * 60, // Retry for max of 24 Hours
     })
-  );
+  ],
 });
 
-// activates service worker
-self.addEventListener("activate", event => {
-  // console.log("Service worker activated", event);
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cache => {
-          if(cache !== staticCache && cache !== dynamicCache){
-            console.log('Cleaning old caches.');
-            return caches.delete(cache);
-          }
-        })
-      );
-      // return Promise.all(keys
-      //   .filter(key => key !== staticCache && key !== dynamicCache)
-      //   .map(key => caches.delete(key)));
-    })
-  );
+const postHandler = async (args) => {
+  try {
+    const response = await networkOnly.handle(args);
+    return response || await caches.match('/offline.html');
+  } catch (error) {
+    return await caches.match('/offline.html');
+  }
+};
+
+routing.registerRoute(
+  ({request}) => request.method === 'POST' || request.method === 'PATCH',
+  postHandler,
+  'POST'
+);
+
+routing.registerRoute(
+  ({request}) => request.destination === 'image',
+  new strategies.CacheFirst({
+    cacheName: 'images',
+    plugins: [
+      new cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new expiration.ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+      }),
+    ]
+  })
+);
+
+
+// routing.registerRoute(
+//   ({url}) => 
+//     url.pathname === '/login-validate' || 
+//     url.pathname === '/forgotPassword' || 
+//     url.pathname === '/resetPassword' || 
+//     url.pathname === '/resident/logout' || 
+//     url.pathname === '/resident/business-clearance' || 
+//     url.pathname === '/resident/indigency' || 
+//     url.pathname === '/resident/brgy-clearance' ||
+//     url.pathname === '/resident/report',
+//   async ({url, request, event, params}) => {
+//     fetch(request).then(response => {
+//       console.log(request);
+//       return response;
+//     });
+//   },
+//   'POST'
+// );
+
+
+// GET requests
+let networkFirst = new strategies.NetworkFirst({
+  cacheName: 'e-Support-responses',
+  plugins: [
+    new cacheableResponse.CacheableResponsePlugin({
+      statuses: [0, 200],
+    }),
+    new expiration.ExpirationPlugin({
+      maxEntries: 50,
+      maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+    }),
+  ]
 });
 
-// fetch requests
-// self.addEventListener("fetch", event => {
-//   // console.log("URL requested:", event.request);
-//   // if (event.request.url.indexOf( '/resident/logout' ) !== -1 ) {
-//   //   return false;
-//   // }
-//   event.respondWith(
-//     fetch(event.request)
-//       .then(res => {
-//         const resClone = res.clone();
-//         caches.open(dynamicCache).then(cache => {
-//           cache.put(event.request, resClone);
-//         });
-//         return res;
-//       })
-//       .catch(err => {
-//         caches.match(event.request).then(res => {
-//           return res;
-//         }).catch(err => {
-//           return caches.match('fallback.blade.php');
-//         });
-//       })
-//   );
-// });
+const getHandler = async (args) => {
+  try {
+    const response = await networkFirst.handle(args);
+    return response || await caches.match('/offline.html');
+  } catch (error) {
+    return await caches.match('/offline.html');
+  }
+};
 
 
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    fetch(event.request).then(response => {
-      return caches.open(dynamicCache).then(cache => {
-        if(event.request.method !== "POST"){
-          cache.put(event.request, response.clone());
-        }
-        return response;
-      });
-    })
-    .catch(error => {
-      caches.match(event.request).then(response => {
-        return response;
-      })
-      .catch(err => {
-        return caches.match('fallback.blade.php');
-      });
-    })
-  );
-});
+routing.registerRoute(
+  ({url, request}) => request.method === 'GET',
+  getHandler,
+    // (
+    //   url.pathname.startsWith('/resident/') || 
+    //   url.pathname === '/register-resident' ||
+    //   url.pathname === '/privacy-policy' ||
+    //   url.pathname === '/terms-and-conditions' ||
+    //   url.pathname === '/forgot-password' ||
+    //   url.pathname === '/register-company' ||
+    //   url.pathname.startsWith('/business/')
+    // ) && 
+    // (
+      // request.method === 'GET'
+    // ),
+    // (
+    //   url.pathname !== '/login-validate' || 
+    //   url.pathname !== '/forgotPassword' || 
+    //   url.pathname !== '/resetPassword' || 
+    //   url.pathname !== '/resident/logout' || 
+    //   url.pathname !== '/resident/business-clearance' || 
+    //   url.pathname !== '/resident/indigency' || 
+    //   url.pathname !== '/resident/brgy-clearance' ||
+    //   url.pathname !== '/resident/report'
+    // ),
+  // new strategies.NetworkFirst({
+  //   cacheName: 'e-Support-responses',
+  //   plugins: [
+  //     new cacheableResponse.CacheableResponsePlugin({
+  //       statuses: [0, 200],
+  //     }),
+  //     new expiration.ExpirationPlugin({
+  //       maxEntries: 50,
+  //       maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+  //     }),
+  //   ]
+  // }),
+);

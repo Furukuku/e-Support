@@ -66,6 +66,12 @@
             <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
             @error('description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
+          <div>
+            <p>Emergency Hotlines</p>
+            <p>Emergency Medical Service: <a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
+            <p>Philippine National Police: <a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
+            <p>Bureau of Fire Protection: <a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
+          </div>
           <button type="submit" id="submit-btn" class="btn text-white my-4 rounded-pill px-4">Submit</button>
         </form>
       </div>
@@ -100,10 +106,14 @@
     report.addEventListener('change', () => {
       if(report.value === 'Others'){
         other.classList.remove('d-none');
-        othersErr.classList.remove('d-none');
+        if(othersErr){
+          othersErr.classList.remove('d-none');
+        }
       }else{
         other.classList.add('d-none');
-        othersErr.classList.add('d-none');
+        if(othersErr){
+          othersErr.classList.add('d-none');
+        }
         other.value = '';
       }
     });

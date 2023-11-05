@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\BarangayClearance;
 use App\Models\BusinessClearance;
+use App\Models\EmergencyHotline;
 use App\Models\Indigency;
 use App\Models\Job;
 use App\Models\Place;
@@ -213,6 +214,13 @@ class ResidentController extends Controller
         }
 
         return redirect()->route('resident.services');
+    }
+
+    public function addReport()
+    {
+        $hotlines = EmergencyHotline::first();
+
+        return view('resident.reports.add-report', ['hotlines' => $hotlines]);
     }
 
     public function updateIndigency(Request $request, $id)

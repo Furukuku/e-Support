@@ -231,14 +231,14 @@
             </div>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        {{-- <li class="nav-item text-white sidebar-list">
           <a href="{{ route('admin.account') }}" id="account" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.account') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">manage_accounts</span>
               <p class="col-9 m-0 ps-0">Account</p>
             </div>
           </a>
-        </li>
+        </li> --}}
       </ul>
     </div>
     <div id="b-sidebar" class="block-sidebar"></div>
@@ -257,9 +257,15 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li class="dropdown-item p-0">
+                <a href="{{ route('admin.account') }}" class="btn btn-transparent border-0 w-100 logout-btn">Account</a>
+              </li>
+              <li class="dropdown-item p-0">
+                <a href="{{ route('admin.settings') }}" class="btn btn-transparent border-0 w-100 logout-btn">Settings</a>
+              </li>
+              <li class="dropdown-item p-0">
                 <form action="{{ route('admin.logout') }}" method="POST">
                   @csrf
-                  <button type="submit" class="bg-transparent border-0 w-100 logout-btn">Logout</button>
+                  <button type="submit" class="btn btn-transparent border-0 w-100 logout-btn">Logout</button>
                 </form>
               </li>
             </ul>

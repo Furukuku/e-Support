@@ -5,42 +5,202 @@
   <div class="{{ $jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true ? 'py-5' : 'py-4' }}">
 
     @if ($jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true)
-      <div class="position-relative mx-5 home-start">
-        <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 end-0 translate-middle-y d-none" id="scroll-right">
-          <span class="material-symbols-outlined">
-          arrow_forward
-          </span>
-        </div>
-        <div class="d-flex justify-content-center align-items-center border bg-white shadow rounded-circle position-absolute z-1 top-50 start-0 translate-middle-y d-none" id="scroll-left">
-          <span class="material-symbols-outlined">
-          arrow_back
-          </span>
-        </div>
-        <div>
-          <h6>RECOMMENDED JOBS</h6>
-        </div>
-        <div id="jobs-container" class="d-flex flex-nowrap gap-5 p-2 overflow-x-auto" style="width: 100%;">
-          @foreach ($jobs as $job)
-            <a href="{{ route('resident.view-job', ['job' => $job]) }}" style="text-decoration: none;">
-              <div class="card mb-3 shadow-sm job-cards">
+      <div class="w-100 px-3">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            @foreach ($jobs as $job)
+                <div class="card swiper-slide mb-3 shadow-sm job-cards">
+                  <a class="text-dark" href="{{ route('resident.view-job', ['job' => $job]) }}" style="text-decoration: none;">
+                    <div class="d-flex align-items-center h-100">
+                      <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                        <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/job_hunt.svg') : Storage::url($job->business_img) }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                      </div>
+                      <div class="h-100" style="width: 60%;">
+                        <div class="card-body h-100 d-flex flex-column justify-content-between">
+                          <div class="">
+                            <h5 class="card-title">{{ $job->title }}</h5>
+                            <p class="card-text text-truncate">{{ $job->business->biz_name }}</p>
+                          </div>
+                          <p class="card-text"><small class="text-body-secondary">{{ $job->location }}</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+            @endforeach
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
-                    <img src="{{ is_null($job->business_img) ? asset('images/Illustrations/job_hunt.svg') : Storage::url($job->business_img) }}" class="img-fluid rounded-start job-card-img" alt="...">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
                   </div>
                   <div class="h-100" style="width: 60%;">
                     <div class="card-body h-100 d-flex flex-column justify-content-between">
                       <div class="">
-                        <h5 class="card-title">{{ $job->title }}</h5>
-                        <p class="card-text text-truncate">{{ $job->business->biz_name }}</p>
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
                       </div>
-                      <p class="card-text"><small class="text-body-secondary">{{ $job->location }}</small></p>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          @endforeach
+              </a>
+            </div>
+  
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+  
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+              <a href="#" style="text-decoration: none;">
+                <div class="d-flex align-items-center h-100">
+                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
+                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
+                  </div>
+                  <div class="h-100" style="width: 60%;">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                      <div class="">
+                        <h5 class="card-title">Sample</h5>
+                        <p class="card-text text-truncate">Sample</p>
+                      </div>
+                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+  
+          </div>
+          {{-- <div class="swiper-pagination"></div> --}}
         </div>
+        @if ($jobs->count() > 10)
+          <div class="d-flex justify-content-end">
+            <a href="{{ route('resident.jobs') }}" class="text-dark">View all</a>
+          </div>
+        @endif
       </div>
     @endif
   
@@ -58,11 +218,11 @@
       </div>
     </div>
 
-    <div class="mx-5 home-end">
+    <div class="mx-5 d-flex flex-column align-items-center home-end">
       <div class="mb-4">
         <h6 class="text-center">PLACES</h6>
       </div>
-      <div class="row gap-4 justify-content-center p-2">
+      <div class="row w-100 gap-4 justify-content-center p-2">
         @forelse ($places as $place)
           <div class="card shadow-sm mb-4 px-0 places-card" style="width: 18rem; cursor: pointer;">
             <a href="{{ route('resident.place', ['place' => $place]) }}" class="text-dark" style="text-decoration: none;">
@@ -85,8 +245,42 @@
 
 @if ($jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true)
   @section('scripts')
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 'auto',
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      // breakpoints: {
+      //   0: {
+      //     slidesPerView: 1,
+      //     spaceBetween: 20
+      //   },
+      //   600: {
+      //     slidesPerView: 3,
+      //     spaceBetween: 10
+      //   },
+      //   1200: {
+      //     slidesPerView: 4,
+      //     spaceBetween: 30
+      //   },
+      //   2000: {
+      //     slidesPerView: 6,
+      //     spaceBetween: 50
+      //   },
+      // },
+      // pagination: {
+      //   el: ".swiper-pagination",
+      //   clickable: true,
+      // },
+    });
+  </script>
 
-    <script>
+  
+
+    {{-- <script>
 
       const scrollRightBtn = document.getElementById('scroll-right');
       const scrollLeftBtn = document.getElementById('scroll-left');
@@ -128,7 +322,7 @@
         }
       }
 
-    </script>
+    </script> --}}
 
   @endsection
 @endif

@@ -45,9 +45,9 @@ Route::middleware(['guest:web', 'guest:business'])->group(function(){
     Route::view('/register-company', 'auth.users.register-company')->name('company.register');
 
     Route::view('/forgot-password', 'auth.users.forgot-password')->name('users.forgot-password');
-    Route::post('/forgot-password', [ResetPasswordController::class, 'sendLink'])->name('users.password-reset.send-link');
+    Route::post('/forgotPassword', [ResetPasswordController::class, 'sendLink'])->name('users.password-reset.send-link');
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPasswordForm'])->name('password.reset');
-    Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
+    Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 });
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome'); // welcome route
@@ -88,6 +88,8 @@ Route::middleware('admin.auth:admin')->group(function() {
         Route::view('/archives', 'admin.admin-archives')->name('archives');
         // Route::get('/account', [AdminController::class, 'account'])->name('account');
         Route::view('/account', 'admin.admin-account')->name('account');
+        Route::view('/settings', 'admin.admin-settings')->name('settings');
+
         Route::get('/generate-report/business-clearances/{from}/{to}', [AdminController::class, 'generateReportBizClearances'])->name('generate-report.biz-clearance');
         
         Route::name('profile.')->group(function(){
@@ -226,11 +228,12 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
         Route::patch('/update/business-clearance/{id}', [ResidentController::class, 'updateBizClearance'])->name('update.biz-clearnce');
         Route::patch('/update/indigency/{id}', [ResidentController::class, 'updateIndigency'])->name('update.indigency');
 
-        Route::view('/add-report', 'resident.reports.add-report')->name('add-report');
+        Route::get('/add-report', [ResidentController::class, 'addReport'])->name('add-report');
         Route::post('/report', [ResidentController::class, 'report'])->name('report');
         Route::get('/report/{report}', [ResidentController::class, 'viewReport'])->name('view.report');
         Route::patch('/update-report/{report}', [ResidentController::class, 'updateReport'])->name('update-report');
 
+        Route::view('/jobs', 'resident.resident-jobs')->name('jobs');
         Route::get('/job/{job}', [ResidentController::class, 'viewJob'])->name('view-job');
 
         Route::view('/family-profile', 'resident.resident-family-profile')->middleware('resident.fam-profile')->name('family-profile');

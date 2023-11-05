@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center py-5">
   
   <div class="bg-warning pt-2 px-4 rounded account-header shadow">
-    <h2>Account Settings</h2>
+    <h2>Account</h2>
   </div>
   <div class="container bg-light rounded p-5 shadow account-details">
     <div class="row justify-content-between px-4">

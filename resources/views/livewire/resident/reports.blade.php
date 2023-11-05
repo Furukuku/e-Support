@@ -1,4 +1,4 @@
-<div class="mx-5 mb-4 home-end report-list">
+<div class="mx-3 mb-4 home-end report-list">
   <div>
     <h6 class="text-center">YOUR REPORTED CASES</h6>
   </div>

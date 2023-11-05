@@ -75,7 +75,6 @@
 
       window.addEventListener('focus', () => {
         if(chatBox.classList.contains('show')){
-          console.log('hello');
           qField.focus();
         }
       });

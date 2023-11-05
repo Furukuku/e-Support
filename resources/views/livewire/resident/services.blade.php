@@ -2,11 +2,11 @@
 
   <div>
     @if ($services_tab === 1)
-      <div class="mx-5 services-start">
+      <div class="mx-3 d-flex flex-column align-items-center services-start">
         <div>
           <h6>REQUEST DOCUMENTS</h6>
         </div>
-        <div class="row gap-2 justify-content-center p-2">
+        <div class="row w-100 gap-2 justify-content-center p-2">
           <div class="col-auto mb-4">
             <div class="card shadow-sm docs-card">
               <div class="card-body px-4">

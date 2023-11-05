@@ -1,4 +1,4 @@
-<div class="mx-5 mb-4 home-end request-list">
+<div class="mx-3 mb-4 home-end request-list">
   <div>
     <h6 class="text-center">YOUR REQUEST LIST</h6>
   </div>
