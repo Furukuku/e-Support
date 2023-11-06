@@ -2,6 +2,14 @@
 
 @section('content')
 
-  <h1>Dashboard</h1>
+  @livewire('sub-admin.dashboard')
+
+@endsection
+
+@section('script')
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  @stack('script')
 
 @endsection

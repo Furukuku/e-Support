@@ -9,7 +9,7 @@
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             @foreach ($jobs as $job)
-                <div class="card swiper-slide mb-3 shadow-sm job-cards">
+                <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
                   <a class="text-dark" href="{{ route('resident.view-job', ['job' => $job]) }}" style="text-decoration: none;">
                     <div class="d-flex align-items-center h-100">
                       <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -28,7 +28,7 @@
                   </a>
                 </div>
             @endforeach
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -47,7 +47,7 @@
               </a>
             </div>
   
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -66,7 +66,7 @@
               </a>
             </div>
   
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -84,7 +84,7 @@
                 </div>
               </a>
             </div>
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -102,7 +102,7 @@
                 </div>
               </a>
             </div>
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -120,7 +120,7 @@
                 </div>
               </a>
             </div>
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -138,7 +138,7 @@
                 </div>
               </a>
             </div>
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -156,7 +156,7 @@
                 </div>
               </a>
             </div>
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
@@ -174,7 +174,7 @@
                 </div>
               </a>
             </div>
-            <div class="card swiper-slide mb-3 shadow-sm job-cards">
+            <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
               <a href="#" style="text-decoration: none;">
                 <div class="d-flex align-items-center h-100">
                   <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">

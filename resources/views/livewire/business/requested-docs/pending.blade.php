@@ -1,6 +1,6 @@
-<div class="py-2">
+<div class="py-2 d-flex justify-content-center">
 
-  <div class="row gap-2 justify-content-center p-2">
+  <div class="row w-100 gap-2 justify-content-center p-2">
     @forelse ($myPendingDocs as $index => $doc)
       <div wire:poll.60s class="col-auto mb-3">
         <a href="{{ route('business.edit.docs', ['id' => $doc->id, 'token' => $doc->token]) }}"style="text-decoration: none;">

@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Assistance;
 use App\Models\BarangayClearance;
 use App\Models\BusinessClearance;
 use App\Models\EmergencyHotline;
@@ -27,6 +28,60 @@ use Illuminate\Support\Facades\Notification;
 
 class ResidentController extends Controller
 {
+    public function deleteAssist($id)
+    {
+        Assistance::find($id)->delete();
+
+        return redirect()->route('resident.services')->with('success', 'Request canceled successfully');
+    }
+
+    public function updateAssist(Request $request, Assistance $assistance)
+    {
+        $request->validate([
+            'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i'],
+            'purpose' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+        ]);
+
+        $assistance->purpose = $request->purpose;
+        $assistance->description = $request->description;
+        $assistance->date = $request->date;
+        $assistance->time = $request->time;
+        $assistance->update();
+
+        return redirect()->route('resident.services')->with('success', 'Request successfully updated');
+    }
+
+    public function assistance(Assistance $assistance)
+    {
+        if($assistance->status === 'Pending'){
+            return view('resident.assistance.edit-assistance', ['assistance' => $assistance]);
+        }else if($assistance->status === 'Approved'){
+            return view('resident.assistance.view-assistance', ['assistance' => $assistance]);
+        }
+    }
+
+    public function requestAssistance(Request $request)
+    {
+        $request->validate([
+            'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i'],
+            'purpose' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+        ]);
+        
+        Assistance::create([
+            'user_id' => auth()->guard('web')->id(),
+            'purpose' => $request->purpose,
+            'description' => $request->description,
+            'date' => $request->date,
+            'time' => $request->time,
+        ]);
+
+        return redirect()->route('resident.services')->with('success', 'Request successfully sent');
+    }
+
     public function viewJob(Job $job)
     {
         if($job->done_hiring == true){
@@ -115,8 +170,13 @@ class ResidentController extends Controller
 
     public function viewReport(Report $report)
     {
+        $hotlines = EmergencyHotline::first();
+
         if(Auth::guard('web')->check() && $report->user_id == auth()->guard('web')->id()){
-            return view('resident.reports.view-report', ['report' => $report]);
+            return view('resident.reports.view-report', [
+                'report' => $report,
+                'hotlines' => $hotlines,
+            ]);
         }else{
             abort(404);
         }

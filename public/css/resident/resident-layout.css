@@ -178,14 +178,24 @@ label[for="proof"] {
 .biz-clearance-form > button:hover,
 .add-report-btn:hover {
   background-color: var(--theme-color);
-
 }
 
 .biz-clearance-form > .btn,
 .biz-clearance-form > div:last-child > .btn.report-update-btn,
-.add-report-btn.btn {
+.add-report-btn.btn,
+.add-report-btn.btn:active {
   --bs-btn-active-bg: var(--theme-color);
-  border: none;
+  border-color: var(--theme-color);
+}
+
+#cancel-assistance-btn,
+#cancel-assistance-btn:active {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+.req-assistance-btn {
+  border-color: var(--theme-color) !important;
 }
 
 .requested-docs-tabs {
@@ -674,6 +684,16 @@ label[for="proof"] {
     align-items: start !important;
     gap: 1rem !important;
   }
+
+  .send-concern {
+    width: 100% !important;
+  }
+
+  .home-middle-texts {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
 }
 
 
@@ -755,6 +775,8 @@ label[for="proof"] {
 @media (max-width: 730px){
   .home-middle-texts {
     display: block !important;
+    width: 100% !important;
+    text-align: center !important;
   }
 
   .home-middle *:not(span) {

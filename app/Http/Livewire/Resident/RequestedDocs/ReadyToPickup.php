@@ -10,6 +10,8 @@ class ReadyToPickup extends Component
 {
     use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
+
     public function render()
     {
         $myToPickupDocs = Document::with(['brgyClearance', 'bizClearance', 'indigency'])

@@ -1,8 +1,8 @@
 <div class="p-4 d-flex justify-content-center">
   
-  <div class="w-100 px-4">
-    <div class="row">
-      <div class="col-sm-4 mb-3">
+  <div class="w-100">
+    <div class="row justify-content-center">
+      <div class="col-sm-6 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
@@ -16,7 +16,7 @@
         </div>
       </div>
   
-      <div class="col-sm-4 mb-3">
+      {{-- <div class="col-sm-4 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
@@ -28,9 +28,9 @@
             <p class="m-0">Business Users</p>
           </div>
         </div>
-      </div>
+      </div> --}}
 
-      <div class="col-sm-4 mb-3">
+      {{-- <div class="col-sm-6 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
@@ -42,24 +42,24 @@
             <p class="m-0">Resident Users</p>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   
-    <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 ps-2 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 100%;">
+    <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 ps-2 rounded shadow mb-5 py-auto" style="height: 80vh;">
       <canvas id="population"></canvas>
     </div>
 
     <div class="d-flex gap-4 justify-content-center">
-      <div id="beneficiaries-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
+      <div id="beneficiaries-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto" style="height: 80vh; width: 50%;">
         <canvas id="beneficiaries"></canvas>
       </div>
 
-      <div id="sex-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
+      <div id="sex-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto" style="height: 80vh; width: 50%;">
         <canvas id="sex"></canvas>
       </div>
     </div>
   
-    <div class="d-flex flex-column justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow mb-5" style="width: 100%;">
+    <div class="d-flex flex-column justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow mb-5" style="height: 80vh;">
       {{-- <div class="w-100 d-flex gap-3 justify-content-end">
         <div class="d-flex align-items-center gap-2">
           <label for="first-date">From:</label>
@@ -73,16 +73,16 @@
       <canvas id="graph-reports"></canvas>
     </div>
 
-    <div class="d-flex justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow" style="width: 50%;">
+    {{-- <div class="d-flex justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow" style="width: 50%;">
       <canvas id="employ-status"></canvas>
-    </div>
+    </div> --}}
   </div>
 
   @push('script')
     <script>
       window.addEventListener('load', () => {
         const population = document.getElementById('population');
-        const employStatus = document.getElementById('employ-status');
+        // const employStatus = document.getElementById('employ-status');
         const reports = document.getElementById('graph-reports');
       
         new Chart(population, {
@@ -213,33 +213,33 @@
           }
         });
   
-        new Chart(employStatus, {
-          type: 'doughnut',
-          data: {
-            labels: [
-              'Employed',
-              'Unemployed',
-            ],
-            datasets: [
-              {
-                label: 'Users',
-                data: @json($employStatus),
-                backgroundColor: [
-                  '#b042f5',
-                  '#f56642'
-                ]
-              },
-            ],
-          },
-          options: {
-            plugins: {
-              title: {
-                display: true,
-                text: "Users' Employment Status",
-              }
-            }
-          }
-        });
+        // new Chart(employStatus, {
+        //   type: 'doughnut',
+        //   data: {
+        //     labels: [
+        //       'Employed',
+        //       'Unemployed',
+        //     ],
+        //     datasets: [
+        //       {
+        //         label: 'Users',
+        //         data: @json($employStatus),
+        //         backgroundColor: [
+        //           '#b042f5',
+        //           '#f56642'
+        //         ]
+        //       },
+        //     ],
+        //   },
+        //   options: {
+        //     plugins: {
+        //       title: {
+        //         display: true,
+        //         text: "Users' Employment Status",
+        //       }
+        //     }
+        //   }
+        // });
   
         new Chart(reports, {
           type: 'line',

@@ -46,11 +46,11 @@
               <h5 class="m-0">Profile</h5>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('business.archives') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'business.archives') ? 'active' : '' }}">
               <h5 class="m-0">Archives</h5>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </div>
       <div class="btn-group navbar-hide-items">
@@ -101,12 +101,12 @@
             <span class="ps-2">Profile</span>
           </a>
         </li>
-        <li class="pb-3">
+        {{-- <li class="pb-3">
           <a href="{{ route('business.archives') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.archives') ? 'text-success' : 'text-dark' }}">
             <span class="material-symbols-outlined">inventory_2</span>
             <span class="ps-2">Archives</span>
           </a>
-        </li>
+        </li> --}}
         <li class="pb-3">
           <form action="{{ route('business.logout') }}" method="POST">
             @csrf

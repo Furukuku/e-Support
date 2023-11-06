@@ -1,6 +1,6 @@
-<div class="py-2">
+<div class="w-100 d-flex flex-column align-items-center py-2">
 
-  <div class="row w-100 gap-2 justify-content-center p-2">
+  <div class="row w-100 gap-2 justify-content-center">
     @forelse ($solvedReports as $report)
       <div wire:poll.60s class="col-auto mb-3">
         <a href="{{ route('resident.view.report', ['report' => $report]) }}" style="text-decoration: none;">

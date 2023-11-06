@@ -233,6 +233,12 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
         Route::get('/report/{report}', [ResidentController::class, 'viewReport'])->name('view.report');
         Route::patch('/update-report/{report}', [ResidentController::class, 'updateReport'])->name('update-report');
 
+        Route::view('/request-assistance', 'resident.assistance.request-assistance')->name('request-assistance');
+        Route::post('/assistance', [ResidentController::class, 'requestAssistance'])->name('assistance');
+        Route::get('/assistance/{assistance}', [ResidentController::class, 'assistance'])->name('view.assist');
+        Route::patch('/update/assistance/{assistance}', [ResidentController::class, 'updateAssist'])->name('update.assist');
+        Route::delete('/delete/assistance/{id}', [ResidentController::class, 'deleteAssist'])->name('delete.assist');
+
         Route::view('/jobs', 'resident.resident-jobs')->name('jobs');
         Route::get('/job/{job}', [ResidentController::class, 'viewJob'])->name('view-job');
 

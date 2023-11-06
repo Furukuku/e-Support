@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\SubAdmin;
 
-use App\Models\User;
-use App\Models\Wife;
-use App\Models\Report;
-use Livewire\Component;
 use App\Models\Business;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
+use App\Models\Report;
+use App\Models\User;
+use App\Models\Wife;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 
 class Dashboard extends Component
 {
@@ -135,7 +135,7 @@ class Dashboard extends Component
         array_push($employStatus, $employed, $unemployed);
 
 
-        $businessUsers = Business::count();
+        // $businessUsers = Business::count();
 
         $va = [];
         $cd = [];
@@ -257,7 +257,7 @@ class Dashboard extends Component
             array_push($others, $others_temp);
         }
 
-        return view('livewire.admin.dashboard', [
+        return view('livewire.sub-admin.dashboard', [
             'population' => $final_population,
             'pwd' => $final_pwd,
             'soloParent' => $final_soloParent,
@@ -270,7 +270,7 @@ class Dashboard extends Component
             'total_house_holds' => $total_house_holds->count(),
             'total_families' => $total_families,
             'employStatus' => $employStatus,
-            'businessUsers' => $businessUsers,
+            // 'businessUsers' => $businessUsers,
             'va' => $va,
             'cd' => $cd,
             'ig' => $ig,

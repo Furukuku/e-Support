@@ -25,6 +25,11 @@ class Services extends Component
         $this->services_tab = 3;
     }
 
+    public function assistance()
+    {
+        $this->services_tab = 4;
+    }
+
     public function render()
     {
         return view('livewire.resident.services');

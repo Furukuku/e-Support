@@ -64,9 +64,15 @@
               <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $report->longitude) }}">
             </div>
             <div class="row mb-3">
-              <label for="description" class="form-label px-0">Description</span></label>
+              <label for="description" class="form-label px-0">Description</label>
               <textarea name="description" id="description" class="form-control" rows="3">{{ old('description', $report->description) }}</textarea>
               @error('description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            </div>
+            <div>
+              <p class="mb-1 fw-bold">Emergency Hotlines</p>
+              <p class="m-0"><small>Emergency Medical Service: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
+              <p class="m-0"><small>Philippine National Police: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
+              <p class="m-0"><small>Bureau of Fire Protection: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
             </div>
             <div class="d-flex justify-content-between my-4">
               <a href="{{ route('resident.services') }}" class="btn btn-secondary rounded-pill px-4 d-none back-btn">Back</a>
@@ -99,6 +105,12 @@
             <div class="border rounded p-2">
               <p class="m-0 text-break" style="text-indent: 20px;">{{ $report->description }}</p>
             </div>
+          </div>
+          <div>
+            <p class="mb-1 fw-bold">Emergency Hotlines</p>
+            <p class="m-0"><small>Emergency Medical Service: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
+            <p class="m-0"><small>Philippine National Police: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
+            <p class="m-0"><small>Bureau of Fire Protection: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
           </div>
           <div class="d-flex justify-content-start">
             <a href="{{ route('resident.services') }}" class="btn btn-secondary rounded-pill px-4 d-none back-btn">Back</a>

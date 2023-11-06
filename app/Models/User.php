@@ -88,6 +88,11 @@ class User extends Authenticatable implements IMustVerifyMobile, CanResetPasswor
         return $this->hasOne(FamilyHead::class);
     }
 
+    public function assistances()
+    {
+        return $this->hasMany(Assistance::class);
+    }
+
     public function routeNotificationForVonage(Notification $notification): string
     {
         return $this->mobile;

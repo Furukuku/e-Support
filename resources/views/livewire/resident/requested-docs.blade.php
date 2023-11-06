@@ -1,6 +1,6 @@
 <div class="mx-3 mb-4 home-end request-list">
   <div>
-    <h6 class="text-center">YOUR REQUEST LIST</h6>
+    <h6 class="text-center">YOUR REQUESTED DOCUMENT LIST</h6>
   </div>
 
   <div class="d-flex justify-content-center mt-4">

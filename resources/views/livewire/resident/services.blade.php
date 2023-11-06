@@ -6,7 +6,7 @@
         <div>
           <h6>REQUEST DOCUMENTS</h6>
         </div>
-        <div class="row w-100 gap-2 justify-content-center p-2">
+        <div class="row w-100 gap-2 justify-content-center py-2">
           <div class="col-auto mb-4">
             <div class="card shadow-sm docs-card">
               <div class="card-body px-4">
@@ -57,12 +57,15 @@
   
       <div class="d-flex justify-content-between align-items-center py-4 px-5 mb-4 bg-success bg-opacity-25 home-middle concern-btn">
         <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
-          <h5 class="m-0 align-center">Do you have concern?</h5>
-          <p class="m-0 align-center">Just send a report to the barangay.</p>
+          <h5 class="m-0 align-center">Do you have concern or request from barangay?</h5>
+          <p class="m-0 align-center">Let us know...</p>
         </div>
-        <div>
+        <div class="d-flex gap-2 justify-content-around send-concern">
           <div class="add-report-btn-container">
-            <a href="{{ route('resident.add-report') }}" class="btn text-white rounded-pill px-4 add-report-btn">Report</a>
+            <a href="{{ route('resident.add-report') }}" class="btn text-white rounded-pill px-4 add-report-btn">Send Report</a>
+          </div>
+          <div class="add-report-btn-container">
+            <a href="{{ route('resident.request-assistance') }}" class="btn text-dark rounded-pill px-2 req-assistance-btn">Request Assistance</a>
           </div>
         </div>
       </div>
@@ -73,31 +76,42 @@
       <div class="services-child">
         @livewire('resident.reports')
       </div>
+      <div class="services-child">
+        @livewire('resident.assistance')
+      </div>
     @elseif ($services_tab === 2)
       @livewire('resident.requested-docs')
     @elseif ($services_tab === 3)
       @livewire('resident.reports')
+    @elseif ($services_tab === 4)
+      @livewire('resident.assistance')
     @endif
   </div>
   
 
   <div class="position-fixed bottom-0 w-100 d-flex z-3 bg-white rounded-top shadow-lg border-top services-bot-nav">
-    <div wire:click="services" class="col-4 py-3 {{ $services_tab === 1 ? 'text-success' : '' }}" style="cursor: pointer;">
+    <div wire:click="services" class="col-3 py-3 {{ $services_tab === 1 ? 'text-success' : '' }}" style="cursor: pointer;">
       <div class="d-flex flex-column align-items-center justify-content-center">
         <span class="material-symbols-outlined">help_clinic</span>
         <small>Services</small>
       </div>
     </div>
-    <div wire:click="documents" class="col-4 py-3 {{ $services_tab === 2 ? 'text-success' : '' }}" style="cursor: pointer;">
+    <div wire:click="documents" class="col-3 py-3 {{ $services_tab === 2 ? 'text-success' : '' }}" style="cursor: pointer;">
       <div class="d-flex flex-column align-items-center justify-content-center">
         <span class="material-symbols-outlined">overview</span>
         <small>Documents</small>
       </div>
     </div>
-    <div wire:click="reports" class="col-4 py-3 {{ $services_tab === 3 ? 'text-success' : '' }}" style="cursor: pointer;">
+    <div wire:click="reports" class="col-3 py-3 {{ $services_tab === 3 ? 'text-success' : '' }}" style="cursor: pointer;">
       <div class="d-flex flex-column align-items-center justify-content-center">
         <span class="material-symbols-outlined">problem</span>
         <small>Reports</small>
+      </div>
+    </div>
+    <div wire:click="assistance" class="col-3 py-3 {{ $services_tab === 4 ? 'text-success' : '' }}" style="cursor: pointer;">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <span class="material-symbols-outlined">help</span>
+        <small>Assistance</small>
       </div>
     </div>
   </div>

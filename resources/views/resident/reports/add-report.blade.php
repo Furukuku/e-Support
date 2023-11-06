@@ -62,15 +62,15 @@
             <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
           </div>
           <div class="row mb-3">
-            <label for="description" class="form-label px-0">Description</span></label>
+            <label for="description" class="form-label px-0">Description</label>
             <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
             @error('description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <div>
-            <p>Emergency Hotlines</p>
-            <p>Emergency Medical Service: <a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
-            <p>Philippine National Police: <a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
-            <p>Bureau of Fire Protection: <a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
+            <p class="mb-1 fw-bold">Emergency Hotlines</p>
+            <p class="m-0"><small>Emergency Medical Service: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
+            <p class="m-0"><small>Philippine National Police: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
+            <p class="m-0"><small>Bureau of Fire Protection: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
           </div>
           <button type="submit" id="submit-btn" class="btn text-white my-4 rounded-pill px-4">Submit</button>
         </form>
