@@ -223,8 +223,10 @@ class BrgyClearances extends Component
     public function release()
     {
         $this->validate([
-            'fee' => ['required', 'numeric', 'min:0.01'],
+            'fee' => ['required', 'numeric', 'min:0', 'max:1000'],
         ]);
+
+        dd($this->fee);
 
         $document = Document::find($this->doc_id);
         $document->status = 'Released';

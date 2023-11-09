@@ -340,8 +340,18 @@
         </div>
         <h4 class="text-center mb-3">Release Barangay Clearance?</h4>
         <p class="text-center px-4 confirm-fs">Are you sure you're done printing this document? You cannot revert this.</p>
-        <div class="my-3">
-          <input type="number" id="add_fee" wire:model.defer="fee" placeholder="Enter fee amount" min="0" class="form-control">
+        <div class="my-3 d-flex flex-column align-items-center">
+          <label class="form-label fw-semibold">Select a Charge Fee</label>
+          <div class="d-flex gap-5">
+            <div class="form-check">
+              <input type="radio" wire:model.defer="fee" name="fee" value="0" id="free" class="form-check-input">
+              <label for="free" class="form-check-label">Free</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" wire:model.defer="fee" name="fee" value="50" id="charge" class="form-check-input">
+              <label for="charge" class="form-check-label">&#8369;50</label>
+            </div>
+          </div>
           @error('fee') <span class="error text-danger px-2" style="font-size: 0.8rem">{{ $message }}</span> @enderror
         </div>
       </div>

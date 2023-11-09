@@ -46,13 +46,13 @@
       <span id="programs" class="program-anchor"></span>
       <div class="container px-3">
         <div class="row pt-4 pb-2">
-          <h3 class="text-center">Programs</h3>
+          <h3 class="text-center">News & Events</h3>
         </div>
         <div class="row justify-content-center">
           @forelse ($latest_programs as $program)
             <div class="col-lg-6 mb-3">
               <a href="/program/{{ $program->id }}" class="link-underline link-underline-opacity-0">
-                <div class="card bg-body rounded pt-2 px-2">
+                <div class="card bg-body rounded pt-2 px-2" style="height: 28rem;">
                   <img class="program-height object-fit-cover rounded" src="{{ Storage::url($program->display_img) }}" alt="program">
                   <div class="card-body">
                     <h5 class="card-title text-center text-truncate">{{ $program->title }}</h5>
