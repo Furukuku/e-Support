@@ -7,6 +7,7 @@
     <div class="border-bottom border-dark d-flex gap-5">
       <h5 wire:click="brgyInfo" class="{{ $brgyInfoTab === '' ? 'text-primary border-bottom border-primary' : '' }}" style="cursor: pointer;">BARANGAY INFORMATION</h5>
       <h5 wire:click="hotlines" class="{{ $hotlinesTab === '' ? 'text-primary border-bottom border-primary' : '' }}" style="cursor: pointer;">EMERGENCY HOTLINES</h5>
+      <h5 wire:click="document" class="{{ $documentTab === '' ? 'text-primary border-bottom border-primary' : '' }}" style="cursor: pointer;">DOCUMENT FEES</h5>
     </div>
     <div class="my-3 {{ $brgyInfoTab }}">
       <div class="d-flex justify-content-end py-2">
@@ -88,6 +89,30 @@
       <div class="d-flex justify-content-end gap-3 {{ $hotlinesEdit === 'disabled' ? 'd-none' : '' }}">
         <button type="button" wire:click="hotlinesSave" class="btn btn-primary">Save</button>
         <button type="button" wire:click="cancelEditHotlines" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+
+    <div class="my-3 {{ $documentTab }}">
+      <div class="d-flex justify-content-end py-2">
+        <i class="fa-solid fa-pen-to-square" wire:click="editDocument" style="cursor: pointer;"></i>
+      </div>
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text">Barangay Clearance</span>
+          <input type="number" min="0" wire:model.defer="barangay_clearance" class="form-control" {{ $documentEdit }}>
+        </div>
+        @error('barangay_clearance') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+      </div>
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text">Business Clearance</span>
+          <input type="number" min="0" wire:model.defer="business_clearance" class="form-control" {{ $documentEdit }}>
+        </div>
+        @error('business_clearance') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+      </div>
+      <div class="d-flex justify-content-end gap-3 {{ $documentEdit === 'disabled' ? 'd-none' : '' }}">
+        <button type="button" wire:click="documentSave" class="btn btn-primary">Save</button>
+        <button type="button" wire:click="cancelEditDocument" class="btn btn-secondary">Cancel</button>
       </div>
     </div>
   </div>

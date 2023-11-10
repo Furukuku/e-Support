@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\BarangayInfo;
+use App\Models\DocumentPrice;
 use App\Models\EmergencyHotline;
 use Livewire\Component;
 
@@ -14,23 +15,37 @@ class Settings extends Component
     // emergency hotlines
     public $ems, $pnp, $bfp;
 
+    // documents
+    public $barangay_clearance, $business_clearance;
+
     // public $tab1, $tab2;
     public $brgyInfoTab = '';
     public $hotlinesTab = 'd-none';
+    public $documentTab = 'd-none';
 
     // properties for triggering disabled attribute
     public $brgyInfoEdit = 'disabled';
     public $hotlinesEdit = 'disabled';
+    public $documentEdit = 'disabled';
 
     public function brgyInfo()
     {
         $this->brgyInfoTab = '';
         $this->hotlinesTab = 'd-none';
+        $this->documentTab = 'd-none';
     }
 
     public function hotlines()
     {
         $this->hotlinesTab = '';
+        $this->brgyInfoTab = 'd-none';
+        $this->documentTab = 'd-none';
+    }
+
+    public function document()
+    {
+        $this->documentTab = '';
+        $this->hotlinesTab = 'd-none';
         $this->brgyInfoTab = 'd-none';
     }
 
@@ -118,6 +133,40 @@ class Settings extends Component
         $this->cancelEditHotlines();
     }
 
+    public function editDocument()
+    {
+        $this->documentEdit = '';
+    }
+
+    public function cancelEditDocument()
+    {
+        $this->resetErrorBag();
+        $this->reset('barangay_clearance', 'business_clearance');
+        $this->documentEdit = 'disabled';
+    }
+
+    public function documentSave()
+    {
+        $this->validate([
+            'barangay_clearance' => ['required', 'numeric', 'min:0', 'max:1000'],
+            'business_clearance' => ['required', 'numeric', 'min:0', 'max:1000'],
+        ]);
+
+        $document = DocumentPrice::first();
+        if(is_null($document)){
+            $newDocument = new DocumentPrice();
+            $newDocument->brgy_clearance = $this->barangay_clearance;
+            $newDocument->biz_clearance = $this->business_clearance;
+            $newDocument->save();
+        }else{
+            $document->brgy_clearance = $this->barangay_clearance;
+            $document->biz_clearance = $this->business_clearance;
+            $document->save();
+        }
+
+        $this->cancelEditDocument();
+    }
+
     public function render()
     {
         $brgyInfo = BarangayInfo::first();
@@ -137,6 +186,13 @@ class Settings extends Component
             $this->ems = $hotlines->ems;
             $this->pnp = $hotlines->pnp;
             $this->bfp = $hotlines->bfp;
+        }
+
+        $document = DocumentPrice::first();
+
+        if(!is_null($document)){
+            $this->barangay_clearance = $document->brgy_clearance;
+            $this->business_clearance = $document->biz_clearance;
         }
 
         return view('livewire.admin.settings');

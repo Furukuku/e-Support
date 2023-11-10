@@ -6,6 +6,7 @@
 
     @if ($jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true)
       <div class="w-100 px-3">
+        <h5>Recommended Jobs</h5>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             @foreach ($jobs as $job)

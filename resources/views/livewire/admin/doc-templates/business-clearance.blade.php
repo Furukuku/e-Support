@@ -28,9 +28,8 @@
             </div>
             <h4 class="text-center mb-3">Release Business Clearance?</h4>
             <p class="text-center px-4 confirm-fs">Are you sure you're done printing this document? You cannot revert this.</p>
-            <div class="my-3">
-              <input type="number" id="add_fee" wire:model.defer="fee" placeholder="Enter fee amount" min="0" class="form-control">
-              @error('fee') <span class="error text-danger px-2" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            <div class="my-3 d-flex flex-column align-items-center">
+              <p class="fs-4 fw-semibold mb-0">Charge Fee: &#8369;{{ $fee }}</p>
             </div>
           </div>
           <div class="modal-footer d-flex justify-content-center border-0">
