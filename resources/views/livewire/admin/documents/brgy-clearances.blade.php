@@ -1,6 +1,13 @@
-<div class="d-flex flex-column align-items-center py-5">
+<div class="d-flex flex-column align-items-center pt-3 pb-5">
 
   @include('livewire.modals.brgy-clearances-modal')
+
+  <div class="w-100 px-3 mb-3">
+    <button type="button" class="btn btn-primary shadow print-report-btn"data-bs-toggle="modal" data-bs-target="#generateReport">
+      <i class="fa-solid fa-print"></i>
+      Print Report
+    </button>
+  </div>
 
   <div class="d-flex justify-content-between px-4 pt-2 documents-header">
     <h3>BARANGAY CLEARANCE REQUESTS</h3>

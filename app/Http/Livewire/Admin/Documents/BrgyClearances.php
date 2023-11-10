@@ -10,6 +10,7 @@ use App\Models\FamilyHead;
 use App\Models\FamilyMember;
 use App\Models\Wife;
 use App\Rules\CheckIfValidResident;
+use App\Rules\DateInterval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -42,6 +43,9 @@ class BrgyClearances extends Component
     public $user_id, $business_id;
 
     public $doc_id;
+
+    // properties for generating report
+    public $from, $to;
 
     public $ctc_container = 'd-none';
 
@@ -93,8 +97,25 @@ class BrgyClearances extends Component
             'issued_on_update',
             'fee',
             'ctc_container',
-            'price'
+            'price',
+            'from',
+            'to'
         );
+    }
+
+    public function generateReport()
+    {
+        $this->validate([
+            'from' => ['required', 'date'],
+            'to' => ['required', 'date', new DateInterval($this->from)]
+        ]);
+
+        $this->dispatchBrowserEvent('close-modal');
+
+        return redirect()->route('admin.generate-report.brgy-clearance', [
+                'from' => $this->from,
+                'to' => $this->to
+            ]);
     }
 
     public function getDocDetails($decodedText)

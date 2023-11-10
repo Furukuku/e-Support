@@ -7,6 +7,50 @@ use App\Models\Document;
 
 class AdminController extends Controller
 {
+    public function generateReportIndigencies($from, $to)
+    {
+        if($from > $to){
+            return redirect()->route('admin.docs.indigencies');
+        }
+
+        $clearances = Document::with('indigency')
+            ->where('is_released', true)
+            ->where('type', 'Indigency')
+            ->where('status', 'Released')
+            ->whereHas('indigency', function($query) use ($from, $to) {
+                $query->whereBetween('date_issued', [$from . ' 00:00:00', $to . ' 23:59:59']);
+            })
+            ->get();
+
+        return view('admin.admin-indigency-report', [
+            'clearances' => $clearances,
+            'from' => $from,
+            'to' => $to,
+        ]);
+    }
+    
+    public function generateReportBrgyClearances($from, $to)
+    {
+        if($from > $to){
+            return redirect()->route('admin.docs.brgy-clearances');
+        }
+
+        $clearances = Document::with('brgyClearance')
+            ->where('is_released', true)
+            ->where('type', 'Barangay Clearance')
+            ->where('status', 'Released')
+            ->whereHas('brgyClearance', function($query) use ($from, $to) {
+                $query->whereBetween('date_issued', [$from . ' 00:00:00', $to . ' 23:59:59']);
+            })
+            ->get();
+
+        return view('admin.admin-brgy-clearance-report', [
+            'clearances' => $clearances,
+            'from' => $from,
+            'to' => $to,
+        ]);
+    }
+
     public function generateReportBizClearances($from, $to)
     {
         if($from > $to){

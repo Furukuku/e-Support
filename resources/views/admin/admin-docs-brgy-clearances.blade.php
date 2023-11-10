@@ -45,6 +45,7 @@
       $('#addDocConfirm').modal('hide');
       $('#releaseDoc').modal('hide');
       $('#brgyClearanceInfo').modal('hide');
+      $('#generateReport').modal('hide');
     });
 
     window.addEventListener('showConfirmation', () => {

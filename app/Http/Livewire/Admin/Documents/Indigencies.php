@@ -9,6 +9,7 @@ use App\Models\FamilyMember;
 use App\Models\Indigency;
 use App\Models\Wife;
 use App\Rules\CheckIfValidResident;
+use App\Rules\DateInterval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
@@ -35,6 +36,9 @@ class Indigencies extends Component
 
     public $doc_id;
 
+    // properties for generating report
+    public $from, $to;
+
     public $error_msg = '';
 
     public function updatingSearch()
@@ -53,7 +57,24 @@ class Indigencies extends Component
             'date_requested',
             'doc_id',
             'error_msg',
+            'from',
+            'to'
         );
+    }
+
+    public function generateReport()
+    {
+        $this->validate([
+            'from' => ['required', 'date'],
+            'to' => ['required', 'date', new DateInterval($this->from)]
+        ]);
+
+        $this->dispatchBrowserEvent('close-modal');
+
+        return redirect()->route('admin.generate-report.indigency', [
+                'from' => $this->from,
+                'to' => $this->to
+            ]);
     }
 
     public function getDocDetails($decodedText)

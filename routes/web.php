@@ -91,7 +91,11 @@ Route::middleware('admin.auth:admin')->group(function() {
         Route::view('/account', 'admin.admin-account')->name('account');
         Route::view('/settings', 'admin.admin-settings')->name('settings');
 
-        Route::get('/generate-report/business-clearances/{from}/{to}', [AdminController::class, 'generateReportBizClearances'])->name('generate-report.biz-clearance');
+        Route::prefix('generate-report')->name('generate-report.')->group(function() {
+            Route::get('/business-clearances/{from}/{to}', [AdminController::class, 'generateReportBizClearances'])->name('biz-clearance');
+            Route::get('/barangay-clearances/{from}/{to}', [AdminController::class, 'generateReportBrgyClearances'])->name('brgy-clearance');
+            Route::get('/indigencies/{from}/{to}', [AdminController::class, 'generateReportIndigencies'])->name('indigency');
+        });
         
         Route::name('profile.')->group(function(){
             // Route::get('/officials', [AdminController::class, 'brgyOfficials'])->name('officials');

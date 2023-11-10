@@ -22,13 +22,12 @@
         <p class="text-center serif" style="margin-bottom: -0.3rem;">Province of Pangasinan</p>
         <p class="text-center serif" style="margin-bottom: -0.3rem;">City of Urdaneta</p>
       </div>
-      <div class="d-flex justify-content-center mb-4">
+      <div class="d-flex justify-content-center mb-5">
         <div class="position-relative">
           <img src="{{ asset('images/logos/brgy-nancayasan-logo-removebg-enhanced.png') }}" alt="logo">
           <h6 class="m-0 text-center">BARANGAY NANCAYASAN</h6>
           <h5 class="mb-1 text-center fw-semibold serif">OFFICE OF THE PUNONG BARANGAY</h5>
-          <h3 class="m-0 text-center fw-semibold serif">BARANGAY BUSINESS</h3>
-          <h3 class="m-0 text-center fw-semibold serif">CLEARANCE</h3>
+          <h3 class="m-0 text-center fw-semibold serif">BARANGAY INDIGENCY</h3>
         </div>
       </div>
       <div class="d-flex justify-content-between">
@@ -41,10 +40,8 @@
         <thead>
           <tr>
             <th class="text-center align-middle">#</th>
-            <th class="text-center align-middle text-primary"><u>BUSINESS NAME</u></th>
-            <th class="text-center align-middle text-primary"><u>BUSINESS ADDRESS</u></th>
-            <th class="text-center align-middle text-primary"><u>NATURE OF BUSINESS</u></th>
-            <th class="text-center align-middle text-primary"><u>OWNER</u></th>
+            <th class="text-center align-middle text-primary"><u>NAME</u></th>
+            <th class="text-center align-middle text-primary"><u>PURPOSE</u></th>
             <th class="text-center align-middle text-primary"><u>ISSUANCE</u></th>
           </tr>
         </thead>
@@ -52,15 +49,13 @@
           @forelse ($clearances as $index => $clearance)
             <tr>
               <td class="p-1 text-center align-middle text-break">{{ $index + 1 }}</td>
-              <td class="p-1 text-center align-middle text-break">{{ $clearance->bizClearance->biz_name }}</td>
-              <td class="p-1 text-center align-middle text-break">{{ $clearance->bizClearance->biz_address }}</td>
-              <td class="p-1 text-center align-middle text-break">{{ $clearance->bizClearance->biz_nature }}</td>
-              <td class="p-1 text-center align-middle text-break">{{ $clearance->bizClearance->biz_owner }}</td>
-              <td class="p-1 text-center align-middle text-break">{{ date('Y-m-d', strtotime($clearance->bizClearance->date_issued)) }}</td>
+              <td class="p-1 text-center align-middle text-break">{{ $clearance->indigency->name }}</td>
+              <td class="p-1 text-center align-middle text-break">{{ $clearance->indigency->purpose }}</td>
+              <td class="p-1 text-center align-middle text-break">{{ date('Y-m-d', strtotime($clearance->indigency->date_issued)) }}</td>
             </tr>
           @empty
             <tr>
-              <td colspan="6" class="text-center">No barangay business clearances to show.</td>
+              <td colspan="6" class="text-center">No barangay indigencies to show.</td>
             </tr>
           @endforelse
         </tbody>
