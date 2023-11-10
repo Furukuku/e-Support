@@ -40,12 +40,12 @@ class ResidentController extends Controller
         $request->validate([
             'date' => ['required', 'date'],
             'time' => ['required', 'date_format:H:i'],
-            'purpose' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'need' => ['required', 'string', 'max:255'],
+            'purpose' => ['required', 'string', 'max:1000'],
         ]);
 
+        $assistance->need = $request->need;
         $assistance->purpose = $request->purpose;
-        $assistance->description = $request->description;
         $assistance->date = $request->date;
         $assistance->time = $request->time;
         $assistance->update();
@@ -55,10 +55,16 @@ class ResidentController extends Controller
 
     public function assistance(Assistance $assistance)
     {
+        if(auth()->guard('web')->id() != $assistance->user_id){
+            return abort(404);
+        }
+        
         if($assistance->status === 'Pending'){
             return view('resident.assistance.edit-assistance', ['assistance' => $assistance]);
-        }else if($assistance->status === 'Approved'){
+        }else if($assistance->status === 'Approved' || $assistance->status === 'Done' || $assistance->status === 'Declined'){
             return view('resident.assistance.view-assistance', ['assistance' => $assistance]);
+        }else{
+            abort(404);
         }
     }
 
@@ -67,14 +73,14 @@ class ResidentController extends Controller
         $request->validate([
             'date' => ['required', 'date'],
             'time' => ['required', 'date_format:H:i'],
-            'purpose' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'need' => ['required', 'string', 'max:255'],
+            'purpose' => ['required', 'string', 'max:1000'],
         ]);
         
         Assistance::create([
             'user_id' => auth()->guard('web')->id(),
+            'need' => $request->need,
             'purpose' => $request->purpose,
-            'description' => $request->description,
             'date' => $request->date,
             'time' => $request->time,
         ]);

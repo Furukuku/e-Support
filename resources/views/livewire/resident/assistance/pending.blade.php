@@ -6,7 +6,7 @@
         <a href="{{ route('resident.view.assist', ['assistance' => $myPendingAssistance]) }}"style="text-decoration: none;">
           <div class="card shadow-sm requested-docs-card">
             <div class="card-body pt-4 pb-5 rounded-top even-requested-docs-card-body">
-              <h5 class="card-title text-white">{{ $myPendingAssistance->purpose }}</h5>
+              <h5 class="card-title text-white">{{ $myPendingAssistance->need }}</h5>
               <p class="card-text text-white fw-bold m-0">On: <span class="fw-normal">{{ date('M d, Y', strtotime($myPendingAssistance->date)) }} - {{ date('h:i A', strtotime($myPendingAssistance->time)) }}</span></p>
             </div>
             <div class="card-footer d-flex justify-content-between bg-white">

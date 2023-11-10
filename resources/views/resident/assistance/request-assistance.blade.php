@@ -27,20 +27,20 @@
           @error('time') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <div class="row mb-3">
-          <label for="purpose" class="form-label px-0">Purpose</label>
-          <select id="purpose" class="form-select" name="purpose">
+          <label for="need" class="form-label px-0">Need</label>
+          <select id="need" class="form-select" name="need">
             <option value="">Choose one...</option>
-            <option value="Borrow Chairs and Tables" {{ old('purpose') === 'Borrow Chairs and Tables' ? 'selected' : '' }}>Borrow Chairs and Tables</option>
-            <option value="Vehicle Use" {{ old('purpose') === 'Vehicle Use' ? 'selected' : '' }}>Vehicle Use</option>
-            <option value="Crowd Control" {{ old('purpose') === 'Crowd Control' ? 'selected' : '' }}>Crowd Control</option>
-            <option value="Streetlight" {{ old('purpose') === 'Streetlight' ? 'selected' : '' }}>StreetLight (Bulb)</option>
+            <option value="Borrow Chairs and Tables" {{ old('need') === 'Borrow Chairs and Tables' ? 'selected' : '' }}>Borrow Chairs and Tables</option>
+            <option value="Vehicle Use" {{ old('need') === 'Vehicle Use' ? 'selected' : '' }}>Vehicle Use</option>
+            <option value="Crowd Control" {{ old('need') === 'Crowd Control' ? 'selected' : '' }}>Crowd Control</option>
+            <option value="Streetlight" {{ old('need') === 'Streetlight' ? 'selected' : '' }}>StreetLight (Bulb)</option>
           </select>
-          @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          @error('need') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <div class="row mb-3">
-          <label for="description" class="form-label px-0">Description</label>
-          <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
-          @error('description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          <label for="purpose" class="form-label px-0">Purpose</label>
+          <textarea name="purpose" id="purpose" class="form-control" rows="3">{{ old('purpose') }}</textarea>
+          @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <button type="submit" id="submit-btn" class="btn text-white my-4 rounded-pill px-4">Submit</button>
       </form>

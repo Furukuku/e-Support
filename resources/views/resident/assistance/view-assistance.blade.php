@@ -15,23 +15,33 @@
       </div>
       <div class="row justify-content-center">
         <div class="row mb-3">
-          <label class="form-label px-0 fw-bold">Purpose</label>
-          <div class="border rounded p-2">
-            <p class="m-0">{{ $assistance->purpose }}</p>
+          <label class="form-label px-0 fw-bold">Need</label>
+          <div class="border rounded p-2 bg-white">
+            <p class="m-0">{{ $assistance->need }}</p>
           </div>
         </div>
         <div class="row mb-3">
           <label class="form-label px-0 fw-bold">Date for the Request</label>
-          <div class="border rounded p-2">
-            <p class="m-0">{{ date('M d, Y', strtotime($assistance->date)) }} {{ date('H:i A', strtotime($assistance->time)) }}</p>
+          <div class="border rounded p-2 bg-white">
+            <p class="m-0">{{ date('M d, Y', strtotime($assistance->date)) }} - {{ date('H:i A', strtotime($assistance->time)) }}</p>
           </div>
         </div>
         <div class="row mb-3">
-          <label class="form-label px-0 fw-bold">Description</label>
-          <div class="border rounded p-2">
-            <p class="m-0">{{ $assistance->description }}</p>
+          <label class="form-label px-0 fw-bold">Purpose</label>
+          <div class="border rounded p-2 bg-white">
+            <p class="m-0">{{ $assistance->purpose }}</p>
           </div>
         </div>
+        @if ($assistance->status === 'Declined')
+          <hr class="mt-3">
+          <h5 class="text-center">Declined!</h5>
+          <div class="row mb-3">
+            <label class="form-label px-0 fw-bold">Reason</label>
+            <div class="border rounded p-2 bg-white">
+              <p class="m-0">{{ $assistance->reason }}</p>
+            </div>
+          </div>
+        @endif
       </div>
     </div>
 

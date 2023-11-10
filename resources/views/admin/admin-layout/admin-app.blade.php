@@ -179,7 +179,15 @@
           <a href="{{ route('admin.mark-report') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.reports') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">report</span>
-              <p class="col-9 m-0 ps-0">Reports</p>
+              <p class="col-9 m-0 ps-0">Incident Reports</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item text-white sidebar-list">
+          <a href="{{ route('admin.assitance') }}" id="message" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.assitance') ? 'navigate-active' : '' }}">
+            <div class="container-fluid row p-0 ps-2 m-0">
+              <span class="material-symbols-outlined col-3 text-center">support_agent</span>
+              <p class="col-9 m-0 ps-0">Assistance</p>
             </div>
           </a>
         </li>
@@ -195,7 +203,7 @@
           <a href="{{ route('admin.programs') }}" id="programs" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.programs') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">event</span>
-              <p class="col-9 m-0 ps-0">Programs</p>
+              <p class="col-9 m-0 ps-0">News & Events</p>
             </div>
           </a>
         </li>

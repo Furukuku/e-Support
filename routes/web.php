@@ -76,6 +76,7 @@ Route::middleware('admin.auth:admin')->group(function() {
         Route::view('/dashboard', 'admin.admin-dashboard')->name('dashboard');
         Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
         // Route::view('/reports', 'admin.admin-reports')->name('reports');
+        Route::get('/assistance', [AdminController::class, 'assistance'])->name('assitance');
         // Route::get('/message', [AdminController::class, 'message'])->name('message');
         Route::view('/message', 'admin.admin-message')->name('message');
         // Route::get('/programs', [AdminController::class, 'programs'])->name('programs');

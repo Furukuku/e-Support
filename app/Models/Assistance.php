@@ -13,16 +13,16 @@ class Assistance extends Model
 
     protected $fillable = [
         'user_id',
+        'need',
         'purpose',
-        'description',
         'date',
         'time',
-        'comment',
+        'reason',
         'status',
     ];
 
     public function resident()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

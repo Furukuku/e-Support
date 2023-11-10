@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('assistances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('purpose');
-            $table->longText('description');
+            $table->string('need');
+            $table->longText('purpose');
             $table->date('date');
             $table->time('time');
-            $table->longText('comment')->nullable();
+            $table->longText('reason')->nullable();
             $table->string('status')->default('Pending');
             $table->timestamps();
         });

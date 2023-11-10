@@ -13,7 +13,14 @@
       </div>
       <h5 class="text-center text-white">Request Assistance</h5>
     </div>
-    <div class="row position-relative">
+    <div class="row">
+      <div class="w-100 d-flex justify-content-end p-0">
+        <form id="cancel-assistance-form" action="{{ route('resident.delete.assist', ['id' => $assistance->id]) }}" method="POST">
+          @method('DELETE')
+          @csrf
+          <button type="submit" class="btn btn-danger text-white rounded-pill px-4 py-1" style="font-size: 14px;">Cancel Request</button>
+        </form>
+      </div>
       <form id="assistance-form" class="biz-clearance-form" action="{{ route('resident.update.assist', ['assistance' => $assistance]) }}" method="POST" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
@@ -28,30 +35,23 @@
           @error('time') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <div class="row mb-3">
-          <label for="purpose" class="form-label px-0">Purpose</label>
-          <select id="purpose" class="form-select" name="purpose">
+          <label for="need" class="form-label px-0">Need</label>
+          <select id="need" class="form-select" name="need">
             <option value="">Choose one...</option>
-            <option value="Borrow Chairs and Tables" {{ old('purpose', $assistance->purpose) === 'Borrow Chairs and Tables' ? 'selected' : '' }}>Borrow Chairs and Tables</option>
-            <option value="Vehicle Use" {{ old('purpose', $assistance->purpose) === 'Vehicle Use' ? 'selected' : '' }}>Vehicle Use</option>
-            <option value="Crowd Control" {{ old('purpose', $assistance->purpose) === 'Crowd Control' ? 'selected' : '' }}>Crowd Control</option>
-            <option value="Streetlight" {{ old('purpose', $assistance->purpose) === 'Streetlight' ? 'selected' : '' }}>StreetLight (Bulb)</option>
+            <option value="Borrow Chairs and Tables" {{ old('need', $assistance->need) === 'Borrow Chairs and Tables' ? 'selected' : '' }}>Borrow Chairs and Tables</option>
+            <option value="Vehicle Use" {{ old('need', $assistance->need) === 'Vehicle Use' ? 'selected' : '' }}>Vehicle Use</option>
+            <option value="Crowd Control" {{ old('need', $assistance->need) === 'Crowd Control' ? 'selected' : '' }}>Crowd Control</option>
+            <option value="Streetlight" {{ old('need', $assistance->need) === 'Streetlight' ? 'selected' : '' }}>StreetLight (Bulb)</option>
           </select>
-          @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          @error('need') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <div class="row mb-3">
-          <label for="description" class="form-label px-0">Description</label>
-          <textarea name="description" id="description" class="form-control" rows="3">{{ old('description', $assistance->description) }}</textarea>
-          @error('description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          <label for="purpose" class="form-label px-0">Purpose</label>
+          <textarea name="purpose" id="purpose" class="form-control" rows="3">{{ old('purpose', $assistance->purpose) }}</textarea>
+          @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <button type="submit" id="submit-btn" class="btn text-white my-4 rounded-pill px-4">Update</button>
       </form>
-      <div class="position-absolute d-flex justify-content-center p-0" style="width: 6rem;bottom: 0;right: 0;">
-        <form id="cancel-assistance-form" action="{{ route('resident.delete.assist', ['id' => $assistance->id]) }}" method="POST">
-          @method('DELETE')
-          @csrf
-          <button type="submit" id="cancel-assistance-btn" class="btn btn-danger text-white my-4 rounded-pill px-4">Cancel</button>
-        </form>
-      </div>
     </div>
   </div>
 

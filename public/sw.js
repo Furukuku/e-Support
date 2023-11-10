@@ -42,12 +42,29 @@ precaching.precacheAndRoute([
 // caching cdns and links
 routing.registerRoute(
   ({url}) => 
-    url.origin === 'https://fonts.googleapis.com' || 
-    url.origin === 'https://cdn.jsdelivr.net' ||
-    url.origin === 'https://code.jquery.com' ||
-    url.origin === 'https://kit.fontawesome.com' ||
-    url.origin === 'https://fonts.gstatic.com',
-  new strategies.StaleWhileRevalidate({
+    (
+      url.origin === 'https://fonts.googleapis.com' || 
+      url.origin === 'https://cdn.jsdelivr.net' ||
+      url.origin === 'https://cdn.jsdelivr.net' ||
+      url.origin === 'https://cdn.jsdelivr.net' ||
+      url.origin === 'https://cdn.jsdelivr.net' ||
+      url.origin === 'https://cdn.jsdelivr.net' ||
+      url.origin === 'https://code.jquery.com' ||
+      url.origin === 'https://kit.fontawesome.com' ||
+      url.origin === 'https://fonts.gstatic.com'
+    )
+    &&
+    (
+      url.pathname === '/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,1,0' || 
+      url.pathname === '/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' ||
+      url.pathname === '/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js' ||
+      url.pathname === '/npm/swiper@11/swiper-bundle.min.css' ||
+      url.pathname === '/npm/swiper@11/swiper-bundle.min.js' ||
+      url.pathname === '/npm/sweetalert2@11' ||
+      url.pathname === '/jquery-3.7.0.min.js' ||
+      url.pathname === '/0541fe1713.js'
+    ),
+  new strategies.NetworkFirst({
     cacheName: 'cdn-links',
     plugins: [
       new cacheableResponse.CacheableResponsePlugin({
@@ -82,7 +99,18 @@ const postHandler = async (args) => {
 };
 
 routing.registerRoute(
-  ({request}) => request.method === 'POST' || request.method === 'PATCH',
+  ({url, request}) => 
+    (
+      request.method === 'POST' || request.method === 'PATCH'
+    ) 
+    &&
+    (
+      url.pathname.startsWith('/resident/') ||
+      url.pathname === '/resetPassword' ||
+      url.pathname === '/forgotPassword' ||
+      url.pathname === '/login-validate' ||
+      url.pathname === '/forgotPassword'
+    ),
   postHandler,
   'POST'
 );
@@ -149,7 +177,21 @@ const getHandler = async (args) => {
 
 
 routing.registerRoute(
-  ({url, request}) => request.method === 'GET',
+  ({url, request}) => 
+    request.method === 'GET' &&
+    (
+      url.pathname.startsWith('/resident/') ||
+      url.pathname.startsWith('/business/') ||
+      url.pathname === '/login' ||
+      url.pathname === '/register-resident' ||
+      url.pathname === '/privacy-policy' ||
+      url.pathname === '/terms-and-conditions' ||
+      url.pathname === '/register-company' ||
+      url.pathname === '/forgot-password' ||
+      url.pathname === '/resident-otp-verification' ||
+      url.pathname === '/company-otp-verification' ||
+      url.pathname.startsWith('reset-password/')
+    ),
   getHandler,
     // (
     //   url.pathname.startsWith('/resident/') || 

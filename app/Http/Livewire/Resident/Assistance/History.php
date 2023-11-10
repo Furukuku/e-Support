@@ -17,7 +17,7 @@ class History extends Component
         $myAssistanceHistories = Assistance::where('user_id', auth()->guard('web')->id())
             ->where(function($query) {
                 $query->where('status', 'Done')
-                ->orWhere('status', 'Rejected');
+                ->orWhere('status', 'Declined');
             })
             ->orderBy('created_at', 'desc')
             ->paginate(5, ['*'], 'AssistanceHistories');

@@ -50,6 +50,11 @@ class AdminController extends Controller
         return redirect()->route('admin.docs.brgy-clearances');
     }
 
+    public function assistance()
+    {
+        return view('admin.admin-assistance');
+    }
+
     public function markReport()
     {
         auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\ReportNotification')->markAsRead();
