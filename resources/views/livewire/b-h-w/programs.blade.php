@@ -52,7 +52,7 @@
 								<td class="align-middle text-center">
 									<i class="fa-solid fa-eye mx-1 view-icon" disabled wire:click="view({{ $program }})" data-bs-toggle="modal" data-bs-target="#viewProgram"></i>
 									<i class="fa-solid fa-pen mx-1 edit-icon" wire:click="edit({{ $program }})" data-bs-toggle="modal" data-bs-target="#updateProgram"></i>
-									<i class="fa-solid fa-trash mx-1 delete-icon" wire:click="archiveConfirmation({{ $program }})" data-bs-toggle="modal" data-bs-target="#archiveProgram"></i>
+									<i class="fa-solid fa-box-archive mx-1 delete-icon text-secondary" wire:click="archiveConfirmation({{ $program }})" data-bs-toggle="modal" data-bs-target="#archiveProgram"></i>
 								</td>
 							</tr>
 						@empty

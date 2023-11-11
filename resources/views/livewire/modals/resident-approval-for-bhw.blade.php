@@ -53,8 +53,8 @@
             </div>
             <div class="row-auto">
               @if (!is_null($resident_verification_img))
-                <div class="border">
-                  <img id="verifiy-img" class="object-fit-contain" src="{{ Storage::url($resident_verification_img) }}" alt="verification" style="width: 100%;">
+                <div class="border rounded">
+                  <img id="verifiy-img" class="object-fit-contain w-100 rounded" src="{{ Storage::url($resident_verification_img) }}" alt="verification" style="height: 15rem;;">
                 </div>
               @endif
             </div>
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="modal-footer d-flex gap-2 justify-content-end border-0 px-4">
-        <button type="button" class="btn btn-secondary rounded" wire:loading.class="disabled" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
+        {{-- <button type="button" class="btn btn-danger rounded" wire:loading.class="disabled" wire:click="declineResidentConfirm" data-bs-dismiss="modal">Decline</button> --}}
         <button type="button" wire:click="approve" wire:loading.class="disabled" class="btn btn-warning rounded">Approve</button>
       </div>
     </div>
@@ -119,7 +119,7 @@
 
 
 <!-- Archive Modal -->
-<div wire:ignore.self class="modal fade" id="rejectResident" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectResidentLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="declineConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="declineConfirmLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0 justify-content-end">
@@ -128,13 +128,10 @@
         </span>
       </div>
       <div class="modal-body pt-0">
-        <div class="d-flex justify-content-center mb-3">
-          <span class="material-symbols-outlined fs-1 delete-warning">
-            warning
-          </span>
+        <div>
+          <label for="reason">Reason</label>
+          
         </div>
-        <h4 class="text-center mb-3">Archive Resident?</h4>
-        <p class="text-center">Are you sure you want to archive this user?</p>
       </div>
       <div class="modal-footer d-flex justify-content-center border-0">
         <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" wire:loading.class="disabled" data-bs-dismiss="modal">Cancel</button>

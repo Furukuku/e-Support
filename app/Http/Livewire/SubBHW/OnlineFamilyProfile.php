@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\SubBHW;
 
 use App\Models\FamilyHead;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -23,6 +24,9 @@ class OnlineFamilyProfile extends Component
 
     public $family_head, $family_head_id;
 
+    public $compared_family_head;
+    public $reason, $other;
+
     public $tab = 1;
 
     public function updatingSearch()
@@ -36,7 +40,10 @@ class OnlineFamilyProfile extends Component
         $this->reset(
             'family_head',
             'family_head_id',
-            'tab'
+            'tab',
+            'compared_family_head',
+            'reason',
+            'other'
         );
     }
 
@@ -68,25 +75,89 @@ class OnlineFamilyProfile extends Component
     public function approveFamily()
     {
         $family = FamilyHead::find($this->family_head->id);
+        $comparedFam = FamilyHead::where('id', '!=', $family->id)
+            ->where('fname', $family->fname)
+            ->where('mname', $family->mname)
+            ->where('lname', $family->lname)
+            ->where('bday', $family->bday)
+            ->where('sex', $family->sex)
+            ->where('civil_status', $family->civil_status)
+            ->where('zone', $family->zone)
+            ->first();
+
+        if(is_null($comparedFam)){
+            $family->is_approved = true;
+            $family->comment = 'Family profile has been recorded successfully.';
+            $family->update();
+
+            $this->dispatchBrowserEvent('close-modal');
+            $this->closeModal();
+        }else{
+            $this->compared_family_head = $comparedFam->fullname;
+            $this->dispatchBrowserEvent('close-modal');
+            $this->dispatchBrowserEvent('redundant-family');
+        }
+    }
+
+    public function approveRedundant()
+    {
+        $family = FamilyHead::find($this->family_head->id);
         $family->is_approved = true;
+        $family->comment = 'Family profile has been recorded successfully.';
         $family->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
     }
 
-    public function deleteConfirmation($id)
+    public function declineConfirmation($id)
     {
-        $this->family_head_id = $id;
+        $this->family_head = FamilyHead::with('familyMembers')->with('wife')->find($id);
     }
 
-    public function deleteFamily()
+    public function declineFamily()
     {
-        FamilyHead::find($this->family_head_id)->forceDelete();
+        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('decline-family');
+    }
+
+    public function decline()
+    {
+        $family = FamilyHead::find($this->family_head->id);
+
+        if($this->reason === 'Other'){
+            $this->validate([
+                'other' => ['required', 'string', 'max:100'],
+            ]);
+
+            $family->comment = $this->other;
+        }else{
+            $this->validate([
+                'reason' => ['required', 'string', 'max:36'],
+            ]);
+
+            $family->comment = $this->reason;
+        }
+
+        $family->is_approved = false;
+        $family->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
     }
+
+    // public function deleteConfirmation($id)
+    // {
+    //     $this->family_head_id = $id;
+    // }
+
+    // public function deleteFamily()
+    // {
+    //     FamilyHead::find($this->family_head_id)->forceDelete();
+
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->closeModal();
+    // }
 
     public function render()
     {
@@ -106,6 +177,7 @@ class OnlineFamilyProfile extends Component
         $onlinenNotApproveFamilies = FamilyHead::where('user_id', '!=', null)
             ->where('zone', auth()->guard('bhw')->user()->assigned_zone)
             ->where('is_approved', false)
+            ->where('comment', null)
             ->where(function($query) {
                 $query->where('fullname', 'like', '%' . $this->search2 . '%')
                 ->orWhere('fname', 'like', '%' . $this->search2 . '%')
@@ -115,9 +187,15 @@ class OnlineFamilyProfile extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate2, ['*'], 'notApproveFamilies');
 
+        $users = User::withTrashed()->get();
+        $checkIfCanEdit = $users->every(function($user) {
+            return $user->can_edit_profiling == true;
+        });
+
         return view('livewire.sub-b-h-w.online-family-profile', [
             'onlineApprovedFamilies' => $onlineApprovedFamilies,
             'onlinenNotApproveFamilies' => $onlinenNotApproveFamilies,
+            'checkIfCanEdit' => $checkIfCanEdit,
         ]);
     }
 }

@@ -35,6 +35,7 @@
         <option value="0">Family Profiles</option>
         <option value="1">Offline Family Profiles</option>
         <option value="2">Online Family Profiles</option>
+        <option value="3">Declined Family Profiles</option>
       </select>
     </div>
   </div>
@@ -131,6 +132,8 @@
     @livewire('sub-b-h-w.offline-family-profile')
   @elseif ($category == 2)
     @livewire('sub-b-h-w.online-family-profile')
+  @elseif ($category == 3)
+    @livewire('sub-b-h-w.declined-family-profile')
   @endif
 
 </div>

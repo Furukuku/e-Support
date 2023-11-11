@@ -51,6 +51,11 @@
                 <p class="m-0 fw-bold">Gender: <span class="fw-normal">{{ $gender }}</span></p>
               </div>
             </div>
+            <div class="row-auto mb-3 border rounded">
+              @isset($resident_verification_img)
+                <img class="rounded object-fit-contain w-100" style="height: 15rem;" src="{{ Storage::url($resident_verification_img) }}" alt="photo">
+              @endisset
+            </div>
           </div>
         </div>
       </div>

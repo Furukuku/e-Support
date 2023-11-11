@@ -15,7 +15,7 @@
       $('#suggestApprove').modal('hide');
       $('#headOrNot').modal('hide');
       $('#updateResidentAcc').modal('hide');
-      $('#rejectResident').modal('hide');
+      $('#declineConfirm').modal('hide');
     });
 
     window.addEventListener('headSuggest', () => {
@@ -24,6 +24,10 @@
     
     window.addEventListener('headOrNot', () => {
       $('#headOrNot').modal('show');
+    });
+
+    window.addEventListener('declineConfirm', () => {
+      $('#declineConfirm').modal('show');
     });
 
   </script>

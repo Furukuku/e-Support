@@ -53,7 +53,7 @@
               {{-- <td class="align-middle text-center">{{ $resident->is_head == true ? 'Yes' : 'No' }}</td> --}}
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewResident({{ $resident }})" data-bs-toggle="modal" data-bs-target="#approvalResident"></i>
-                <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="rejectResidentConfirm({{ $resident }})" data-bs-toggle="modal" data-bs-target="#rejectResident"></i>
+                {{-- <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="rejectResidentConfirm({{ $resident }})" data-bs-toggle="modal" data-bs-target="#rejectResident"></i> --}}
               </td>
             </tr>
           @empty

@@ -43,6 +43,7 @@ class FamilyHead extends Model
         'senior_citizen',
         'pregnant',
         'is_approved',
+        'comment',
     ];
 
     public function wife()

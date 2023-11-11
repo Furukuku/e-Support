@@ -1,49 +1,57 @@
 <div class="d-flex flex-column align-items-center justify-content-center pb-5 pt-4">
 
   <div class="w-100 px-4 d-flex justify-content-between">
-    <div class="d-flex align-items-center gap-5">
-      <a href="{{ route('bhw.generate-report.residents') }}" class="btn btn-primary shadow print-report-btn">
-        <i class="fa-solid fa-print"></i>
-        Print Report
-      </a>
-      <div class="form-check form-switch" data-bs-toggle="modal" data-bs-target="#onlineSurvey" style="cursor: pointer;">
-        <label class="form-label m-0 ms-2" for="online-survey" style="cursor: pointer;">Online Survey</label>
-        <input class="form-check-input" wire:model="online_survey" disabled type="checkbox" role="switch" id="online-survey">
-      </div>
-    </div>
 
-    <!-- online profiling status -->
-    <div wire:ignore.self class="modal fade" id="onlineSurvey" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="onlineSurveyLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header header-bg py-2">
-            <h1 class="modal-title fs-5" id="onlineSurveyLabel">Online Survey</h1>
-            <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
-              cancel
-            </span>
+    
+      <div class="d-flex align-items-center gap-5">
+        <a href="{{ route('bhw.generate-report.residents') }}" class="btn btn-primary shadow print-report-btn">
+          <i class="fa-solid fa-print"></i>
+          Print Report
+        </a>
+
+        @if ($category == 2)
+          <div class="form-check form-switch" data-bs-toggle="modal" data-bs-target="#onlineSurvey" style="cursor: pointer;">
+            <label class="form-label m-0 ms-2" for="online-survey" style="cursor: pointer;">Online Survey</label>
+            <input class="form-check-input" wire:model="online_survey" disabled type="checkbox" role="switch" id="online-survey">
           </div>
-          <div class="modal-body">
-            <div class="d-flex justify-content-center mb-3">
-              <span class="material-symbols-outlined fs-1 text-warning">
-                warning
+        @endif
+      </div>
+
+    @if ($category == 2)
+      <!-- online profiling status -->
+      <div wire:ignore.self class="modal fade" id="onlineSurvey" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="onlineSurveyLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header header-bg py-2">
+              <h1 class="modal-title fs-5" id="onlineSurveyLabel">Online Survey</h1>
+              <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
+                cancel
               </span>
             </div>
-            <h4 class="text-center mb-3">{{ $online_survey == true ? 'Close Survey?' : 'Open Survey?' }}</h4>
-            <p class="text-center">Are you sure you want to {{ $online_survey == true ? 'close' : 'open' }} family profiling survey?</p>
-          </div>
-          <div class="modal-footer justify-content-center border-0">
-            <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
-            <button type="button"  wire:click="toggleSurvey" wire:loading.attr="disabled" class="btn btn-warning px-5 rounded">Yes</button>
+            <div class="modal-body">
+              <div class="d-flex justify-content-center mb-3">
+                <span class="material-symbols-outlined fs-1 text-warning">
+                  warning
+                </span>
+              </div>
+              <h4 class="text-center mb-3">{{ $online_survey == true ? 'Close Survey?' : 'Open Survey?' }}</h4>
+              <p class="text-center">Are you sure you want to {{ $online_survey == true ? 'close' : 'open' }} family profiling survey?</p>
+            </div>
+            <div class="modal-footer justify-content-center border-0">
+              <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
+              <button type="button"  wire:click="toggleSurvey" wire:loading.attr="disabled" class="btn btn-warning px-5 rounded">Yes</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    @endif
 
     <div class="shadow-sm">
       <select wire:model="category" class="form-select">
         <option value="0">Family Profiles</option>
         <option value="1">Offline Family Profiles</option>
         <option value="2">Online Family Profiles</option>
+        <option value="3">Declined Family Profiles</option>
       </select>
     </div>
   </div>
@@ -140,6 +148,8 @@
     @livewire('b-h-w.offline-family-profile')
   @elseif ($category == 2)
     @livewire('b-h-w.online-family-profile')
+  @elseif ($category == 3)
+    @livewire('b-h-w.declined-family-profile')
   @endif
   
 </div>

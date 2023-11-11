@@ -1,10 +1,10 @@
 <div class="w-100 px-3">
-  @include('livewire.modals.residents-crud')
+  
+  @include('livewire.modals.declined-family-profile-modals')
 
   <div class="bg-white officials-profile-table shadow rounded mt-3">
     <div class="d-flex justify-content-between p-2 rounded-top officials-header">
       <h3>FAMILY LIST</h3>
-      <button type="button" class="btn px-4 shadow btn-add" wire:loading.attr="disabled" data-bs-toggle="modal" data-bs-target="#addResident">Add</button>
     </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
@@ -35,6 +35,7 @@
       <table class="table border rounded table-striped">
         <thead>
           <tr>
+            <th class="align-middle text-center">Status</th>
             <th class="align-middle text-center">Name</th>
             <th class="align-middle text-center">Zone</th>
             <th class="align-middle text-center">Birthplace</th>
@@ -44,8 +45,13 @@
           </tr>
         </thead>
         <tbody>
-          @forelse ($offlineFamilies as $family)
+          @forelse ($onlineDeclinedFamilies as $family)
             <tr>
+              <td class="align-middle text-center">
+                <div class="rounded-pill px-2 text-white bg-danger">
+                  Declined
+                </div>
+              </td>
               <td class="align-middle text-center">{{ $family->fullname }}</td>
               <td class="align-middle text-center">{{ $family->zone }}</td>
               <td class="align-middle text-center">{{ $family->bplace }}</td>
@@ -53,8 +59,6 @@
               <td class="align-middle text-center">{{ $family->contact }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 view-icon" wire:loading.class="pe-none" wire:click="viewFamily({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#viewResident"></i>
-                <i class="fa-solid fa-pen mx-1 edit-icon" wire:loading.class="pe-none" wire:click="editFamily({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#updateResident"></i>
-                <i class="fa-solid fa-box-archive mx-1 delete-icon text-secondary" wire:loading.class="pe-none" wire:click="deleteConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#deleteResident"></i>
               </td>
             </tr>
           @empty
@@ -64,7 +68,7 @@
           @endforelse
         </tbody>
       </table>
-      {{ $offlineFamilies->links() }}
+      {{ $onlineDeclinedFamilies->links() }}
     </div>
   </div>
 

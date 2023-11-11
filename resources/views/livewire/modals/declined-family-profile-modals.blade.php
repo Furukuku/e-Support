@@ -1,6 +1,3 @@
-
-
-
 {{-- View Family Modal --}}
 <div wire:ignore.self class="modal fade" id="viewResident" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewResidentLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -522,72 +519,8 @@
           @endif
         </div>
       </div>
-      <div class="modal-footer d-flex justify-content-end">
-        @if (isset($family_head) && $family_head->is_approved == false)
-          <button type="button" wire:click="declineFamily" wire:loading.attr="disabled" class="btn btn-danger">Decline</button>
-          <button type="button" wire:click="approveFamily" wire:loading.attr="disabled" class="btn btn-warning">Approve</button>
-        @endif
-      </div>
-    </div>
-  </div>
-</div>
-
-
-{{-- Redundant Family Modal --}}
-<div wire:ignore.self class="modal fade" id="redundantFamily" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="redundantFamilyLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header border-0 pb-0 justify-content-end">
-        <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
-          cancel
-        </span>
-      </div>
-      <div class="modal-body pt-0">
-        <div class="d-flex justify-content-center mb-3">
-          <span class="material-symbols-outlined fs-1 delete-warning text-warning">
-            warning
-          </span>
-        </div>
-        <h4 class="text-center mb-3">Found the same family head!</h4>
-        <p class="text-center px-4">{{ $compared_family_head }}</p>
-      </div>
-      <div class="modal-footer d-flex justify-content-center border-0">
-        <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="declineFamily" data-bs-dismiss="modal">Decline</button>
-        <button type="button" wire:click="approveRedundant" wire:loading.class="disabled" class="btn btn-warning mx-3">Approve anyway</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-{{-- Decline Family Modal --}}
-<div wire:ignore.self class="modal fade" id="declineFamily" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="declineFamilyLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header header-bg py-2">
-        <h1 class="modal-title fs-5" id="declineFamilyLabel">Decline Family</h1>
-        <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
-          cancel
-        </span>
-      </div>
-      <div class="modal-body pt-0">
-        <div class="p-3">
-          <label for="reason" class="form-label">Reason</label>
-          <select id="reason" wire:model="reason" class="form-select">
-            <option value="">Choose one...</option>
-            <option value="Family profile has already recorded.">Family profile has already recorded.</option>
-            <option value="Other">Other</option>
-          </select>
-          @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          @if ($reason === 'Other')
-            <textarea rows="3" wire:model.defer="other" class="form-control mt-2" placeholder="Please specify your reason here..."></textarea>
-            @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
-          @endif
-        </div>
-      </div>
-      <div class="modal-footer d-flex justify-content-end">
-        <button type="button" class="btn btn-secondary" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" wire:click="decline" wire:loading.class="disabled" class="btn btn-danger">Decline</button>
+      <div class="modal-footer d-flex justify-content-center">
+          <button type="button" wire:click="restoreFamily" wire:loading.attr="disabled" class="btn btn-success px-4 rounded-pill">Restore</button>
       </div>
     </div>
   </div>

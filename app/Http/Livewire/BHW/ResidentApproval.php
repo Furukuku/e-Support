@@ -150,14 +150,16 @@ class ResidentApproval extends Component
     //     $this->closeModal();
     // }
 
-    public function rejectResidentConfirm(User $resident)
+    public function declineResidentConfirm(User $resident)
     {
         $this->resident_id = $resident->id;
+        $this->dispatchBrowserEvent('declineConfirm');
     }
 
-    public function reject()
+    public function decline()
     {
-        User::find($this->resident_id)->delete();
+        $user = User::find($this->resident_id);
+        $user = 
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();

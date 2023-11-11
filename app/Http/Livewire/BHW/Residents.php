@@ -98,15 +98,28 @@ class Residents extends Component
         //     return $family->is_approved == true;
         // });
 
-        foreach($users as $user){
-            $user->can_edit_profiling = $checkIfCanEdit == true ? false : true;
-            $user->save();
+        if($checkIfCanEdit == true){
+            foreach($users as $user){
+                $user->can_edit_profiling = false;
+                $user->save();
+            }
+        }else{
+            foreach($users as $user){
+                $user->can_edit_profiling = true;
+                $user->save();
+            }
+
+            foreach($families as $family){
+                $family->is_approved = false;
+                $family->comment = null;
+                $family->save();
+            }
         }
 
-        foreach($families as $family){
-            $family->is_approved = $checkIfCanEdit == true ? false : false;
-            $family->save();
-        }
+        // foreach($families as $family){
+        //     $family->is_approved = $checkIfCanEdit == true ? false : false;
+        //     $family->save();
+        // }
 
         $this->mount();
         $this->dispatchBrowserEvent('close-modal');

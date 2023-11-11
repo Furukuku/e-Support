@@ -15,6 +15,16 @@
       $('#deleteResident').modal('hide');
       $('#deleteFamily').modal('hide');
       $('#onlineSurvey').modal('hide');
+      $('#redundantFamily').modal('hide');
+      $('#declineFamily').modal('hide');
+    });
+
+    window.addEventListener('redundant-family', () => {
+      $('#redundantFamily').modal('show');
+    });
+
+    window.addEventListener('decline-family', () => {
+      $('#declineFamily').modal('show');
     });
 
     // $('#viewResident').on('hidden.bs.modal', function (e) {

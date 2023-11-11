@@ -21,7 +21,7 @@ class ResidentAccounts extends Component
 
     public $category = 0;
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender;
+    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $resident_verification_img;
 
     public $resident_id;
 
@@ -42,6 +42,7 @@ class ResidentAccounts extends Component
             'employment_status',
             'gender',
             'resident_id',
+            'resident_verification_img'
         );
     }
 
@@ -58,12 +59,13 @@ class ResidentAccounts extends Component
         $this->zone = $resident->zone;
         $this->employment_status = $resident->is_employed;
         $this->gender = $resident->gender;
+        $this->resident_verification_img = $resident->verification_img;
     }
 
-    public function editResident(User $resident)
-    {
-        $this->resident_id = $resident->id;
-    }
+    // public function editResident(User $resident)
+    // {
+    //     $this->resident_id = $resident->id;
+    // }
 
     // public function updateResident()
     // {

@@ -512,7 +512,8 @@ label[for="proof"] {
 
 
 @media (max-width: 1105px){
-  .fam-profile-main-container {
+  .fam-profile-main-container,
+  .edit-family-profile {
     display: flex;
     flex-direction: column !important;
     align-items: center;
