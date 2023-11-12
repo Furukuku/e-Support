@@ -4,11 +4,11 @@
   <div class="bg-light col-7 shadow-lg overflow-auto">
     <div class="h-100 d-flex align-items-center">
       <div class="row px-5 mt-2">
-        <div class="col px-5">
+        <div class="col">
           <div class="row mb-3">
             <p class="">We have sent a verification code to +{{ auth()->guard('business')->user()->mobile }}</p>
             <p class="text-secondary" style="font-size: 0.8rem">The verification code is valid for only 3 minutes.</p>
-            <div class="col-6 mb-3">
+            <div class="col-sm-6 mb-3">
               <input wire:model.defer="verification_code" id="resident-verification" placeholder="Enter verification code" type="text" class="form-control">
               @error('verification_code') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
