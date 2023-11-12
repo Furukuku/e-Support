@@ -89,7 +89,7 @@
           <a href="{{ route('sub-admin.reports') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.reports') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">report</span>
-              <p class="col-9 m-0 ps-0">Reports</p>
+              <p class="col-9 m-0 ps-0">Incident Reports</p>
             </div>
           </a>
         </li>
@@ -97,7 +97,7 @@
           <a href="{{ route('sub-admin.programs') }}" id="programs" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-admin.programs') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">event</span>
-              <p class="col-9 m-0 ps-0">Programs</p>
+              <p class="col-9 m-0 ps-0">News & Events</p>
             </div>
           </a>
         </li>

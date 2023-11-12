@@ -4,6 +4,7 @@ namespace App\Http\Livewire\SubAdmin\Documents;
 
 use App\Models\BusinessClearance;
 use App\Models\Document;
+use App\Models\DocumentPrice;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
 use App\Models\Wife;
@@ -141,6 +142,9 @@ class BusinessClearances extends Component
 
     public function qrReleaseConfirm()
     {
+        $price = DocumentPrice::first();
+        $this->fee = $price->biz_clearance;
+        
         $this->dispatchBrowserEvent('close-modal');
         $this->dispatchBrowserEvent('showReleaseConfirm');
     }
@@ -250,13 +254,15 @@ class BusinessClearances extends Component
 
     public function releaseConfirm(Document $document)
     {
+        $price = DocumentPrice::first();
         $this->doc_id = $document->id;
+        $this->fee = $price->biz_clearance;
     }
 
     public function release()
     {
         $this->validate([
-            'fee' => ['required', 'numeric', 'min:0.01'],
+            'fee' => ['required', 'numeric', 'min:0.01', 'max:1000'],
         ]);
 
         $document = Document::find($this->doc_id);

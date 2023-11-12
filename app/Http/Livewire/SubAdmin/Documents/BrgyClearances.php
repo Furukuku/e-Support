@@ -4,6 +4,7 @@ namespace App\Http\Livewire\SubAdmin\Documents;
 
 use App\Models\BarangayClearance;
 use App\Models\Document;
+use App\Models\DocumentPrice;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
 use App\Models\Wife;
@@ -35,7 +36,7 @@ class BrgyClearances extends Component
 
     public $ctc_image, $ctc, $issued_at, $issued_on;
 
-    public $ctc_update, $issued_on_update, $issued_at_update, $fee;
+    public $ctc_update, $issued_on_update, $issued_at_update, $fee, $price;
 
     public $user_id, $business_id;
 
@@ -90,6 +91,7 @@ class BrgyClearances extends Component
             'issued_at_update',
             'issued_on_update',
             'fee',
+            'price',
             'ctc_container'
         );
     }
@@ -129,6 +131,9 @@ class BrgyClearances extends Component
 
     public function qrReleaseConfirm()
     {
+        $price = DocumentPrice::first();
+        $this->price = $price->brgy_clearance;
+
         $this->dispatchBrowserEvent('close-modal');
         $this->dispatchBrowserEvent('showReleaseConfirm');
     }
@@ -216,13 +221,15 @@ class BrgyClearances extends Component
 
     public function releaseConfirm(Document $document)
     {
+        $price = DocumentPrice::first();
         $this->doc_id = $document->id;
+        $this->price = $price->brgy_clearance;
     }
 
     public function release()
     {
         $this->validate([
-            'fee' => ['required', 'numeric', 'min:0.01'],
+            'fee' => ['required', 'numeric', 'min:0', 'max:1000'],
         ]);
 
         $document = Document::find($this->doc_id);

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\SubAdmin\DocTemplates;
 
 use App\Models\BrgyOfficial;
 use App\Models\Document;
+use App\Models\DocumentPrice;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -23,7 +24,7 @@ class BusinessClearance extends Component
     public function release()
     {
         $this->validate([
-            'fee' => ['required', 'numeric', 'min:0.01'],
+            'fee' => ['required', 'numeric', 'min:0.01', 'max:1000'],
         ]);
 
         $this->document->status = 'Released';
@@ -58,6 +59,9 @@ class BusinessClearance extends Component
 
     public function render()
     {
+        $price = DocumentPrice::first();
+        $this->fee = $price->biz_clearance;
+
         $captain = BrgyOfficial::where('position', 'Captain')->first();
 
         $captain_name = null;
