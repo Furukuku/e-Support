@@ -69,9 +69,9 @@ class WelcomeController extends Controller
         $latest_places = Place::orderBy('created_at', 'desc')->take(3)->get();
         $officials = BrgyOfficial::orderByRaw("CASE
                 WHEN position = 'Captain' THEN 1
-                WHEN position = 'Secretary' THEN 2
-                WHEN position = 'Treasurer' THEN 3
-                WHEN position = 'Kagawad' THEN 4
+                WHEN position = 'Kagawad' THEN 2
+                WHEN position = 'Secretary' THEN 3
+                WHEN position = 'Treasurer' THEN 4
                 WHEN position = 'SK' THEN 5
                 ELSE 6
             END")->get();

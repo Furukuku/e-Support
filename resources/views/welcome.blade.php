@@ -30,7 +30,7 @@
                   <img class="w-100 h-100 object-fit-cover rounded-top" src="{{ Storage::url($official->display_img) }}" alt="official">
                 </div>
                 <div class="w-100 p-2">
-                  <h5 class="text-break">{{ $official->fname }} {{ $official->mname }} {{ $official->kname }} {{ $official->sname }}</h5>
+                  <h5 class="text-break">{{ $official->fname }} {{ $official->mname }} {{ $official->lname }} {{ $official->sname }}</h5>
                   <p class="text-truncate">{{ $official->position }}</p>
                 </div>
               </div>

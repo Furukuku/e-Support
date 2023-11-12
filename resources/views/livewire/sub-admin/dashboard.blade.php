@@ -1,7 +1,7 @@
 <div class="p-4 d-flex justify-content-center">
   
   <div class="w-100">
-    <div class="row justify-content-center">
+    {{-- <div class="row justify-content-center">
       <div class="col-sm-6 mb-3">
         <div class="card shadow">
           <div class="card-body">
@@ -16,7 +16,7 @@
         </div>
       </div>
   
-      {{-- <div class="col-sm-4 mb-3">
+      <div class="col-sm-4 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
@@ -28,9 +28,9 @@
             <p class="m-0">Business Users</p>
           </div>
         </div>
-      </div> --}}
+      </div>
 
-      {{-- <div class="col-sm-6 mb-3">
+      <div class="col-sm-6 mb-3">
         <div class="card shadow">
           <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
@@ -42,8 +42,8 @@
             <p class="m-0">Resident Users</p>
           </div>
         </div>
-      </div> --}}
-    </div>
+      </div>
+    </div> --}}
   
     <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 ps-2 rounded shadow mb-5 py-auto" style="height: 80vh;">
       <canvas id="population"></canvas>

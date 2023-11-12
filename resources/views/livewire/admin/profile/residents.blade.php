@@ -3,9 +3,9 @@
   @include('livewire.modals.residents-crud')
 
   <div class="bg-white officials-profile-table shadow rounded">
-    <div class="d-flex justify-content-between p-2 rounded-top officials-header">
+    <div class="d-flex justify-content-start p-2 rounded-top officials-header">
       <h3>FAMILY LIST</h3>
-      <button type="button" class="btn px-4 shadow btn-add" wire:loading.attr="disabled" data-bs-toggle="modal" data-bs-target="#addResident">Add</button>
+      {{-- <button type="button" class="btn px-4 shadow btn-add" wire:loading.attr="disabled" data-bs-toggle="modal" data-bs-target="#addResident">Add</button> --}}
     </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
@@ -72,8 +72,8 @@
               <td class="align-middle text-center">{{ $family->contact }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewFamily({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#viewResident"></i>
-                <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:loading.class="pe-none" wire:click="editFamily({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#updateResident"></i>
-                <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="deleteConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#deleteResident"></i>
+                {{-- <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:loading.class="pe-none" wire:click="editFamily({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#updateResident"></i>
+                <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="deleteConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#deleteResident"></i> --}}
               </td>
             </tr>
           @empty

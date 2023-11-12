@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ asset('css/resident/resident-layout.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('css/admin/profile-brgy-officials.css') }}"> --}}
 
-  <link rel="manifest" href="{{ asset('manifest.json') }}">
+  <link rel="manifest" crossorigin="use-credentials" href="{{ asset('manifest.json') }}">
 
   <link rel="apple-touch-icon" href="{{ asset('images/pwa_icons/logo-512x512.png') }}">
   <meta name="apple-moble-web-app-status-bar" content="#0E2C15">

@@ -2,6 +2,14 @@
   --theme-color: #0E2C15;
 }
 
+span {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .colored-toast.swal2-icon-success {
   background-color: #33a54e !important;
 }

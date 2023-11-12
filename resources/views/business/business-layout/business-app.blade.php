@@ -12,6 +12,13 @@
 
   <link rel="stylesheet" href="{{ asset('css/business/business-layout.css') }}">
 
+  <link rel="manifest" crossorigin="use-credentials" href="{{ asset('manifest.json') }}">
+
+  <link rel="apple-touch-icon" href="{{ asset('images/pwa_icons/logo-512x512.png') }}">
+  <meta name="apple-moble-web-app-status-bar" content="#0E2C15">
+
+  <meta name="theme-color" content="#0E2C15">
+
 
   @livewireStyles
 </head>
@@ -134,6 +141,8 @@
   <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
   
   <script src="{{ asset('js/resident/resident-sidebar.js') }}"></script>
+
+  <script type="module" src="{{ asset('js/app.js') }}"></script>
 
   @yield('scripts')
 
