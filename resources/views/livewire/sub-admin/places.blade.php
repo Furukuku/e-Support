@@ -54,7 +54,7 @@
                 <div class="mx-auto actions-container">
                   <i class="fa-solid fa-eye mx-1 view-icon" disabled wire:click="view({{ $place }})" data-bs-toggle="modal" data-bs-target="#viewPlace"></i>
                   <i class="fa-solid fa-pen mx-1 edit-icon" wire:click="edit({{ $place }})" data-bs-toggle="modal" data-bs-target="#updatePlace"></i>
-                  <i class="fa-solid fa-trash mx-1 delete-icon" wire:click="archiveConfirmation({{ $place }})" data-bs-toggle="modal" data-bs-target="#archivePlace"></i>
+                  <i class="fa-solid fa-box-archive mx-1 delete-icon text-secondary" wire:click="archiveConfirmation({{ $place }})" data-bs-toggle="modal" data-bs-target="#archivePlace"></i>
                 </div>
               </td>
             </tr>

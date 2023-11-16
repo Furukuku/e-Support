@@ -46,6 +46,7 @@ class User extends Authenticatable implements IMustVerifyMobile, CanResetPasswor
         'gender',
         'can_edit_profiling',
         'is_approved',
+        'is_active',
         'username',
         'email',
         'password',
@@ -113,47 +114,56 @@ class User extends Authenticatable implements IMustVerifyMobile, CanResetPasswor
             $activity->log_name = 'Resident account ' . $eventName;
             $activity->causer_id = auth()->guard('admin')->user()->id;
             $activity->causer_type = 'Admin';
-            // if(Str::endsWith($this->username, 's')){
-            //     $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
+            // if($this->isDirty('is_approved') && $this->is_approved == 1){
+            //     $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "'s account.";
+            // }else if($this->isDirty('is_active')){
+            //     if($this->is_active == 1){
+            //             $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "'s account.";
+            //     }else{
+            //         $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "'s account.";
+            //     }
             // }else{
-            //     $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
             // }
-            if($this->isDirty('is_approved') && $this->is_approved == 1){
-                $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "'s account.";
-            }else if($this->isDirty('is_active')){
-                if($this->is_active == 1){
-                        $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "'s account.";
-                }else{
-                    $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "'s account.";
-                }
+            if(Str::endsWith($this->username, 's')){
+                $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
             }else{
-                if(Str::endsWith($this->username, 's')){
-                    $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
-                }else{
-                    $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
-                }
+                $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
             }
         }else if(auth()->guard('sub-admin')->check()){
-            $activity->log_name = 'Resident account';
+            $activity->log_name = 'Resident account ' . $eventName;
             $activity->causer_id = auth()->guard('sub-admin')->user()->id;
-            $activity->causer_type = 'Sub-Admin';
-            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' a resident account.';
-        }else if(auth()->guard('web')->check()){
-            $user = auth()->guard('web')->user();
-            if($user->gender === 'Male'){
-                $activity->description = $user->username . ' ' . $eventName . ' his resident account.';
+            $activity->causer_type = 'BHW';
+            if(Str::endsWith($this->username, 's')){
+                $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
             }else{
-                $activity->description = $user->username . ' ' . $eventName . ' her resident account.';
+                $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
             }
-        }else{
-            $activity->log_name = 'New resident account ' . $eventName;
-            $activity->causer_id = $this->id;
-            $activity->causer_type = 'Resident';
-            if($this->gender === 'Male'){
-                $activity->description = $this->username . ' ' . $eventName . ' his resident account.';
+        }else if(auth()->guard('bhw')->check()){
+            $activity->log_name = 'Resident account ' . $eventName;
+            $activity->causer_id = auth()->guard('bhw')->user()->id;
+            $activity->causer_type = 'BHW';
+            if(Str::endsWith($this->username, 's')){
+                $activity->description = auth()->guard('bhw')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
             }else{
-                $activity->description = $this->username . ' ' . $eventName . ' her resident account.';
+                $activity->description = auth()->guard('bhw')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
             }
         }
+        // else if(auth()->guard('web')->check()){
+        //     $user = auth()->guard('web')->user();
+        //     if($user->gender === 'Male'){
+        //         $activity->description = $user->username . ' ' . $eventName . ' his resident account.';
+        //     }else{
+        //         $activity->description = $user->username . ' ' . $eventName . ' her resident account.';
+        //     }
+        // }else{
+        //     $activity->log_name = 'New resident account ' . $eventName;
+        //     $activity->causer_id = $this->id;
+        //     $activity->causer_type = 'Resident';
+        //     if($this->gender === 'Male'){
+        //         $activity->description = $this->username . ' ' . $eventName . ' his resident account.';
+        //     }else{
+        //         $activity->description = $this->username . ' ' . $eventName . ' her resident account.';
+        //     }
+        // }
     }
 }

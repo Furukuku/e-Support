@@ -42,15 +42,10 @@ class Place extends Model
             $activity->causer_type = 'Admin';
             $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->name . '.';
         }else if(auth()->guard('sub-admin')->check()){
-            $activity->log_name = 'Place';
+            $activity->log_name = $this->wasRecentlyCreated ? 'New place ' . $eventName : 'Place ' . $eventName;
             $activity->causer_id = auth()->guard('sub-admin')->user()->id;
             $activity->causer_type = 'Sub-Admin';
-            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' a place.';
-        }else{
-            $activity->log_name = 'Place';
-            $activity->causer_id = auth()->guard('web')->user()->id;
-            $activity->causer_type = 'Resident';
-            $activity->description = auth()->guard('web')->user()->username . ' ' . $eventName . ' a place.';
+            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->name . '.';
         }
     }
 }

@@ -21,3 +21,7 @@
 .colored-toast.swal2-icon-success {
   background-color: #33a54e !important;
 }
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}

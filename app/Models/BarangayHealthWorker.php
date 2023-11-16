@@ -15,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class BarangayHealthWorker extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, LogsActivity;
 
     use SoftDeletes;
 
@@ -54,4 +54,31 @@ class BarangayHealthWorker extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logFillable()
+        ->dontLogIfAttributesChangedOnly([
+            'password',
+            'remember_token'
+        ])
+        ->logOnlyDirty();
+    }
+
+    public function tapActivity(Activity $activity, string $eventName)
+    {
+        if(auth()->guard('sub-admin')->check()){
+            $activity->log_name = $this->wasRecentlyCreated ? 'New BHW account ' . $eventName : 'BHW account ' . $eventName;
+            $activity->causer_id = auth()->guard('sub-admin')->user()->id;
+            $activity->causer_type = auth()->guard('sub-admin')->user()->position === 'BHW' ? 'BHW' : 'Sub-Admin';
+            $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('sub-admin')->user()->username . ' ' . $eventName  . ' ' . $this->username . "' account." : auth()->guard('sub-admin')->user()->username . ' ' . $eventName  . ' ' . $this->username . "'s account.";
+        }else if(auth()->guard('bhw')->check()){
+            
+            $activity->log_name = 'BHW account ' . $eventName;
+            $activity->causer_id = auth()->guard('bhw')->user()->id;
+            $activity->causer_type = 'Sub-BHW';
+            $activity->description = auth()->guard('bhw')->user()->username . ' ' . $eventName . ' his/her account.';
+        }
+    }
 }

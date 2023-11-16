@@ -11,125 +11,139 @@
         </span>
       </div>
       <div class="modal-body p-3">
-        <div class="border border-1 rounded">
+        <div class="">
           @if ($event === 'created')
             <div class="col p-2">
-              <ul>
                 @isset($properties)
                   @foreach ($properties['attributes'] as $attribute => $value)
-                      <li class="fw-bold text-break">{{ $attribute }}: 
-                        <span class="fw-normal">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active')
+                    <div class="mb-2">
+                      <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
+                      <div class="border rounded p-2">
+                        <p class="text-break m-0">
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
                             @if ($value == 1)
                               Yes
                             @else
                               No
                             @endif
+                          @elseif (is_null($value) || $value === '')
+                            N/A
                           @else
                             {{ $value }}
                           @endif
-                        </span>
-                      </li>
+                        </p>
+                      </div>
+                    </div>
                   @endforeach
                 @endisset
-              </ul>
             </div>
           @elseif ($event === 'updated')
             <div class="col p-2">
-              <div>
+              <div class="mb-3">
                 <h4>New</h4>
-                <ul>
                   @isset($properties)
                     @foreach ($properties['attributes'] as $attribute => $value)
-                        <li class="fw-bold text-break">{{ $attribute }}: 
-                          <span class="fw-normal">
-                            @if ($attribute == 'is_approved' || $attribute == 'is_active')
+                      <div class="mb-2">
+                        <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
+                        <div class="border rounded p-2">
+                          <p class="text-break m-0">
+                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
                               @if ($value == 1)
                                 Yes
                               @else
                                 No
                               @endif
+                            @elseif (is_null($value) || $value === '')
+                              N/A
                             @else
                               {{ $value }}
                             @endif
-                          </span>
-                        </li>
+                          </p>
+                        </div>
+                      </div>
                     @endforeach
                   @endisset
-                </ul>
               </div>
               <div>
                 <h4>Old</h4>
-                <ul>
                   @isset($properties)
                     @foreach ($properties['old'] as $attribute => $value)
-                        <li class="fw-bold text-break">{{ $attribute }}: 
-                          <span class="fw-normal">
-                            @if ($attribute == 'is_approved' || $attribute == 'is_active')
+                      <div class="mb-2">
+                        <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
+                        <div class="border rounded p-2">
+                          <p class="text-break m-0">
+                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
                               @if ($value == 1)
                                 Yes
                               @else
                                 No
                               @endif
+                            @elseif (is_null($value) || $value === '')
+                              N/A
                             @else
                               {{ $value }}
                             @endif
-                          </span>
-                        </li>
+                          </p>
+                        </div>
+                      </div>
                     @endforeach
                   @endisset
-                </ul>
               </div>
             </div>
           @elseif ($event === 'deleted')
             <div class="col p-2">
-              <ul>
                 @isset($properties)
                   @foreach ($properties['old'] as $attribute => $value)
-                      <li class="fw-bold text-break">{{ $attribute }}: 
-                        <span class="fw-normal">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active')
+                    <div class="mb-2">
+                      <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
+                      <div class="border rounded p-2">
+                        <p class="text-break m-0">
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
                             @if ($value == 1)
                               Yes
                             @else
                               No
                             @endif
+                          @elseif (is_null($value) || $value === '')
+                            N/A
                           @else
                             {{ $value }}
                           @endif
-                        </span>
-                      </li>
+                        </p>
+                      </div>
+                    </div>
                   @endforeach
                 @endisset
-              </ul>
             </div>
           @elseif ($event === 'restored')
             <div class="col p-2">
-              <ul>
                 @isset($properties)
                   @foreach ($properties['attributes'] as $attribute => $value)
-                    <li class="fw-bold text-break">{{ $attribute }}: 
-                      <span class="fw-normal">
-                        @if ($attribute == 'is_approved' || $attribute == 'is_active')
-                          @if ($value == 1)
-                            Yes
+                    <div class="mb-2">
+                      <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
+                      <div class="border rounded p-2">
+                        <p class="text-break m-0">
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
+                            @if ($value == 1)
+                              Yes
+                            @else
+                              No
+                            @endif
+                          @elseif (is_null($value) || $value === '')
+                            N/A
                           @else
-                            No
+                            {{ $value }}
                           @endif
-                        @else
-                          {{ $value }}
-                        @endif
-                      </span>
-                    </li>
+                        </p>
+                      </div>
+                    </div>
                   @endforeach
                 @endisset
-              </ul>
             </div>
           @endif
         </div>
       </div>
       <div class="modal-footer border-0">
-        
       </div>
     </div>
   </div>

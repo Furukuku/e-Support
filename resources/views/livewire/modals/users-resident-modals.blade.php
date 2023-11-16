@@ -103,11 +103,7 @@
                   <label for="reason" class="form-label">Reason</label>
                   <select id="reason" wire:model="reason" class="form-select">
                     <option value="">Choose one...</option>
-                    <option value="sample1">sample1</option>
-                    <option value="sample2">sample2</option>
-                    <option value="sample3">sample3</option>
-                    <option value="sample4">sample4</option>
-                    <option value="sample5">sample5</option>
+                    <option value="You have violated our terms and conditions.">You have violated our terms and conditions.</option>
                     <option value="Other">Other</option>
                   </select>
                   @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror

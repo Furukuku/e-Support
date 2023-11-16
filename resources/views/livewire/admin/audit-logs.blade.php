@@ -42,7 +42,7 @@
             <th class="align-middle text-center">Causer Id</th>
             <th class="align-middle text-center">Date/Time</th>
             {{-- <th class="align-middle text-center">Properties</th> --}}
-            {{-- <th class="align-middle text-center">Action</th> --}}
+            <th class="align-middle text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -55,11 +55,11 @@
               <td class="align-middle text-center">{{ $activity->causer_id }}</td>
               <td class="align-middle text-center">{{ $activity->created_at->format('M d, Y - h:i A') }}</td>
               {{-- <td class="align-middle text-center">{{ $activity->properties }}</td> --}}
-              {{-- <td class="align-middle text-center">
+              <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 view-icon" disabled wire:click="view({{ $activity }})" data-bs-toggle="modal" data-bs-target="#viewActivity"></i>
-                <i class="fa-solid fa-pen mx-1 edit-icon" wire:click="edit({{ $program }})" data-bs-toggle="modal" data-bs-target="#updateProgram"></i>
-                <i class="fa-solid fa-trash mx-1 delete-icon" wire:click="archiveConfirmation({{ $program }})" data-bs-toggle="modal" data-bs-target="#archiveProgram"></i>
-              </td> --}}
+                {{-- <i class="fa-solid fa-pen mx-1 edit-icon" wire:click="edit({{ $program }})" data-bs-toggle="modal" data-bs-target="#updateProgram"></i>
+                <i class="fa-solid fa-trash mx-1 delete-icon" wire:click="archiveConfirmation({{ $program }})" data-bs-toggle="modal" data-bs-target="#archiveProgram"></i> --}}
+              </td>
             </tr>
           @empty
             <tr>

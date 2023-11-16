@@ -19,34 +19,56 @@ class Message extends Component
 
     public $search = '';
 
-    public $message_content;
+    public $message_content, $password;
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    public function resetMessage()
+    public function closeModal()
     {
-        $this->message_content = '';
+        $this->resetErrorBag();
+        $this->resetValidation();
+        $this->reset(
+            'message_content',
+            'password'
+        );
     }
 
-    public function send()
+    public function confirmSend()
     {
         $this->validate([
             'message_content' => 'required|string|max:160',
         ]);
 
-        $residents = User::all();
+        $this->dispatchBrowserEvent('passwordConfirm');
+    }
 
-        Notification::send($residents, new SMSBroadcast($this->message_content));
-
-        SmsMessage::create([
-            'content' => $this->message_content,
+    public function send()
+    {
+        $this->validate([
+            'password' => 'required|current_password:admin',
         ]);
 
-        $this->dispatchBrowserEvent('success', ['success' => 'Message sent!']);
-        $this->resetMessage();
+        $residents = User::all();
+
+        $notification = Notification::send($residents, new SMSBroadcast($this->message_content));
+
+        if($notification){
+            SmsMessage::create([
+                'content' => $this->message_content,
+            ]);
+
+            $this->dispatchBrowserEvent('success', ['success' => 'Message sent!']);
+            $this->dispatchBrowserEvent('close-modal');
+            $this->closeModal();
+        }else{
+            $this->dispatchBrowserEvent('failed', ['failed' => 'Message not sent!']);
+            $this->dispatchBrowserEvent('close-modal');
+            $this->closeModal();
+        }
+
     }
 
     public function render()

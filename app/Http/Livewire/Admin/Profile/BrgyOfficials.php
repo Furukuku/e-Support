@@ -63,20 +63,22 @@ class BrgyOfficials extends Component
 
     public function resetInputs()
     {
-        $this->official_id = "";
-        $this->view_display_image = null;
-        $this->display_image = null;
-        $this->last_name = "";
-        $this->first_name = "";
-        $this->middle_name = "";
-        $this->suffix_name = "";
-        $this->zone = "";
-        $this->gender = "";
-        $this->phone_no = "";
-        $this->email = "";
-        $this->civil_status = "";
-        $this->birthday = "";
-        $this->position = "";
+        $this->reset(
+            'official_id',
+            'view_display_image',
+            'display_image',
+            'last_name',
+            'first_name',
+            'middle_name',
+            'suffix_name',
+            'zone',
+            'gender',
+            'phone_no',
+            'email',
+            'civil_status',
+            'birthday',
+            'position'
+        );
     }
 
     public function closeModal()
@@ -120,17 +122,17 @@ class BrgyOfficials extends Component
 
         BrgyOfficial::create([
             'display_img' => $display_img_filename,
-            'lname' => ucwords($this->last_name),
-            'fname' => ucwords($this->first_name),
-            'mname' => ucwords($this->middle_name),
-            'sname' => ucwords($this->suffix_name),
+            'lname' => $this->last_name,
+            'fname' => $this->first_name,
+            'mname' => $this->middle_name,
+            'sname' => $this->suffix_name,
             'zone' => $this->zone,
-            'gender' => ucwords($this->gender),
+            'gender' => $this->gender,
             'contact' => $this->phone_no,
             'email' => $this->email,
-            'civil_status' => ucwords($this->civil_status),
+            'civil_status' => $this->civil_status,
             'bday' => $this->birthday,
-            'position' => ucwords($this->position),
+            'position' => $this->position,
         ]);
 
         // $this->dispatchBrowserEvent('add-close-modal', [

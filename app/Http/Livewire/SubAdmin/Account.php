@@ -61,9 +61,9 @@ class Account extends Component
             ],
         ]);
 
-        SubAdmin::where('id', auth()->guard('sub-admin')->user()->id)->update([
-            'username' => $this->username,
-        ]);
+        $sub = SubAdmin::find(auth()->guard('sub-admin')->user()->id);
+        $sub->username = $this->username;
+        $sub->update();
 
         $this->resetErrorBag();
         $this->username_hidden = 'hidden';
@@ -105,9 +105,9 @@ class Account extends Component
             ],
         ]);
 
-        SubAdmin::where('id', auth()->guard('sub-admin')->user()->id)->update([
-            'email' => $this->email,
-        ]);
+        $sub = SubAdmin::find(auth()->guard('sub-admin')->user()->id);
+        $sub->email = $this->email;
+        $sub->update();
 
         $this->resetErrorBag();
         $this->email_hidden = 'hidden';

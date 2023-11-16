@@ -61,9 +61,9 @@ class Account extends Component
             ],
         ]);
 
-        BarangayHealthWorker::where('id', auth()->guard('bhw')->user()->id)->update([
-            'username' => $this->username,
-        ]);
+        $sub = BarangayHealthWorker::find(auth()->guard('bhw')->user()->id);
+        $sub->username = $this->username;
+        $sub->update();
 
         $this->resetErrorBag();
         $this->username_hidden = 'hidden';
@@ -105,9 +105,9 @@ class Account extends Component
             ],
         ]);
 
-        BarangayHealthWorker::where('id', auth()->guard('bhw')->user()->id)->update([
-            'email' => $this->email,
-        ]);
+        $sub = BarangayHealthWorker::find(auth()->guard('bhw')->user()->id);
+        $sub->email = $this->email;
+        $sub->update();
 
         $this->resetErrorBag();
         $this->email_hidden = 'hidden';

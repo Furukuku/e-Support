@@ -102,33 +102,38 @@ class Business extends Authenticatable implements IMustVerifyMobile
             $activity->causer_id = auth()->guard('admin')->user()->id;
             $activity->causer_type = 'Admin';
             // $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' a business account.';
-            if($this->isDirty('is_approved') && $this->is_approved == 1){
-                $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "'s account.";
-            }else if($this->isDirty('is_active')){
-                if($this->is_active == 1){
-                        $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "'s account.";
-                }else{
-                    $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "'s account.";
-                }
+            // if($this->isDirty('is_approved') && $this->is_approved == 1){
+            //     $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' approved ' . $this->username  . "'s account.";
+            // }else if($this->isDirty('is_active')){
+            //     if($this->is_active == 1){
+            //             $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' enabled ' . $this->username  . "'s account.";
+            //     }else{
+            //         $activity->description = Str::endsWith($this->username, 's') ? auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "' account." : auth()->guard('admin')->user()->username . ' disabled ' . $this->username  . "'s account.";
+            //     }
+            // }else{
+            // }
+            if(Str::endsWith($this->username, 's')){
+                $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
             }else{
-                if(Str::endsWith($this->username, 's')){
-                    $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
-                }else{
-                    $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
-                }
+                $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
             }
-        }else if(auth()->guard('sub-admin')->check()){
-            $activity->log_name = 'Business Account';
-            $activity->causer_id = auth()->guard('sub-admin')->user()->id;
-            $activity->causer_type = 'Sub-Admin';
-            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' a business account.';
-        }else if(auth()->guard('business')->check()){
-            // dd('a business owner updated their account.');
-        }else{
-            $activity->log_name = 'New business account ' . $eventName;
-            $activity->causer_id = $this->id;
-            $activity->causer_type = 'Business Owner';
-            $activity->description = $this->username . ' ' . $eventName . ' their account.';
         }
+        // else if(auth()->guard('sub-admin')->check()){
+        //     $activity->log_name = 'Business Account';
+        //     $activity->causer_id = auth()->guard('sub-admin')->user()->id;
+        //     $activity->causer_type = 'Sub-Admin';
+        //     if(Str::endsWith($this->username, 's')){
+        //         $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "' account.";
+        //     }else{
+        //         $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
+        //     }
+        // }else if(auth()->guard('business')->check()){
+
+        // }else{
+        //     $activity->log_name = 'New business account ' . $eventName;
+        //     $activity->causer_id = $this->id;
+        //     $activity->causer_type = 'Business Owner';
+        //     $activity->description = $this->username . ' ' . $eventName . ' their account.';
+        // }
     }
 }

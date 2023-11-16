@@ -86,15 +86,7 @@ class ResidentUsers extends Component
 
         if(!is_null($resident->disable_msg)){
             switch($resident->disable_msg){
-                case 'sample1': $this->reason = $resident->disable_msg;
-                    break;
-                case 'sample2': $this->reason = $resident->disable_msg;
-                    break;
-                case 'sample3': $this->reason = $resident->disable_msg;
-                    break;
-                case 'sample4': $this->reason = $resident->disable_msg;
-                    break;
-                case 'sample5': $this->reason = $resident->disable_msg;
+                case 'You have violated our terms and conditions.': $this->reason = $resident->disable_msg;
                     break;
                 default:
                     $this->reason = 'Other';

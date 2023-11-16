@@ -23,7 +23,8 @@ class Assistance extends Component
 
     public $name, $zone, $need, $purpose, $date, $time, $status;
     public $assistance_id;
-    public $reason;
+
+    public $reason, $other;
 
     public $tab = 0;
 
@@ -45,7 +46,8 @@ class Assistance extends Component
             'time',
             'assistance_id',
             'status',
-            'reason'
+            'reason',
+            'other'
         );
     }
 
@@ -78,12 +80,22 @@ class Assistance extends Component
 
     public function decline()
     {
-        $this->validate([
-            'reason' => ['required', 'string'],
-        ]);
-
         $assistance = ModelsAssistance::find($this->assistance_id);
-        $assistance->reason = $this->reason;
+
+        if($this->reason === 'Other'){
+            $this->validate([
+                'other' => ['required', 'string', 'max:150'],
+            ]);
+
+            $assistance->reason = $this->other;
+        }else{
+            $this->validate([
+                'reason' => ['required', 'string', 'max:150'],
+            ]);
+
+            $assistance->reason = $this->reason;
+        }
+
         $assistance->status = 'Declined';
         $assistance->update();
 
@@ -114,7 +126,7 @@ class Assistance extends Component
                             ->orWhere('zone', 'LIKE', '%' . $res_search . '%');
                     });
             })
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('updated_at', 'asc')
             ->paginate($this->paginate, ['*'], 'assistance');
 
 
@@ -130,7 +142,7 @@ class Assistance extends Component
                             ->orWhere('zone', 'LIKE', '%' . $pending_res_search . '%');
                     });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->pending_paginate, ['*'], 'history');
 
         return view('livewire.admin.assistance', [

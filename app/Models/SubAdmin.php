@@ -60,6 +60,10 @@ class SubAdmin extends Authenticatable
     {
         return LogOptions::defaults()
         ->logFillable()
+        ->dontLogIfAttributesChangedOnly([
+            'password',
+            'remember_token'
+        ])
         ->logOnlyDirty();
     }
 
@@ -67,7 +71,7 @@ class SubAdmin extends Authenticatable
     {
         if(auth()->guard('admin')->check()){
             $admin_username = auth()->guard('admin')->user()->username;
-
+            
             $activity->causer_id = auth()->guard('admin')->user()->id;
             $activity->causer_type = 'Admin';
             // $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username;
@@ -78,26 +82,21 @@ class SubAdmin extends Authenticatable
                 $activity->log_name = $this->position === 'BHW' ? 'BHW account ' . $eventName : 'Barangay official account ' . $eventName;
             }
 
-            if($this->isDirty('is_active')){
-                if($this->is_active == 1){
-                    $activity->description = Str::endsWith($this->username, 's') ? $admin_username . ' enabled ' . $this->username  . "' account." : $admin_username . ' enabled ' . $this->username  . "'s account.";
-                }else{
-                    $activity->description = Str::endsWith($this->username, 's') ? $admin_username . ' disabled ' . $this->username  . "' account." : $admin_username . ' disabled ' . $this->username  . "'s account.";
-                }
-            }else{
-                $activity->description = Str::endsWith($this->username, 's') ? $admin_username . ' ' . $eventName  . ' ' . $this->username . "' account." : $admin_username . ' ' . $eventName  . ' ' . $this->username . "'s account.";
-            }
+            // if($this->isDirty('is_active')){
+            //     if($this->is_active == 1){
+            //         $activity->description = Str::endsWith($this->username, 's') ? $admin_username . ' enabled ' . $this->username  . "' account." : $admin_username . ' enabled ' . $this->username  . "'s account.";
+            //     }else{
+            //         $activity->description = Str::endsWith($this->username, 's') ? $admin_username . ' disabled ' . $this->username  . "' account." : $admin_username . ' disabled ' . $this->username  . "'s account.";
+            //     }
+            // }else{
+            // }
+            $activity->description = Str::endsWith($this->username, 's') ? $admin_username . ' ' . $eventName  . ' ' . $this->username . "' account." : $admin_username . ' ' . $eventName  . ' ' . $this->username . "'s account.";
             
         }else if(auth()->guard('sub-admin')->check()){
-            $activity->log_name = 'Sub-admin';
+            $activity->log_name = $this->position === 'BHW' ? 'BHW account ' . $eventName : 'Barangay official account ' . $eventName;
             $activity->causer_id = auth()->guard('sub-admin')->user()->id;
-            $activity->causer_type = 'Sub-Admin';
-            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' a sub-admin.';
-        }else{
-            $activity->log_name = 'Sub-admin';
-            $activity->causer_id = auth()->guard('web')->user()->id;
-            $activity->causer_type = 'Resident';
-            $activity->description = auth()->guard('web')->user()->username . ' ' . $eventName . ' a sub-admin.';
+            $activity->causer_type = auth()->guard('sub-admin')->user()->position === 'BHW' ? 'BHW' : 'Sub-Admin';
+            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' his/her account.';
         }
     }
 }

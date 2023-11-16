@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\SubAdmin;
 
 use App\Models\Report;
 use Livewire\Component;
@@ -101,7 +101,7 @@ class Reports extends Component
         $totalOngoingReports = Report::where('status', 'Ongoing')->count();
         $totalSolvedReports = Report::where('status', 'Solved')->count();
 
-        return view('livewire.admin.reports', [
+        return view('livewire.sub-admin.reports', [
             'reports' => $reports,
             'totalPendingReports' => $totalPendingReports,
             'totalOngoingReports' => $totalOngoingReports,

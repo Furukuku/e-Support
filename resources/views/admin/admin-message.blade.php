@@ -32,6 +32,22 @@
       });
     });
 
+    window.addEventListener('failed', e => {
+      Toast.fire({
+        icon: 'error',
+        title: e.detail.failed,
+        color: '#fff',
+      });
+    });
+
+    window.addEventListener('passwordConfirm', () => {
+      $('#sendMessage').modal('show');
+    });
+
+    window.addEventListener('close-modal', () => {
+      $('#sendMessage').modal('hide');
+    });
+
   </script>
 
 @endsection

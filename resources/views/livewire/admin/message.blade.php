@@ -5,16 +5,39 @@
       <h2 class="px-3">Message</h2>
     </div>
     <div class="p-5 pb-3">
-      <form wire:submit.prevent="send">
-        @csrf
-        <div class="p-2">
-          <textarea wire:model.defer="message_content" placeholder="Type something..." class="form-control" rows="5"></textarea>
-          @error('message_content') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+      <div class="p-2">
+        <textarea wire:model.defer="message_content" placeholder="Type something..." class="form-control" rows="5"></textarea>
+        @error('message_content') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+      </div>
+      <div class="d-flex justify-content-center py-3">
+        <button type="button" wire:click="confirmSend" wire:loading.class="disabled" class="btn btn-warning rounded-pill px-5">Send</button>
+      </div>
+    </div>
+  </div>
+
+  {{-- Send Modal --}}
+  <div wire:ignore.self class="modal fade" id="sendMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="sendMessageLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0 justify-content-end">
+          <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
+            cancel
+          </span>
         </div>
-        <div class="d-flex justify-content-center py-3">
-          <button type="submit" class="btn btn-warning px-5">Send</button>
+        <div class="modal-body pt-0 px-5">
+          <div class="d-flex justify-content-center mb-3">
+            <span class="material-symbols-outlined fs-1">
+              key
+            </span>
+          </div>
+          <h4 class="text-center mb-4">Password</h4>
+          <input type="password" class="form-control" wire:model.defer="password" placeholder="Enter your password...">
+          @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
         </div>
-      </form>
+        <div class="modal-footer d-flex justify-content-center border-0">
+          <button type="button" wire:click="send" wire:loading.class="disabled" class="btn btn-warning rounded-pill px-5">Send</button>
+        </div>
+      </div>
     </div>
   </div>
 

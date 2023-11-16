@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\BHW;
 
+use App\Models\HealthRecord;
 use App\Models\Patient;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -253,7 +254,7 @@ class Patients extends Component
 
         // $total_patients = Patient::count();
 
-        $today_patients = Patient::whereDate('created_at', today())->count();
+        $today_patients = HealthRecord::whereDate('created_at', today())->count();
 
         return view('livewire.b-h-w.patients', [
             'patients' => $patients,

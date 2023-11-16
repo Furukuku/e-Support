@@ -17,26 +17,22 @@ class AuditLogs extends Component
     public $paginate = 5;
     public $paginate_values = [5, 10, 50, 100];
 
-    // protected $rules = [
-    //     'paginate' => 'integer|required|min:1|max:10',
-    // ];
-
     public $search = '';
 
     public $old, $new, $event;
 
     public $properties;
 
-    // public function mount()
-    // {
-    //     $this->validate([
-    //         'paginate' => 'string|required|min:1|max:10',
-    //     ]);
-    // }
+    public $listeners = ['closeModal'];
 
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function closeModal()
+    {
+        $this->reset('event', 'properties');
     }
 
     public function view(Activity $activity)

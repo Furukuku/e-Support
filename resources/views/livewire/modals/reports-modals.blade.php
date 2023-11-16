@@ -24,7 +24,7 @@
             @isset($report_imgs)
             <h5 class="px-0"><strong>Images</strong></h5>
               @foreach ($report_imgs as $image)
-                <img src="{{ Storage::url($image->image) }}" class="object-fit-contain border rounded" alt="image" style="max-width: 100%;">
+                <img src="{{ Storage::url($image->image) }}" class="object-fit-contain border rounded mb-2" alt="image" style="max-width: 100%;">
               @endforeach
             @endisset
           </div>

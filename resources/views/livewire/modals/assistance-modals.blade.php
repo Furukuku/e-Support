@@ -42,8 +42,8 @@
       </div>
       @if ($status === 'Pending')
         <div class="modal-footer justify-content-end">
-          <button type="button" wire:click="approve" wire:loading.attr="disabled" class="btn btn-warning">Approve</button>
           <button type="button" wire:click="declineConfirmation" wire:loading.attr="disabled" class="btn btn-danger">Decline</button>
+          <button type="button" wire:click="approve" wire:loading.attr="disabled" class="btn btn-warning">Approve</button>
         </div>
       @elseif ($status === 'Approved')
         <div class="modal-footer justify-content-center">
@@ -66,10 +66,18 @@
         </span>
       </div>
       <div class="modal-body p-3">
-        <div>
+        <div class="p-3">
           <label for="reason" class="form-label">Reason</label>
-          <textarea wire:model.defer="reason" id="reason" class="form-control" rows="3"></textarea>
+          <select id="reason" wire:model="reason" class="form-select">
+            <option value="">Choose one...</option>
+            <option value="Service is not available.">Service is not available.</option>
+            <option value="Other">Other</option>
+          </select>
           @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @if ($reason === 'Other')
+            <textarea id="other" wire:model.defer="other" class="form-control mt-3" rows="3"></textarea>
+            @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @endif
         </div>
       </div>
       <div class="modal-footer justify-content-center border-0">

@@ -80,15 +80,7 @@ class BusinessUsers extends Component
 
         if(!is_null($business->disable_msg)){
             switch($business->disable_msg){
-                case 'sample1': $this->reason = $business->disable_msg;
-                    break;
-                case 'sample2': $this->reason = $business->disable_msg;
-                    break;
-                case 'sample3': $this->reason = $business->disable_msg;
-                    break;
-                case 'sample4': $this->reason = $business->disable_msg;
-                    break;
-                case 'sample5': $this->reason = $business->disable_msg;
+                case 'You have violated our terms and conditions.': $this->reason = $business->disable_msg;
                     break;
                 default:
                     $this->reason = 'Other';

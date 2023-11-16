@@ -38,15 +38,10 @@ class Program extends Model
             $activity->causer_type = 'Admin';
             $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->title . ' program.';
         }else if(auth()->guard('sub-admin')->check()){
-            $activity->log_name = 'Program';
+            $activity->log_name = $this->wasRecentlyCreated ? 'New program ' . $eventName : 'Program ' . $eventName;
             $activity->causer_id = auth()->guard('sub-admin')->user()->id;
-            $activity->causer_type = 'Sub-Admin';
-            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' a program.';
-        }else{
-            $activity->log_name = 'Program';
-            $activity->causer_id = auth()->guard('web')->user()->id;
-            $activity->causer_type = 'Resident';
-            $activity->description = auth()->guard('web')->user()->username . ' ' . $eventName . ' a program.';
+            $activity->causer_type = auth()->guard('sub-admin')->user()->position === 'BHW' ? 'BHW' : 'Sub-Admin';
+            $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->title . ' program.';
         }
     }
 }

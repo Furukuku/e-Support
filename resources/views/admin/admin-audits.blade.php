@@ -5,3 +5,15 @@
   @livewire('admin.audit-logs')
 
 @endsection
+
+@section('script')
+
+  <script>
+
+    $('#viewActivity').on('hidden.bs.modal', () => {
+      Livewire.emit('closeModal');
+    });
+
+  </script>
+
+@endsection
