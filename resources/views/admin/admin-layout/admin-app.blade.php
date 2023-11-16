@@ -105,7 +105,7 @@
             <li class="nav-item">
               <a href="{{ route('admin.manage.approval') }}" id="approval" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.manage.approval') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
-                  <p class="col-12 m-0 ms-3 ps-5">User Approval</p>
+                  <p class="col-12 m-0 ms-3 ps-5">Business Approval</p>
                 </div>
               </a>
             </li>

@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header header-bg py-2">
-        <h1 class="modal-title fs-5" id="viewBusinessLabel">View Pre-registered Resident</h1>
+        <h1 class="modal-title fs-5" id="viewBusinessLabel">View Business</h1>
         <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
           cancel
         </span>
@@ -18,33 +18,39 @@
               @endisset
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Business Name</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Business Name: <span class="fw-normal">{{ $business_name }}</span></p>
+                <p class="m-0 text-break">{{ $business_name }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Business Owner</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Business Owner: <span class="fw-normal">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</span></p>
+                <p class="m-0 text-break">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Business Nature</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Business Nature: <span class="fw-normal">{{ $business_nature }}</span></p>
+                <p class="m-0 text-break">{{ $business_nature }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Business Address</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Business Address: <span class="fw-normal">{{ $business_address }}</span></p>
+                <p class="m-0 text-break">{{ $business_address }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Email</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Email: <span class="fw-normal">{{ $email }}</span></p>
+                <p class="m-0 text-break">{{ $email }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Phone no.</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Phone no.: <span class="fw-normal">{{ $contact }}</span></p>
+                <p class="m-0 text-break">{{ $contact }}</p>
               </div>
             </div>
           </div>
@@ -80,6 +86,25 @@
                 </select>
                 @error('status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
+              @if ($status == false)
+                <div class="row-auto mb-3">
+                  <label for="reason" class="form-label">Reason</label>
+                  <select id="reason" wire:model="reason" class="form-select">
+                    <option value="">Choose one...</option>
+                    <option value="sample1">sample1</option>
+                    <option value="sample2">sample2</option>
+                    <option value="sample3">sample3</option>
+                    <option value="sample4">sample4</option>
+                    <option value="sample5">sample5</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @if ($reason === 'Other')
+                    <textarea id="other" wire:model.defer="other" class="form-control mt-3" rows="3"></textarea>
+                    @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @endif
+                </div>
+              @endif
             </div>
           </div>
         </div>

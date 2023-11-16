@@ -17,11 +17,13 @@ class CheckIfResidentAccountIsActive
     public function handle(Request $request, Closure $next): Response
     {
         if($request->user() && $request->user()->is_active == false){
+            $msg = !is_null($request->user()->disable_msg) ? $request->user()->disable_msg : 'Your account has been disabled.';
+
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
             
-            return redirect()->route('resident.login')->with('disabled' , 'Your account has been disabled.');
+            return redirect()->route('resident.login')->with('disabled', $msg);
         }
 
         if($request->user() && $request->user()->is_active == true){

@@ -23,7 +23,7 @@ class ResidentApproval extends Component
 
     public $resident_id;
 
-    public $head_id, $head_fullname;
+    public $reason, $other;
 
     public function closeModal()
     {
@@ -43,8 +43,8 @@ class ResidentApproval extends Component
             'gender',
             'resident_verification_img',
             'resident_id',
-            'head_id',
-            'head_fullname',
+            'reason',
+            'other'
         );
     }
 
@@ -130,6 +130,7 @@ class ResidentApproval extends Component
     public function approve()
     {
         $resident = User::find($this->resident_id);
+        $resident->decline_msg = null;
         $resident->is_approved = true;
         $resident->update();
         $this->dispatchBrowserEvent('close-modal');
@@ -150,16 +151,30 @@ class ResidentApproval extends Component
     //     $this->closeModal();
     // }
 
-    public function declineResidentConfirm(User $resident)
+    public function declineResidentConfirm()
     {
-        $this->resident_id = $resident->id;
         $this->dispatchBrowserEvent('declineConfirm');
     }
 
     public function decline()
     {
         $user = User::find($this->resident_id);
-        $user = 
+        if($this->reason === 'Other'){
+            $this->validate([
+                'other' => ['required', 'string', 'max:100']
+            ]);
+
+            $user->decline_msg = $this->other;
+        }else {
+            $this->validate([
+                'reason' => ['required', 'string', 'max:100']
+            ]);
+
+            $user->decline_msg = $this->reason;
+        }
+
+        $user->is_approved = false;
+        $user->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
@@ -168,6 +183,7 @@ class ResidentApproval extends Component
     public function render()
     {
         $residents = User::where('is_approved', false)
+            ->where('decline_msg', null)
             ->where(function ($query) {
                 $query->where('lname', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('fname', 'LIKE', '%' . $this->search . '%')

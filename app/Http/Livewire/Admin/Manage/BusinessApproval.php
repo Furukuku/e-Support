@@ -22,6 +22,8 @@ class BusinessApproval extends Component
 
     public $business_id;
 
+    public $reason, $other;
+
     protected $listeners = ['closeModal'];
 
     public function updatingSearch()
@@ -31,18 +33,22 @@ class BusinessApproval extends Component
 
     public function resetVariables()
     {
-        $this->profile_image = null;
-        $this->last_name = '';
-        $this->first_name = '';
-        $this->middle_name = '';
-        $this->suffix_name = '';
-        $this->email = '';
-        $this->contact = '';
-        $this->business_id = '';
-        $this->business_name = '';
-        $this->business_clearance = null;
-        $this->business_address = '';
-        $this->business_nature = '';
+        $this->reset(
+            'profile_image',
+            'last_name',
+            'first_name',
+            'middle_name',
+            'suffix_name',
+            'email',
+            'contact',
+            'business_id',
+            'business_name',
+            'business_clearance',
+            'business_address',
+            'business_nature',
+            'reason',
+            'other'
+        );
     }
 
     public function closeModal()
@@ -53,6 +59,7 @@ class BusinessApproval extends Component
     public function viewBusiness($id)
     {
         $business = Business::find($id);
+        $this->business_id = $business->id;
         $this->profile_image = $business->profile;
         $this->business_name = $business->biz_name;
         $this->business_address = $business->biz_address;
@@ -62,51 +69,94 @@ class BusinessApproval extends Component
         $this->middle_name = $business->mname;
         $this->suffix_name = $business->sname;
         $this->email = $business->email;
-        $this->contact = $business->contact;
-    }
-
-    public function showBizVerification($id)
-    {
-        $business = Business::find($id);
-        $this->business_id = $business->id;
+        $this->contact = $business->mobile;
         $this->business_clearance = $business->biz_clearance;
     }
 
-    public function acceptBusiness()
+    public function approve()
     {
         $business = Business::find($this->business_id);
+        $business->decline_msg = null;
         $business->is_approved = true;
         $business->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        $this->resetVariables();
+        $this->closeModal();
     }
 
-    public function declineBusiness()
+    public function declineBusinessConfirm()
     {
-        Business::find($this->business_id)->delete();
+        $this->dispatchBrowserEvent('declineConfirm');
+    }
+
+    public function decline()
+    {
+        $business = Business::find($this->business_id);
+
+        if($this->reason === 'Other'){
+            $this->validate([
+                'other' => ['required', 'string', 'max:150']
+            ]);
+
+            $business->decline_msg = $this->other;
+        }else {
+            $this->validate([
+                'reason' => ['required', 'string', 'max:150']
+            ]);
+
+            $business->decline_msg = $this->reason;
+        }
+
+        $business->is_approved = false;
+        $business->update();
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
+    }
+
+    // public function showBizVerification($id)
+    // {
+    //     $business = Business::find($id);
+    //     $this->business_id = $business->id;
+    //     $this->business_clearance = $business->biz_clearance;
+    // }
+
+    // public function acceptBusiness()
+    // {
+    //     $business = Business::find($this->business_id);
+    //     $business->is_approved = true;
+    //     $business->update();
+
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->resetVariables();
+    // }
+
+    // public function declineBusiness()
+    // {
+    //     Business::find($this->business_id)->delete();
         
-        $this->dispatchBrowserEvent('close-modal');
-        $this->resetVariables();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->resetVariables();
+    // }
 
-    public function archiveBizConfirmation($id)
-    {
-        $business = Business::find($id);
-        $this->business_id = $business->id;
-    }
+    // public function archiveBizConfirmation($id)
+    // {
+    //     $business = Business::find($id);
+    //     $this->business_id = $business->id;
+    // }
 
-    public function archiveBusiness()
-    {
-        Business::find($this->business_id)->delete();
+    // public function archiveBusiness()
+    // {
+    //     Business::find($this->business_id)->delete();
 
-        $this->dispatchBrowserEvent('close-modal');
-        $this->resetVariables();
-    }
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->resetVariables();
+    // }
 
     public function render()
     {
         $businesses = Business::where('is_approved', false)
+            ->where('decline_msg', null)
             ->where(function (Builder $query) {
                 $query->where('lname', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('fname', 'LIKE', '%' . $this->search . '%')

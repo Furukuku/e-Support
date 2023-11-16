@@ -134,6 +134,9 @@
                   display: true,
                   text: 'Residents',
                   padding: 20,
+                },
+                ticks: {
+                  precision: 0
                 }
               },
               x: {
@@ -372,6 +375,9 @@
                   display: true,
                   text: 'Incidents',
                   padding: 10,
+                },
+                ticks: {
+                  precision: 0
                 }
               },
               x: {

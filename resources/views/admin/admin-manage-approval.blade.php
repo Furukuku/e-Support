@@ -2,7 +2,7 @@
 
 @section('content')
 
-  @livewire('admin.manage.resident-approval')
+  @livewire('admin.manage.business-approval')
 
 @endsection
 
@@ -14,15 +14,21 @@
       Livewire.emit('closeModal');
     });
 
-    $('#viewBusiness').on('hidden.bs.modal', function (e) {
-      Livewire.emit('closeModal');
-    });
+    // $('#viewBusiness').on('hidden.bs.modal', function (e) {
+    //   Livewire.emit('closeModal');
+    // });
     
     window.addEventListener('close-modal', () => {
+      $('#viewBusiness').modal('hide');
+      $('#declineConfirm').modal('hide');
       $('#showVerification').modal('hide');
       $('#archiveResident').modal('hide');
       $('#showBizVerification').modal('hide');
       $('#archiveBusiness').modal('hide');
+    });
+
+    window.addEventListener('declineConfirm', () => {
+      $('#declineConfirm').modal('show');
     });
 
 

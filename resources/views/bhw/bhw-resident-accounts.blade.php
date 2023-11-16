@@ -16,6 +16,7 @@
       $('#headOrNot').modal('hide');
       $('#updateResidentAcc').modal('hide');
       $('#declineConfirm').modal('hide');
+      $('#declinedResident').modal('hide');
     });
 
     window.addEventListener('headSuggest', () => {

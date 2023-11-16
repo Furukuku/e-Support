@@ -21,11 +21,12 @@ class ResidentUsers extends Component
 
     protected $listeners = ['closeModal'];
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender;
+    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $resident_verification_img;
 
     public $resident_id;
 
     public $status;
+    public $reason, $other;
 
     public function updatingSearch()
     {
@@ -34,19 +35,24 @@ class ResidentUsers extends Component
 
     public function resetVariables()
     {
-        $this->resident_id = '';
-        $this->profile_image = '';
-        $this->last_name = '';
-        $this->first_name = '';
-        $this->middle_name = '';
-        $this->suffix_name = '';
-        $this->birthday = '';
-        $this->email = '';
-        $this->contact = '';
-        $this->zone = '';
-        $this->employment_status = '';
-        $this->gender = '';
-        $this->status = '';
+        $this->reset(
+            'profile_image',
+            'last_name',
+            'first_name',
+            'middle_name',
+            'suffix_name',
+            'birthday',
+            'email',
+            'contact',
+            'zone',
+            'employment_status',
+            'gender',
+            'resident_id',
+            'resident_verification_img',
+            'status',
+            'reason',
+            'other'
+        );
     }
 
     public function closeModal()
@@ -64,10 +70,11 @@ class ResidentUsers extends Component
         $this->suffix_name = $resident->sname;
         $this->birthday = $resident->bday;
         $this->email = $resident->email;
-        $this->contact = $resident->contact;
+        $this->contact = $resident->mobile;
         $this->zone = $resident->zone;
         $this->employment_status = $resident->is_employed;
         $this->gender = $resident->gender;
+        $this->resident_verification_img = $resident->verification_img;
     }
 
     public function editResident($id)
@@ -76,41 +83,76 @@ class ResidentUsers extends Component
         
         $this->resident_id = $resident->id;
         $this->status = $resident->is_active;
+
+        if(!is_null($resident->disable_msg)){
+            switch($resident->disable_msg){
+                case 'sample1': $this->reason = $resident->disable_msg;
+                    break;
+                case 'sample2': $this->reason = $resident->disable_msg;
+                    break;
+                case 'sample3': $this->reason = $resident->disable_msg;
+                    break;
+                case 'sample4': $this->reason = $resident->disable_msg;
+                    break;
+                case 'sample5': $this->reason = $resident->disable_msg;
+                    break;
+                default:
+                    $this->reason = 'Other';
+            }
+    
+            if($this->reason === 'Other'){
+                $this->other = $resident->disable_msg;
+            }
+        }
     }
 
     public function updateResident()
     {
-        $validated = $this->validate([
-            'status' => 'required|integer|max:1'
-        ]);
+        $resident = User::find($this->resident_id);
+        
+        if($this->status == false){
+            if($this->reason === 'Other'){
+                $this->validate([
+                    'other' => 'required|string|max:100',
+                ]);
+                
+                $resident->disable_msg = $this->other;
+            }else{
+                $this->validate([
+                    'reason' => 'required|string|max:100',
+                ]);
+                
+                $resident->disable_msg = $this->reason;
+            }
+        }else{
+            $this->validate([
+                'status' => 'required|boolean'
+            ]);
 
-        if($validated){
-            $converted_status = intval($this->status);
-            
-            $resident = User::find($this->resident_id);
-    
-            $resident->is_active = $converted_status;
-            $resident->update();
-    
-            $this->dispatchBrowserEvent('close-modal');
-            $this->resetVariables();
-            $this->resetErrorBag();
+            $resident->disable_msg = null;
         }
-    }
-
-    public function archiveConfirmation($id)
-    {
-        $resident = User::find($id);
-        $this->resident_id = $resident->id;
-    }
-
-    public function archiveResident()
-    {
-        User::find($this->resident_id)->delete();
+        
+        $resident->is_active = $this->status;
+        $resident->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
+        $this->resetErrorBag();
     }
+
+    // public function archiveConfirmation($id)
+    // {
+    //     $resident = User::find($id);
+    //     $this->resident_id = $resident->id;
+    // }
+
+    // public function archiveResident()
+    // {
+    //     User::find($this->resident_id)->delete();
+
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->resetVariables();
+    // }
 
     public function render()
     {

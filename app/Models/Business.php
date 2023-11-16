@@ -43,9 +43,12 @@ class Business extends Authenticatable implements IMustVerifyMobile
         'mobile_verify_code',
         'mobile_verify_code_exp',
         'is_approved',
+        'is_active',
         'username',
         'email',
         'password',
+        'decline_msg',
+        'disable_msg',
     ];
 
     /**

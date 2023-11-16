@@ -17,11 +17,13 @@ class CheckIfCompanyApproved
     public function handle(Request $request, Closure $next): Response
     {
         if($request->user() && $request->user()->is_approved == false){
+            $msg = !is_null($request->user()->decline_msg) ? $request->user()->decline_msg : 'Your account has not been approved yet. Please wait for the barangay to approve your account.';
+
             Auth::guard('business')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
             
-            return redirect()->route('resident.login')->with('for-approval', 'Your account has not approved yet.');
+            return redirect()->route('resident.login')->with('for-approval', $msg);
         }
 
         if($request->user() && $request->user()->is_approved == true){

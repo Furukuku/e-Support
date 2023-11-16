@@ -5,6 +5,7 @@
       <select wire:model="category" class="form-select">
         <option value="0">Accounts</option>
         <option value="1">Approval</option>
+        {{-- <option value="2">Declined</option> --}}
       </select>
     </div>
   </div>
@@ -78,6 +79,8 @@
   </div>
   @elseif ($category == 1)
     @livewire('b-h-w.resident-approval')
+  {{-- @elseif ($category == 2)
+    @livewire('b-h-w.declined-resident') --}}
   @endif
 
 

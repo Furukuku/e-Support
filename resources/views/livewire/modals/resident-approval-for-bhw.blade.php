@@ -17,38 +17,45 @@
               @endisset
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Full Name</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Full Name: <span class="fw-normal">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</span></p>
+                <p class="m-0 text-break">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Birthday</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Birthday: <span class="fw-normal">{{ $birthday }}</span></p>
+                <p class="m-0 text-break">{{ $birthday }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Email</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Email: <span class="fw-normal">{{ $email }}</span></p>
+                <p class="m-0 text-break">{{ $email }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Phone no.</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Phone no.: <span class="fw-normal">{{ $contact }}</span></p>
+                <p class="m-0 text-break">{{ $contact }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Zone</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Zone: <span class="fw-normal">{{ $zone }}</span></p>
+                <p class="m-0 text-break">{{ $zone }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Employment Status</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Employment Status: <span class="fw-normal">{{ $employment_status == true ? 'Employed' : 'Unemployed' }}</span></p>
+                <p class="m-0 text-break">{{ $employment_status == true ? 'Employed' : 'Unemployed' }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Gender</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Gender: <span class="fw-normal">{{ $gender }}</span></p>
+                <p class="m-0 text-break">{{ $gender }}</p>
               </div>
             </div>
             <div class="row-auto">
@@ -62,7 +69,7 @@
         </div>
       </div>
       <div class="modal-footer d-flex gap-2 justify-content-end border-0 px-4">
-        {{-- <button type="button" class="btn btn-danger rounded" wire:loading.class="disabled" wire:click="declineResidentConfirm" data-bs-dismiss="modal">Decline</button> --}}
+        <button type="button" class="btn btn-danger rounded" wire:loading.class="disabled" wire:click="declineResidentConfirm" data-bs-dismiss="modal">Decline</button>
         <button type="button" wire:click="approve" wire:loading.class="disabled" class="btn btn-warning rounded">Approve</button>
       </div>
     </div>
@@ -118,24 +125,38 @@
 </div> --}}
 
 
-<!-- Archive Modal -->
+<!-- Decline Modal -->
 <div wire:ignore.self class="modal fade" id="declineConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="declineConfirmLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header border-0 pb-0 justify-content-end">
+      <div class="modal-header header-bg py-2">
+        <h1 class="modal-title fs-5" id="declineConfirmLabel">Decline Resident</h1>
         <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
           cancel
         </span>
       </div>
       <div class="modal-body pt-0">
-        <div>
-          <label for="reason">Reason</label>
-          
+        <div class="p-3">
+          <label for="reason" class="form-label">Reason</label>
+          <select id="reason" wire:model="reason" class="form-select">
+            <option value="">Choose one...</option>
+            <option value="Your id must be valid (not expired) with a validity period indicated in your id.">Your id must be valid (not expired) with a validity period indicated in your id.</option>
+            <option value="Your id name does not match in your account.">Your id name does not match in your account.</option>
+            <option value="Your id is not clear or visible.">Your id is not clear or visible.</option>
+            <option value="ID is not valid,  you may need to submit another id aside from the initial id you submitted.">ID is not valid,  you may need to submit another id aside from the initial id you submitted.</option>
+            <option value="Unclear account information.">Unclear account information.</option>
+            <option value="Other">Other</option>
+          </select>
+          @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @if ($reason === 'Other')
+            <textarea id="other" wire:model.defer="other" class="form-control mt-3" rows="3"></textarea>
+            @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @endif
         </div>
       </div>
-      <div class="modal-footer d-flex justify-content-center border-0">
-        <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" wire:loading.class="disabled" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" wire:click="reject" wire:loading.class="disabled" class="btn btn-danger px-4 mx-3">Archive</button>
+      <div class="modal-footer d-flex gap-2 justify-content-end">
+        <button type="button" class="btn btn-secondary px-4" wire:click="closeModal" wire:loading.class="disabled" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" wire:click="decline" wire:loading.class="disabled" class="btn btn-danger px-4">Decline</button>
       </div>
     </div>
   </div>

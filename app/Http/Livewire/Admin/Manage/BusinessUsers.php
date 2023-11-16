@@ -24,6 +24,7 @@ class BusinessUsers extends Component
     public $business_id;
 
     public $status;
+    public $reason, $other;
 
     public function updatingSearch()
     {
@@ -32,18 +33,22 @@ class BusinessUsers extends Component
 
     public function resetVariables()
     {
-        $this->profile_image = '';
-        $this->last_name = '';
-        $this->first_name = '';
-        $this->middle_name = '';
-        $this->suffix_name = '';
-        $this->email = '';
-        $this->contact = '';
-        $this->business_id = '';
-        $this->business_name = '';
-        $this->business_clearance = '';
-        $this->business_address = '';
-        $this->business_nature = '';
+        $this->reset(
+            'profile_image',
+            'last_name',
+            'first_name',
+            'middle_name',
+            'suffix_name',
+            'email',
+            'contact',
+            'business_id',
+            'business_name',
+            'business_clearance',
+            'business_address',
+            'business_nature',
+            'reason',
+            'other'
+        );
     }
 
     public function closeModal()
@@ -72,41 +77,76 @@ class BusinessUsers extends Component
         
         $this->business_id = $business->id;
         $this->status = $business->is_active;
+
+        if(!is_null($business->disable_msg)){
+            switch($business->disable_msg){
+                case 'sample1': $this->reason = $business->disable_msg;
+                    break;
+                case 'sample2': $this->reason = $business->disable_msg;
+                    break;
+                case 'sample3': $this->reason = $business->disable_msg;
+                    break;
+                case 'sample4': $this->reason = $business->disable_msg;
+                    break;
+                case 'sample5': $this->reason = $business->disable_msg;
+                    break;
+                default:
+                    $this->reason = 'Other';
+            }
+    
+            if($this->reason === 'Other'){
+                $this->other = $business->disable_msg;
+            }
+        }
     }
 
     public function updateBusiness()
     {
-        $validated = $this->validate([
-            'status' => 'required|integer|max:1'
-        ]);
+        $business = Business::find($this->business_id);
 
-        if($validated){
-            $converted_status = intval($this->status);
-            
-            $business = Business::find($this->business_id);
-    
-            $business->is_active = $converted_status;
-            $business->update();
-    
-            $this->dispatchBrowserEvent('close-modal');
-            $this->resetVariables();
-            $this->resetErrorBag();
+        if($this->status == false){
+            if($this->reason === 'Other'){
+                $this->validate([
+                    'other' => 'required|string|max:100',
+                ]);
+                
+                $business->disable_msg = $this->other;
+            }else{
+                $this->validate([
+                    'reason' => 'required|string|max:100',
+                ]);
+                
+                $business->disable_msg = $this->reason;
+            }
+        }else{
+            $this->validate([
+                'status' => 'required|boolean'
+            ]);
+
+            $business->disable_msg = null;
         }
-    }
-
-    public function archiveBizConfirmation($id)
-    {
-        $business = Business::find($id);
-        $this->business_id = $business->id;
-    }
-
-    public function archiveBusiness()
-    {
-        Business::find($this->business_id)->delete();
+        
+        $business->is_active = $this->status;
+        $business->update();
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
+        $this->resetErrorBag();
     }
+
+    // public function archiveBizConfirmation($id)
+    // {
+    //     $business = Business::find($id);
+    //     $this->business_id = $business->id;
+    // }
+
+    // public function archiveBusiness()
+    // {
+    //     Business::find($this->business_id)->delete();
+
+    //     $this->dispatchBrowserEvent('close-modal');
+    //     $this->resetVariables();
+    // }
 
     public function render()
     {

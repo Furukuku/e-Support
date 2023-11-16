@@ -14,43 +14,55 @@
           <div class="col mt-4">
             <div class="mb-3 d-flex justify-content-center">
               @isset($profile_image)
-                <img class="rounded-pill view-image" src="{{ Storage::url($profile_image) }}" alt="photo">
+                <img class="rounded-pill object-fit-contain view-image" src="{{ Storage::url($profile_image) }}" alt="photo">
               @endisset
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Full Name</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Full Name: <span class="fw-normal">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</span></p>
+                <p class="m-0 text-break">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Birthday</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Birthday: <span class="fw-normal">{{ $birthday }}</span></p>
+                <p class="m-0 text-break">{{ $birthday }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Email</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Email: <span class="fw-normal">{{ $email }}</span></p>
+                <p class="m-0 text-break">{{ $email }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Phone no.</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Phone no.: <span class="fw-normal">{{ $contact }}</span></p>
+                <p class="m-0 text-break">{{ $contact }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Zone</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Zone: <span class="fw-normal">{{ $zone }}</span></p>
+                <p class="m-0 text-break">{{ $zone }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Employment Status</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Employment Status: <span class="fw-normal">{{ $employment_status == true ? 'Employed' : 'Unemployed' }}</span></p>
+                <p class="m-0 text-break">{{ $employment_status == true ? 'Employed' : 'Unemployed' }}</p>
               </div>
             </div>
             <div class="row-auto mb-3">
+              <p class="m-0 fw-semibold">Gender</p>
               <div class="border rounded align-items-center p-2">
-                <p class="m-0 fw-bold">Gender: <span class="fw-normal">{{ $gender }}</span></p>
+                <p class="m-0 text-break">{{ $gender }}</p>
               </div>
+            </div>
+            <div class="row-auto mb-3 border rounded">
+              @isset($resident_verification_img)
+                <img class="rounded object-fit-contain w-100" style="height: 15rem;" src="{{ Storage::url($resident_verification_img) }}" alt="photo">
+              @endisset
             </div>
           </div>
         </div>
@@ -86,6 +98,25 @@
                 </select>
                 @error('status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
+              @if ($status == false)
+                <div class="row-auto mb-3">
+                  <label for="reason" class="form-label">Reason</label>
+                  <select id="reason" wire:model="reason" class="form-select">
+                    <option value="">Choose one...</option>
+                    <option value="sample1">sample1</option>
+                    <option value="sample2">sample2</option>
+                    <option value="sample3">sample3</option>
+                    <option value="sample4">sample4</option>
+                    <option value="sample5">sample5</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @if ($reason === 'Other')
+                    <textarea id="other" wire:model.defer="other" class="form-control mt-3" rows="3"></textarea>
+                    @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                  @endif
+                </div>
+              @endif
             </div>
           </div>
         </div>

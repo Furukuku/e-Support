@@ -67,7 +67,7 @@
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewBusiness({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#viewBusiness"></i>
                 <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:loading.class="pe-none" wire:click="editBusiness({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#updateBusiness"></i>
-                <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="archiveBizConfirmation({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#archiveBusiness"></i>
+                {{-- <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="archiveBizConfirmation({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#archiveBusiness"></i> --}}
               </td>
             </tr>
           @empty

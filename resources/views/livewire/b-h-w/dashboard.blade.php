@@ -126,6 +126,9 @@
                   display: true,
                   text: 'Residents',
                   padding: 20,
+                },
+                ticks: {
+                  precision: 0
                 }
               },
               x: {

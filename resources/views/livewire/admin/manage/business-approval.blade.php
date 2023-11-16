@@ -1,4 +1,4 @@
-<div class="w-100 d-flex justify-content-center">
+<div class="w-100 d-flex justify-content-center py-5">
 
   @include('livewire.modals.users-approval-businesses-modals')
 
@@ -55,10 +55,10 @@
               <td class="align-middle text-center">{{ $business->mobile }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewBusiness({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#viewBusiness"></i>
-                <span class="material-symbols-outlined align-middle search-icon" wire:loading.class="pe-none" wire:click="showBizVerification({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#showBizVerification">
+                {{-- <span class="material-symbols-outlined align-middle search-icon" wire:loading.class="pe-none" wire:click="showBizVerification({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#showBizVerification">
                   quick_reference_all
                 </span>
-                <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="archiveBizConfirmation({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#archiveBusiness"></i>
+                <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:loading.class="pe-none" wire:click="archiveBizConfirmation({{ $business->id }})" data-bs-toggle="modal" data-bs-target="#archiveBusiness"></i> --}}
               </td>
             </tr>
           @empty
