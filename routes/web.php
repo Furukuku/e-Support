@@ -43,6 +43,7 @@ Route::middleware(['guest:web', 'guest:business'])->group(function(){
     Route::view('/terms-and-conditions', 'auth.users.agreements.terms-conditions')->name('terms-conditions');
 
     Route::view('/register-company', 'auth.users.register-company')->name('company.register');
+    Route::view('/business/terms-and-conditions', 'auth.users.business-agreements.terms-conditions')->name('business.terms-conditions');
 
     Route::view('/forgot-password', 'auth.users.forgot-password')->name('users.forgot-password');
     Route::post('/forgotPassword', [ResetPasswordController::class, 'sendLink'])->name('users.password-reset.send-link');

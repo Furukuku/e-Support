@@ -70,11 +70,13 @@
                 @error('employment_status') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
             </div>
-            <div class="d-flex justify-content-start gap-2 form-check">
-              <input type="checkbox" wire:model.defer="agreement" id="terms-condition" class="form-check-input">
-              <label class="form-check-label" for="terms-condition"><small>I agree to the <a href="{{ route('terms-conditions') }}">Terms & Conditions</a> and <a href="{{ route('privacy-policy') }}">Privacy Policy</a>.</small></label>
+            <div class="mb-3">
+              <div class="d-flex justify-content-start gap-2 form-check">
+                <input type="checkbox" wire:model.defer="agreement" id="terms-condition" class="form-check-input">
+                <label class="form-check-label" for="terms-condition"><small>I agree to the <a href="{{ route('terms-conditions') }}">Terms & Conditions</a> and <a href="{{ route('privacy-policy') }}">Privacy Policy</a>.</small></label>
+              </div>
+              @error('agreement') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
-            @error('agreement') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
           </div>
         @elseif ($currentPage === 2)
           <div class="col">

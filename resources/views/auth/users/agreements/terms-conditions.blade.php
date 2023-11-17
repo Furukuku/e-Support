@@ -4,17 +4,14 @@
 
   <div>
     <div class="bg-white px-5 py-3 shadow-sm privacy-header">
-      <div class="d-flex align-items-center gap-2 privacy-brgy-logo-container">
-        <img class="rounded-circle privacy-brgy-logo" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="logo">
-        <h5 class="opacity-75">e-Support</h5>
+      <div class="d-flex align-items-center privacy-brgy-logo-container">
+        <a href="{{ route('resident.register') }}" class="text-dark d-flex gap-2 align-items-center" style="text-decoration: none;">
+          <img class="rounded-circle privacy-brgy-logo" src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" alt="logo">
+          <h5 class="opacity-75">e-Support</h5>
+        </a>
       </div>
       <div class="d-flex justify-content-center align-items-center mb-4">
-        <div class="position-relative">
-          <a href="{{ route('resident.register') }}" class="text-dark position-absolute top-50 translate-middle" style="left: -1.5rem;">
-            <span class="material-symbols-outlined align-middle">arrow_back_ios</span>
-          </a>
-          <h3 class="text-center m-0">Terms and Conditions</h3>
-        </div>
+        <h3 class="text-center m-0">Terms and Conditions</h3>
       </div>
       <div class="d-flex justify-content-center privacy-icon">
         <span class="material-symbols-outlined">contract</span>

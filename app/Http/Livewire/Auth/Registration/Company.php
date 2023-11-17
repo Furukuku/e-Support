@@ -18,6 +18,8 @@ class Company extends Component
 
     public $mobile;
 
+    public $agreement;
+
     public $currentPage = 1;
 
     private $validations = [
@@ -26,6 +28,7 @@ class Company extends Component
             'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
             'suffix_name' => 'nullable|string|max:255',
+            'agreement' => 'accepted',
         ],
         2 => [
             'email' => 'required|email|unique:businesses|unique:users|unique:barangay_health_workers|unique:sub_admins|unique:admins|max:255',

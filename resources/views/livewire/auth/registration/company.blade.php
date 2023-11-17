@@ -43,6 +43,13 @@
                 <input wire:model.defer="suffix_name" id="company-sname" type="text" class="form-control">
                 @error('suffix_name') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
+              <div class="col-12 mb-3">
+                <div class="d-flex gap-2">
+                  <input type="checkbox" wire:model.defer="agreement" id="terms-condition" class="form-check-input">
+                  <label class="form-check-label" for="terms-condition"><small>I agree to the <a href="{{ route('business.terms-conditions') }}">Terms & Conditions</a> and <a href="{{ route('privacy-policy') }}">Privacy Policy</a>.</small></label>
+                </div>
+                @error('agreement') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              </div>
             </div>
           </div>
         @elseif ($currentPage === 2)
