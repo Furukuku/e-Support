@@ -48,6 +48,7 @@ class ArchivedResidentUsers extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User restored successfully']);
     }
 
     public function permanentlyDelConfirmation($id)

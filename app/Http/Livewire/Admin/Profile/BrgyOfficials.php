@@ -142,9 +142,9 @@ class BrgyOfficials extends Component
         // ]);
 
         $this->dispatchBrowserEvent('close-modal');
-
         $this->resetInputs();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Official successfully added']);
     }
 
     public function view($id)
@@ -283,6 +283,7 @@ class BrgyOfficials extends Component
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInputs();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Official updated successfully']);
     }
 
     public function edit($id)
@@ -323,6 +324,7 @@ class BrgyOfficials extends Component
         $this->dispatchBrowserEvent('close-modal');
 
         $this->resetInputs();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Official archived successfully']);
     }
 
     public function render()

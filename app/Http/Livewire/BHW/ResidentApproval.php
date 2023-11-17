@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\BHW;
 
-use App\Models\FamilyHead;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -135,6 +133,7 @@ class ResidentApproval extends Component
         $resident->update();
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Resident approved successfully']);
     }
 
     // public function bindAccount()
@@ -178,6 +177,7 @@ class ResidentApproval extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Resident declined successfully']);
     }
 
     public function render()
@@ -190,7 +190,7 @@ class ResidentApproval extends Component
                 ->orWhere('mname', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('sname', 'LIKE', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->paginate, ['*'], 'approvalPage');
 
         return view('livewire.b-h-w.resident-approval', ['residents' => $residents]);

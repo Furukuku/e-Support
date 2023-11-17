@@ -17,8 +17,6 @@ class ResidentUsers extends Component
 
     public $search = "";
 
-    public $category = 0;
-
     protected $listeners = ['closeModal'];
 
     public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $birthday, $email, $contact, $zone, $employment_status, $gender, $resident_verification_img;
@@ -130,6 +128,7 @@ class ResidentUsers extends Component
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User updated successfully']);
     }
 
     // public function archiveConfirmation($id)
@@ -155,6 +154,7 @@ class ResidentUsers extends Component
                     ->orWhere('mname', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('sname', 'LIKE', '%' . $this->search . '%');
             })
+            ->orderBy('is_active', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate, ['*'], 'residentsPage');
 

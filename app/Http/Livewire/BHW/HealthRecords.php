@@ -100,6 +100,7 @@ class HealthRecords extends Component
             $this->resetValidation();
             $this->resetErrorBag();
             $this->resetInputs();
+            $this->dispatchBrowserEvent('successToast', ['success' => 'Record successfully added']);
 
         }else{
             $this->add_error = 1;
@@ -137,6 +138,7 @@ class HealthRecords extends Component
             $this->resetValidation();
             $this->resetErrorBag();
             $this->resetInputs();
+            $this->dispatchBrowserEvent('successToast', ['success' => 'Record updated successfully']);
 
         }else{
             $this->update_error = 1;

@@ -17,6 +17,7 @@
               warning
             </span>
           </div>
+          <h4 class="text-center mb-3">Restore Official?</h4>
           <p class="text-center">Are you sure you want to restore this official?</p>
         </div>
         <div class="modal-footer d-flex justify-content-center border-0">

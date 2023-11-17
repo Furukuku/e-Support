@@ -93,6 +93,7 @@ class Settings extends Component
         }
 
         $this->cancelEditBrgyInfo();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Brgy Info updated successfully']);
     }
 
 
@@ -131,6 +132,7 @@ class Settings extends Component
         }
 
         $this->cancelEditHotlines();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Hotlines updated successfully']);
     }
 
     public function editDocument()
@@ -165,6 +167,7 @@ class Settings extends Component
         }
 
         $this->cancelEditDocument();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Document prices updated successfully']);
     }
 
     public function render()

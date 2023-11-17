@@ -44,7 +44,7 @@ class BrgyClearance extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
-        return redirect()->route('sub-admin.docs.brgy-clearances');
+        return redirect()->route('sub-admin.docs.brgy-clearances')->with('success', 'Document successfully released');
     }
 
     public function forPickup()
@@ -53,7 +53,7 @@ class BrgyClearance extends Component
         $this->document->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        return redirect()->route('sub-admin.docs.brgy-clearances');
+        return redirect()->route('sub-admin.docs.brgy-clearances')->with('success', 'Document updated successfully');
     }
     
     public function render()

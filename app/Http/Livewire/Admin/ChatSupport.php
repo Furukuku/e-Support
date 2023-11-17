@@ -38,6 +38,7 @@ class ChatSupport extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Topic successfully created']);
     }
 
     public function editTag(ChatBotTag $tag)
@@ -58,6 +59,7 @@ class ChatSupport extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Topic updated successfully']);
     }
 
     public function deleteConfirmation(ChatBotTag $tag)
@@ -71,6 +73,7 @@ class ChatSupport extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Topic archived successfully']);
     }
 
     public function render()

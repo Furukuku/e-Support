@@ -63,12 +63,12 @@
             warning
           </span>
         </div>
-        <h4 class="text-center mb-3">Delete Tag?</h4>
-        <p class="text-center">Are you sure you want to delete this tag? You can't revert this!</p>
+        <h4 class="text-center mb-3">Archive Tag?</h4>
+        <p class="text-center">Are you sure you want to archive this tag?</p>
       </div>
       <div class="modal-footer d-flex justify-content-center border-0">
         <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" wire:click="deleteTag" wire:loading.attr="disabled" class="btn btn-danger px-4 mx-3">Delete</button>
+        <button type="button" wire:click="deleteTag" wire:loading.attr="disabled" class="btn btn-danger px-4 mx-3">Archive</button>
       </div>
     </div>
   </div>

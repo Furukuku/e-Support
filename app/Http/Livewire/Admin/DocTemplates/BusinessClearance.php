@@ -45,7 +45,7 @@ class BusinessClearance extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
-        return redirect()->route('admin.docs.biz-clearances');
+        return redirect()->route('admin.docs.biz-clearances')->with('success', 'Document successfully released');
     }
 
     public function forPickup()
@@ -54,7 +54,7 @@ class BusinessClearance extends Component
         $this->document->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        return redirect()->route('admin.docs.biz-clearances');
+        return redirect()->route('admin.docs.biz-clearances')->with('success', 'Document updated successfully');
     }
 
     public function render()

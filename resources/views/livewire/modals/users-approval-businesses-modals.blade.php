@@ -113,7 +113,7 @@
 
 
 {{-- Verify Modal --}}
-<div wire:ignore.self class="modal fade" id="showBizVerification" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="showBizVerificationLabel" aria-hidden="true">
+{{-- <div wire:ignore.self class="modal fade" id="showBizVerification" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="showBizVerificationLabel" aria-hidden="true">
   <div class="modal-dialog modal-scrollable modal-md">
     <div class="modal-content">
       <div class="modal-header header-bg py-2 justify-content-between">
@@ -126,7 +126,6 @@
         <div class="col mt-2">
           <div class="biz-zoom-container border border-1 rounded d-flex justify-content-center align-items-center position-relative">
             <img id="bizZoomImage" wire:loading.class="d-none" class="biz-zoom-image" src="{{ isset($business_clearance) ? Storage::url($business_clearance) : '' }}" alt="photo">
-            {{-- <img id="bizZoomImage" wire:loading.class="d-none" class="biz-zoom-image" src="{{ !isset($business_clearance) || $business_clearance == '' ? '' : asset('storage/images/users/businesses/clearances/' . $business_clearance) }}" alt="photo"> --}}
             <div wire:loading class="loader-container">
               <div class="spinner"></div>
             </div>
@@ -139,7 +138,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 
 {{-- Archive Official Modal --}}

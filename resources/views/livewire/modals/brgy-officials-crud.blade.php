@@ -42,7 +42,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="add-zone">Zone</label>
-                <select  wire:model="zone" id="add-zone" class="form-select">
+                <select  wire:model.defer="zone" id="add-zone" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -55,7 +55,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="add-gender">Gender</label>
-                <select wire:model="gender" id="add-gender" class="form-select">
+                <select wire:model.defer="gender" id="add-gender" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -74,7 +74,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="add-civil-status">Civil Status</label>
-                <select wire:model="civil_status" id="add-civil-status" class="form-select">
+                <select wire:model.defer="civil_status" id="add-civil-status" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
@@ -91,7 +91,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="add-position">Position</label>
-                <select wire:model="position" id="add-position" class="form-select">
+                <select wire:model.defer="position" id="add-position" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="Captain">Barangay Captain</option>
                   <option value="Kagawad">Barangay Kagawad</option>
@@ -227,7 +227,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="update-zone">Zone</label>
-                <select  wire:model="zone" id="update-zone" class="form-select">
+                <select  wire:model.defer="zone" id="update-zone" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -240,7 +240,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="update-gender">Gender</label>
-                <select wire:model="gender" id="update-gender" class="form-select">
+                <select wire:model.defer="gender" id="update-gender" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -259,7 +259,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="update-civil-status">Civil Status</label>
-                <select wire:model="civil_status" id="update-civil-status" class="form-select">
+                <select wire:model.defer="civil_status" id="update-civil-status" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
@@ -276,7 +276,7 @@
               </div>
               <div class="row-auto mb-3">
                 <label for="update-position">Position</label>
-                <select wire:model="position" id="update-position" class="form-select">
+                <select wire:model.defer="position" id="update-position" class="form-select">
                   <option value="">Choose one...</option>
                   <option value="Captain">Barangay Captain</option>
                   <option value="Kagawad">Barangay Kagawad</option>

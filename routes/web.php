@@ -109,9 +109,9 @@ Route::middleware('admin.auth:admin')->group(function() {
             // Route::get('/staffs', [AdminController::class, 'staffs'])->name('staffs');
             Route::view('/staffs', 'admin.admin-manage-staffs')->name('staffs');
             // Route::get('/residents-business', [AdminController::class, 'residentsBusiness'])->name('residents-business');
-            Route::view('/residents-business', 'admin.admin-manage-residents-business')->name('residents-business');
+            Route::view('/business', 'admin.admin-manage-business')->name('business');
             // Route::get('/approval', [AdminController::class, 'approval'])->name('approval');
-            Route::view('/approval', 'admin.admin-manage-approval')->name('approval');
+            Route::view('/resident', 'admin.admin-manage-resident')->name('resident');
         });
         
         Route::name('docs.')->group(function(){

@@ -48,6 +48,7 @@ class ArchivedPrograms extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Program restored successfully']);
     }
 
     public function permanentlyDelConfirmation($id)

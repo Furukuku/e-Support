@@ -66,6 +66,7 @@ class BHWAccounts extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User successfully created']);
     }
 
     public function editUser(BarangayHealthWorker $subBhw)
@@ -86,6 +87,7 @@ class BHWAccounts extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User updated successfully']);
     }
 
     public function archiveConfirmation(BarangayHealthWorker $subBhw)
@@ -99,6 +101,7 @@ class BHWAccounts extends Component
         
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User archived successfully']);
     }
 
     public function render()

@@ -17,7 +17,6 @@ use App\Models\Job;
 use App\Models\Place;
 use App\Models\Report;
 use App\Models\ReportImage;
-use App\Models\Wife;
 use App\Notifications\DocumentNotification;
 use App\Notifications\ReportNotification;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +59,7 @@ class ResidentController extends Controller
         $assistance->time = $request->time;
         $assistance->update();
 
-        return redirect()->route('resident.services')->with('success', 'Request successfully updated');
+        return redirect()->route('resident.services')->with('success', 'Request updated successfully');
     }
 
     public function assistance(Assistance $assistance)
@@ -191,7 +190,7 @@ class ResidentController extends Controller
             $report->update();
         }
 
-        return redirect()->route('resident.services');
+        return redirect()->route('resident.services')->with('success', 'Report updated successfully');
     }
 
     public function viewReport(Report $report)
@@ -299,7 +298,7 @@ class ResidentController extends Controller
             event(new SendReport($user->username));
         }
 
-        return redirect()->route('resident.services');
+        return redirect()->route('resident.services')->with('success', 'Report successfully sent');
     }
 
     public function addReport()
@@ -329,7 +328,7 @@ class ResidentController extends Controller
         $document->indigency->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
         $document->indigency->update();
 
-        return redirect()->route('resident.services');
+        return redirect()->route('resident.services')->with('success', 'Document updated successfully');
     }
 
     public function updateBizClearance(Request $request, $id){
@@ -384,7 +383,7 @@ class ResidentController extends Controller
         $document->bizClearance->biz_address = $request->business_address;
         $document->bizClearance->update();
 
-        return redirect()->route('resident.services');
+        return redirect()->route('resident.services')->with('success', 'Document updated successfully');
     }
 
     public function updateBrgyClearance(Request $request, $id)
@@ -443,7 +442,7 @@ class ResidentController extends Controller
         $document->brgyClearance->update();
 
 
-        return redirect()->route('resident.services');
+        return redirect()->route('resident.services')->with('success', 'Document updated successfully');
     }
 
     public function editDocs($id, $token)
@@ -538,7 +537,7 @@ class ResidentController extends Controller
 
             Notification::send($admins, new DocumentNotification($user, $document));
 
-            return redirect()->route('resident.qr-code', ['token' => $token]);
+            return redirect()->route('resident.qr-code', ['token' => $token])->with('success', 'Request successfully sent');
         }else{
             return redirect()->route('resident.biz-clearance');
         }
@@ -579,7 +578,7 @@ class ResidentController extends Controller
 
             Notification::send($admins, new DocumentNotification($user, $document));
 
-            return redirect()->route('resident.qr-code', ['token' => $token]);
+            return redirect()->route('resident.qr-code', ['token' => $token])->with('success', 'Request successfully sent');
         }else{
             return redirect()->route('resident.indigency');
         }
@@ -641,7 +640,7 @@ class ResidentController extends Controller
 
             Notification::send($admins, new DocumentNotification($user, $document));
 
-            return redirect()->route('resident.qr-code', ['token' => $token]);
+            return redirect()->route('resident.qr-code', ['token' => $token])->with('success', 'Request successfully sent');
         }else{
             return redirect()->route('resident.brgy-clearance');
         }

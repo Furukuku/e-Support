@@ -28,7 +28,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header header-bg py-2">
-        <h1 class="modal-title fs-5" id="updatePatternLabel">Label/Topic</h1>
+        <h1 class="modal-title fs-5" id="updatePatternLabel">Question</h1>
         <span class="material-symbols-outlined modal-close-icon" wire:click="closeModal" data-bs-dismiss="modal" aria-label="Close">
           cancel
         </span>

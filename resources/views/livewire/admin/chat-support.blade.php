@@ -49,7 +49,7 @@
                   <i class="fa-solid fa-eye mx-1 align-middle view-icon"></i>
                 </a>
                 <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editTag({{ $tag }})" data-bs-toggle="modal" data-bs-target="#updateTag"></i>
-                <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:click="deleteConfirmation({{ $tag }})" data-bs-toggle="modal" data-bs-target="#deleteTag"></i>
+                <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:click="deleteConfirmation({{ $tag }})" data-bs-toggle="modal" data-bs-target="#deleteTag"></i>
               </td>
             </tr>
           @empty

@@ -14,7 +14,7 @@
         <h5 class="text-center text-white">Business Clearance</h5>
       </div>
       <div class="row">
-        <form id="biz-clearance-form" class="biz-clearance-form" action="" method="POST" enctype="multipart/form-data">
+        <form id="biz-clearance-form" class="biz-clearance-form" action="{{ route('business.validate.biz-clearance') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="row mb-3">
             <label for="biz-nature" class="form-label px-0">Nature of Business</label>

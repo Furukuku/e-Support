@@ -95,8 +95,19 @@
           </div>
           <div class="my-3">
             <label for="purpose" class="form-label m-0">Purpose</label>
-            <input type="text" wire:model.defer="purpose" id="purpose" class="form-control">
+            <select name="purpose" wire:model="purpose" id="purpose" class="form-select">
+              <option value="">Choose one...</option>
+              <option value="For Financial Assistance">For Financial Assistance</option>
+              <option value="For Health Related-Expenses">For Health Related-Expenses</option>
+              <option value="For Educational Support">For Educational Support</option>
+              <option value="For Social Welfare Programs">For Social Welfare Programs</option>
+              <option value="Others">Others</option>
+            </select>
             @error('purpose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            @if ($purpose === 'Others')
+              <input id="other" wire:model.defer="others" class="form-control mt-3" rows="3">
+              @error('others') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            @endif
           </div>
         </div>
         <div class="modal-footer justify-content-center border-0">
@@ -128,7 +139,7 @@
         <div class="my-3">
           <label class="form-label">Purpose</label>
           <div class="border rounded p-2">
-            <p class="m-0">{{ $purpose }}</p>
+            <p class="m-0">{{ $purpose === 'Others' ? $others : $purpose }}</p>
           </div>
         </div>
       </div>

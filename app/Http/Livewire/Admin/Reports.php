@@ -82,6 +82,7 @@ class Reports extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->reset();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Report updated successfully']);
     }
 
     public function render()
@@ -90,11 +91,20 @@ class Reports extends Component
             ->where('report_name', 'like', '%' . $this->search . '%')
             ->orWhere('description', 'like', '%' . $this->search . '%')
             ->orWhere('zone', 'like', '%' . $this->search . '%')
+            ->orWhere('status', 'like', '%' . $this->search . '%')
             ->orWhereHas('user', function ($query) {
                 $query->where('fname', 'like', '%' . $this->search . '%')
                 ->orWhere('lname', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->orderByRaw(
+                "CASE
+                    WHEN status = 'Pending' THEN 1
+                    WHEN status = 'Ongoing' THEN 2
+                    WHEN status = 'Solved' THEN 3
+                    ELSE 3
+                END"
+            )
+            ->orderBy('created_at', 'asc')
             ->paginate($this->paginate);
 
         $totalPendingReports = Report::where('status', 'Pending')->count();

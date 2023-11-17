@@ -82,6 +82,7 @@ class BusinessApproval extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User approved successfully']);
     }
 
     public function declineBusinessConfirm()
@@ -112,6 +113,7 @@ class BusinessApproval extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User declined successfully']);
     }
 
     // public function showBizVerification($id)

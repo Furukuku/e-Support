@@ -94,7 +94,7 @@ class PostJob extends Component
             }
         }
 
-        return redirect()->route('business.home');
+        return redirect()->route('business.home')->with('success', 'Job posted successfully');
     }
 
     public function render()

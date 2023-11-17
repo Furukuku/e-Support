@@ -44,7 +44,7 @@ class Company extends Component
         'mobile' => [
             'required' => 'The contact field is required.',
             'unique' => 'The contact has already been taken.',
-            'digits' => 'The contact field must be 12 digits.',
+            'digits' => 'The contact field must be 10 digits.',
         ],
     ];
 

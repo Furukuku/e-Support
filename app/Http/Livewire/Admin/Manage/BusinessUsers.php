@@ -17,6 +17,8 @@ class BusinessUsers extends Component
 
     public $search = "";
 
+    public $category = 0;
+
     protected $listeners = ['closeModal'];
 
     public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $email, $contact, $business_clearance, $business_name, $business_address, $business_nature;
@@ -124,6 +126,7 @@ class BusinessUsers extends Component
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User updated successfully']);
     }
 
     // public function archiveBizConfirmation($id)
@@ -149,6 +152,7 @@ class BusinessUsers extends Component
                     ->orWhere('mname', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('sname', 'LIKE', '%' . $this->search . '%');
             })
+            ->orderBy('is_active', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate, ['*'], 'businessesPage');
 

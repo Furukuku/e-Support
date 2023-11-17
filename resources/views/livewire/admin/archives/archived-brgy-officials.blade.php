@@ -6,10 +6,11 @@
         <option value="0">Barangay Officials</option>
         <option value="1">Families</option>
         <option value="2">Staffs</option>
-        <option value="3">Resident Users</option>
-        <option value="4">Business Users</option>
-        <option value="5">Programs</option>
-        <option value="6">Places</option>
+        <option value="3">Programs</option>
+        <option value="4">Places</option>
+        <option value="5">Chat Topics</option>
+        {{-- <option value="6">Resident Users</option>
+        <option value="7">Business Users</option> --}}
       </select>
     </div>
   </div>
@@ -76,7 +77,7 @@
                       quick_reference_all
                     </span> --}}
                     <i class="fa-solid fa-trash-arrow-up mx-1 align-middle text-success restore-icon" wire:loading.class="pe-none" wire:click="restoreConfirmation({{ $official->id }})" data-bs-toggle="modal" data-bs-target="#restoreOfficial"></i>
-                    <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $official->id }})" data-bs-toggle="modal" data-bs-target="#deleteOfficial"></i>
+                    {{-- <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $official->id }})" data-bs-toggle="modal" data-bs-target="#deleteOfficial"></i> --}}
                   </td>
                 </tr>
               @empty
@@ -95,13 +96,15 @@
   @elseif ($d_archive == 2)
     @livewire('admin.archives.archived-staffs')
   @elseif ($d_archive == 3)
-    @livewire('admin.archives.archived-resident-users')
-  @elseif ($d_archive == 4)
-    @livewire('admin.archives.archived-business-users')
-  @elseif ($d_archive == 5)
     @livewire('admin.archives.archived-programs')
-  @elseif ($d_archive == 6)
+  @elseif ($d_archive == 4)
     @livewire('admin.archives.archived-places')
+  @elseif ($d_archive == 5)
+    @livewire('admin.archives.archived-chat-bot-tags')
+  {{-- @elseif ($d_archive == 6)
+    @livewire('admin.archives.archived-resident-users')
+  @elseif ($d_archive == 7)
+    @livewire('admin.archives.archived-business-users') --}}
   @endif
 
 </div>

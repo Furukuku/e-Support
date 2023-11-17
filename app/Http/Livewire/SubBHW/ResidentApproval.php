@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\SubBHW;
 
-use App\Models\FamilyHead;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -112,6 +110,7 @@ class ResidentApproval extends Component
         $resident->update();
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Resident approved successfully']);
     }
 
     // public function bindAccount()
@@ -155,6 +154,7 @@ class ResidentApproval extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Resident declined successfully']);
     }
 
     public function render()

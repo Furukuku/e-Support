@@ -156,6 +156,7 @@ class Patients extends Component
         $this->resetValidation();
         $this->reset();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Patient successfully added']);
     }
 
     public function editPatient(Patient $patient)
@@ -240,9 +241,8 @@ class Patients extends Component
         $this->reset();
         $this->resetErrorBag();
         $this->resetValidation();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Patient updated successfully']);
     }
-
-    
 
     public function render()
     {

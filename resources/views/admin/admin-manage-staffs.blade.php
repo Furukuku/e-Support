@@ -8,11 +8,33 @@
 
 @section('script')
   <script>
+
+    window.addEventListener('successToast', e => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-right',
+        iconColor: 'white',
+        customClass: {
+          popup: 'colored-toast'
+        },
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true
+      });
+
+      Toast.fire({
+        icon: 'success',
+        title: e.detail.success,
+        color: '#fff',
+      });
+    });
+
     window.addEventListener('close-modal', event => {
       $('#createAccount').modal('hide');
       $('#updateUser').modal('hide');
       $('#archiveUser').modal('hide');
     });
+    
   </script>
 
 @endsection

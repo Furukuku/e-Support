@@ -46,7 +46,12 @@ class FamilyMember extends Model
 
     public function tapActivity(Activity $activity, string $eventName)
     {
-        if(auth()->guard('sub-admin')->check()){
+        if(auth()->guard('admin')->check()){
+            $activity->log_name = $this->wasRecentlyCreated ? 'New Family Member ' . $eventName : 'Family Member ' . $eventName;
+            $activity->causer_id = auth()->guard('admin')->user()->id;
+            $activity->causer_type = 'Admin';
+            $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->fname . ' of ' . $this->familyHead->lname  . ' family.';
+        }else if(auth()->guard('sub-admin')->check()){
             $activity->log_name = $this->wasRecentlyCreated ? 'New Family Member ' . $eventName : 'Family Member ' . $eventName;
             $activity->causer_id = auth()->guard('sub-admin')->user()->id;
             $activity->causer_type = 'BHW';

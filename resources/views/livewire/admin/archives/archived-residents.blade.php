@@ -54,7 +54,7 @@
               <td class="align-middle text-center">{{ $family->contact }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-trash-arrow-up mx-1 align-middle text-success restore-icon" wire:loading.class="pe-none" wire:click="restoreConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#restoreFamily"></i>
-                <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#deleteFamily"></i>
+                {{-- <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#deleteFamily"></i> --}}
               </td>
             </tr>
           @empty

@@ -108,8 +108,21 @@
           </div>
           <div class="my-3">
             <label for="purpose" class="form-label m-0">Purpose</label>
-            <input type="text" wire:model.defer="purpose" id="purpose" class="form-control">
+            <select name="purpose" wire:model="purpose" id="purpose" class="form-select">
+              <option value="">Choose one...</option>
+              <option value="For School Enrollment">For School Enrollment</option>
+              <option value="For Scholarship">For Scholarship</option>
+              <option value="For Employment">For Employment</option>
+              <option value="For Business">For Business</option>
+              <option value="For Passport">For Passport</option>
+              <option value="For Marriage">For Marriage</option>
+              <option value="Others">Others</option>
+            </select>
             @error('purpose') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            @if ($purpose === 'Others')
+              <input id="other" wire:model.defer="others" class="form-control mt-3" rows="3">
+              @error('others') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+            @endif
           </div>
           <div class="d-flex align-items-center justify-content-between">
             <h5 class="m-0">Add Community Tax Certificate</h5>
@@ -168,7 +181,7 @@
         <div class="my-3">
           <label class="form-label">Purpose</label>
           <div class="border rounded p-2">
-            <p class="m-0 text-truncate">{{ $purpose }}</p>
+            <p class="m-0 text-truncate">{{ $purpose === 'Others' ? $others : $purpose }}</p>
           </div>
         </div>
         @if (!is_null($ctc))

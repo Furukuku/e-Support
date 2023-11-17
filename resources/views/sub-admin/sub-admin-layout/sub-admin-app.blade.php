@@ -154,7 +154,7 @@
   </div>
 
   @livewireScripts
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
   @yield('script')
 </body>
 </html>

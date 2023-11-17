@@ -56,14 +56,14 @@
       <div class="modal-body">
         <div class="col px-3">
           <div class="row mb-3">
-            <div class="col-3">
+            <div class="col-lg-3">
               <div class="program-img-container">
                 @isset($view_display_image)
                   <img class="object-fit-contain border rounded program-img" src="{{ Storage::url($view_display_image) }}" alt="photo">
                 @endisset
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6">
               <h5>Program Title</h5>
               <div class="rounded border border-1 p-2">
                 <p class="m-0 text-truncate">{{ $program_title }}</p>

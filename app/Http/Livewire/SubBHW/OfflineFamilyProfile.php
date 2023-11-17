@@ -753,6 +753,7 @@ class OfflineFamilyProfile extends Component
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInputs();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Family successfully created']);
     }
 
     public function viewFamily($id)
@@ -1189,6 +1190,7 @@ class OfflineFamilyProfile extends Component
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInputs();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Family updated successfully']);
     }
 
     public function deleteConfirmation($id)
@@ -1202,6 +1204,7 @@ class OfflineFamilyProfile extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInputs();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Family archived successfully']);
     }
     
     public function render()

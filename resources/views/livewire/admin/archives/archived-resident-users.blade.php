@@ -55,7 +55,7 @@
                   quick_reference_all
                 </span> --}}
                 <i class="fa-solid fa-trash-arrow-up mx-1 align-middle text-success restore-icon" wire:loading.class="pe-none" wire:click="restoreConfirmation({{ $resident->id }})" data-bs-toggle="modal" data-bs-target="#restoreResident"></i>
-                <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $resident->id }})" data-bs-toggle="modal" data-bs-target="#deleteResident"></i>
+                {{-- <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $resident->id }})" data-bs-toggle="modal" data-bs-target="#deleteResident"></i> --}}
               </td>
             </tr>
           @empty

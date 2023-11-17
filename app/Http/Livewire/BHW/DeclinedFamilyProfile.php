@@ -68,6 +68,7 @@ class DeclinedFamilyProfile extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Family restored successfully']);
     }
 
     public function render()

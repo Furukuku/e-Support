@@ -50,6 +50,7 @@ class ArchivedBrgyOfficials extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Official restored successfully']);
     }
 
     public function permanentlyDelConfirmation($id)

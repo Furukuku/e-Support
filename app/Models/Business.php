@@ -117,6 +117,8 @@ class Business extends Authenticatable implements IMustVerifyMobile
             }else{
                 $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
             }
+        }else{
+            activity()->disableLogging();
         }
         // else if(auth()->guard('sub-admin')->check()){
         //     $activity->log_name = 'Business Account';

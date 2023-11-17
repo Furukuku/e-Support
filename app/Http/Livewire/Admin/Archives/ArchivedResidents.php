@@ -47,6 +47,7 @@ class ArchivedResidents extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetVariables();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Family restored successfully']);
     }
 
     public function permanentlyDelConfirmation($id)

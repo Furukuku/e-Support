@@ -109,5 +109,26 @@
       $('#edit-philhealth-container').addClass('d-none');
     });
 
+
+    window.addEventListener('successToast', e => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-right',
+        iconColor: 'white',
+        customClass: {
+          popup: 'colored-toast'
+        },
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true
+      });
+
+      Toast.fire({
+        icon: 'success',
+        title: e.detail.success,
+        color: '#fff',
+      });
+    });
+
   </script>
 @endsection

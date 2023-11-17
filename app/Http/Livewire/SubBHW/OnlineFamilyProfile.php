@@ -92,6 +92,7 @@ class OnlineFamilyProfile extends Component
 
             $this->dispatchBrowserEvent('close-modal');
             $this->closeModal();
+            $this->dispatchBrowserEvent('successToast', ['success' => 'Family approved successfully']);
         }else{
             $this->compared_family_head = $comparedFam->fullname;
             $this->dispatchBrowserEvent('close-modal');
@@ -108,6 +109,7 @@ class OnlineFamilyProfile extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Family approved successfully']);
     }
 
     public function declineConfirmation($id)
@@ -144,6 +146,7 @@ class OnlineFamilyProfile extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Family declined successfully']);
     }
 
     // public function deleteConfirmation($id)

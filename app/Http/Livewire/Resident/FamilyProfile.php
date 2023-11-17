@@ -880,7 +880,7 @@ class FamilyProfile extends Component
             }
         }
 
-        return redirect()->route('resident.family-profile');
+        return redirect()->route('resident.family-profile')->with('success', 'Family added successfully');
     }
 
     public function update()
@@ -1180,7 +1180,7 @@ class FamilyProfile extends Component
             }
         }
 
-        return redirect()->route('resident.family-profile');
+        return redirect()->route('resident.family-profile')->with('success', 'Family updated successfully');
     }
 
     public function render()

@@ -52,7 +52,7 @@
               <td class="align-middle text-center">{{ $place->location }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-trash-arrow-up mx-1 align-middle text-success restore-icon" wire:loading.class="pe-none" wire:click="restoreConfirmation({{ $place->id }})" data-bs-toggle="modal" data-bs-target="#restorePlace"></i>
-                <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $place->id }})" data-bs-toggle="modal" data-bs-target="#deletePlace"></i>
+                {{-- <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $place->id }})" data-bs-toggle="modal" data-bs-target="#deletePlace"></i> --}}
               </td>
             </tr>
           @empty

@@ -284,6 +284,7 @@ class BusinessClearances extends Component
         
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Document successfully released']);
     }
 
     public function getResidentName($name)
@@ -316,7 +317,7 @@ class BusinessClearances extends Component
                     });
                 });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->paginate, ['*'], 'clearance');
 
         $taken_documents = Document::with(['user', 'business', 'bizClearance'])

@@ -92,7 +92,6 @@
                   <td class="align-middle text-center">{{ $resident->mobile }}</td>
                   <td class="align-middle text-center">
                     <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:loading.class="pe-none" wire:click="viewResident({{ $resident }})" data-bs-toggle="modal" data-bs-target="#viewResident"></i>
-                    <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:loading.class="pe-none" wire:click="editResident({{ $resident }})" data-bs-toggle="modal" data-bs-target="#updateResidentAcc"></i>
                   </td>
                 </tr>
               @empty

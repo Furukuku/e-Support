@@ -96,16 +96,16 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.manage.residents-business') }}" id="resident-business" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.manage.residents-business') ? 'navigate-active' : '' }}">
+              <a href="{{ route('admin.manage.business') }}" id="resident-business" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.manage.business') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
-                  <p class="col-12 m-0 ms-3 ps-5">Resident & Business</p>
+                  <p class="col-12 m-0 ms-3 ps-5">Business</p>
                 </div>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.manage.approval') }}" id="approval" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.manage.approval') ? 'navigate-active' : '' }}">
+              <a href="{{ route('admin.manage.resident') }}" id="approval" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.manage.resident') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
-                  <p class="col-12 m-0 ms-3 ps-5">Business Approval</p>
+                  <p class="col-12 m-0 ms-3 ps-5">Resident</p>
                 </div>
               </a>
             </li>
@@ -290,9 +290,10 @@
   </div>
 
   @livewireScripts
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
 
   @yield('script')
-
+  
   <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
   <script>
 

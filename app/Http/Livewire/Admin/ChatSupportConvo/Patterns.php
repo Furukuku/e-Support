@@ -52,6 +52,7 @@ class Patterns extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Question successfully created']);
     }
 
     public function editPattern(ChatBotPattern $question)
@@ -72,6 +73,7 @@ class Patterns extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Question updated successfully']);
     }
     
     public function deletePatternConfirmation(ChatBotPattern $question)
@@ -85,6 +87,7 @@ class Patterns extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Question deleted successfully']);
     }
 
     public function render()

@@ -71,6 +71,7 @@ class Assistance extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Assistance approved successfully']);
     }
 
     public function declineConfirmation()
@@ -100,6 +101,7 @@ class Assistance extends Component
         $assistance->update();
 
         $this->dispatchBrowserEvent('close-modal');
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Assistance declined successfully']);
     }
 
     public function done()
@@ -110,6 +112,7 @@ class Assistance extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Assistance updated successfully']);
     }
 
     public function render()

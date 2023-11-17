@@ -75,6 +75,7 @@ class Staffs extends Component
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInputs();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User successfully created']);
     }
 
     public function editUser($id)
@@ -102,6 +103,7 @@ class Staffs extends Component
             $this->dispatchBrowserEvent('close-modal');
             $this->resetInputs();
             $this->resetErrorBag();
+            $this->dispatchBrowserEvent('successToast', ['success' => 'User updated successfully']);
         }
     }
 
@@ -117,6 +119,7 @@ class Staffs extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInputs();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'User archived successfully']);
     }
 
     public function render()

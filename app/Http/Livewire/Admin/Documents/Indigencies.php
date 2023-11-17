@@ -32,7 +32,7 @@ class Indigencies extends Component
     
     protected $listeners = ['getDocDetails'];
 
-    public $name, $purpose, $date_requested;
+    public $name, $purpose, $others, $date_requested;
 
     public $doc_id;
 
@@ -54,6 +54,7 @@ class Indigencies extends Component
         $this->reset(
             'name',
             'purpose',
+            'others',
             'date_requested',
             'doc_id',
             'error_msg',
@@ -124,10 +125,18 @@ class Indigencies extends Component
     {
         $this->dispatchBrowserEvent('hideSuggestions');
 
-        $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'purpose' => ['required', 'string', 'max:255'],
-        ]);
+        if($this->purpose === 'Others'){
+            $this->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:30'],
+                'others' => ['required', 'string', 'max:100'],
+            ]);
+        }else{
+            $this->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:30'],
+            ]);
+        }
 
         $this->dispatchBrowserEvent('showConfirmation');
         $this->dispatchBrowserEvent('close-modal');
@@ -143,7 +152,7 @@ class Indigencies extends Component
         $indigency = new Indigency();
         $indigency->document_id = $document->id;
         $indigency->name = $this->name;
-        $indigency->purpose = $this->purpose;
+        $indigency->purpose = $this->purpose === 'Others' ? $this->others : $this->purpose;
         $indigency->save();
 
         $this->closeModal();
@@ -183,6 +192,7 @@ class Indigencies extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Document successfully released']);
     }
 
     public function getResidentName($name)
@@ -208,7 +218,7 @@ class Indigencies extends Component
                     });
                 });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->paginate, ['*'], 'clearance');
 
         $taken_documents = Document::with(['user', 'indigency'])

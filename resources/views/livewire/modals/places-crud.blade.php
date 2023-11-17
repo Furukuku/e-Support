@@ -34,9 +34,13 @@
                 <option value="Repair Shop">Repair Shop</option>
                 <option value="Junk Shop">Junk Shop</option>
                 <option value="Pharmacies">Pharmacies</option>
-                <option value="Others">Others</option>
+                <option value="Other">Other</option>
               </select>
               @error('type') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              @if ($type === 'Other')
+                <input id="other" wire:model.defer="other" class="form-control mt-3" rows="3">
+                @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              @endif
             </div>
             {{-- <div class="row-auto mb-3">
               <label for="add-address">Address</label>
@@ -159,9 +163,13 @@
                 <option value="Junk Shop">Junk Shop</option>
                 <option value="Pharmacies">Pharmacies</option>
                 <option value="Gas Station">Gas Station</option>
-                <option value="Others">Others</option>
+                <option value="Other">Other</option>
               </select>
               @error('type') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              @if ($type === 'Other')
+                <input id="other" wire:model.defer="other" class="form-control mt-3" rows="3">
+                @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              @endif
             </div>
             {{-- <div class="row-auto mb-3">
               <label for="edit-address">Address</label>

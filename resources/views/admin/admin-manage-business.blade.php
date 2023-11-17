@@ -2,23 +2,13 @@
 
 @section('content')
 
-  @livewire('admin.chat-support-convo.patterns', ['tag' => $tag])
+  @livewire('admin.manage.business-users')
 
 @endsection
 
 @section('script')
 
   <script>
-
-    window.addEventListener('close-modal', () => {
-      $('#addPattern').modal('hide');
-      $('#updatePattern').modal('hide');
-      $('#deletePattern').modal('hide');
-      $('#addResponse').modal('hide');
-      $('#updateResponse').modal('hide');
-      $('#deleteResponse').modal('hide');
-    });
-
 
     window.addEventListener('successToast', e => {
       const Toast = Swal.mixin({
@@ -40,6 +30,17 @@
       });
     });
 
+    window.addEventListener('close-modal', () => {
+      $('#viewBusiness').modal('hide');
+      $('#archiveBusiness').modal('hide');
+      $('#declineConfirm').modal('hide');
+      $('#updateBusiness').modal('hide');
+    });
+
+    window.addEventListener('declineConfirm', () => {
+      $('#declineConfirm').modal('show');
+    });
+    
   </script>
 
 @endsection

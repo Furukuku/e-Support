@@ -52,6 +52,7 @@ class Responses extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Response successfully created']);
     }
 
     public function editResponse(ChatBotResponse $response)
@@ -72,6 +73,7 @@ class Responses extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Response updated successfully']);
     }
     
     public function deleteResponseConfirmation(ChatBotResponse $response)
@@ -85,6 +87,7 @@ class Responses extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Response deleted successfully']);
     }
 
     public function render()

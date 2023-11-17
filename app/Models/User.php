@@ -147,23 +147,8 @@ class User extends Authenticatable implements IMustVerifyMobile, CanResetPasswor
             }else{
                 $activity->description = auth()->guard('bhw')->user()->username . ' ' . $eventName . ' ' . $this->username  . "'s account.";
             }
+        }else{
+            activity()->disableLogging();
         }
-        // else if(auth()->guard('web')->check()){
-        //     $user = auth()->guard('web')->user();
-        //     if($user->gender === 'Male'){
-        //         $activity->description = $user->username . ' ' . $eventName . ' his resident account.';
-        //     }else{
-        //         $activity->description = $user->username . ' ' . $eventName . ' her resident account.';
-        //     }
-        // }else{
-        //     $activity->log_name = 'New resident account ' . $eventName;
-        //     $activity->causer_id = $this->id;
-        //     $activity->causer_type = 'Resident';
-        //     if($this->gender === 'Male'){
-        //         $activity->description = $this->username . ' ' . $eventName . ' his resident account.';
-        //     }else{
-        //         $activity->description = $this->username . ' ' . $eventName . ' her resident account.';
-        //     }
-        // }
     }
 }

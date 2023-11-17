@@ -16,8 +16,8 @@
               warning
             </span>
           </div>
-          <h4 class="text-center mb-3">Restore Resident?</h4>
-          <p class="text-center">Are you sure you want to restore this user?</p>
+          <h4 class="text-center mb-3">Restore Program?</h4>
+          <p class="text-center">Are you sure you want to restore this program?</p>
         </div>
         <div class="modal-footer d-flex justify-content-center border-0">
           <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" data-bs-dismiss="modal">Cancel</button>

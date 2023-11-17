@@ -32,7 +32,7 @@ class BrgyClearances extends Component
     
     protected $listeners = ['getDocDetails'];
 
-    public $name, $zone, $purpose, $date_requested, $status;
+    public $name, $zone, $purpose, $others, $date_requested, $status;
 
     public $ctc_image, $ctc, $issued_at, $issued_on;
 
@@ -77,6 +77,7 @@ class BrgyClearances extends Component
             'name', 
             'zone', 
             'purpose', 
+            'others',
             'date_requested',
             'status',
             'doc_id',
@@ -164,20 +165,41 @@ class BrgyClearances extends Component
         $this->dispatchBrowserEvent('hideSuggestions');
 
         if($this->ctc_container === ''){
-            $this->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'zone' => ['required', 'string', 'max:1'],
-                'purpose' => ['required', 'string', 'max:255'],
-                'ctc' => ['required', 'string', 'max:255'],
-                'issued_at' => ['required', 'string', 'max:255'],
-                'issued_on' => ['required', 'date'],
-            ]);
+            if($this->purpose === 'Others'){
+                $this->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'purpose' => ['required', 'string', 'max:30'],
+                    'others' => ['required', 'string', 'max:100'],
+                    'ctc' => ['required', 'string', 'max:255'],
+                    'issued_at' => ['required', 'string', 'max:255'],
+                    'issued_on' => ['required', 'date'],
+                ]);
+            }else{
+                $this->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'purpose' => ['required', 'string', 'max:30'],
+                    'ctc' => ['required', 'string', 'max:255'],
+                    'issued_at' => ['required', 'string', 'max:255'],
+                    'issued_on' => ['required', 'date'],
+                ]);
+            }
         }else{
-            $this->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'zone' => ['required', 'string', 'max:1'],
-                'purpose' => ['required', 'string', 'max:255'],
-            ]);
+            if($this->purpose === 'Others'){
+                $this->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'purpose' => ['required', 'string', 'max:30'],
+                    'others' => ['required', 'string', 'max:100'],
+                ]);
+            }else{
+                $this->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'zone' => ['required', 'string', 'max:1'],
+                    'purpose' => ['required', 'string', 'max:30'],
+                ]);
+            }
         }
 
         $this->dispatchBrowserEvent('showConfirmation');
@@ -195,7 +217,7 @@ class BrgyClearances extends Component
         $brgyClearance->document_id = $document->id;
         $brgyClearance->name = $this->name;
         $brgyClearance->zone = $this->zone;
-        $brgyClearance->purpose = $this->purpose;
+        $brgyClearance->purpose = $this->purpose === 'Others' ? $this->others : $this->purpose;
         $brgyClearance->ctc = $this->ctc;
         $brgyClearance->issued_at = $this->issued_at;
         $brgyClearance->issued_on = $this->issued_on;
@@ -250,6 +272,7 @@ class BrgyClearances extends Component
 
         $this->dispatchBrowserEvent('close-modal');
         $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Document successfully released']);
     }
 
     public function getResidentName($name)
@@ -276,7 +299,7 @@ class BrgyClearances extends Component
                     });
                 });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->paginate, ['*'], 'clearance');
 
         $taken_documents = Document::with(['user', 'brgyClearance'])

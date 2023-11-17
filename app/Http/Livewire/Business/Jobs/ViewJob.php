@@ -75,7 +75,7 @@ class ViewJob extends Component
         $job->done_hiring = true;
         $job->update();
 
-        return redirect()->route('business.home');
+        return redirect()->route('business.home')->with('success', 'Job updated successfully');
     }
 
     public function submit()
@@ -118,7 +118,7 @@ class ViewJob extends Component
                 $job->done_hiring = false;
                 $job->update();
 
-                return redirect()->route('business.home');
+                return redirect()->route('business.home')->with('success', 'Job updated successfully');
             }
 
             $job->update();
@@ -127,6 +127,7 @@ class ViewJob extends Component
         }
         
         $this->cancel();
+        $this->dispatchBrowserEvent('updateSuccess', ['success' => 'Job updated successfully']);
     }
 
     public function render()

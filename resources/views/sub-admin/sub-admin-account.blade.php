@@ -8,8 +8,6 @@
 
 @section('script')
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
-
   <script>
 
     const Toast = Swal.mixin({

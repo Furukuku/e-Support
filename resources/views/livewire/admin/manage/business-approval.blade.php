@@ -1,9 +1,9 @@
-<div class="w-100 d-flex justify-content-center py-5">
+<div class="w-100 d-flex justify-content-center">
 
   @include('livewire.modals.users-approval-businesses-modals')
 
   {{-- Businesses Accounts --}}
-  <div class="bg-white officials-profile-table shadow rounded">
+  <div class="bg-white officials-profile-table mb-5 shadow rounded">
     <div class="d-flex justify-content-between p-2 rounded-top officials-header">
       <h3>PRE-REGISTERED BUSINESS ACCOUNTS</h3>
     </div>

@@ -66,6 +66,7 @@ class Programs extends Component
 
         $this->resetInputs();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Program successfully created']);
     }
 
     public function view(Program $program)
@@ -122,6 +123,7 @@ class Programs extends Component
 
         $this->resetInputs();
         $this->resetErrorBag();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Program updated successfully']);
     }
 
     public function archiveConfirmation(Program $program)
@@ -135,6 +137,7 @@ class Programs extends Component
         
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInputs();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Program archived successfully']);
     }
 
     public function render()

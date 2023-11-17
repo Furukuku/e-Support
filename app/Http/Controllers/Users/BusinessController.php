@@ -69,7 +69,7 @@ class BusinessController extends Controller
         $document->bizClearance->biz_address = $request->business_address;
         $document->bizClearance->update();
 
-        return redirect()->route('business.services');
+        return redirect()->route('business.services')->with('success', 'Document updated successfully');
     }
 
     public function editDocs($id, $token)
@@ -156,7 +156,7 @@ class BusinessController extends Controller
 
             Notification::send($admins, new DocumentNotification($user, $document));
 
-            return redirect()->route('business.qr-code', ['token' => $token]);
+            return redirect()->route('business.qr-code', ['token' => $token])->with('success', 'Request successfully sent');
         }else{
             return redirect()->route('business.biz-clearance');
         }

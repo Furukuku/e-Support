@@ -82,6 +82,7 @@ class Reports extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->reset();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Report updated successfully']);
     }
 
     public function render()
@@ -94,6 +95,14 @@ class Reports extends Component
                 $query->where('fname', 'like', '%' . $this->search . '%')
                 ->orWhere('lname', 'like', '%' . $this->search . '%');
             })
+            ->orderByRaw(
+                "CASE
+                    WHEN status = 'Pending' THEN 1
+                    WHEN status = 'Ongoing' THEN 2
+                    WHEN status = 'Solved' THEN 3
+                    ELSE 3
+                END"
+            )
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate);
 

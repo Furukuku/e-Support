@@ -28,7 +28,7 @@ class Indigency extends Component
         $this->document->indigency->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        return redirect()->route('sub-admin.docs.indigencies');
+        return redirect()->route('sub-admin.docs.indigencies')->with('success', 'Document successfully released');
     }
 
     public function forPickup()
@@ -37,7 +37,7 @@ class Indigency extends Component
         $this->document->update();
 
         $this->dispatchBrowserEvent('close-modal');
-        return redirect()->route('sub-admin.docs.indigencies');
+        return redirect()->route('sub-admin.docs.indigencies')->with('success', 'Document updated successfully');
     }
     
     public function render()
