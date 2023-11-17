@@ -49,8 +49,19 @@
           </div>
           <div class="row mb-4">
             <label for="purpose" class="form-label px-0">Purpose</label>
-            <input type="text" id="purpose" class="form-control mb-2" name="purpose" value="{{ old('purpose') }}" placeholder="Enter purpose (ex. Scholarship)">
+            <select name="purpose" id="purpose" class="form-select">
+              <option value="">Choose one...</option>
+              <option value="For School Enrollment" {{ old('purpose') === 'For School Enrollment' ? 'selected' : '' }}>For School Enrollment</option>
+              <option value="For Scholarship" {{ old('purpose') === 'For Scholarship' ? 'selected' : '' }}>For Scholarship</option>
+              <option value="For Employment" {{ old('purpose') === 'For Employment' ? 'selected' : '' }}>For Employment</option>
+              <option value="For Business" {{ old('purpose') === 'For Business' ? 'selected' : '' }}>For Business</option>
+              <option value="For Passport" {{ old('purpose') === 'For Passport' ? 'selected' : '' }}>For Passport</option>
+              <option value="For Marriage" {{ old('purpose') === 'For Marriage' ? 'selected' : '' }}>For Marriage</option>
+              <option value="Others" {{ old('purpose') === 'Others' ? 'selected' : '' }}>Others</option>
+            </select>
             @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            <input type="text" id="other" class="form-control mt-2 d-none" name="others" value="{{ old('others') }}" placeholder="Enter purpose here...">
+            @error('others') <span class="error text-danger px-0 d-none" id="others-error" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it blank. And if you do, please bring it with you upon claiming your request.</small></p>
           <div class="position-relative mb-4">
@@ -119,6 +130,35 @@
       if(e.target.files){
         previewImg.classList.remove('d-none');
         previewImg.src = URL.createObjectURL(e.target.files[0]);
+      }
+    });
+
+
+    const purpose = document.getElementById('purpose');
+    const other = document.getElementById('other');
+    const othersErr = document.getElementById('others-error');
+
+    purpose.addEventListener('change', () => {
+      if(purpose.value === 'Others'){
+        other.classList.remove('d-none');
+        if(othersErr){
+          othersErr.classList.remove('d-none');
+        }
+      }else{
+        other.classList.add('d-none');
+        if(othersErr){
+          othersErr.classList.add('d-none');
+        }
+        other.value = '';
+      }
+    });
+
+    window.addEventListener('load', () => {
+      if(purpose.value === 'Others'){
+        other.classList.remove('d-none');
+        if(othersErr){
+          othersErr.classList.remove('d-none');
+        }
       }
     });
 

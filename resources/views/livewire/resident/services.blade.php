@@ -92,25 +92,25 @@
   <div class="position-fixed bottom-0 w-100 d-flex z-3 bg-white rounded-top shadow-lg border-top services-bot-nav">
     <div wire:click="services" class="col-3 py-3 {{ $services_tab === 1 ? 'text-success' : '' }}" style="cursor: pointer;">
       <div class="d-flex flex-column align-items-center justify-content-center">
-        <span class="material-symbols-outlined">help_clinic</span>
+        <span class="material-symbols-outlined" onmousedown="return false">help_clinic</span>
         <small>Services</small>
       </div>
     </div>
     <div wire:click="documents" class="col-3 py-3 {{ $services_tab === 2 ? 'text-success' : '' }}" style="cursor: pointer;">
       <div class="d-flex flex-column align-items-center justify-content-center">
-        <span class="material-symbols-outlined">overview</span>
+        <span class="material-symbols-outlined" onmousedown="return false">overview</span>
         <small>Documents</small>
       </div>
     </div>
     <div wire:click="reports" class="col-3 py-3 {{ $services_tab === 3 ? 'text-success' : '' }}" style="cursor: pointer;">
       <div class="d-flex flex-column align-items-center justify-content-center">
-        <span class="material-symbols-outlined">problem</span>
+        <span class="material-symbols-outlined" onmousedown="return false">problem</span>
         <small>Reports</small>
       </div>
     </div>
     <div wire:click="assistance" class="col-3 py-3 {{ $services_tab === 4 ? 'text-success' : '' }}" style="cursor: pointer;">
       <div class="d-flex flex-column align-items-center justify-content-center">
-        <span class="material-symbols-outlined">help</span>
+        <span class="material-symbols-outlined" onmousedown="return false">help</span>
         <small>Assistance</small>
       </div>
     </div>

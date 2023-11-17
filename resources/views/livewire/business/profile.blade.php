@@ -95,7 +95,7 @@
 
   <div class="container p-4 bg-white rounded-4 shadow">
     <div class="row justify-content-center mb-3">
-      <p class="fw-semibold mb-1">Change Password <small class="fw-normal">(Must have atleast 1 uppercase, 1 lowercase and 1 number)</small></p>
+      <p class="fw-semibold mb-1">Change Password <small class="fw-normal">(Must have uppercase, lowercase, and number)</small></p>
       <div class="row">
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="current-pass"><small>Current Password</small></label>

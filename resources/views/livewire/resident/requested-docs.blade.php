@@ -5,13 +5,13 @@
 
   <div class="d-flex justify-content-center mt-4">
     <div wire:click="pending" class="d-flex align-items-center px-3 py-2 border-bottom requested-docs-tabs {{ $docs_tab === 'pending' ? 'border border-bottom-0 rounded-top' : '' }}">
-      <p class="m-0 text-center {{ $docs_tab === 'pending' ? 'fw-semibold' : '' }}">Pending</p>
+      <p class="m-0 text-center {{ $docs_tab === 'pending' ? 'fw-semibold' : '' }}" onmousedown="return false">Pending</p>
     </div>
     <div wire:click="toPickup" class="d-flex align-items-center px-3 py-2 border-bottom requested-docs-tabs {{ $docs_tab === 'toPickup' ? 'border border-bottom-0 rounded-top' : '' }}">
-      <p class="m-0 text-center {{ $docs_tab === 'toPickup' ? 'fw-semibold' : '' }}">Ready To Pickup</p>
+      <p class="m-0 text-center {{ $docs_tab === 'toPickup' ? 'fw-semibold' : '' }}" onmousedown="return false">Ready To Pickup</p>
     </div>
     <div wire:click="claimed" class="d-flex align-items-center px-3 py-2 border-bottom requested-docs-tabs {{ $docs_tab === 'claimed' ? 'border border-bottom-0 rounded-top' : '' }}">
-      <p class="m-0 text-center {{ $docs_tab === 'claimed' ? 'fw-semibold' : '' }}">Claimed</p>
+      <p class="m-0 text-center {{ $docs_tab === 'claimed' ? 'fw-semibold' : '' }}" onmousedown="return false">Claimed</p>
     </div>
   </div>
   @if ($docs_tab === 'pending')

@@ -3,7 +3,7 @@
   "short_name": "e-Support",
   "start_url": "/login",
   "display": "standalone",
-  "background_color": "#696969",
+  "background_color": "#fff",
   "theme_color": "#0E2C15",
   "orientation": "portrait-primary",
   "icons": [

@@ -29,8 +29,17 @@
           </div>
           <div class="row mb-3">
             <label for="purpose" class="form-label px-0">Purpose</label>
-            <input type="text" id="purpose" class="form-control mb-2 inputs" disabled name="purpose" value="{{ old('purpose', $document->indigency->purpose) }}" placeholder="Enter purpose (ex. Scholarship)">
+            <select name="purpose" id="purpose" class="form-select inputs" disabled>
+              <option value="">Choose one...</option>
+              <option value="For Financial Assistance" {{ old('purpose', $document->indigency->purpose) === 'For Financial Assistance' ? 'selected' : '' }}>For Financial Assistance</option>
+              <option value="For Health Related-Expenses" {{ old('purpose', $document->indigency->purpose) === 'For Health Related-Expenses' ? 'selected' : '' }}>For Health Related-Expenses</option>
+              <option value="For Educational Support" {{ old('purpose', $document->indigency->purpose) === 'For Educational Support' ? 'selected' : '' }}>For Educational Support</option>
+              <option value="For Social Welfare Programs" {{ old('purpose', $document->indigency->purpose) === 'For Social Welfare Programs' ? 'selected' : '' }}>For Social Welfare Programs</option>
+              <option value="Others" {{ old('purpose', $document->indigency->purpose) === 'Others' ? 'selected' : '' }}>Others</option>
+            </select>
             @error('purpose') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            <input type="text" id="other" class="form-control mt-2 d-none inputs" disabled name="others" value="{{ old('others', $document->indigency->purpose) }}" placeholder="Enter purpose here...">
+            @error('others') <span class="error text-danger px-0 d-none" id="others-error" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <button id="confirmation" type="submit" hidden class="btn text-white my-4 rounded-pill px-4">Update</button>
         </form>
@@ -88,6 +97,55 @@
           $('#indigency-form').submit();
         }
       });
+    });
+
+
+
+    const purpose = document.getElementById('purpose');
+    const other = document.getElementById('other');
+    const othersErr = document.getElementById('others-error');
+
+    purpose.addEventListener('change', () => {
+      if(purpose.value === 'Others'){
+        other.classList.remove('d-none');
+        if(othersErr){
+          othersErr.classList.remove('d-none');
+        }
+      }else{
+        other.classList.add('d-none');
+        if(othersErr){
+          othersErr.classList.add('d-none');
+        }
+        other.value = '';
+      }
+    });
+
+    window.addEventListener('load', () => {
+      switch(purpose.value){
+        case 'For Financial Assistance' :
+          purpose.value = purpose.value;
+          other.value = '';
+          break;
+        case 'For Health Related-Expenses' :
+          purpose.value = purpose.value;
+          other.value = '';
+          break;
+        case 'For Educational Support' :
+          purpose.value = purpose.value;
+          other.value = '';
+          break;
+        case 'For Social Welfare Programs' :
+          purpose.value = purpose.value;
+          other.value = '';
+          break;
+        default:
+          other.value = other.value;
+          purpose.value = 'Others';
+          other.classList.remove('d-none');
+          if(othersErr){
+            othersErr.classList.remove('d-none');
+          }
+      }
     });
 
   </script>

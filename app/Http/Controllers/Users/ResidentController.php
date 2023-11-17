@@ -37,14 +37,24 @@ class ResidentController extends Controller
 
     public function updateAssist(Request $request, Assistance $assistance)
     {
-        $request->validate([
-            'date' => ['required', 'date'],
-            'time' => ['required', 'date_format:H:i'],
-            'need' => ['required', 'string', 'max:255'],
-            'purpose' => ['required', 'string', 'max:1000'],
-        ]);
+        if($request->need === 'Others'){
+            $request->validate([
+                'date' => ['required', 'date'],
+                'time' => ['required', 'date_format:H:i'],
+                'need' => ['required', 'string', 'max:255'],
+                'others' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:1000'],
+            ]);
+        }else{
+            $request->validate([
+                'date' => ['required', 'date'],
+                'time' => ['required', 'date_format:H:i'],
+                'need' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:1000'],
+            ]);
+        }
 
-        $assistance->need = $request->need;
+        $assistance->need = $request->need === 'Others' ? $request->others : $request->need;
         $assistance->purpose = $request->purpose;
         $assistance->date = $request->date;
         $assistance->time = $request->time;
@@ -70,16 +80,26 @@ class ResidentController extends Controller
 
     public function requestAssistance(Request $request)
     {
-        $request->validate([
-            'date' => ['required', 'date'],
-            'time' => ['required', 'date_format:H:i'],
-            'need' => ['required', 'string', 'max:255'],
-            'purpose' => ['required', 'string', 'max:1000'],
-        ]);
+        if($request->need === 'Others'){
+            $request->validate([
+                'date' => ['required', 'date'],
+                'time' => ['required', 'date_format:H:i'],
+                'need' => ['required', 'string', 'max:255'],
+                'others' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:1000'],
+            ]);
+        }else{
+            $request->validate([
+                'date' => ['required', 'date'],
+                'time' => ['required', 'date_format:H:i'],
+                'need' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:1000'],
+            ]);
+        }
         
         Assistance::create([
             'user_id' => auth()->guard('web')->id(),
-            'need' => $request->need,
+            'need' => $request->need === 'Others' ? $request->others : $request->need,
             'purpose' => $request->purpose,
             'date' => $request->date,
             'time' => $request->time,
@@ -291,14 +311,22 @@ class ResidentController extends Controller
 
     public function updateIndigency(Request $request, $id)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'purpose' => ['required', 'string', 'max:255'],
-        ]);
+        if($request->purpose === 'Others'){
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:255'],
+                'others' => ['required', 'string', 'max:255'],
+            ]);
+        }else{
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:255'],
+            ]);
+        }
 
         $document = Document::find($id);
         $document->indigency->name = $request->name;
-        $document->indigency->purpose = $request->purpose;
+        $document->indigency->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
         $document->indigency->update();
 
         return redirect()->route('resident.services');
@@ -361,15 +389,28 @@ class ResidentController extends Controller
 
     public function updateBrgyClearance(Request $request, $id)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'zone' => ['required', 'string', 'max:1'],
-            'purpose' => ['required', 'string', 'max:255'],
-            'ctc_image' => [File::image()],
-            'ctc' => ['nullable', 'string', 'max:255'],
-            'issued_at' => ['nullable', 'string', 'max:255'],
-            'issued_on' => ['nullable', 'date'],
-        ]);
+        if($request->purpose === 'Others'){
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'zone' => ['required', 'string', 'max:1'],
+                'purpose' => ['required', 'string', 'max:255'],
+                'others' => ['required', 'string', 'max:255'],
+                'ctc_image' => [File::image()],
+                'ctc' => ['nullable', 'string', 'max:255'],
+                'issued_at' => ['nullable', 'string', 'max:255'],
+                'issued_on' => ['nullable', 'date'],
+            ]);
+        }else{
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'zone' => ['required', 'string', 'max:1'],
+                'purpose' => ['required', 'string', 'max:255'],
+                'ctc_image' => [File::image()],
+                'ctc' => ['nullable', 'string', 'max:255'],
+                'issued_at' => ['nullable', 'string', 'max:255'],
+                'issued_on' => ['nullable', 'date'],
+            ]);
+        }
 
         $document = Document::find($id);
 
@@ -398,7 +439,7 @@ class ResidentController extends Controller
         
         $document->brgyClearance->name = $request->name;
         $document->brgyClearance->zone = $request->zone;
-        $document->brgyClearance->purpose = $request->purpose;
+        $document->brgyClearance->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
         $document->brgyClearance->update();
 
 
@@ -505,10 +546,18 @@ class ResidentController extends Controller
 
     public function storeIndigency(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'purpose' => ['required', 'string', 'max:255'],
-        ]);
+        if($request->purpose === 'Others'){
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:255'],
+                'others' => ['required', 'string', 'max:255'],
+            ]);
+        }else{
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'purpose' => ['required', 'string', 'max:255'],
+            ]);
+        }
 
         if(Auth::guard('web')->check()){
             $token = uniqid(Str::random(10), true);
@@ -522,7 +571,7 @@ class ResidentController extends Controller
             $indigency = new Indigency();
             $indigency->document_id = $document->id;
             $indigency->name = $request->name;
-            $indigency->purpose = $request->purpose;
+            $indigency->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
             $indigency->save();
 
             $user = auth()->guard('web')->user();
@@ -538,15 +587,28 @@ class ResidentController extends Controller
 
     public function storeBrgyClearance(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'zone' => ['required', 'string', 'max:1'],
-            'purpose' => ['required', 'string', 'max:255'],
-            'ctc_image' => ['nullable', File::image()],
-            'ctc' => ['nullable', 'string', 'max:255'],
-            'issued_at' => ['nullable', 'string', 'max:255'],
-            'issued_on' => ['nullable', 'date'],
-        ]);
+        if($request->purpose === 'Others'){
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'zone' => ['required', 'string', 'max:1'],
+                'purpose' => ['required', 'string', 'max:255'],
+                'others' => ['required', 'string', 'max:255'],
+                'ctc_image' => ['nullable', File::image()],
+                'ctc' => ['nullable', 'string', 'max:255'],
+                'issued_at' => ['nullable', 'string', 'max:255'],
+                'issued_on' => ['nullable', 'date'],
+            ]);
+        }else{
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'zone' => ['required', 'string', 'max:1'],
+                'purpose' => ['required', 'string', 'max:255'],
+                'ctc_image' => ['nullable', File::image()],
+                'ctc' => ['nullable', 'string', 'max:255'],
+                'issued_at' => ['nullable', 'string', 'max:255'],
+                'issued_on' => ['nullable', 'date'],
+            ]);
+        }
 
         if(Auth::guard('web')->check()){
             $token = uniqid(Str::random(10), true);
@@ -571,7 +633,7 @@ class ResidentController extends Controller
             $brgyClearance->document_id = $document->id;
             $brgyClearance->name = $request->name;
             $brgyClearance->zone = $request->zone;
-            $brgyClearance->purpose = $request->purpose;
+            $brgyClearance->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
             $brgyClearance->save();
 
             $user = auth()->guard('web')->user();

@@ -42,8 +42,11 @@
             <option value="Vehicle Use" {{ old('need', $assistance->need) === 'Vehicle Use' ? 'selected' : '' }}>Vehicle Use</option>
             <option value="Crowd Control" {{ old('need', $assistance->need) === 'Crowd Control' ? 'selected' : '' }}>Crowd Control</option>
             <option value="Streetlight" {{ old('need', $assistance->need) === 'Streetlight' ? 'selected' : '' }}>StreetLight (Bulb)</option>
+            <option value="Others" {{ old('need', $assistance->need) === 'Others' ? 'selected' : '' }}>Others</option>
           </select>
           @error('need') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          <input type="text" id="other" class="form-control mt-2 d-none" value="{{ old('others', $assistance->need) }}" name="others" placeholder="Please specify your need here...">
+          @error('others') <span class="error text-danger px-0 d-none" id="others-error" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <div class="row mb-3">
           <label for="purpose" class="form-label px-0">Purpose</label>
@@ -95,6 +98,54 @@
           $('#cancel-assistance-form').submit();
         }
       });
+    });
+
+
+    const need = document.getElementById('need');
+    const other = document.getElementById('other');
+    const othersErr = document.getElementById('others-error');
+
+    need.addEventListener('change', () => {
+      if(need.value === 'Others'){
+        other.classList.remove('d-none');
+        if(othersErr){
+          othersErr.classList.remove('d-none');
+        }
+      }else{
+        other.classList.add('d-none');
+        if(othersErr){
+          othersErr.classList.add('d-none');
+        }
+        other.value = '';
+      }
+    });
+
+    window.addEventListener('load', () => {
+      switch(need.value){
+        case 'Borrow Chairs and Tables' :
+          need.value = need.value;
+          other.value = '';
+          break;
+        case 'Vehicle Use' :
+          need.value = need.value;
+          other.value = '';
+          break;
+        case 'Crowd Control' :
+          need.value = need.value;
+          other.value = '';
+          break;
+        case 'Streetlight' :
+          need.value = need.value;
+          other.value = '';
+          break;
+        default:
+          other.value = other.value;
+          need.value = 'Others';
+          other.classList.remove('d-none');
+          if(othersErr){
+            othersErr.classList.remove('d-none');
+          }
+      }
     });
 
   </script>

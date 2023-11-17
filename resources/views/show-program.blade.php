@@ -6,7 +6,7 @@
 
     <div class="container bg-light my-5 p-3">
       <div class="d-flex justify-content-center mb-5">
-        <img class="object-fit-contain rounded w-100" src="{{ Storage::url($program->display_img) }}" alt="img">
+        <img class="object-fit-contain rounded w-100" src="{{ Storage::url($program->display_img) }}" alt="img" style="height: 20rem;">
       </div>
       <div class="d-flex justify-content-center">
         <div class="w-100">

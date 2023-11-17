@@ -121,7 +121,7 @@
       <div class="px-4">
         <div class="card shadow p-1 mb-5 bg-body-tertiary rounded">
           <div class="card-body px-2">
-            <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15344.643745226082!2d120.5678042380382!3d15.952969836799163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33913ee33655b17f%3A0x339de728f9941f0a!2sNancayasan%2C%20Pangasinan!5e0!3m2!1sen!2sph!4v1690717553675!5m2!1sen!2sph" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.1410767501243!2d120.57392377438893!3d15.954007442513662!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33913efd2b8ba2b1%3A0xac2ed57018278646!2sNancayasan%20Barangay%20Hall!5e0!3m2!1sen!2sph!4v1700189608988!5m2!1sen!2sph" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>

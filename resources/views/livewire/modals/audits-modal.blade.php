@@ -20,7 +20,7 @@
                       <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                       <div class="border rounded p-2">
                         <p class="text-break m-0">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
                             @if ($value == 1)
                               Yes
                             @else
@@ -47,7 +47,7 @@
                         <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                         <div class="border rounded p-2">
                           <p class="text-break m-0">
-                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
+                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
                               @if ($value == 1)
                                 Yes
                               @else
@@ -72,7 +72,7 @@
                         <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                         <div class="border rounded p-2">
                           <p class="text-break m-0">
-                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
+                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
                               @if ($value == 1)
                                 Yes
                               @else
@@ -98,7 +98,7 @@
                       <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                       <div class="border rounded p-2">
                         <p class="text-break m-0">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
                             @if ($value == 1)
                               Yes
                             @else
@@ -123,7 +123,7 @@
                       <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                       <div class="border rounded p-2">
                         <p class="text-break m-0">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released')
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
                             @if ($value == 1)
                               Yes
                             @else

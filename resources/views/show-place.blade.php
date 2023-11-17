@@ -6,7 +6,7 @@
 
     <div class="container bg-light my-3 p-3">
       <div class="d-flex flex-column align-items-center mb-3">
-        <img class="object-fit-cover rounded w-100" src="{{ Storage::url($place->display_img) }}" alt="">
+        <img class="object-fit-contain rounded w-100" src="{{ Storage::url($place->display_img) }}" alt="" style="height: 20rem;">
         <p class="my-2 fw-medium">
           <i class="fa-solid fa-location-dot text-danger me-2"></i>
           {{ $place->location }}
