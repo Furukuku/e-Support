@@ -97,30 +97,79 @@
           <div class="row-auto mb-3">
             <h6>Place Name</h6>
             <div class="rounded border border-1 p-2">
-              <p class="m-0">{{ $place_name }}</p>
+              <p class="m-0 text-break">{{ $place_name }}</p>
             </div>
           </div>
           <div class="row-auto mb-3">
             <h6>Type</h6>
             <div class="rounded border border-1 p-2">
-              <p class="m-0">{{ $type }}</p>
+              <p class="m-0 text-break">{{ $type }}</p>
             </div>
           </div>
+          @if (!is_null($business))
+            <div class="row-auto mb-3">
+              <h6>Owner</h6>
+              <div class="rounded border border-1 p-2">
+                <p class="m-0 text-break">{{ $business->fname }} {{ $business->mname }} {{ $business->lname }}</p>
+              </div>
+            </div>
+          @endif
           <div class="row-auto mb-3">
             <h6>Address</h6>
             <div class="rounded border border-1 p-2">
-              <p class="m-0">{{ $location }}</p>
+              <p class="m-0 text-break">{{ $location }}</p>
             </div>
           </div>
           <div class="row-auto mb-3">
             <h6>Description</h6>
             <div class="rounded border border-1 p-2">
-              <p class="m-0">{{ $place_description }}</p>
+              <p class="m-0 text-break">{{ $place_description }}</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-center border-0">
+      @if (!is_null($place) && $place->is_approved == false && is_null($place->decline_msg))
+        <div class="modal-footer justify-content-end gap-2 border-0">
+          <button type="button" wire:click="declineConfirm" wire:loading.attr="disabled" class="btn btn-danger">Decline</button>
+          <button type="button" wire:click="approve" wire:loading.attr="disabled" class="btn btn-warning">Approve</button>
+        </div>
+      @endif
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Decline Modal -->
+<div wire:ignore.self class="modal fade" id="declineConfirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="declineConfirmLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-bg py-2">
+        <h1 class="modal-title fs-5" id="declineConfirmLabel">Decline Business</h1>
+        <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
+          cancel
+        </span>
+      </div>
+      <div class="modal-body pt-0">
+        <div class="p-3">
+          <label for="reason" class="form-label">Reason</label>
+          <select id="reason" wire:model="reason" class="form-select">
+            <option value="">Choose one...</option>
+            <option value="Please provide a detailed information of your business.">Please provide a detailed information of your business.</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Misleading Information">Misleading Information</option>
+            <option value="Other">Other</option>
+          </select>
+          @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @if ($reason === 'Other')
+            <textarea id="other" wire:model.defer="other" class="form-control mt-3" rows="3"></textarea>
+            @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @endif
+        </div>
+      </div>
+      <div class="modal-footer d-flex gap-2 justify-content-end">
+        <button type="button" class="btn btn-secondary px-4" wire:click="closeModal" wire:loading.class="disabled" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" wire:click="decline" wire:loading.class="disabled" class="btn btn-danger px-4">Decline</button>
       </div>
     </div>
   </div>

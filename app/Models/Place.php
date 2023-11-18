@@ -18,6 +18,7 @@ class Place extends Model
     protected $table = 'places';
 
     protected $fillable = [
+        'business_id',
         'display_img',
         'name',
         'type',
@@ -25,7 +26,15 @@ class Place extends Model
         'location',
         'latitude',
         'longitude',
+        'is_approved',
+        'decline_msg'
     ];
+
+
+    public function business()
+    {
+        return $this->belongsTo(Business::class);
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

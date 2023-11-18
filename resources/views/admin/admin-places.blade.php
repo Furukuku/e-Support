@@ -196,6 +196,12 @@
       $('#addPlace').modal('hide');
       $('#updatePlace').modal('hide');
       $('#archivePlace').modal('hide');
+      $('#viewPlace').modal('hide');
+      $('#declineConfirm').modal('hide');
+    });
+
+    window.addEventListener('confirm-decline', () => {
+      $('#declineConfirm').modal('show');
     });
 
 

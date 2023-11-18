@@ -53,11 +53,11 @@
               <h5 class="m-0">Profile</h5>
             </a>
           </li>
-          {{-- <li class="nav-item">
-            <a href="{{ route('business.archives') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'business.archives') ? 'active' : '' }}">
-              <h5 class="m-0">Archives</h5>
+          <li class="nav-item">
+            <a href="{{ route('business.share.location') }}" class="nav-link text-dark {{ str_contains(Route::currentRouteName(), 'business.share.location') ? 'active' : '' }}">
+              <h5 class="m-0">Share Location</h5>
             </a>
-          </li> --}}
+          </li>
         </ul>
       </div>
       <div class="btn-group navbar-hide-items">
@@ -98,7 +98,7 @@
         </li>
         <li class="pb-3">
           <a href="{{ route('business.services') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.services') ? 'text-success' : 'text-dark' }}">
-            <span class="material-symbols-outlined">home</span>
+            <span class="material-symbols-outlined">quick_reference</span>
             <span class="ps-2">Services</span>
           </a>
         </li>
@@ -108,12 +108,12 @@
             <span class="ps-2">Profile</span>
           </a>
         </li>
-        {{-- <li class="pb-3">
-          <a href="{{ route('business.archives') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.archives') ? 'text-success' : 'text-dark' }}">
-            <span class="material-symbols-outlined">inventory_2</span>
-            <span class="ps-2">Archives</span>
+        <li class="pb-3">
+          <a href="{{ route('business.share.location') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'business.share.location') ? 'text-success' : 'text-dark' }}">
+            <span class="material-symbols-outlined">home_pin</span>
+            <span class="ps-2">Share Location</span>
           </a>
-        </li> --}}
+        </li>
         <li class="pb-3">
           <form action="{{ route('business.logout') }}" method="POST">
             @csrf

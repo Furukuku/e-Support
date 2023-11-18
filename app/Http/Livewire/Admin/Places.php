@@ -21,6 +21,11 @@ class Places extends Component
     public $view_display_image;
 
     public $place_id;
+    public $business;
+    public $place;
+    public $reason;
+
+    public $category = 0;
 
     public $paginate = 5;
     public $paginate_values = [5, 10, 50, 100];
@@ -246,12 +251,15 @@ class Places extends Component
 
     public function render()
     {
-        $places = Place::where('name', 'like', '%' . $this->search . '%')
-        ->orWhere('type', 'like', '%' . $this->search . '%')
-        ->orWhere('description', 'like', '%' . $this->search . '%')
-        ->orWhere('location', 'like', '%' . $this->search . '%')
-        ->orderBy('created_at', 'desc')
-        ->paginate($this->paginate);
+        $places = Place::where('business_id', null)
+            ->where(function($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('type', 'like', '%' . $this->search . '%')
+                ->orWhere('description', 'like', '%' . $this->search . '%')
+                ->orWhere('location', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate);
 
         return view('livewire.admin.places', ['places' => $places]);
     }

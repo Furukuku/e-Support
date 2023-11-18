@@ -13,20 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
 {
-    // public $first_date, $second_date;
-
-    public function mount()
-    {
-        // $date = Report::where('is_exist', true)
-        //     ->select('created_at')
-        //     ->orderBy('created_at', 'asc')
-        //     ->first();
-
-        // $this->first_date = $date->created_at;
-        // $this->second_date = now();
-
-    }
-
     public function render()
     {
         $final_population = [];

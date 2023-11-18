@@ -74,6 +74,11 @@ class Business extends Authenticatable implements IMustVerifyMobile, CanResetPas
         'password' => 'hashed',
     ];
 
+    public function place()
+    {
+        return $this->hasOne(Place::class);
+    }
+
     public function documents()
     {
         return $this->hasMany(Document::class);
