@@ -21,6 +21,12 @@
             <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         @endif
+        @if (session('status'))
+          <div class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert">
+            <p class="mb-0">{{ session('status') }}</p>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
 
         <div class="row mb-3">
           <label for="username" class="">Username</label>
@@ -52,7 +58,7 @@
           </div>
         </div>
       </form>
-      <a href="#" class="text-decoration-none text-color my-3">Forgot Password?</a>
+      <a href="{{ route('users.forgot-password') }}" class="text-decoration-none text-color my-3">Forgot Password?</a>
     </div>
   </div>
 

@@ -44,12 +44,17 @@ Route::middleware(['guest:web', 'guest:business'])->group(function(){
 
     Route::view('/register-company', 'auth.users.register-company')->name('company.register');
     Route::view('/business/terms-and-conditions', 'auth.users.business-agreements.terms-conditions')->name('business.terms-conditions');
+});
 
+
+Route::middleware(['guest:web', 'guest:business', 'guest:admin', 'guest:sub-admin', 'guest:bhw'])->group(function(){
     Route::view('/forgot-password', 'auth.users.forgot-password')->name('users.forgot-password');
     Route::post('/forgotPassword', [ResetPasswordController::class, 'sendLink'])->name('users.password-reset.send-link');
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetPasswordForm'])->name('password.reset');
     Route::post('/resetPassword', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 });
+
+
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome'); // welcome route
 Route::get('/about-us', [WelcomeController::class, 'aboutUs'])->name('about');

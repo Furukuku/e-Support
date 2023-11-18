@@ -177,6 +177,12 @@ body {
   transform: rotate(-90deg);
 }
 
+.forgot-pass-bg {
+  background-image: url('../../images/welcome-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 @keyframes rotation {
   0% {

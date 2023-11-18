@@ -2,15 +2,22 @@
 
 @section('users.auth')
 
-  <div class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="bg-light d-flex justify-content-center align-items-center forgot-pass-bg" style="height: 100vh;">
     <div class="p-5 rounded shadow border bg-white" style="width: 30rem;">
       @if (session('status'))
-        <p class="text-success m-0">{{ session('status') }}</p>
+        <div class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert">
+          <p class="mb-0">{{ session('status') }}</p>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       @endif
 
       @if (session('email'))
-        <p class="text-danger m-0">{{ session('email') }}</p>
+        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-center" role="alert">
+          <p class="mb-0">{{ session('email') }}</p>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       @endif
+        
       <form action="{{ route('users.password-reset.send-link') }}" method="POST">
         @csrf
         <div class="mb-2">
