@@ -103,7 +103,7 @@ class Reports extends Component
                     ELSE 3
                 END"
             )
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->paginate);
 
         $totalPendingReports = Report::where('status', 'Pending')->count();

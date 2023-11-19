@@ -2,11 +2,15 @@
 
 namespace App\Http\Livewire\Auth\Registration;
 
+use App\Models\Admin;
 use App\Models\Business;
+use App\Notifications\PreRegisteredBusinessNotification;
+use Exception;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Notification;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -32,7 +36,7 @@ class Company extends Component
         ],
         2 => [
             'email' => 'required|email|unique:businesses|unique:users|unique:barangay_health_workers|unique:sub_admins|unique:admins|max:255',
-            'mobile' => 'required|unique:businesses|digits:12',
+            'mobile' => 'required|digits:12',
             'business_address' => 'required|string|max:255',
             'business_clearance' => 'required|image',
             'business_name' => 'required|string|max:255',
@@ -94,9 +98,17 @@ class Company extends Component
             'password' => $this->password,
         ]);
 
-        event(new Registered($user));
+        try{
+            event(new Registered($user));
+        }catch(Exception $e){
+            return redirect()->route('resident.login')->with('not-send', 'Please check your internet connection and login your account then resend an otp code.');
+        }
 
         Auth::guard('business')->login($user);
+
+        $admins = Admin::all();
+
+        Notification::send($admins, new PreRegisteredBusinessNotification($user));
 
         return redirect()->route('business.home');
     }

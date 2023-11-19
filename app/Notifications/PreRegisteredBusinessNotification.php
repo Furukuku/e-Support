@@ -7,18 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReportNotification extends Notification
+class PreRegisteredBusinessNotification extends Notification
 {
     use Queueable;
 
-    private $user, $report;
+    private $business;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct($user, $report)
+    public function __construct($business)
     {
-        $this->user = $user;
-        $this->report = $report;
+        $this->business = $business;
     }
 
     /**
@@ -50,10 +50,8 @@ class ReportNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'user_id' => $this->user->id,
-            'user' => $this->user->username,
-            'report_id' => $this->report->id,
-            'report' => $this->report->report_name,
+            'business_id' => $this->business->id,
+            'business' => $this->business->username,
         ];
     }
 }

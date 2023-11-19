@@ -35,6 +35,12 @@ class SubAdminController extends Controller
 
     public function reports()
     {
+        auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\ReportNotification')->markAsRead();
+
+        if(auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\ReportNotification')->count() > 0){
+            return redirect()->route('sub-admin.reports');
+        }
+
         return view('sub-admin.sub-admin-reports');
     }
 
@@ -48,18 +54,36 @@ class SubAdminController extends Controller
         return view('sub-admin.sub-admin-places');
     }
 
-    public function clearance()
+    public function brgyClearance()
     {
+        auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Barangay Clearance')->markAsRead();
+
+        if(auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Barangay Clearance')->count() > 0){
+            return redirect()->route('sub-admin.docs.brgy-clearances');
+        }
+
         return view('sub-admin.sub-admin-print-clearance');
     }
 
-    public function permit()
+    public function bizClearance()
     {
+        auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Business Clearance')->markAsRead();
+
+        if(auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Business Clearance')->count() > 0){
+            return redirect()->route('sub-admin.docs.biz-clearances');
+        }
+
         return view('sub-admin.sub-admin-print-biz-permit');
     }
 
     public function indigency()
     {
+        auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Indigency')->markAsRead();
+
+        if(auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\DocumentNotification')->where('data.document','Indigency')->count() > 0){
+            return redirect()->route('sub-admin.docs.indigencies');
+        }
+
         return view('sub-admin.sub-admin-print-indigency');
     }
 

@@ -17,6 +17,8 @@ use App\Models\Job;
 use App\Models\Place;
 use App\Models\Report;
 use App\Models\ReportImage;
+use App\Models\SubAdmin;
+use App\Notifications\AssistanceNotification;
 use App\Notifications\DocumentNotification;
 use App\Notifications\ReportNotification;
 use Illuminate\Support\Facades\Auth;
@@ -96,13 +98,20 @@ class ResidentController extends Controller
             ]);
         }
         
-        Assistance::create([
+        $assistance = Assistance::create([
             'user_id' => auth()->guard('web')->id(),
             'need' => $request->need === 'Others' ? $request->others : $request->need,
             'purpose' => $request->purpose,
             'date' => $request->date,
             'time' => $request->time,
         ]);
+
+        $user = auth()->guard('web')->user();
+        $admins = Admin::all();
+        $subAdmins = SubAdmin::where('position', 'Barangay Official')->get();
+
+        Notification::send($admins, new AssistanceNotification($user, $assistance));
+        Notification::send($subAdmins, new AssistanceNotification($user, $assistance));
 
         return redirect()->route('resident.services')->with('success', 'Request successfully sent');
     }
@@ -304,8 +313,10 @@ class ResidentController extends Controller
             $user = auth()->guard('web')->user();
 
             $admins = Admin::all();
+            $subAdmins = SubAdmin::where('position', 'Barangay Official')->get();
 
             Notification::send($admins, new ReportNotification($user, $report));
+            Notification::send($subAdmins, new ReportNotification($user, $report));
 
             event(new SendReport($user->username));
         }
@@ -546,8 +557,10 @@ class ResidentController extends Controller
 
             $user = auth()->guard('web')->user();
             $admins = Admin::all();
+            $subAdmins = SubAdmin::where('position', 'Barangay Official')->get();
 
             Notification::send($admins, new DocumentNotification($user, $document));
+            Notification::send($subAdmins, new DocumentNotification($user, $document));
 
             return redirect()->route('resident.qr-code', ['token' => $token])->with('success', 'Request successfully sent');
         }else{
@@ -587,8 +600,10 @@ class ResidentController extends Controller
 
             $user = auth()->guard('web')->user();
             $admins = Admin::all();
+            $subAdmins = SubAdmin::where('position', 'Barangay Official')->get();
 
             Notification::send($admins, new DocumentNotification($user, $document));
+            Notification::send($subAdmins, new DocumentNotification($user, $document));
 
             return redirect()->route('resident.qr-code', ['token' => $token])->with('success', 'Request successfully sent');
         }else{
@@ -649,8 +664,10 @@ class ResidentController extends Controller
 
             $user = auth()->guard('web')->user();
             $admins = Admin::all();
+            $subAdmins = SubAdmin::where('position', 'Barangay Official')->get();
 
             Notification::send($admins, new DocumentNotification($user, $document));
+            Notification::send($subAdmins, new DocumentNotification($user, $document));
 
             return redirect()->route('resident.qr-code', ['token' => $token])->with('success', 'Request successfully sent');
         }else{

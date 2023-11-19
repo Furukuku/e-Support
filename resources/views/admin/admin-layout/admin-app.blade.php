@@ -76,7 +76,12 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredBusinessNotification')->count() > 0)
+            <span class="position-absolute translate-middle p-1 bg-danger rounded-circle" style="top: 1.6rem;right: 2rem;">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          @endif
           <a id="u-submenu-toggle" class="nav-link p-0 d-flex align-items-center sidebar-navigate submenu-link">
             @if (str_contains(Route::currentRouteName(), 'admin.manage.'))
               <div class="submenu-active"></div>
@@ -95,7 +100,13 @@
                 </div>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="position-relative nav-item">
+              @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredBusinessNotification')->count() > 0)
+                <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+                  {{ auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredBusinessNotification')->count() }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              @endif
               <a href="{{ route('admin.manage.business') }}" id="resident-business" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.manage.business') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Business</p>
@@ -135,7 +146,7 @@
                   <span class="visually-hidden">unread messages</span>
                 </span>
               @endif
-              <a href="{{ route('admin.mark-brgy-clearance') }}" id="clearance" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.brgy-clearances') ? 'navigate-active' : '' }}">
+              <a href="{{ route('admin.docs.brgy-clearances') }}" id="clearance" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.brgy-clearances') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Barangay Clearance</p>
                 </div>
@@ -148,7 +159,7 @@
                   <span class="visually-hidden">unread messages</span>
                 </span>
               @endif
-              <a href="{{ route('admin.mark-biz-clearance') }}" id="business-permit" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.biz-clearance') ? 'navigate-active' : '' }}">
+              <a href="{{ route('admin.docs.biz-clearances') }}" id="business-permit" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.biz-clearances') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Business Clearance</p>
                 </div>
@@ -161,7 +172,7 @@
                   <span class="visually-hidden">unread messages</span>
                 </span>
               @endif
-              <a href="{{ route('admin.mark-indigency') }}" id="indigency" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.indigencies') ? 'navigate-active' : '' }}">
+              <a href="{{ route('admin.docs.indigencies') }}" id="indigency" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.docs.indigencies') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Indigency</p>
                 </div>
@@ -176,14 +187,20 @@
               <span class="visually-hidden">unread messages</span>
             </span>
           @endif
-          <a href="{{ route('admin.mark-report') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.reports') ? 'navigate-active' : '' }}">
+          <a href="{{ route('admin.reports') }}" id="reports" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.reports') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">report</span>
               <p class="col-9 m-0 ps-0">Incident Reports</p>
             </div>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\AssistanceNotification')->count() > 0)
+            <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+              {{ auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\AssistanceNotification')->count() }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          @endif
           <a href="{{ route('admin.assitance') }}" id="message" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.assitance') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">support_agent</span>
@@ -215,7 +232,13 @@
             </div>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\PlacesNotification')->count() > 0)
+            <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+              {{ auth()->guard('admin')->user()->unreadNotifications->where('type', 'App\Notifications\PlacesNotification')->count() }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          @endif
           <a href="{{ route('admin.places') }}" id="spot" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.places') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">attractions</span>
@@ -239,14 +262,6 @@
             </div>
           </a>
         </li>
-        {{-- <li class="nav-item text-white sidebar-list">
-          <a href="{{ route('admin.account') }}" id="account" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.account') ? 'navigate-active' : '' }}">
-            <div class="container-fluid row p-0 ps-2 m-0">
-              <span class="material-symbols-outlined col-3 text-center">manage_accounts</span>
-              <p class="col-9 m-0 ps-0">Account</p>
-            </div>
-          </a>
-        </li> --}}
       </ul>
     </div>
     <div id="b-sidebar" class="block-sidebar"></div>

@@ -7,18 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReportNotification extends Notification
+class PreRegisteredResidentNotification extends Notification
 {
     use Queueable;
 
-    private $user, $report;
+    private $user;
     /**
      * Create a new notification instance.
      */
-    public function __construct($user, $report)
+    public function __construct($user)
     {
         $this->user = $user;
-        $this->report = $report;
     }
 
     /**
@@ -52,8 +51,7 @@ class ReportNotification extends Notification
         return [
             'user_id' => $this->user->id,
             'user' => $this->user->username,
-            'report_id' => $this->report->id,
-            'report' => $this->report->report_name,
+            'user_zone' => $this->user->zone,
         ];
     }
 }

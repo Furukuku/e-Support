@@ -31,7 +31,13 @@
             </div>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('bhw')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredResidentNotification')->where('data.user_zone', auth()->guard('bhw')->user()->assigned_zone)->count() > 0)
+            <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+              {{ auth()->guard('bhw')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredResidentNotification')->where('data.user_zone', auth()->guard('bhw')->user()->assigned_zone)->count() }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          @endif
           <a href="{{ route('sub-bhw.resident-accounts') }}" id="family" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-bhw.resident-accounts') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">group</span>
@@ -39,7 +45,13 @@
             </div>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('bhw')->user()->unreadNotifications->where('type', 'App\Notifications\FamilyNotification')->where('data.family_zone', auth()->guard('bhw')->user()->assigned_zone)->count() > 0)
+            <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+              {{ auth()->guard('bhw')->user()->unreadNotifications->where('type', 'App\Notifications\FamilyNotification')->where('data.family_zone', auth()->guard('bhw')->user()->assigned_zone)->count() }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          @endif
           <a href="{{ route('sub-bhw.family-profiles') }}" id="family" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'sub-bhw.family-profiles') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">family_restroom</span>

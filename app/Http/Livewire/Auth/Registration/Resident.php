@@ -2,10 +2,14 @@
 
 namespace App\Http\Livewire\Auth\Registration;
 
+use App\Models\BarangayHealthWorker;
+use App\Models\SubAdmin;
 use App\Models\User;
+use App\Notifications\PreRegisteredResidentNotification;
 use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -32,7 +36,7 @@ class Resident extends Component
         ],
         2 => [
             'email' => 'required|email|unique:users|unique:businesses|unique:barangay_health_workers|unique:sub_admins|unique:admins|max:255',
-            'mobile' => 'required|unique:users|digits:12',
+            'mobile' => 'required|digits:12',
             'zone' => 'required|string|max:2',
         ],
     ];
@@ -100,6 +104,12 @@ class Resident extends Component
         }
 
         Auth::login($user);
+
+        $bhw = SubAdmin::where('position', 'BHW')->get();
+        $subBhw = BarangayHealthWorker::all();
+
+        Notification::send($bhw, new PreRegisteredResidentNotification($user));
+        Notification::send($subBhw, new PreRegisteredResidentNotification($user));
 
         return redirect()->route('resident.home');
     }

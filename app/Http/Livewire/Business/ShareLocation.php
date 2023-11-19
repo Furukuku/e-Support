@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Business;
 
+use App\Models\Admin;
 use App\Models\Place;
+use App\Notifications\PlacesNotification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -132,7 +135,7 @@ class ShareLocation extends Component
 
         $display_img_filename = $this->business_image->store('public/images/profiles/places');
 
-        Place::create([
+        $place = Place::create([
             'business_id' => auth()->guard('business')->id(),
             'display_img' => $display_img_filename,
             'name' => $this->business_name,
@@ -143,6 +146,11 @@ class ShareLocation extends Component
             'longitude' => $this->lng,
             'is_approved' => false,
         ]);
+
+        $business = auth()->guard('business')->user();
+        $admins = Admin::all();
+
+        Notification::send($admins, new PlacesNotification($business, $place));
 
         return redirect()->route('business.share.location')->with('success', 'Post submitted successfully');
     }

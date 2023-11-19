@@ -129,13 +129,25 @@ class BHWController extends Controller
         ]);
     }
 
-    public function residents()
+    public function residentAccounts()
     {
-        return view('bhw.bhw-residents');
+        auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredResidentNotification')->markAsRead();
+
+        if(auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredResidentNotification')->count() > 0){
+            return redirect()->route('bhw.manage.resident-accounts');
+        }
+
+        return view('bhw.bhw-resident-accounts');
     }
 
-    public function patients()
+    public function familyProfiles()
     {
-        return view('bhw.bhw-patients');
+        auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\FamilyNotification')->markAsRead();
+
+        if(auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\FamilyNotification')->count() > 0){
+            return redirect()->route('bhw.family-profiles');
+        }
+
+        return view('bhw.bhw-family-profiles');
     }
 }

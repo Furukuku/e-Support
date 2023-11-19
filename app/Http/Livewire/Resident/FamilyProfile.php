@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire\Resident;
 
+use App\Models\BarangayHealthWorker;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
+use App\Models\SubAdmin;
 use App\Models\Wife;
+use App\Notifications\FamilyNotification;
 use App\Rules\MustAtleastOneIsTrueOfTheFour;
 use App\Rules\MustAtleastOneIsTrueOfTheTwo;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class FamilyProfile extends Component
@@ -879,6 +883,14 @@ class FamilyProfile extends Component
                 $family_member->save();
             }
         }
+
+        $user = auth()->guard('web')->user();
+        $bhw = SubAdmin::where('position', 'BHW')->get();
+        $subBhw = BarangayHealthWorker::all();
+
+        Notification::send($bhw, new FamilyNotification($user, $family_head));
+        Notification::send($subBhw, new FamilyNotification($user, $family_head));
+
 
         return redirect()->route('resident.family-profile')->with('success', 'Family added successfully');
     }

@@ -65,7 +65,12 @@
             </div>
           </a>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredResidentNotification')->count() > 0)
+            <span class="position-absolute translate-middle p-1 bg-danger rounded-circle" style="top: 1.6rem;right: 2rem;">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          @endif
           <a id="u-submenu-toggle" class="nav-link p-0 d-flex align-items-center sidebar-navigate submenu-link">
             @if (str_contains(Route::currentRouteName(), 'bhw.manage.'))
               <div class="submenu-active"></div>
@@ -77,7 +82,13 @@
             </div>
           </a>
           <ul id="u-sub-menu" class="navbar-nav text-white {{ !str_contains(Route::currentRouteName(), 'bhw.manage.') ? 'u-submenu' : '' }}">
-            <li class="nav-item">
+            <li class="position-relative nav-item">
+              @if (auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredResidentNotification')->count() > 0)
+                <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+                  {{ auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\PreRegisteredResidentNotification')->count() }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              @endif
               <a href="{{ route('bhw.manage.resident-accounts') }}" id="residents" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'bhw.manage.resident-accounts') ? 'navigate-active' : '' }}">
                 <div class="container-fluid row p-0 ps-2 m-0">
                   <p class="col-12 m-0 ms-3 ps-5">Resident Accounts</p>
@@ -93,7 +104,13 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item text-white sidebar-list">
+        <li class="nav-item text-white position-relative sidebar-list">
+          @if (auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\FamilyNotification')->count() > 0)
+            <span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger">
+              {{ auth()->guard('sub-admin')->user()->unreadNotifications->where('type', 'App\Notifications\FamilyNotification')->count() }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          @endif
           <a href="{{ route('bhw.family-profiles') }}" id="family" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'bhw.family-profiles') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">family_restroom</span>
@@ -102,7 +119,7 @@
           </a>
         </li>
         <li class="nav-item text-white sidebar-list">
-          <a href="{{ route('bhw.patients') }}" id="patients" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'bhw.patients') ? 'navigate-active' : '' }}">
+          <a href="{{ route('bhw.patients') }}" id="patients" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'bhw.patients') || str_contains(Route::currentRouteName(), 'bhw.health-records') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">patient_list</span>
               <p class="col-9 m-0 ps-0">Patients</p>
