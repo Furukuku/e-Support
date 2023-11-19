@@ -135,6 +135,9 @@ class ResidentController extends Controller
                         'required' => 'The location is required.',
                         'string' => 'The location must be a valid location.',
                         'max' => 'The location must not exceed 100 characters.',
+                    ],
+                    'photo' => [
+                        'max' => 'The photo field must not exceed 3 image.'
                     ]
                 ]
             );
@@ -154,6 +157,9 @@ class ResidentController extends Controller
                         'required' => 'The location is required.',
                         'string' => 'The location must be a valid location.',
                         'max' => 'The location must not exceed 100 characters.',
+                    ],
+                    'photo' => [
+                        'max' => 'The photo field must not exceed 3 image.'
                     ]
                 ]
             );
@@ -226,6 +232,9 @@ class ResidentController extends Controller
                         'required' => 'The location is required.',
                         'string' => 'The location must be a valid location.',
                         'max' => 'The location must not exceed 100 characters.',
+                    ],
+                    'photo' => [
+                        'max' => 'The photo field must not exceed 3 image.'
                     ]
                 ]
             );
@@ -245,6 +254,9 @@ class ResidentController extends Controller
                         'required' => 'The location is required.',
                         'string' => 'The location must be a valid location.',
                         'max' => 'The location must not exceed 100 characters.',
+                    ],
+                    'photo' => [
+                        'max' => 'The photo field must not exceed 3 image.'
                     ]
                 ]
             );

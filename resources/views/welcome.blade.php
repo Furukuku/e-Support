@@ -9,16 +9,14 @@
     <div class="w-50 d-flex flex-column justify-content-center pe-5">
       <h1 class="fw-bold text-white">Barangay Nancasayan</h1>
       <p class="text-white">There is no power for change greater than a community discovering what it cares about.</p>
-      <div class="mt-3">
+      <div class="mt-3 d-flex gap-3 header-btn">
         <a href="{{ route('about') }}" class="btn btn-primary readmore-btn">About us</a>
+        <a id="install" class="btn btn-outline-light d-none install-btn">Install our application here!</a>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="py-5 d-flex justify-content-center">
-      <button type="button" class="btn btn-secondary" id="install" hidden>Install</button>
-    </div>
     <div class="py-5">
 
       <span id="brgy-officials" class="officials-anchor"></span>
@@ -174,39 +172,29 @@
       },
     });
 
+    const installBtn = document.getElementById("install");
 
-    let installPrompt = null;
-    const installButton = document.querySelector("#install");
-
-    window.addEventListener("beforeinstallprompt", (event) => {
-      event.preventDefault();
-      installPrompt = event;
-      installButton.removeAttribute("hidden");
+    installBtn.addEventListener('click', () => {
+      window.location.replace('/install');
     });
-
-
-    installButton.addEventListener("click", async () => {
-      if (!installPrompt) {
-        return;
+    // This variable will save the event for later use.
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if ('serviceWorker' in navigator) {
+        showInAppInstallPromotion();
       }
-      const result = await installPrompt.prompt();
-      console.log(`Install prompt was: ${result.outcome}`);
-      disableInAppInstallPrompt();
     });
-
-    function disableInAppInstallPrompt() {
-      installPrompt = null;
-      installButton.setAttribute("hidden", "");
-    }
-
 
     window.addEventListener("appinstalled", () => {
-      disableInAppInstallPrompt();
+      console.log("Thank you for installing our app!");
+      installBtn.classList.add('d-none');
+      window.location.replace('/login');
     });
 
-    function disableInAppInstallPrompt() {
-      installPrompt = null;
-      installButton.setAttribute("hidden", "");
+    function showInAppInstallPromotion(){
+      installBtn.classList.remove('d-none');
     }
 
   </script>

@@ -28,6 +28,7 @@ html {
 .readmore-btn:active {
   opacity: 0.8 !important;
 }
+
 /* .brgy-captain-bg {
   background-image: url('../images/welcome-bg.png');
   background-repeat: no-repeat;
@@ -223,5 +224,12 @@ footer {
   .website-header > div:last-child > h1,
   .website-header > div:last-child > p {
     text-align: center !important;
+  }
+
+  .website-header > div > .header-btn {
+    display: flex;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
   }
 }

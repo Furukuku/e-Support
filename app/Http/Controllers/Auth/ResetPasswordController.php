@@ -27,7 +27,7 @@ class ResetPasswordController extends Controller
         $status = null;
         if(!is_null($user)){
             $request->validate([
-                'email' => ['required', 'email', 'exists:businesses'],
+                'email' => ['required', 'email', 'exists:users'],
             ]);
 
             $status = Password::sendResetLink(

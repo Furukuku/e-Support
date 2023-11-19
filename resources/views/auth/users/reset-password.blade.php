@@ -13,7 +13,7 @@
         @error('token') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         <div class="mb-2">
           <label for="email" class="form-label">Enter your email</label>
-          <input type="text" id="email" class="form-control" name="email">
+          <input type="text" id="email" class="form-control" value="{{ old('email') }}" name="email">
           @error('email') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <div class="mb-2">

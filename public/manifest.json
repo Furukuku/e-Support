@@ -1,6 +1,7 @@
 {
   "name": "e-Support",
   "short_name": "e-Support",
+  "id": "/",
   "start_url": "/login",
   "display": "standalone",
   "background_color": "#fff",

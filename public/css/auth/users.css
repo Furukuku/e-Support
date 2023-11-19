@@ -184,6 +184,15 @@ body {
 }
 
 
+.install-header {
+  background-color: var(--theme-color) !important;
+}
+
+.install-banner {
+  background-color: #0e2c15c4;
+}
+
+
 @keyframes rotation {
   0% {
       transform: rotate(0deg);

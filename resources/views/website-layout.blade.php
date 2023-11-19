@@ -18,6 +18,7 @@
   {{-- link for swiper js --}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
+
   <link rel="manifest" crossorigin="use-credentials" href="{{ asset('manifest.json') }}">
 
   <link rel="apple-touch-icon" href="{{ asset('images/pwa_icons/logo-512x512.png') }}">
@@ -54,14 +55,13 @@
   </nav>
     @yield('content')
 
+    <script type="module" src="{{ asset('js/app.js') }}"></script>
     {{-- script for bootstrap --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
       
     <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
     {{-- scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
-    <script type="module" src="{{ asset('js/app.js') }}"></script>
 
     @yield('script')
 </body>

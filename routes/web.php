@@ -37,6 +37,8 @@ Route::view('/indigency', 'admin.admin-indigency');
 /*------------------------- Guest Middleware for residents/companies -------------------------*/
 Route::middleware(['guest:web', 'guest:business'])->group(function(){
     Route::view('/login', 'auth.users.login')->name('resident.login'); // to login form route
+
+    Route::view('/install', 'auth.users.installation-guide')->name('install');
     
     Route::view('/register-resident', 'auth.users.register-resident')->name('resident.register');
     Route::view('/privacy-policy', 'auth.users.agreements.privacy-policy')->name('privacy-policy');

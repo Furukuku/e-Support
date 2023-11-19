@@ -31,8 +31,9 @@
 
   @livewireScripts
   
-  @yield('script')
-
   <script type="module" src="{{ asset('js/app.js') }}"></script>
+  <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
+  
+  @yield('script')
 </body>
 </html>
