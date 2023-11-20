@@ -82,7 +82,7 @@ class DeclinedFamilyProfile extends Component
                 ->orWhere('mname', 'like', '%' . $this->search . '%')
                 ->orWhere('lname', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate($this->paginate, ['*'], 'declinedFamilies');
         
         return view('livewire.b-h-w.declined-family-profile', ['onlineDeclinedFamilies' => $onlineDeclinedFamilies]);

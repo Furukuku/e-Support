@@ -55,6 +55,8 @@ class Place extends Model
             $activity->causer_id = auth()->guard('sub-admin')->user()->id;
             $activity->causer_type = 'Sub-Admin';
             $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->name . '.';
+        }else{
+            activity()->disableLogging();
         }
     }
 }

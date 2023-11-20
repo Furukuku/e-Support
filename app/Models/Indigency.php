@@ -61,6 +61,8 @@ class Indigency extends Model
             }else{
                 $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->name  . "'s Barangay Indigency.";
             }
+        }else{
+            activity()->disableLogging();
         }
     }
 }

@@ -19,19 +19,23 @@
                     <div class="mb-2">
                       <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                       <div class="border rounded p-2">
-                        <p class="text-break m-0">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
-                            @if ($value == 1)
-                              Yes
-                            @else
-                              No
-                            @endif
-                          @elseif (is_null($value) || $value === '')
-                            N/A
+                        @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
+                          @if ($value == 1)
+                            <p class="text-break m-0">Yes</p>
                           @else
-                            {{ $value }}
+                            <p class="text-break m-0">No</p>
                           @endif
-                        </p>
+                        @elseif ($attribute == 'ctc_photo' || $attribute == 'display_img' || $attribute == 'profile' || $attribute == 'biz_clearance' || $attribute == 'proof' || $attribute == 'business_img' || $attribute == 'verification_img')
+                          @if (Storage::exists($value))
+                            <img src="{{ Storage::url($value) }}" class="w-100 object-fit-contain" style="height: 15rem;" alt="img">
+                          @else
+                            <p class="text-break m-0">{{ $value }}</p>
+                          @endif
+                        @elseif (is_null($value) || $value === '')
+                          <p class="text-break m-0">N/A</p>
+                        @else
+                          <p class="text-break m-0">{{ $value }}</p>
+                        @endif
                       </div>
                     </div>
                   @endforeach
@@ -46,19 +50,23 @@
                       <div class="mb-2">
                         <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                         <div class="border rounded p-2">
-                          <p class="text-break m-0">
-                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
-                              @if ($value == 1)
-                                Yes
-                              @else
-                                No
-                              @endif
-                            @elseif (is_null($value) || $value === '')
-                              N/A
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
+                            @if ($value == 1)
+                              <p class="text-break m-0">Yes</p>
                             @else
-                              {{ $value }}
+                              <p class="text-break m-0">No</p>
                             @endif
-                          </p>
+                          @elseif ($attribute == 'ctc_photo' || $attribute == 'display_img' || $attribute == 'profile' || $attribute == 'biz_clearance' || $attribute == 'proof' || $attribute == 'business_img' || $attribute == 'verification_img')
+                            @if (Storage::exists($value))
+                              <img src="{{ Storage::url($value) }}" class="w-100 object-fit-contain" style="height: 15rem;" alt="img">
+                            @else
+                              <p class="text-break m-0">{{ $value }}</p>
+                            @endif
+                          @elseif (is_null($value) || $value === '')
+                            <p class="text-break m-0">N/A</p>
+                          @else
+                            <p class="text-break m-0">{{ $value }}</p>
+                          @endif
                         </div>
                       </div>
                     @endforeach
@@ -71,19 +79,23 @@
                       <div class="mb-2">
                         <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                         <div class="border rounded p-2">
-                          <p class="text-break m-0">
-                            @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
-                              @if ($value == 1)
-                                Yes
-                              @else
-                                No
-                              @endif
-                            @elseif (is_null($value) || $value === '')
-                              N/A
+                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
+                            @if ($value == 1)
+                              <p class="text-break m-0">Yes</p>
                             @else
-                              {{ $value }}
+                              <p class="text-break m-0">No</p>
                             @endif
-                          </p>
+                          @elseif ($attribute == 'ctc_photo' || $attribute == 'display_img' || $attribute == 'profile' || $attribute == 'biz_clearance' || $attribute == 'proof' || $attribute == 'business_img' || $attribute == 'verification_img')
+                            @if (Storage::exists($value))
+                              <img src="{{ Storage::url($value) }}" class="w-100 object-fit-contain" style="height: 15rem;" alt="img">
+                            @else
+                              <p class="text-break m-0">{{ $value }}</p>
+                            @endif
+                          @elseif (is_null($value) || $value === '')
+                            <p class="text-break m-0">N/A</p>
+                          @else
+                            <p class="text-break m-0">{{ $value }}</p>
+                          @endif
                         </div>
                       </div>
                     @endforeach
@@ -97,19 +109,23 @@
                     <div class="mb-2">
                       <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                       <div class="border rounded p-2">
-                        <p class="text-break m-0">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
-                            @if ($value == 1)
-                              Yes
-                            @else
-                              No
-                            @endif
-                          @elseif (is_null($value) || $value === '')
-                            N/A
+                        @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
+                          @if ($value == 1)
+                            <p class="text-break m-0">Yes</p>
                           @else
-                            {{ $value }}
+                            <p class="text-break m-0">No</p>
                           @endif
-                        </p>
+                        @elseif ($attribute == 'ctc_photo' || $attribute == 'display_img' || $attribute == 'profile' || $attribute == 'biz_clearance' || $attribute == 'proof' || $attribute == 'business_img' || $attribute == 'verification_img')
+                          @if (Storage::exists($value))
+                            <img src="{{ Storage::url($value) }}" class="w-100 object-fit-contain" style="height: 15rem;" alt="img">
+                          @else
+                            <p class="text-break m-0">{{ $value }}</p>
+                          @endif
+                        @elseif (is_null($value) || $value === '')
+                          <p class="text-break m-0">N/A</p>
+                        @else
+                          <p class="text-break m-0">{{ $value }}</p>
+                        @endif
                       </div>
                     </div>
                   @endforeach
@@ -122,19 +138,23 @@
                     <div class="mb-2">
                       <p class="fw-semibold text-break mb-1">{{ $attribute }}</p>
                       <div class="border rounded p-2">
-                        <p class="text-break m-0">
-                          @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
-                            @if ($value == 1)
-                              Yes
-                            @else
-                              No
-                            @endif
-                          @elseif (is_null($value) || $value === '')
-                            N/A
+                        @if ($attribute == 'is_approved' || $attribute == 'is_active' || $attribute == 'document.is_released' || $attribute == 'pipe_nawasa' || $attribute == 'deep_well' || $attribute == 'nipa' || $attribute == 'concrete' || $attribute == 'sem' || $attribute == 'wood' || $attribute == 'owned_toilet' || $attribute == 'sharing_toilet' || $attribute == 'poultry_livestock' || $attribute == 'iodized_salt' || $attribute == 'owned_electricity' || $attribute == 'sharing_electricity' || $attribute == 'philhealth')
+                          @if ($value == 1)
+                            <p class="text-break m-0">Yes</p>
                           @else
-                            {{ $value }}
+                            <p class="text-break m-0">No</p>
                           @endif
-                        </p>
+                        @elseif ($attribute == 'ctc_photo' || $attribute == 'display_img' || $attribute == 'profile' || $attribute == 'biz_clearance' || $attribute == 'proof' || $attribute == 'business_img' || $attribute == 'verification_img')
+                          @if (Storage::exists($value))
+                            <img src="{{ Storage::url($value) }}" class="w-100 object-fit-contain" style="height: 15rem;" alt="img">
+                          @else
+                            <p class="text-break m-0">{{ $value }}</p>
+                          @endif
+                        @elseif (is_null($value) || $value === '')
+                          <p class="text-break m-0">N/A</p>
+                        @else
+                          <p class="text-break m-0">{{ $value }}</p>
+                        @endif
                       </div>
                     </div>
                   @endforeach

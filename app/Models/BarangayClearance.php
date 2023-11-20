@@ -73,6 +73,8 @@ class BarangayClearance extends Model
             }else{
                 $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->name  . "'s Barangay Clearance.";
             }
+        }else{
+            activity()->disableLogging();
         }
     }
 }

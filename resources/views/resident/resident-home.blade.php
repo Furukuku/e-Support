@@ -104,7 +104,7 @@
     var swiper = new Swiper(".mySwiper", {
       slidesPerView: 'auto',
       spaceBetween: 30,
-      loop: true,
+      // loop: true,
       autoplay: {
         delay: 5000,
       },

@@ -135,6 +135,14 @@
           </a>
         </li>
         <li class="nav-item text-white sidebar-list">
+          <a href="{{ route('bhw.archives') }}" id="programs" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'bhw.archives') ? 'navigate-active' : '' }}">
+            <div class="container-fluid row p-0 ps-2 m-0">
+              <span class="material-symbols-outlined col-3 text-center">archive</span>
+              <p class="col-9 m-0 ps-0">Archives</p>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item text-white sidebar-list">
           <a href="{{ route('bhw.account') }}" id="account" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'bhw.account') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">manage_accounts</span>

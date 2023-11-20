@@ -49,6 +49,8 @@ class BrgyOfficial extends Model
             $activity->causer_id = auth()->guard('admin')->user()->id;
             $activity->causer_type = 'Admin';
             $activity->description = Str::endsWith($this->lname, 's') ? auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $official_name . "' profile." : auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $official_name . "'s profile.";
+        }else{
+            activity()->disableLogging();
         }
     }
 }

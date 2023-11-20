@@ -51,7 +51,7 @@ class Message extends Component
             'password' => 'required|current_password:admin',
         ]);
 
-        $residents = User::all();
+        $residents = User::where('is_approved', true)->get();
 
         $notification = Notification::send($residents, new SMSBroadcast($this->message_content));
 

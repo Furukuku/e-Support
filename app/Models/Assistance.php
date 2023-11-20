@@ -48,6 +48,8 @@ class Assistance extends Model
             }else{
                 $activity->description = auth()->guard('admin')->user()->username . ' ' . $eventName . ' ' . $this->resident->fname  . "'s requested assistance.";
             }
+        }else{
+            activity()->disableLogging();
         }
     }
 }

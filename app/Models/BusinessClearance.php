@@ -83,6 +83,8 @@ class BusinessClearance extends Model
             }else{
                 $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->biz_owner  . "'s Business Clearance.";
             }
+        }else{
+            activity()->disableLogging();
         }
     }
 }

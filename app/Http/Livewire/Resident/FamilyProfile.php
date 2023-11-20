@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Resident;
 
 use App\Models\BarangayHealthWorker;
+use App\Models\BarangayInfo;
 use App\Models\FamilyHead;
 use App\Models\FamilyMember;
 use App\Models\SubAdmin;
@@ -383,8 +384,10 @@ class FamilyProfile extends Component
             'new_members' => collect([]),
         ]);
 
+        $brgyInfo = BarangayInfo::first();
+        $canEdit = !is_null($brgyInfo) ? $brgyInfo->family_profiling : false;
 
-        if(auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead)){
+        if($canEdit == true && !is_null(auth()->guard('web')->user()->familyHead)){
             $family_head = FamilyHead::with('familyMembers')
                 ->with('wife')
                 ->find(auth()->guard('web')->user()->familyHead->id);
@@ -635,7 +638,10 @@ class FamilyProfile extends Component
 
     public function toOthers()
     {
-        if(auth()->guard('web')->user()->can_edit_profiling == true && is_null(auth()->guard('web')->user()->familyHead)){
+        $brgyInfo = BarangayInfo::first();
+        $canEdit = !is_null($brgyInfo) ? $brgyInfo->family_profiling : false;
+
+        if($canEdit == true && is_null(auth()->guard('web')->user()->familyHead)){
             $this->validate([
                 'members.*.lname' => ['required', 'string', 'max:255'],
                 'members.*.fname' => ['required', 'string', 'max:255'],
@@ -651,7 +657,7 @@ class FamilyProfile extends Component
                 'members.*.booster' => ['nullable', 'date'],
                 'members.*.bbrand' => ['nullable', 'string', 'max:17'],
             ]);
-        }else if(auth()->guard('web')->user()->can_edit_profiling == true && !is_null(auth()->guard('web')->user()->familyHead)){
+        }else if($canEdit == true && !is_null(auth()->guard('web')->user()->familyHead)){
             $this->validate([
                 'old_members.*.lname' => 'required|string|max:255',
                 'old_members.*.fname' => 'required|string|max:255',
@@ -1192,11 +1198,24 @@ class FamilyProfile extends Component
             }
         }
 
+        $brgyInfo = BarangayInfo::first();
+        if(!is_null($brgyInfo) && $brgyInfo->family_profiling == true){
+            $user = auth()->guard('web')->user();
+            $bhw = SubAdmin::where('position', 'BHW')->get();
+            $subBhw = BarangayHealthWorker::all();
+
+            Notification::send($bhw, new FamilyNotification($user, $updated_family_head));
+            Notification::send($subBhw, new FamilyNotification($user, $updated_family_head));
+        }
+
         return redirect()->route('resident.family-profile')->with('success', 'Family updated successfully');
     }
 
     public function render()
     {
-        return view('livewire.resident.family-profile');
+        $brgyInfo = BarangayInfo::first();
+        $canEdit = !is_null($brgyInfo) ? $brgyInfo->family_profiling : false;
+        
+        return view('livewire.resident.family-profile', ['canEdit' => $canEdit]);
     }
 }

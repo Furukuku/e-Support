@@ -71,6 +71,8 @@ class Wife extends Model
             $activity->causer_id = auth()->guard('web')->user()->id;
             $activity->causer_type = 'Resident';
             $activity->description = auth()->guard('web')->user()->username . ' ' . $eventName . ' ' . $this->fname . ' of ' . $this->familyHead->lname  . ' family.';
+        }else{
+            activity()->disableLogging();
         }
     }
 }

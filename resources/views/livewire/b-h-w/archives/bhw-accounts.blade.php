@@ -1,11 +1,11 @@
-<div class="w-100 d-flex justify-content-center">
+<div class="w-100 d-flex justify-content-center px-3">
 
-  @include('livewire.modals.archived-families-modal')
+  @include('livewire.modals.archived-bhws-modal')
 
-  {{-- Families --}}
-  <div class="bg-white officials-profile-table mb-5 shadow rounded">
+  {{-- Bhw --}}
+  <div class="bg-white w-100 officials-profile-table mb-5 shadow rounded">
     <div class="d-flex justify-content-between p-2 rounded-top officials-header">
-      <h3>FAMILIES</h3>
+      <h3>STAFFS</h3>
     </div>
     <div class="d-flex justify-content-between p-2">
       <div class="row g-1 align-items-center">
@@ -37,24 +37,19 @@
         <thead>
           <tr>
             <th class="align-middle text-center">Name</th>
-            <th class="align-middle text-center">Zone</th>
-            <th class="align-middle text-center">Birthplace</th>
-            <th class="align-middle text-center">Birthday</th>
-            <th class="align-middle text-center">Contact</th>
+            <th class="align-middle text-center">Email</th>
+            <th class="align-middle text-center">Position</th>
             <th class="align-middle text-center">Action</th>
           </tr>
         </thead>
         <tbody>
-          @forelse ($families as $family)
+          @forelse ($bhws as $bhw)
             <tr>
-              <td class="align-middle text-center">{{ $family->fullname }}</td>
-              <td class="align-middle text-center">{{ $family->zone }}</td>
-              <td class="align-middle text-center">{{ $family->bplace }}</td>
-              <td class="align-middle text-center">{{ date('m/d/Y', strtotime($family->bday)) }}</td>
-              <td class="align-middle text-center">{{ $family->contact }}</td>
+              <td class="align-middle text-center">{{ $bhw->fname }} {{ $bhw->mname }} {{ $bhw->lname }} {{ $bhw->sname }}</td>
+              <td class="align-middle text-center">{{ $bhw->email }}</td>
+              <td class="align-middle text-center">{{ $bhw->position }}</td>
               <td class="align-middle text-center">
-                <i class="fa-solid fa-trash-arrow-up mx-1 align-middle text-success restore-icon" wire:loading.class="pe-none" wire:click="restoreConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#restoreFamily"></i>
-                {{-- <i class="fa-solid fa-trash mx-1 align-middle delete-icon" wire:loading.class="pe-none" wire:click="permanentlyDelConfirmation({{ $family->id }})" data-bs-toggle="modal" data-bs-target="#deleteFamily"></i> --}}
+                <i class="fa-solid fa-trash-arrow-up mx-1 align-middle text-success restore-icon" wire:loading.class="pe-none" wire:click="restoreConfirmation({{ $bhw->id }})" data-bs-toggle="modal" data-bs-target="#restoreBhw"></i>
               </td>
             </tr>
           @empty
@@ -64,7 +59,7 @@
           @endforelse
         </tbody>
       </table>
-      {{ $families->links() }}
+      {{ $bhws->links() }}
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\BHW;
 
+use App\Models\BarangayInfo;
 use App\Models\Wife;
 use Livewire\Component;
 use App\Models\FamilyHead;
@@ -68,60 +69,30 @@ class Residents extends Component
         $this->resetErrorBag();
         $this->mount();
     }
-
-    public function mount()
-    {
-        $users = User::withTrashed()->get();
-
-        $checkIfCanEdit = $users->every(function($user) {
-            return $user->can_edit_profiling == true;
-        });
-
-        if($checkIfCanEdit == true){
-            $this->online_survey = true;
-        }else{
-            $this->online_survey = false;
-
-        }
-    }
-
     public function toggleSurvey()
     {
-        $users = User::withTrashed()->get();
-        $families = FamilyHead::where('user_id', '!=', null)->get();
+        $brgyInfo = BarangayInfo::first();
 
-        $checkIfCanEdit = $users->every(function($user) {
-            return $user->can_edit_profiling == true;
-        });
-
-        // $checkIfApproved = $families->every(function($family) {
-        //     return $family->is_approved == true;
-        // });
-
-        if($checkIfCanEdit == true){
-            foreach($users as $user){
-                $user->can_edit_profiling = false;
-                $user->save();
-            }
-        }else{
-            foreach($users as $user){
-                $user->can_edit_profiling = true;
-                $user->save();
-            }
-
-            foreach($families as $family){
-                $family->is_approved = false;
-                $family->comment = null;
-                $family->save();
+        if(!is_null($brgyInfo)){
+            if($brgyInfo->family_profiling == true){
+                $brgyInfo->family_profiling = false;
+                $brgyInfo->update();
+            }else{
+                $brgyInfo->family_profiling = true;
+                $brgyInfo->update();
+                
+                $families = FamilyHead::where('user_id', '!=', null)->get();
+                if(!is_null($families)){
+                    foreach($families as $family){
+                        $family->is_approved = false;
+                        $family->comment = null;
+                        $family->save();
+                    }
+                }
             }
         }
 
-        // foreach($families as $family){
-        //     $family->is_approved = $checkIfCanEdit == true ? false : false;
-        //     $family->save();
-        // }
-
-        $this->mount();
+        // $this->mount();
         $this->dispatchBrowserEvent('close-modal');
         $this->emit('refreshOnlinePage');
     }
@@ -157,6 +128,10 @@ class Residents extends Component
             ->count();
 
         $residents = $heads + $wives + $members;
+
+        $brgyInfo = BarangayInfo::first();
+
+        $this->online_survey = !is_null($brgyInfo) ? $brgyInfo->family_profiling : false;
 
         return view('livewire.b-h-w.residents', [
             'families' => $families,

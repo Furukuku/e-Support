@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\BarangayInfo;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,8 @@ class CheckResidentIfCanProfiling
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && $request->user()->can_edit_profiling == false){
+        $brgyInfo = BarangayInfo::first();
+        if($request->user() && !is_null($brgyInfo) && $brgyInfo->family_profiling == false){
             return redirect()->back();
         }
 

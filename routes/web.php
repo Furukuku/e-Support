@@ -167,6 +167,7 @@ Route::middleware(['sub-admin.auth:sub-admin', 'bhw:bhw'])->group(function() {
         Route::view('/patients', 'bhw.bhw-patients')->name('patients');
         Route::view('/health-records/{patient}', 'bhw.bhw-health-records')->name('health-records');
         Route::view('/programs', 'bhw.bhw-programs')->name('programs');
+        Route::view('/archives', 'bhw.bhw-archives')->name('archives');
         Route::view('/account', 'bhw.bhw-account')->name('account');
         
         Route::name('manage.')->group(function () {

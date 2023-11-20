@@ -81,6 +81,8 @@ class BarangayHealthWorker extends Authenticatable implements CanResetPassword
             $activity->causer_id = auth()->guard('bhw')->user()->id;
             $activity->causer_type = 'Sub-BHW';
             $activity->description = auth()->guard('bhw')->user()->username . ' ' . $eventName . ' his/her account.';
+        }else{
+            activity()->disableLogging();
         }
     }
 }

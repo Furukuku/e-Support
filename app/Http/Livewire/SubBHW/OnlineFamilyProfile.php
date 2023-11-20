@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\SubBHW;
 
+use App\Models\BarangayInfo;
 use App\Models\FamilyHead;
 use App\Models\User;
 use Livewire\Component;
@@ -190,10 +191,8 @@ class OnlineFamilyProfile extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->paginate2, ['*'], 'notApproveFamilies');
 
-        $users = User::withTrashed()->get();
-        $checkIfCanEdit = $users->every(function($user) {
-            return $user->can_edit_profiling == true;
-        });
+            $brgyInfo = BarangayInfo::first();
+            $checkIfCanEdit = !is_null($brgyInfo) ? $brgyInfo->family_profiling : false;
 
         return view('livewire.sub-b-h-w.online-family-profile', [
             'onlineApprovedFamilies' => $onlineApprovedFamilies,

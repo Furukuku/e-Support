@@ -17,6 +17,7 @@ class BarangayInfo extends Model
         'phone_no',
         'history',
         'mission',
-        'vision'
+        'vision',
+        'family_profiling'
     ];
 }

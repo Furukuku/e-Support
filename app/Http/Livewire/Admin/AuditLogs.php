@@ -37,20 +37,22 @@ class AuditLogs extends Component
 
     public function view(Activity $activity)
     {
-        // dd($activity->properties['attributes']);
         $this->event = $activity->event;
         $this->properties = $activity->properties;
     }
 
     public function render()
     {
-        $activities = Activity::where('log_name', 'like', '%' . $this->search . '%')
-        ->orWhere('description', 'like', '%' . $this->search . '%')
-        ->orWhere('subject_id', 'like', '%' . $this->search . '%')
-        ->orWhere('causer_type', 'like', '%' . $this->search . '%')
-        ->orWhere('causer_id', 'like', '%' . $this->search . '%')
-        ->orderBy('created_at', 'desc')
-        ->paginate($this->paginate);
+        $activities = Activity::where('properties', '!=', '{"attributes":[],"old":[]}')
+            ->where(function($query) {
+                $query->where('log_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('description', 'like', '%' . $this->search . '%')
+                    ->orWhere('subject_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('causer_type', 'like', '%' . $this->search . '%')
+                    ->orWhere('causer_id', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->paginate);
 
         return view('livewire.admin.audit-logs', ['activities' => $activities]);
     }

@@ -44,7 +44,6 @@ class User extends Authenticatable implements IMustVerifyMobile, CanResetPasswor
         'zone',
         'is_employed',
         'gender',
-        'can_edit_profiling',
         'is_approved',
         'is_active',
         'username',

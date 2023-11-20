@@ -29,7 +29,7 @@
       </div>
       <div class="text-light mt-3">
         <p class="text-center mb-1"><small>Available on Google Chrome, Microsoft Edge, Firefox, and Safari on IOS.</small></p>
-        <p class="text-center"><a href="https://web.dev/learn/pwa/progressive-web-apps#desktop_and_laptops" target="_blank" class="text-light"><small>See supported browser here</small></a></p>
+        <p class="text-center"><a href="https://intercom.help/progressier/en/articles/5703021-on-what-devices-can-you-install-a-pwa" target="_blank" class="text-light"><small>See supported browser here</small></a></p>
       </div>
     </div>
     <div class="container mt-4 py-3">

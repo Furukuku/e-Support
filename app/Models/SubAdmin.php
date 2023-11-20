@@ -99,6 +99,8 @@ class SubAdmin extends Authenticatable implements CanResetPassword
             $activity->causer_id = auth()->guard('sub-admin')->user()->id;
             $activity->causer_type = auth()->guard('sub-admin')->user()->position === 'BHW' ? 'BHW' : 'Sub-Admin';
             $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' his/her account.';
+        }else{
+            activity()->disableLogging();
         }
     }
 }

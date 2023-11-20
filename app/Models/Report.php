@@ -65,6 +65,8 @@ class Report extends Model
             }else{
                 $activity->description = auth()->guard('sub-admin')->user()->username . ' ' . $eventName . ' ' . $this->user->fname  . "'s report.";
             }
+        }else{
+            activity()->disableLogging();
         }
     }
 }
