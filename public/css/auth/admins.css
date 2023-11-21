@@ -1,3 +1,7 @@
+:root {
+  --main-theme-color: #0E2C15;
+}
+
 
 .admin-auth-bg {
   /* background: rgb(255,192,61);
@@ -9,7 +13,7 @@
 }
 
 :root {
-  --header-bg: #FFC03D;
+  --header-bg: #0E2C15;
   --main-color: #BD00FF;
   --links-color: #0000FF;
   --theme-color: #432344;
@@ -185,6 +189,23 @@ body {
 
 .rotate {
   transform: rotate(-90deg);
+}
+
+
+.btn-warning {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning:disabled {
+  border-color: var(--main-theme-color) !important;
 }
 
 

@@ -10,7 +10,7 @@
         @error('message_content') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
       </div>
       <div class="d-flex justify-content-center py-3">
-        <button type="button" wire:click="confirmSend" wire:loading.class="disabled" class="btn btn-warning rounded-pill px-5">Send</button>
+        <button type="button" wire:click="confirmSend" wire:loading.attr="disabled" class="btn btn-warning rounded-pill px-5">Send</button>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
           @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="modal-footer d-flex justify-content-center border-0">
-          <button type="button" wire:click="send" wire:loading.class="disabled" class="btn btn-warning rounded-pill px-5">Send</button>
+          <button type="button" wire:click="send" wire:loading.attr="disabled" class="btn btn-warning rounded-pill px-5">Send</button>
         </div>
       </div>
     </div>

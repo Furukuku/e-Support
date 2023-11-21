@@ -3,8 +3,9 @@ html {
 }
 
 :root {
-  --header-bg: #FFC03D;
-  --add-btn-color: #432344;
+  --main-theme-color: #0E2C15;
+  --header-bg: #EBF3E8;
+  --add-btn-color: #0E2C15;
   --view-icon-color: #3887D0;
   --edit-icon-color: #FFB800;
   --delete-icon-color: #FF2020;
@@ -16,7 +17,7 @@ body {
 }
 
 .nav-bg {
-  background-color: #432344;
+  background-color: #0E2C15;
 }
 
 .main-container {
@@ -33,7 +34,7 @@ body {
 }
 
 .sidebar {
-  background-color: #432344;
+  background-color: #0E2C15;
   min-width: 17rem;
   max-width: 17rem;
   flex-grow: 3;
@@ -89,7 +90,7 @@ body {
 }
 
 .navigate-active {
-  background-color: #FFC03D;
+  background-color: #ebf3e86b;
 }
 
 .logout-btn {
@@ -143,13 +144,13 @@ body {
   background-color: var(--add-btn-color);
   color: #FFFFFF;
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #673a69;
-  --bs-btn-disabled-border-color: #673a69;
+  --bs-btn-disabled-bg: #0e2c15dc;
+  --bs-btn-disabled-border-color: #0e2c15dc;
   --bs-btn-hover-color: #FFFFFF;
-  --bs-btn-hover-bg: #5a315c;
+  --bs-btn-hover-bg: #0e2c15dc;
   --bs-btn-active-color: var(--bs-btn-hover-color);
-  --bs-btn-active-bg: #713f74;
-  --bs-btn-active-border-color: #713f74;
+  --bs-btn-active-bg: #0e2c15dc;
+  --bs-btn-active-border-color: #0e2c15dc;
 }
 
 .modal-close-icon {
@@ -259,6 +260,37 @@ body {
 
 .pac-container {
   z-index: 1060 !important;
+}
+
+
+.btn-warning,
+.btn-success {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:disabled {
+  border-color: var(--main-theme-color) !important;
+}
+
+
+div > nav > ul > .active > .page-link {
+  background-color: var(--main-theme-color) !important;
+  border-color: var(--main-theme-color);
+  color: #fff;
+}
+
+div > nav > ul > li > .page-link {
+  color: var(--main-theme-color);
 }
 
 

@@ -1,5 +1,6 @@
 :root {
   font-size: 15px;
+  --main-theme-color: #0E2C15;
 }
 
 .print-btn {
@@ -141,6 +142,25 @@ h5 {
   font-size: 13px;
   top: -2px;
   right: 0;
+}
+
+.btn-warning,
+.btn-success {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:disabled {
+  border-color: var(--main-theme-color) !important;
 }
 
 @media print {

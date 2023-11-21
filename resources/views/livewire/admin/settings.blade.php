@@ -56,7 +56,7 @@
         @error('vision') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
       </div>
       <div class="d-flex justify-content-end gap-3 {{ $brgyInfoEdit === 'disabled' ? 'd-none' : '' }}">
-        <button type="button" wire:click="brgyInfoSave" class="btn btn-primary">Save</button>
+        <button type="button" wire:click="brgyInfoSave" class="btn btn-warning">Save</button>
         <button type="button" wire:click="cancelEditBrgyInfo" class="btn btn-secondary">Cancel</button>
       </div>
     </div>
@@ -87,7 +87,7 @@
         @error('bfp') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
       </div>
       <div class="d-flex justify-content-end gap-3 {{ $hotlinesEdit === 'disabled' ? 'd-none' : '' }}">
-        <button type="button" wire:click="hotlinesSave" class="btn btn-primary">Save</button>
+        <button type="button" wire:click="hotlinesSave" class="btn btn-warning">Save</button>
         <button type="button" wire:click="cancelEditHotlines" class="btn btn-secondary">Cancel</button>
       </div>
     </div>
@@ -111,7 +111,7 @@
         @error('business_clearance') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
       </div>
       <div class="d-flex justify-content-end gap-3 {{ $documentEdit === 'disabled' ? 'd-none' : '' }}">
-        <button type="button" wire:click="documentSave" class="btn btn-primary">Save</button>
+        <button type="button" wire:click="documentSave" class="btn btn-warning">Save</button>
         <button type="button" wire:click="cancelEditDocument" class="btn btn-secondary">Cancel</button>
       </div>
     </div>

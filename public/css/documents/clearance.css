@@ -1,3 +1,7 @@
+:root {
+  --main-theme-color: #0E2C15;
+}
+
 .doc-font-family,
 h5,
 h3 {
@@ -55,6 +59,25 @@ footer p {
 
 .thumbmark {
   height: 140px;
+}
+
+.btn-warning,
+.btn-success {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:disabled {
+  border-color: var(--main-theme-color) !important;
 }
 
 @media print {

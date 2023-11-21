@@ -58,7 +58,7 @@
           </div>
         </div>
       </form>
-      <a href="{{ route('users.forgot-password') }}" class="text-decoration-none text-color my-3">Forgot Password?</a>
+      <a href="{{ route('users.forgot-password') }}" class="text-dark my-3">Forgot Password?</a>
     </div>
   </div>
 

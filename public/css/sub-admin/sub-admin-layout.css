@@ -1,3 +1,7 @@
+:root {
+  --main-theme-color: #0E2C15;
+}
+
 html {
   font-size: 14px;
 }
@@ -7,7 +11,7 @@ body {
 }
 
 .nav-bg {
-  background-color: #432344;
+  background-color: var(--main-theme-color);
 }
 
 .main-container {
@@ -24,7 +28,7 @@ body {
 }
 
 .sidebar {
-  background-color: #432344;
+  background-color: var(--main-theme-color);
   min-width: 17rem;
   max-width: 17rem;
   flex-grow: 3;
@@ -88,7 +92,7 @@ body {
 } */
 
 .navigate-active {
-  background-color: #FFC03D;
+  background-color: #ebf3e86b;
 }
 
 .logout-btn {
@@ -142,10 +146,39 @@ body {
   height: 50px;
   border-radius: 50%;
   background: 
-    radial-gradient(farthest-side,#432344 94%,#0000) top/8px 8px no-repeat,
-    conic-gradient(#0000 30%,#432344);
+    radial-gradient(farthest-side,var(--main-theme-color) 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,var(--main-theme-color));
     -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
   animation:s3 1s infinite linear;
+}
+
+.btn-warning,
+.btn-success {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-warning,
+.btn-success:disabled {
+  border-color: var(--main-theme-color) !important;
+}
+
+div > nav > ul > .active > .page-link {
+  background-color: var(--main-theme-color) !important;
+  border-color: var(--main-theme-color);
+  color: #fff;
+}
+
+div > nav > ul > li > .page-link {
+  color: var(--main-theme-color);
 }
 
 @keyframes s3{ 

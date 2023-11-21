@@ -17,7 +17,7 @@
           </div>
           <div class="row mt-1">
             <div class="px-0" {{ $username_hidden }}>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-warning">Save</button>
               <button type="button" wire:click="cancelUsername" class="btn btn-secondary">Cancel</button>
             </div>
           </div>
@@ -35,7 +35,7 @@
           </div>
           <div class="row mt-1">
             <div class="px-0" {{ $email_hidden }}>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-warning">Save</button>
               <button type="button" wire:click="cancelEmail" class="btn btn-secondary">Cancel</button>
             </div>
           </div>
@@ -66,7 +66,7 @@
               <input wire:model.defer="new_password_confirmation" class="form-control" id="password-confirmation" type="password">
             </div>
             <div class="d-flex justify-content-end gap-2">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-warning">Submit</button>
               <button type="button" wire:click="cancelPassword" class="btn btn-secondary">Cancel</button>
             </div>
           </div>

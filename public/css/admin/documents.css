@@ -1,6 +1,6 @@
 
 .documents-header {
-  background-color: #FFC03D;
+  background-color: #EBF3E8;
   width: 100%;
   height: 7rem;
 }
@@ -14,19 +14,35 @@
   min-width: 12rem !important;
 }
 
-.print-btn {
+/* .print-btn {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background-color: var(--add-btn-color);
+  background-color: #0E2C15 !important;
   color: #FFFFFF;
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #673a69;
   --bs-btn-disabled-border-color: #673a69;
   --bs-btn-hover-color: #FFFFFF;
-  --bs-btn-hover-bg: #5a315c;
+  --bs-btn-hover-bg: #0E2C15;
   --bs-btn-active-color: var(--bs-btn-hover-color);
   --bs-btn-active-bg: #713f74;
   --bs-btn-active-border-color: #713f74;
+} */
+
+.print-btn {
+  margin-top: -0.5rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #0E2C15 !important;
+  color: #FFFFFF;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #0e2c15dc;
+  --bs-btn-disabled-border-color: #0e2c15dc;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: #0e2c15dc;
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #0e2c15dc;
+  --bs-btn-active-border-color: #0e2c15dc;
 }
 
 .modal-dialog .documents-modal-content {
@@ -46,11 +62,11 @@
 }
 
 .suggestions:hover {
-  background-color: #FFC03D;
+  background-color: #EBF3E8;
   color: #fff;
 }
 
 .print-report-btn {
-  background-color: #5a315c !important;
-  border-color: #5a315c !important;
+  background-color: #0E2C15 !important;
+  border-color: #0E2C15 !important;
 }
