@@ -23,6 +23,10 @@ body {
   background-size: cover;
 }
 
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
 .back-btn {
   position: absolute;
   top: 2rem;
@@ -189,7 +193,7 @@ body {
 }
 
 .install-banner {
-  background-color: #0e2c15c4;
+  background-color: var(--theme-color) !important;
 }
 
 

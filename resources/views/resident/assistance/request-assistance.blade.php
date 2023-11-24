@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'REQUEST ASSISTANCE';
+    }
+  </style>
+@endpush
+
 @section('content')
 
 <div class="py-5">

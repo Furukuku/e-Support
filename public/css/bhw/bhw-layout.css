@@ -2,6 +2,10 @@ html {
   font-size: 14px;
 }
 
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
 :root {
   --main-theme-color: #0E2C15;
   --header-bg: #EBF3E8;

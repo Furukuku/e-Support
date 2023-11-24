@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'REQUEST DOCUMENT';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   <div class="py-5">
@@ -18,7 +26,10 @@
           @csrf
           <div class="row mb-3">
             <label for="name" class="form-label px-0">Name</label>
-            <input type="text" id="name" class="form-control mb-2"  name="name" 
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem;">
+              <p class="m-0">{{ auth()->guard('web')->user()->fname }} {{ is_null(auth()->guard('web')->user()->mname) ? '' : auth()->guard('web')->user()->mname[0] }}{{ is_null(auth()->guard('web')->user()->mname) ? '' : '. ' }} {{ auth()->guard('web')->user()->lname }} {{ auth()->guard('web')->user()->sname }}</p>
+            </div>
+            {{-- <input type="text" id="name" class="form-control mb-2" hidden name="name" value="{{ old('name', ) }}"
             @if (auth()->guard('web')->user()->mname !== null && auth()->guard('web')->user()->sname !== null)
               value="{{ old('name', auth()->guard('web')->user()->fname . ' ' . auth()->guard('web')->user()->mname[0] . '. ' . auth()->guard('web')->user()->lname . ' ' . auth()->guard('web')->user()->sname) }}"
             @elseif (auth()->guard('web')->user()->mname !== null && auth()->guard('web')->user()->sname === null)
@@ -31,11 +42,14 @@
               value="{{ old('name') }}"
             @endif 
             placeholder="Enter your name">
-            @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror --}}
           </div>
           <div class="row mb-3">
             <label for="zone" class="form-label px-0">Zone</label>
-            <select id="zone" class="form-select" name="zone">
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem;">
+              <p class="m-0">{{ auth()->guard('web')->user()->zone }}</p>
+            </div>
+            {{-- <select id="zone" class="form-select" hidden name="zone">
               <option value="">Choose one...</option>
               @for ($i = 1; $i <= 6; $i++)
                 <option value="{{ $i }}"
@@ -45,9 +59,9 @@
                 >{{ $i }}</option>
               @endfor
             </select>
-            @error('zone') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            @error('zone') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror --}}
           </div>
-          <div class="row mb-4">
+          <div class="row mb-5">
             <label for="purpose" class="form-label px-0">Purpose</label>
             <select name="purpose" id="purpose" class="form-select">
               <option value="">Choose one...</option>
@@ -63,12 +77,14 @@
             <input type="text" id="other" class="form-control mt-2 d-none" name="others" value="{{ old('others') }}" placeholder="Enter purpose here...">
             @error('others') <span class="error text-danger px-0 d-none" id="others-error" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it blank. And if you do, please bring it with you upon claiming your request.</small></p>
-          <div class="position-relative mb-4">
+          <div class="position-relative mb-3">
             <hr class="border border-dark m-0 w-100">
             <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
-              <p class="m-0 text-center">Community Tax Certificate</p>
+              <p class="m-0 text-center fw-semibold">Community Tax Certificate</p>
             </div>
+          </div>
+          <div class="rounded border p-2 mb-3" style="background-color: #EBF3E8;">
+            <p class="text-center m-0"><small>Please only fill out the following if you have a Community Tax Certificate; otherwise, leave it blank.</small></p>
           </div>
           <div class="row mb-2">
             <label for="ctc-img" class="form-label px-0"><small>Please insert a clear image of your CTC</small></label>

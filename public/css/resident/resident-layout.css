@@ -3,6 +3,10 @@
   --theme-color: #0E2C15;
 }
 
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
 span {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -562,7 +566,7 @@ label[for="proof"] {
     display: none;
   }
 
-  .navbar.navbar-home::after {
+  .navbar.navbar-wide::after {
     content: var(--page-name);
     display: flex;
     align-items: center;
@@ -576,7 +580,7 @@ label[for="proof"] {
     right: 0;
   }
 
-  .navbar.navbar-services::after {
+  /* .navbar.navbar-services::after {
     content: 'SERVICES';
     display: flex;
     align-items: center;
@@ -602,7 +606,7 @@ label[for="proof"] {
     top: 66px;
     left: 0;
     right: 0;
-  }
+  } */
 
   .sidebar-btn {
     display: initial !important;
@@ -666,7 +670,8 @@ label[for="proof"] {
   }
 
   .chatbot-circle {
-    bottom: 6rem;
+    bottom: 5rem;
+    right: 1.3rem;
   }
 
   /* .chatbot-circle.move-up {

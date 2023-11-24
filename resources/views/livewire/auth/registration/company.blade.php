@@ -4,7 +4,7 @@
   <div class="bg-light col-7 shadow-lg overflow-auto">
     <div class="py-5">
       <div class="col px-5 mt-2">
-        <h3 class="mb-5">Signing up as Company <span class="sign-up-link {{ $currentPage === 1 ? '' : 'd-none' }}">Sign up as <a href="{{ route('resident.register') }}">resident</a></span></h3>
+        <h3 class="mb-5">Signing up as Business Owner <span class="sign-up-link {{ $currentPage === 1 ? '' : 'd-none' }}">Sign up as <a href="{{ route('resident.register') }}">resident</a></span></h3>
         @if ($currentPage === 1)
           <h5 class="mb-3">Personal Information</h5>
         @elseif ($currentPage === 2)
@@ -46,7 +46,7 @@
               <div class="col-12 mb-3">
                 <div class="d-flex gap-2">
                   <input type="checkbox" wire:model.defer="agreement" id="terms-condition" class="form-check-input">
-                  <label class="form-check-label" for="terms-condition"><small>I agree to the <a href="{{ route('business.terms-conditions') }}">Terms & Conditions</a> and <a href="{{ route('privacy-policy') }}">Privacy Policy</a>.</small></label>
+                  <label class="form-check-label" for="terms-condition"><small>I agree to the <a href="{{ route('business.terms-conditions') }}">Terms & Conditions</a> and <a href="{{ route('business.privacy-policy') }}">Privacy Policy</a>.</small></label>
                 </div>
                 @error('agreement') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
@@ -73,7 +73,7 @@
                 @error('business_address') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="col-md-6 mb-3">
-                <label class="input-labels" for="company-clearance" class="form-label">Business Clearance</label>
+                <label class="input-labels" for="company-clearance" class="form-label">Document(DTI or Business Clearance)</label>
                 <input wire:model="business_clearance" id="company-clearance" type="file" class="form-control form-control-sm w-50" accept="image/*">
                 @error('business_clearance') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
@@ -97,9 +97,9 @@
         @elseif ($currentPage === 3)
           <div class="col">
             <div class="row-auto mb-3">
-              <label class="input-labels" for="company-profile-picture" class="form-label">Profile Picture</label>
-              <input wire:model="profile_image" id="company-profile-picture" type="file" class="form-control form-control-sm w-50" accept="image/*">
-              @error('profile_image') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              <label class="input-labels" for="company-profile-picture" class="form-label">Business Logo</label>
+              <input wire:model="business_logo" id="company-profile-picture" type="file" class="form-control form-control-sm w-50" accept="image/*">
+              @error('business_logo') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="row-auto mb-3">
               <label class="input-labels" for="company-username">Username</label>
@@ -108,14 +108,76 @@
             </div>
             <div class="row-auto mb-3">
               <label class="input-labels" for="company-password">Password <small class="fw-normal">(Must have uppercase, lowercase, and number)</small></label>
-              <input wire:model.defer="password" id="company-password" type="password" class="form-control">
-              @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              <div class="position-relative">
+                <input wire:model.defer="password" id="company-password" type="password" class="form-control" style="padding-right: 35px">
+                @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 10px;cursor: pointer;"></i>
+              </div>
             </div>
             <div class="row-auto mb-3">
               <label class="input-labels" for="company-confirm-password">Confirm Password</label>
-              <input wire:model.defer="password_confirmation" id="company-confirm-password" type="password" class="form-control">
+              <div class="position-relative">
+                <input wire:model.defer="password_confirmation" id="company-confirm-password" type="password" class="form-control" style="padding-right: 35px">
+                <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-confirm-password" style="right: 10px;cursor: pointer;"></i>
+              </div>
             </div>
           </div>
+          <script>
+            const showPassBtn = document.getElementById('show-password');
+            const passInput = document.getElementById('company-password');
+        
+            console.log(passInput);
+        
+            passInput.addEventListener('input', () => {
+              if(passInput.value === ''){
+                showPassBtn.classList.add('d-none');
+                showPassBtn.classList.remove('fa-eye-slash');
+                showPassBtn.classList.add('fa-eye');
+                passInput.type = "password";
+              }else{
+                showPassBtn.classList.remove('d-none');
+              }
+            });
+        
+            showPassBtn.addEventListener('click', () => {
+              if(showPassBtn.classList.contains('fa-eye-slash')){
+                showPassBtn.classList.remove('fa-eye-slash');
+                showPassBtn.classList.add('fa-eye');
+                passInput.type = "password";
+              }else{
+                showPassBtn.classList.remove('fa-eye');
+                showPassBtn.classList.add('fa-eye-slash');
+                passInput.type = "text";
+              }
+            });
+        
+        
+            const showConfirmPassBtn = document.getElementById('show-confirm-password');
+            const passConfirmInput = document.getElementById('company-confirm-password');
+        
+            passConfirmInput.addEventListener('input', () => {
+              if(passConfirmInput.value === ''){
+                showConfirmPassBtn.classList.add('d-none');
+                showConfirmPassBtn.classList.remove('fa-eye-slash');
+                showConfirmPassBtn.classList.add('fa-eye');
+                passConfirmInput.type = "password";
+              }else{
+                showConfirmPassBtn.classList.remove('d-none');
+              }
+            });
+        
+            showConfirmPassBtn.addEventListener('click', () => {
+              if(showConfirmPassBtn.classList.contains('fa-eye-slash')){
+                showConfirmPassBtn.classList.remove('fa-eye-slash');
+                showConfirmPassBtn.classList.add('fa-eye');
+                passConfirmInput.type = "password";
+              }else{
+                showConfirmPassBtn.classList.remove('fa-eye');
+                showConfirmPassBtn.classList.add('fa-eye-slash');
+                passConfirmInput.type = "text";
+              }
+            });
+          </script>
         @endif
         <div class="d-flex gap-2 justify-content-between">
           @if ($currentPage === 1)
@@ -126,7 +188,7 @@
           @if ($currentPage === 3)
             <button class="btn btn-primary next-btn" wire:loading.attr="disabled" wire:target="submit, nextPage, PreviousPage" type="button" wire:click="submit">Submit</button>
           @elseif ($currentPage <= 2)
-            <button class="btn btn-primary px-4 next-btn" wire:loading.attr="disabled" wire:target="nextPage, previousPage, submit" type="button" wire:click="nextPage">Next</button>
+            <button class="btn btn-primary px-4 next-btn" wire:loading.attr="disabled" wire:target="nextPage, previousPage, submit, business_clearance" type="button" wire:click="nextPage">Next</button>
           @endif
         </div>
       </div>

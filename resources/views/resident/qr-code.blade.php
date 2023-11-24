@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'QR CODE';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   <div class="py-5 w-100 d-flex flex-column gap-4 justify-content-center align-items-center" style="height: 80vh;">

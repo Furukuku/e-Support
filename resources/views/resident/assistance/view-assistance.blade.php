@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'REQUESTED ASSISTANCE';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   <div class="py-5">
@@ -23,7 +31,7 @@
         <div class="row mb-3">
           <label class="form-label px-0 fw-bold">Date for the Request</label>
           <div class="border rounded p-2 bg-white">
-            <p class="m-0">{{ date('M d, Y', strtotime($assistance->date)) }} - {{ date('H:i A', strtotime($assistance->time)) }}</p>
+            <p class="m-0">{{ date('M d, Y', strtotime($assistance->date)) }} {{ is_null($assistance->time) ? '' : '- ' . date('H:i A', strtotime($assistance->time)) }}</p>
           </div>
         </div>
         <div class="row mb-3">

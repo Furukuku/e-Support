@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'REQUESTED DOCUMENT';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   <div class="py-5">
@@ -23,12 +31,18 @@
           @csrf
           <div class="row mb-3">
             <label for="name" class="form-label px-0">Name</label>
-            <input type="text" id="name" class="form-control mb-2 inputs" disabled name="name" value="{{ old('name', $document->brgyClearance->name) }}" placeholder="Enter your name">
-            @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+              <p class="m-0">{{ $document->brgyClearance->name }}</p>
+            </div>
+            {{-- <input type="text" id="name" class="form-control mb-2 inputs" disabled name="name" value="{{ old('name', $document->brgyClearance->name) }}" placeholder="Enter your name">
+            @error('name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror --}}
           </div>
           <div class="row mb-3">
             <label for="zone" class="form-label px-0">Zone</label>
-            <select id="zone" class="form-select inputs" disabled name="zone">
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+              <p class="m-0">{{ $document->brgyClearance->zone }}</p>
+            </div>
+            {{-- <select id="zone" class="form-select inputs" disabled name="zone">
               <option value="">Choose one...</option>
               @for ($i = 1; $i <= 6; $i++)
                 <option value="{{ $i }}"
@@ -38,9 +52,9 @@
                 >{{ $i }}</option>
               @endfor
             </select>
-            @error('zone') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            @error('zone') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror --}}
           </div>
-          <div class="row mb-4">
+          <div class="row mb-5">
             <label for="purpose" class="form-label px-0">Purpose</label>
             <select name="purpose" id="purpose" class="form-select inputs" disabled>
               <option value="">Choose one...</option>
@@ -56,12 +70,14 @@
             <input type="text" id="other" class="form-control mt-2 d-none inputs" disabled name="others" value="{{ old('others', $document->brgyClearance->purpose) }}" placeholder="Enter purpose here...">
             @error('others') <span class="error text-danger px-0 d-none" id="others-error" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it as it is.</small></p>
-          <div class="position-relative mb-4">
+          <div class="position-relative mb-3">
             <hr class="border border-dark m-0 w-100">
             <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
-              <p class="m-0 text-center">Community Tax Certificate</p>
+              <p class="m-0 text-center fw-semibold">Community Tax Certificate</p>
             </div>
+          </div>
+          <div class="rounded border p-2 mb-3" style="background-color: #EBF3E8;">
+            <p class="text-center m-0"><small>Please only fill out the following if you have a Community Tax Certificate; otherwise, leave it blank.</small></p>
           </div>
           <div id="insert-img-input" class="row mb-2 d-none">
             <label for="ctc-img" class="form-label px-0">Please insert a clear image of your CTC</label>

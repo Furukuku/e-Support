@@ -2,6 +2,10 @@
   --theme-color: #0E2C15;
 }
 
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
 span {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -165,12 +169,14 @@ span {
   cursor: pointer;
 }
 
-.edit-btn-container > button:hover {
+.edit-btn-container > button:hover,
+.repost-btn-container > button:hover {
   background-color: var(--theme-color) !important;
   color: #fff !important;
 }
 
-.edit-btn-container > button:active {
+.edit-btn-container > button:active,
+.repost-btn-container > button:active {
   background-color: var(--theme-color) !important;
   color: #fff !important;
 }
@@ -384,8 +390,8 @@ label[for="proof"] {
     display: none;
   }
 
-  .navbar.navbar-home::after {
-    content: 'HOME';
+  .navbar.navbar-wide::after {
+    content: var(--page-name);
     display: flex;
     align-items: center;
     padding-left: 30px;

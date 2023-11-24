@@ -3,10 +3,17 @@
   <div id="chat-box" class="bg-white border rounded shadow chat-box {{ $chatBox }}">
     <div class="d-flex justify-content-center align-items-center rounded-top position-relative message-header">
       <h5 class="text-white text-center m-0">Chat Support</h5>
-      <span class="position-absolute top-0 d-none chatbot-close-btn" wire:click="toggleChat" style="right: 0.5rem; cursor: pointer;"><i class="fa-solid fa-xmark text-light"></i></span>
+      <span class="position-absolute top-50 translate-middle-y fs-4 d-none chatbot-close-btn" wire:click="toggleChat" style="right: 1rem; cursor: pointer;"><i class="fa-solid fa-xmark text-light"></i></span>
     </div>
     <div wire:ignore id="chat-messages" class="d-flex flex-column gap-3 px-2 py-4 overflow-y-auto chat-messages">
-
+      <div class="d-flex flex-column-reverse gap-2 align-items-start pe-5 w-100">
+        <div class="rounded-circle bot-icon">
+          <img src="{{ asset('images/logos/brgy-nancayasan-logo.png') }}" class="rounded-circle">
+        </div>
+        <div class="p-2 px-3 text-wrap text-break bot-message">
+          <p class="m-0">Hello! How can I help you?</p>
+        </div>
+      </div>
     </div>
     <div class="d-flex align-items-center justify-content-between gap-2 px-2 border rounded-bottom message-box">
       <textarea id="question-field" wire:model.defer="question" class="px-2 rounded" placeholder="Ask something..." rows="1"></textarea>
@@ -16,7 +23,7 @@
     </div>
   </div>
 
-  <div wire:click="toggleChat" class="rounded-circle shadow chatbot-circle {{ str_contains(Route::currentRouteName(), 'resident.services') ? 'move-up' : '' }}">
+  <div wire:click="toggleChat" class="rounded-circle shadow chatbot-circle">
     <i class="fa-regular fa-comment text-light fs-4 position-absolute top-50 start-50 translate-middle {{ $chatBox === 'hide' ||  $chatBox === '' ? '' : 'd-none' }}"></i>
     <i class="fa-solid fa-xmark text-light position-absolute top-50 start-50 close-chatbot-icon {{ $chatBox === 'hide' || $chatBox === '' ? 'd-none' : '' }}"></i>
   </div>

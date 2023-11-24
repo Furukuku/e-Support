@@ -15,7 +15,7 @@ class PostJob extends Component
 
     public $page;
 
-    public $job_title, $job_type, $workplace_type, $phone_number, $email, $location, $business_image, $job_description, $job_requirements;
+    public $job_title, $job_type, $workplace_type, $phone_number, $email, $address, $business_image, $job_description, $job_requirements;
 
     public function toFirst()
     {
@@ -43,7 +43,7 @@ class PostJob extends Component
         $this->validate([
             'phone_number' => ['required', 'digits:11'],
             'email' => ['required', 'email', 'max:255'],
-            'location' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
         ]);
 
         $this->page = 'last';
@@ -57,7 +57,7 @@ class PostJob extends Component
             'workplace_type' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'digits:11'],
             'email' => ['required', 'email', 'max:255'],
-            'location' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
             'business_image' => ['nullable', 'image'],
             'job_description' => ['required', 'string'],
             'job_requirements' => ['required', 'string'],
@@ -72,7 +72,7 @@ class PostJob extends Component
                     'workplace_type' => $this->workplace_type,
                     'phone_number' => $this->phone_number,
                     'email' => $this->email,
-                    'location' => $this->location,
+                    'location' => $this->address,
                     'description' => $this->job_description,
                     'requirements' => $this->job_requirements,
                 ]);
@@ -86,7 +86,7 @@ class PostJob extends Component
                     'workplace_type' => $this->workplace_type,
                     'phone_number' => $this->phone_number,
                     'email' => $this->email,
-                    'location' => $this->location,
+                    'location' => $this->address,
                     'business_img' => $business_img_filename,
                     'description' => $this->job_description,
                     'requirements' => $this->job_requirements,

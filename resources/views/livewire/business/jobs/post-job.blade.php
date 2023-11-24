@@ -1,6 +1,6 @@
-<div class="py-5 d-flex justify-content-evenly post-job-main-container">
+<div class="py-5 mt-5 d-flex justify-content-evenly post-job-main-container">
   
-  <div class="d-flex align-items-center ">
+  <div class="d-flex align-items-center mt-3">
     <img class="post-job-illustration" src="{{ asset('images/Illustrations/hiring.svg') }}" alt="job">
   </div>
   <div class="">
@@ -23,7 +23,6 @@
                 <option value="Part-time">Part-time</option>
                 <option value="Contract">Contract</option>
                 <option value="Temporary">Temporary</option>
-                <option value="Internship">Internship</option>
               </select>
               @error('job_type') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
@@ -54,9 +53,9 @@
               @error('email') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
             <div class="mb-3">
-              <label for="location" class="form-label">Location</label>
-              <input type="text" wire:model.defer="location" id="location" class="form-control">
-              @error('location') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+              <label for="address" class="form-label">Address</label>
+              <input type="text" wire:model.defer="address" id="address" class="form-control">
+              @error('address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
             <div class="d-flex justify-content-between">
               <button type="button" wire:click="toFirst" wire:loading.attr="disabled" wire:target="toFirst, toLast" class="btn btn-secondary">Back</button>

@@ -20,35 +20,49 @@
       </div>
     </div>
     <div class="row justify-content-center mb-3">
-      <p class="fw-semibold mb-1">Full name</p>
+      <p class="fw-semibold mb-1">Personal Info</p>
       <div class="row">
-        <div class="col-md-6 mb-2">
-          <label class="text-secondary" for="lname"><small>Last name</small></label>
-          <input type="text" id="lname" wire:model.defer="last_name" class="form-control shadow-sm rounded-3">
-          @error('last_name')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+        <div class="col-md-12 mb-2">
+          <p class="mb-1 text-secondary"><small>Name</small></p>
+          <div class="border rounded-3 shadow-sm" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+            <p class="m-0">{{ $first_name }} {{ $middle_name }} {{ $last_name }} {{ $suffix_name }}</p>
+          </div>
+          {{-- <label class="text-secondary" for="lname"><small>Last name</small></label>
+          <input type="text" id="lname" wire:model.defer="last_name" disabled class="form-control shadow-sm rounded-3">
+          @error('last_name')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror --}}
         </div>
-        <div class="col-md-6 mb-2">
+        {{-- <div class="col-md-6 mb-2">
           <label class="text-secondary" for="fname"><small>First name</small></label>
-          <input type="text" id="fname" wire:model.defer="first_name" class="form-control shadow-sm rounded-3">
+          <input type="text" id="fname" wire:model.defer="first_name" disabled class="form-control shadow-sm rounded-3">
           @error('first_name')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
-        </div>
+        </div> --}}
       </div>
       <div class="row">
         <div class="col-md-6 mb-2">
-          <label class="text-secondary" for="mname"><small>Middle name</small></label>
-          <input type="text" id="mname" wire:model.defer="middle_name" class="form-control shadow-sm rounded-3">
-          @error('middle_name')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+          <p class="mb-1 text-secondary"><small>Birthday</small></p>
+          <div class="border rounded-3 shadow-sm" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+            <p class="m-0">{{ date('M d, Y', strtotime($birthday)) }}</p>
+          </div>
         </div>
         <div class="col-md-6 mb-2">
-          <label class="text-secondary" for="sname"><small>Suffix name</small></label>
-          <input type="text" id="sname" wire:model.defer="suffix_name" class="form-control shadow-sm rounded-3">
-          @error('suffix_name')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+          <p class="mb-1 text-secondary"><small>Gender</small></p>
+          <div class="border rounded-3 shadow-sm" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+            <p class="m-0">{{ $gender }}</p>
+          </div>
+          {{-- <label class="text-secondary" for="mname"><small>Middle name</small></label>
+          <input type="text" id="mname" wire:model.defer="middle_name" disabled class="form-control shadow-sm rounded-3">
+          @error('middle_name')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror --}}
         </div>
+        {{-- <div class="col-md-6 mb-2">
+          <label class="text-secondary" for="sname"><small>Suffix name</small></label>
+          <input type="text" id="sname" wire:model.defer="suffix_name" disabled class="form-control shadow-sm rounded-3">
+          @error('suffix_name')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+        </div> --}}
       </div>
     </div>
     <div class="row justify-content-center mb-3">
       <p class="fw-semibold mb-1">Account info</p>
-      <div class="row">
+      {{-- <div class="row">
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="username"><small>Username</small></label>
           <input type="text" id="username" wire:model.defer="username" class="form-control shadow-sm rounded-3">
@@ -68,7 +82,7 @@
           </select>
           @error('gender')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
         </div>
-      </div>
+      </div> --}}
       <div class="row">
         <div class="col-md-6 mb-2">
           <label class="text-secondary" for="zone"><small>Zone</small></label>
@@ -93,16 +107,18 @@
           @error('employment_status')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
         </div>
       </div>
-    </div>
-    <div class="row justify-content-center mb-3">
-      <p class="fw-semibold mb-1">Contact</p>
       <div class="row">
-        <div class="col-md-6 mb-2">
+        <div class="col-md-4 mb-2">
+          <label class="text-secondary" for="username"><small>Username</small></label>
+          <input type="text" id="username" wire:model.defer="username" class="form-control shadow-sm rounded-3">
+          @error('username')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+        </div>
+        <div class="col-md-4 mb-2">
           <label class="text-secondary" for="email"><small>Email</small></label>
           <input type="text" id="email" wire:model.defer="email" class="form-control shadow-sm rounded-3">
           @error('email')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
         </div>
-        <div class="col-md-6 mb-2">
+        <div class="col-md-4 mb-2">
           <label class="text-secondary" for="mobile"><small>Mobile no.</small></label>
           <input type="text" id="mobile" wire:model.defer="mobile_no" class="form-control shadow-sm rounded-3">
           @error('mobile_no')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
@@ -120,17 +136,26 @@
       <div class="row">
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="current-pass"><small>Current Password</small></label>
-          <input type="password" id="current-pass" wire:model.defer="current_password" class="form-control shadow-sm rounded-3">
-          @error('current_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+          <div class="position-relative">
+            <input type="password" id="current-pass" wire:model.defer="current_password" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
+            @error('current_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-current-password" style="right: 10px;cursor: pointer;"></i>
+          </div>
         </div>
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="new-pass"><small>New Password</small></label>
-          <input type="password" id="new-pass" wire:model.defer="new_password" class="form-control shadow-sm rounded-3">
-          @error('new_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+          <div class="position-relative">
+            <input type="password" id="new-pass" wire:model.defer="new_password" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
+            @error('new_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-new-password" style="right: 10px;cursor: pointer;"></i>
+          </div>
         </div>
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="pass-confirmation"><small>Confirm Password</small></label>
-          <input type="password" id="pass-confirmation" wire:model.defer="new_password_confirmation" class="form-control shadow-sm rounded-3">
+          <div class="position-relative">
+            <input type="password" id="pass-confirmation" wire:model.defer="new_password_confirmation" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-confirm-password" style="right: 10px;cursor: pointer;"></i>
+          </div>
         </div>
       </div>
     </div>

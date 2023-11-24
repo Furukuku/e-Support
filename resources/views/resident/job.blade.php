@@ -1,14 +1,14 @@
 @extends('resident.resident-layout.resident-app')
 
-@section('content')
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'JOB';
+    }
+  </style>
+@endpush
 
-  @push('page-name')
-    <style>
-      :root {
-        --page-name: 'JOB';
-      }
-    </style>
-  @endpush
+@section('content')
 
   <div class="mt-5 py-3">
 

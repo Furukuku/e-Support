@@ -12,18 +12,26 @@ class WelcomeController extends Controller
 {
     public function searchPlace(Request $request)
     {
-        $places = Place::where('name', 'LIKE', '%' . $request->keyword . '%')
-            ->orWhere('type', 'LIKE', '%' . $request->keyword . '%')
-            ->orWhere('description', 'LIKE', '%' . $request->keyword . '%')
-            ->orWhere('location', 'LIKE', '%' . $request->keyword . '%')
+        $places = Place::where('is_approved', true)
+            ->where(function($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->keyword . '%')
+                ->orWhere('type', 'LIKE', '%' . $request->keyword . '%')
+                ->orWhere('description', 'LIKE', '%' . $request->keyword . '%')
+                ->orWhere('location', 'LIKE', '%' . $request->keyword . '%');
+            })
             ->get();
 
-        return view('more-places', ['places' => $places]);
+        return view('more-places', [
+            'places' => $places,
+            'place' => $request->keyword,
+        ]);
     }
 
     public function showPlaces()
     {
-        $places = Place::orderBy('created_at', 'desc')->get();
+        $places = Place::where('is_approved', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('more-places', ['places' => $places]);
     }
@@ -65,8 +73,16 @@ class WelcomeController extends Controller
         $brgyCapt = BrgyOfficial::where('position', 'Captain')->first();
         $programs = Program::orderBy('created_at', 'desc')->get();
         $latest_programs = Program::orderBy('created_at', 'desc')->take(2)->get();
-        $places = Place::orderBy('created_at', 'desc')->get();
-        $latest_places = Place::orderBy('created_at', 'desc')->take(3)->get();
+
+        $places = Place::where('is_approved', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $latest_places = Place::where('is_approved', true)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
         $officials = BrgyOfficial::orderByRaw("CASE
                 WHEN position = 'Captain' THEN 1
                 WHEN position = 'Kagawad' THEN 2

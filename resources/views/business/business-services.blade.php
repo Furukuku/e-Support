@@ -5,7 +5,7 @@
   <div class="py-5">
 
     <div class="container d-flex justify-content-center py-3 mb-5">
-      <div class="d-flex gap-5 align-items-center clearance-header">
+      <div class="d-flex gap-5 align-items-center border rounded shadow p-5 bg-white clearance-header">
         <div class="d-flex justify-content-center align-items-center rounded-circle" style="height: 5rem; width: 5rem; background-color: #0E2C15;">
           <span class="material-symbols-outlined fs-1 text-white">
             description

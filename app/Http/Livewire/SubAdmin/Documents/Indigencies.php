@@ -196,6 +196,11 @@ class Indigencies extends Component
                     });
                 });
             })
+            ->orderByRaw("CASE
+                WHEN status = 'Pending' THEN 1
+                WHEN status = 'Ready To Pickup' THEN 2
+                ELSE 3
+            END")
             ->orderBy('created_at', 'asc')
             ->paginate($this->paginate, ['*'], 'clearance');
 

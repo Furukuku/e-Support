@@ -2,7 +2,7 @@
 
 @section('users.auth')
 
-  <header class="sticky-top d-flex align-items-center gap-3 text-light p-3 install-header">
+  <header class="sticky-top shadow d-flex align-items-center gap-3 text-light p-3 install-header">
     <a href="{{ route('welcome') }}" class="text-light" style="text-decoration: none;">
       <span class="material-symbols-outlined m-0 align-middle">
         arrow_back_ios_new

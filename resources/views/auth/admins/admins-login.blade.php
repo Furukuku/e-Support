@@ -42,14 +42,15 @@
         </div>
         <div class="row mb-4">
           <label for="password" class="">Password</label>
-          <div class="col-md-12">
-            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password">
+          <div class="col-md-12 position-relative">
+            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" style="padding-right: 35px">
 
             @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 20px;cursor: pointer;"></i>
           </div>
         </div>
         <div class="row">
@@ -132,5 +133,39 @@
       </div>
     </div>
   </div> --}}
+
+@endsection
+
+@section('script')
+
+  <script>
+
+    const showPassBtn = document.getElementById('show-password');
+    const passInput = document.getElementById('password');
+
+    passInput.addEventListener('input', () => {
+      if(passInput.value === ''){
+        showPassBtn.classList.add('d-none');
+        showPassBtn.classList.remove('fa-eye-slash');
+        showPassBtn.classList.add('fa-eye');
+        passInput.type = "password";
+      }else{
+        showPassBtn.classList.remove('d-none');
+      }
+    });
+
+    showPassBtn.addEventListener('click', () => {
+      if(showPassBtn.classList.contains('fa-eye-slash')){
+        showPassBtn.classList.remove('fa-eye-slash');
+        showPassBtn.classList.add('fa-eye');
+        passInput.type = "password";
+      }else{
+        showPassBtn.classList.remove('fa-eye');
+        showPassBtn.classList.add('fa-eye-slash');
+        passInput.type = "text";
+      }
+    });
+
+  </script>
 
 @endsection

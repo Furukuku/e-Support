@@ -17,7 +17,7 @@ class CheckIfResidentApproved
     public function handle(Request $request, Closure $next): Response
     {
         if($request->user() && $request->user()->is_approved == false){
-            $msg = !is_null($request->user()->decline_msg) ? $request->user()->decline_msg : 'Your account has not been approved yet. Please wait for the barangay to approve your account.';
+            $msg = !is_null($request->user()->decline_msg) ? 'Your account has been declined due to this reason: ' . $request->user()->decline_msg : 'Your account has not been approved yet. Please wait for the barangay to approve your account.';
 
             Auth::guard('web')->logout();
             $request->session()->invalidate();

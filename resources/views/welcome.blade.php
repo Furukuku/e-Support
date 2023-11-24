@@ -17,13 +17,13 @@
   </header>
 
   <main>
-    <div class="py-5">
+    <div class="pt-4 pb-1">
 
       <span id="brgy-officials" class="officials-anchor"></span>
       <div>
         <h3 class="text-center">Meet Our Council</h3>
         <!-- Slider main container -->
-        <div class="swiper mySwiper px-2 py-4 rounded">
+        <div class="swiper mySwiper px-2 pt-2 pb-4 rounded">
           <div class="swiper-wrapper mb-3">
             @forelse ($officials as $official)
               <div class="swiper-slide shadow rounded">
@@ -82,7 +82,7 @@
 
       {{-- Places --}}
       <span id="places" class="places-anchor"></span>
-      <div class="container px-3 py-5">
+      <div class="container px-3">
         <div class="row pt-4 pb-2">
           <h3 class="text-center">Places</h3>
         </div>
@@ -102,7 +102,7 @@
               </a>
             </div>
           @empty
-            <h6 class="text-center">No Programs</h6>
+            <h6 class="text-center">No Places</h6>
           @endforelse
         </div>
         <div class="row-12 d-flex justify-content-end">
@@ -120,7 +120,7 @@
       {{-- Location --}}
       <span id="location" class="location-anchor"></span>
       <div class="px-4">
-        <div class="card shadow p-1 mb-5 bg-body-tertiary rounded">
+        <div class="card shadow p-1 mb-5 mt-4 bg-body-tertiary rounded">
           <div class="card-body px-2">
             <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.1410767501243!2d120.57392377438893!3d15.954007442513662!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33913efd2b8ba2b1%3A0xac2ed57018278646!2sNancayasan%20Barangay%20Hall!5e0!3m2!1sen!2sph!4v1700189608988!5m2!1sen!2sph" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>

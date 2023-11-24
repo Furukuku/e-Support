@@ -167,7 +167,7 @@ class BusinessApproval extends Component
                     ->orWhere('biz_name', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('biz_nature', 'LIKE', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->business_paginate, ['*'], 'businessesPage');
 
         return view('livewire.admin.manage.business-approval', [

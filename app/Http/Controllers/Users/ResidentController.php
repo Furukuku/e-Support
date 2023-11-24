@@ -41,7 +41,7 @@ class ResidentController extends Controller
         if($request->need === 'Others'){
             $request->validate([
                 'date' => ['required', 'date'],
-                'time' => ['required', 'date_format:H:i'],
+                'time' => ['nullable', 'date_format:H:i'],
                 'need' => ['required', 'string', 'max:255'],
                 'others' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:1000'],
@@ -49,7 +49,7 @@ class ResidentController extends Controller
         }else{
             $request->validate([
                 'date' => ['required', 'date'],
-                'time' => ['required', 'date_format:H:i'],
+                'time' => ['nullable', 'date_format:H:i'],
                 'need' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:1000'],
             ]);
@@ -84,7 +84,7 @@ class ResidentController extends Controller
         if($request->need === 'Others'){
             $request->validate([
                 'date' => ['required', 'date'],
-                'time' => ['required', 'date_format:H:i'],
+                'time' => ['nullable', 'date_format:H:i'],
                 'need' => ['required', 'string', 'max:255'],
                 'others' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:1000'],
@@ -92,7 +92,7 @@ class ResidentController extends Controller
         }else{
             $request->validate([
                 'date' => ['required', 'date'],
-                'time' => ['required', 'date_format:H:i'],
+                'time' => ['nullable', 'date_format:H:i'],
                 'need' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:1000'],
             ]);
@@ -335,19 +335,19 @@ class ResidentController extends Controller
     {
         if($request->purpose === 'Others'){
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                // 'name' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:255'],
                 'others' => ['required', 'string', 'max:255'],
             ]);
         }else{
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                // 'name' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:255'],
             ]);
         }
 
         $document = Document::find($id);
-        $document->indigency->name = $request->name;
+        // $document->indigency->name = $request->name;
         $document->indigency->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
         $document->indigency->update();
 
@@ -357,9 +357,9 @@ class ResidentController extends Controller
     public function updateBizClearance(Request $request, $id){
         $request->validate([
             'business_nature' => ['required', 'string', 'max:255'],
-            'owner_name' => ['required', 'string', 'max:255'],
+            // 'owner_name' => ['required', 'string', 'max:255'],
             'business_name' => ['required', 'string', 'max:255'],
-            'owner_address' => ['required', 'string', 'max:255'],
+            // 'owner_address' => ['required', 'string', 'max:255'],
             'business_address' => ['required', 'string', 'max:255'],
             'proof' => [File::image()],
             'ctc_image' => [File::image()],
@@ -400,9 +400,9 @@ class ResidentController extends Controller
         }
 
         $document->bizClearance->biz_nature = $request->business_nature;
-        $document->bizClearance->biz_owner = $request->owner_name;
+        // $document->bizClearance->biz_owner = $request->owner_name;
         $document->bizClearance->biz_name = $request->business_name;
-        $document->bizClearance->owner_address = $request->owner_address;
+        // $document->bizClearance->owner_address = $request->owner_address;
         $document->bizClearance->biz_address = $request->business_address;
         $document->bizClearance->update();
 
@@ -413,8 +413,8 @@ class ResidentController extends Controller
     {
         if($request->purpose === 'Others'){
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'zone' => ['required', 'string', 'max:1'],
+                // 'name' => ['required', 'string', 'max:255'],
+                // 'zone' => ['required', 'string', 'max:1'],
                 'purpose' => ['required', 'string', 'max:255'],
                 'others' => ['required', 'string', 'max:255'],
                 'ctc_image' => [File::image()],
@@ -424,8 +424,8 @@ class ResidentController extends Controller
             ]);
         }else{
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'zone' => ['required', 'string', 'max:1'],
+                // 'name' => ['required', 'string', 'max:255'],
+                // 'zone' => ['required', 'string', 'max:1'],
                 'purpose' => ['required', 'string', 'max:255'],
                 'ctc_image' => [File::image()],
                 'ctc' => ['nullable', 'string', 'max:255'],
@@ -459,8 +459,8 @@ class ResidentController extends Controller
             $document->brgyClearance->issued_on = $request->issued_on;
         }
         
-        $document->brgyClearance->name = $request->name;
-        $document->brgyClearance->zone = $request->zone;
+        // $document->brgyClearance->name = $request->name;
+        // $document->brgyClearance->zone = $request->zone;
         $document->brgyClearance->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
         $document->brgyClearance->update();
 
@@ -514,9 +514,9 @@ class ResidentController extends Controller
     {
         $request->validate([
             'business_nature' => ['required', 'string', 'max:255'],
-            'owner_name' => ['required', 'string', 'max:255'],
+            // 'owner_name' => ['required', 'string', 'max:255'],
             'business_name' => ['required', 'string', 'max:255'],
-            'owner_address' => ['required', 'string', 'max:255'],
+            // 'owner_address' => ['required', 'string', 'max:255'],
             'business_address' => ['required', 'string', 'max:255'],
             'proof' => ['required', File::image()],
             'ctc_image' => ['nullable', File::image()],
@@ -546,12 +546,14 @@ class ResidentController extends Controller
                 $bizClearance->issued_on = $request->issued_on;
             }
             
+            $user = auth()->guard('web')->user();
+
             $bizClearance->document_id = $document->id;
             $bizClearance->biz_name = $request->business_name;
             $bizClearance->biz_address = $request->business_address;
             $bizClearance->biz_nature = $request->business_nature;
-            $bizClearance->biz_owner = $request->owner_name;
-            $bizClearance->owner_address = $request->owner_address;
+            $bizClearance->biz_owner = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . ' ' . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
+            $bizClearance->owner_address = 'Zone ' . $user->zone . ', Nancayasan Urdaneta City, Pangasinan';
             $bizClearance->proof = $proof_filename;
             $bizClearance->save();
 
@@ -572,13 +574,13 @@ class ResidentController extends Controller
     {
         if($request->purpose === 'Others'){
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                // 'name' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:255'],
                 'others' => ['required', 'string', 'max:255'],
             ]);
         }else{
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                // 'name' => ['required', 'string', 'max:255'],
                 'purpose' => ['required', 'string', 'max:255'],
             ]);
         }
@@ -592,9 +594,11 @@ class ResidentController extends Controller
             $document->token = $token;
             $document->save();
 
+            $user = auth()->guard('web')->user();
+
             $indigency = new Indigency();
             $indigency->document_id = $document->id;
-            $indigency->name = $request->name;
+            $indigency->name = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . ' ' . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
             $indigency->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
             $indigency->save();
 
@@ -615,8 +619,8 @@ class ResidentController extends Controller
     {
         if($request->purpose === 'Others'){
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'zone' => ['required', 'string', 'max:1'],
+                // 'name' => ['required', 'string', 'max:255'],
+                // 'zone' => ['required', 'string', 'max:1'],
                 'purpose' => ['required', 'string', 'max:255'],
                 'others' => ['required', 'string', 'max:255'],
                 'ctc_image' => ['nullable', File::image()],
@@ -626,8 +630,8 @@ class ResidentController extends Controller
             ]);
         }else{
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'zone' => ['required', 'string', 'max:1'],
+                // 'name' => ['required', 'string', 'max:255'],
+                // 'zone' => ['required', 'string', 'max:1'],
                 'purpose' => ['required', 'string', 'max:255'],
                 'ctc_image' => ['nullable', File::image()],
                 'ctc' => ['nullable', 'string', 'max:255'],
@@ -655,10 +659,12 @@ class ResidentController extends Controller
                 $brgyClearance->issued_at = $request->issued_at;
                 $brgyClearance->issued_on = $request->issued_on;
             }
+
+            $user = auth()->guard('web')->user();
             
             $brgyClearance->document_id = $document->id;
-            $brgyClearance->name = $request->name;
-            $brgyClearance->zone = $request->zone;
+            $brgyClearance->name = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . ' ' . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
+            $brgyClearance->zone = $user->zone;
             $brgyClearance->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
             $brgyClearance->save();
 
@@ -694,7 +700,7 @@ class ResidentController extends Controller
     {
         $jobs = Job::with('business')->where('done_hiring', false)->inRandomOrder()->take(10)->get();
 
-        $places = Place::all();
+        $places = Place::where('is_approved', true)->get();
 
         return view('resident.resident-home', [
             'jobs' => $jobs,

@@ -48,7 +48,7 @@
 
 
     window.addEventListener('close-modal', () => {
-      $('#updateReport').modal('hide');
+      $('#viewReport').modal('hide');
     });
 
 

@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'UPDATE ASSISTANCE';
+    }
+  </style>
+@endpush
+
 @section('content')
 
 <div class="py-5">
@@ -31,7 +39,7 @@
         </div>
         <div class="row mb-3">
           <label for="time" class="form-label px-0">Time</label>
-          <input type="time" id="time" class="form-control" name="time" value="{{ old('time', date('H:i', strtotime($assistance->time))) }}">
+          <input type="time" id="time" class="form-control" name="time" value="{{ old('time', is_null($assistance->time) ? null : date('H:i', strtotime($assistance->time))) }}">
           @error('time') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
         </div>
         <div class="row mb-3">

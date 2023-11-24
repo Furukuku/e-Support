@@ -70,6 +70,8 @@
         </div>
       </div>
 
+      <div class="bg-light" style="height: 2rem;"></div>
+
       <div class="services-child">
         @livewire('resident.requested-docs')
       </div>

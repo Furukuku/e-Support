@@ -3,7 +3,7 @@
   <div class="bg-light col-7 shadow-lg overflow-auto">
     <div class="py-5">
       <div class="col px-5 mt-2">
-        <h3 class="mb-5">Signing up as Resident <span class="sign-up-link {{ $currentPage === 1 ? '' : 'd-none' }}">Sign up as <a href="{{ route('company.register') }}">company</a></span></h3>
+        <h3 class="mb-5">Signing up as Resident <span class="sign-up-link {{ $currentPage === 1 ? '' : 'd-none' }}">Sign up as <a href="{{ route('company.register') }}">business owner</a></span></h3>
         @if ($currentPage === 1)
           <h5 class="mb-3">Personal Information</h5>
         @elseif ($currentPage === 2)
@@ -126,14 +126,74 @@
             </div>
             <div class="row-auto mb-3">
               <label class="input-labels" for="resident-password">Password <small class="fw-normal">(Must have uppercase, lowercase, and number)</small></label>
-              <input wire:model.defer="password" id="resident-password" type="password" class="form-control">
-              @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              <div class="position-relative">
+                <input wire:model.defer="password" id="resident-password" type="password" class="form-control" style="padding-right: 35px">
+                @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 10px;cursor: pointer;"></i>
+              </div>
             </div>
             <div class="row-auto mb-3">
               <label class="input-labels" for="resident-confirm-password">Confirm Password</label>
-              <input wire:model.defer="password_confirmation" id="resident-confirm-password" type="password" class="form-control">
+              <div class="position-relative">
+                <input wire:model.defer="password_confirmation" id="resident-confirm-password" type="password" class="form-control" style="padding-right: 35px">
+                <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-confirm-password" style="right: 10px;cursor: pointer;"></i>
+              </div>
             </div>
           </div>
+          <script>
+            const showPassBtn = document.getElementById('show-password');
+            const passInput = document.getElementById('resident-password');
+        
+            passInput.addEventListener('input', () => {
+              if(passInput.value === ''){
+                showPassBtn.classList.add('d-none');
+                showPassBtn.classList.remove('fa-eye-slash');
+                showPassBtn.classList.add('fa-eye');
+                passInput.type = "password";
+              }else{
+                showPassBtn.classList.remove('d-none');
+              }
+            });
+        
+            showPassBtn.addEventListener('click', () => {
+              if(showPassBtn.classList.contains('fa-eye-slash')){
+                showPassBtn.classList.remove('fa-eye-slash');
+                showPassBtn.classList.add('fa-eye');
+                passInput.type = "password";
+              }else{
+                showPassBtn.classList.remove('fa-eye');
+                showPassBtn.classList.add('fa-eye-slash');
+                passInput.type = "text";
+              }
+            });
+        
+        
+            const showConfirmPassBtn = document.getElementById('show-confirm-password');
+            const passConfirmInput = document.getElementById('resident-confirm-password');
+        
+            passConfirmInput.addEventListener('input', () => {
+              if(passConfirmInput.value === ''){
+                showConfirmPassBtn.classList.add('d-none');
+                showConfirmPassBtn.classList.remove('fa-eye-slash');
+                showConfirmPassBtn.classList.add('fa-eye');
+                passConfirmInput.type = "password";
+              }else{
+                showConfirmPassBtn.classList.remove('d-none');
+              }
+            });
+        
+            showConfirmPassBtn.addEventListener('click', () => {
+              if(showConfirmPassBtn.classList.contains('fa-eye-slash')){
+                showConfirmPassBtn.classList.remove('fa-eye-slash');
+                showConfirmPassBtn.classList.add('fa-eye');
+                passConfirmInput.type = "password";
+              }else{
+                showConfirmPassBtn.classList.remove('fa-eye');
+                showConfirmPassBtn.classList.add('fa-eye-slash');
+                passConfirmInput.type = "text";
+              }
+            });
+          </script>
         @endif
         <div class="d-flex gap-2 justify-content-between">
           @if ($currentPage === 1)

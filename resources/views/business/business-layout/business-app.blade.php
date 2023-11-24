@@ -19,18 +19,38 @@
 
   <meta name="theme-color" content="#0E2C15">
 
+  @stack('page-name')
+
+  @if (str_contains(Route::currentRouteName(), 'business.home'))
+    <style>
+      :root {
+        --page-name: 'HOME';
+      }
+    </style>
+  @elseif (str_contains(Route::currentRouteName(), 'business.services'))
+    <style>
+      :root {
+        --page-name: 'SERVICES';
+      }
+    </style>
+  @elseif (str_contains(Route::currentRouteName(), 'business.profile'))
+    <style>
+      :root {
+        --page-name: 'PROFILE';
+      }
+    </style>
+  @elseif (str_contains(Route::currentRouteName(), 'business.share.location'))
+    <style>
+      :root {
+        --page-name: 'LOCATION';
+      }
+    </style>
+  @endif
 
   @livewireStyles
 </head>
 <body class="bg-light">
-  <nav class="navbar navbar-expand-lg bg-light border-bottom px-4 shadow-sm sticky-top navbar-wide
-    @if (str_contains(Route::currentRouteName(), 'business.home'))
-      navbar-home
-    @elseif(str_contains(Route::currentRouteName(), 'business.profile'))
-      navbar-profile
-    @elseif (str_contains(Route::currentRouteName(), 'business.archives'))
-      navbar-services
-    @endif">
+  <nav class="navbar navbar-expand-lg bg-light border-bottom px-4 shadow-sm sticky-top navbar-wide">
     <div class="container-fluid">
       <div class="d-flex gap-5 align-items-center">
         <a class="navbar-brand mb-0 align-middle h1" href="{{ route('business.home') }}">

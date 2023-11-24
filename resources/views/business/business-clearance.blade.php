@@ -1,5 +1,13 @@
 @extends('business.business-layout.business-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'REQUESTED CLEARANCE';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   <div class="py-5">
@@ -23,22 +31,32 @@
           @csrf
           <div class="row mb-3">
             <label for="biz-nature" class="form-label px-0">Nature of Business</label>
-            <input type="text" id="biz-nature" autocomplete="false" class="form-control inputs" disabled name="business_nature" value="{{ old('business_nature', $document->bizClearance->biz_nature) }}">
-            @error('business_nature') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+              <p class="m-0">{{ $document->bizClearance->biz_nature }}</p>
+            </div>
           </div>
           <div class="row mb-3">
-            <label for="name" class="form-label px-0">Name</label>
-            <input type="text" id="name" class="form-control mb-2 inputs" disabled  name="owner_name" value="{{ old('owner_name', $document->bizClearance->biz_owner) }}" placeholder="Business Owner">
-            @error('owner_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
-            <input type="text" class="form-control inputs" disabled name="business_name" value="{{ old('business_name', $document->bizClearance->biz_name) }}" placeholder="Name of Business">
-            @error('business_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            <label for="biz_name" class="form-label px-0">Name of Business</label>
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+              <p class="m-0">{{ $document->bizClearance->biz_name }}</p>
+            </div>
           </div>
           <div class="row mb-3">
-            <label for="address" class="form-label px-0">Address</label>
-            <input type="text" id="address" class="form-control mb-2 inputs" disabled name="owner_address" value="{{ old('owner_address', $document->bizClearance->owner_address) }}" placeholder="Owner Address">
+            <label for="biz_address" class="form-label px-0">Business Address</label>
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+              <p class="m-0">{{ $document->bizClearance->biz_address }}</p>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="biz_owner" class="form-label px-0">Business Owner</label>
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem; background-color: #e9ecef;">
+              <p class="m-0">{{ $document->bizClearance->biz_owner }}</p>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="owner_address" class="form-label px-0">Owner Address</label>
+            <input type="text" id="owner_address" class="form-control mb-2 inputs" disabled name="owner_address" value="{{ old('owner_address', $document->bizClearance->owner_address) }}" placeholder="Owner Address">
             @error('owner_address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
-            <input type="text" class="form-control inputs" name="business_address" disabled value="{{ old('business_address', $document->bizClearance->biz_address) }}" placeholder="Business Address">
-            @error('business_address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <div id="proof-img-input" class="row mb-3 d-none">
             <label for="proof" class="form-label px-0"><b>Proof of your business </b>(DTI, Business Clearance, etc.)</label>
@@ -48,12 +66,14 @@
           <div class="row justify-content-center mb-4">
             <img id="proof-preview" src="{{ Storage::url($document->bizClearance->proof) }}" class="object-fit-scale rounded" alt="proof" style="width: 20rem;">
           </div>
-          <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it as it is.</small></p>
-          <div class="position-relative mb-4">
+          <div class="position-relative mb-3">
             <hr class="border border-dark m-0 w-100">
             <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
-              <p class="m-0 text-center">Community Tax Certificate</p>
+              <p class="m-0 text-center fw-semibold">Community Tax Certificate</p>
             </div>
+          </div>
+          <div class="rounded border p-2 mb-3" style="background-color: #EBF3E8;">
+            <p class="text-center m-0"><small>Please only fill out the following if you have a Community Tax Certificate; otherwise, leave it blank.</small></p>
           </div>
           <div id="ctc-img-input" class="row mb-2 d-none">
             <label for="ctc-img" class="form-label px-0">Please insert a clear image of your CTC</label>

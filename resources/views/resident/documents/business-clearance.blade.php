@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'REQUEST DOCUMENT';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   <div class="py-5">
@@ -17,13 +25,11 @@
         <form id="biz-clearance-form" class="biz-clearance-form" action="{{ route('resident.validate.biz-clearance') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="row mb-3">
-            <label for="biz-nature" class="form-label px-0">Nature of Business</label>
-            <input type="text" id="biz-nature" autocomplete="false" class="form-control" name="business_nature" value="{{ old('business_nature') }}">
-            @error('business_nature') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
-          </div>
-          <div class="row mb-3">
             <label for="biz_owner" class="form-label px-0">Business Owner</label>
-            <input type="text" id="biz_owner" class="form-control mb-2"  name="owner_name" 
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem;">
+              <p class="m-0">{{ auth()->guard('web')->user()->fname }} {{ is_null(auth()->guard('web')->user()->mname) ? '' : auth()->guard('web')->user()->mname[0] }}{{ is_null(auth()->guard('web')->user()->mname) ? '' : '. ' }} {{ auth()->guard('web')->user()->lname }} {{ auth()->guard('web')->user()->sname }}</p>
+            </div>
+            {{-- <input type="text" id="biz_owner" class="form-control mb-2"  name="owner_name" 
             @if (auth()->guard('web')->user()->mname !== null && auth()->guard('web')->user()->sname !== null)
               value="{{ old('owner_name', auth()->guard('web')->user()->fname . ' ' . auth()->guard('web')->user()->mname[0] . '. ' . auth()->guard('web')->user()->lname . ' ' . auth()->guard('web')->user()->sname) }}"
             @elseif (auth()->guard('web')->user()->mname !== null && auth()->guard('web')->user()->sname === null)
@@ -36,15 +42,27 @@
               value="{{ old('owner_name') }}"
             @endif 
             placeholder="Enter business owner">
-            @error('owner_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            @error('owner_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror --}}
+          </div>
+          <div class="row mb-3">
+            <label for="owner_address" class="form-label px-0">Owner Address</label>
+            <div class="border rounded" style="padding: 0.375rem 2.25rem 0.375rem 0.75rem;">
+              <p class="m-0">Zone {{ auth()->guard('web')->user()->zone }}, Nancayasan Urdaneta City, Pangasinan</p>
+            </div>
+            {{-- <input type="text" id="owner_address" class="form-control mb-2" name="owner_address" value="{{ old('owner_address', 'Zone ' . auth()->guard('web')->user()->zone . ', Nancayasan Urdaneta City, Pangasinan') }}" placeholder="Enter owner's address">
+            @error('owner_address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror --}}
+          </div>
+          <div class="row mb-3">
+            <label for="biz-nature" class="form-label px-0">Nature of Business</label>
+            <input type="text" id="biz-nature" autocomplete="false" class="form-control" name="business_nature" value="{{ old('business_nature') }}">
+            @error('business_nature') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+          </div>
+          <div class="row mb-3">
             <label for="biz_name" class="form-label px-0">Name of Business</label>
             <input type="text" id="biz_name" class="form-control" name="business_name" value="{{ old('business_name') }}" placeholder="Enter the name of your business">
             @error('business_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
           <div class="row mb-3">
-            <label for="owner_address" class="form-label px-0">Owner Address</label>
-            <input type="text" id="owner_address" class="form-control mb-2" name="owner_address" value="{{ old('owner_address', 'Zone ' . auth()->guard('web')->user()->zone . ', Nancayasan Urdaneta City, Pangasinan') }}" placeholder="Enter owner's address">
-            @error('owner_address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             <label for="biz_address" class="form-label px-0">Business Address</label>
             <input type="text" id="biz_address" class="form-control" name="business_address" value="{{ old('business_address') }}" placeholder="Enter the address of your business">
             @error('business_address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
@@ -54,15 +72,17 @@
             <input type="file" accept="image/*" id="proof" class="form-control form-control-sm" name="proof" value="{{ old('proof') }}">
             @error('proof') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
           </div>
-          <div class="row justify-content-center mb-4">
+          <div class="row justify-content-center mb-5">
             <img id="proof-preview" class="object-fit-scale rounded d-none" alt="proof" style="width: 20rem;">
           </div>
-          <p class="text-center mb-4 text-secondary"><small>Please fill out the following only if you have a Community Tax Certificate; otherwise, just leave it as it is.</small></p>
-          <div class="position-relative mb-4">
+          <div class="position-relative mb-3">
             <hr class="border border-dark m-0 w-100">
             <div class="bg-light position-absolute top-50 start-50 translate-middle" style="width: 13rem;">
-              <p class="m-0 text-center">Community Tax Certificate</p>
+              <p class="m-0 text-center fw-semibold">Community Tax Certificate</p>
             </div>
+          </div>
+          <div class="rounded border p-2 mb-3" style="background-color: #EBF3E8;">
+            <p class="text-center m-0"><small>Please only fill out the following if you have a Community Tax Certificate; otherwise, leave it blank.</small></p>
           </div>
           <div class="row mb-2">
             <label for="ctc-img" class="form-label px-0">Please insert a clear image of your CTC</label>

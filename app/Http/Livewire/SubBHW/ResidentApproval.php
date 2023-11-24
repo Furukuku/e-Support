@@ -168,7 +168,7 @@ class ResidentApproval extends Component
                 ->orWhere('mname', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('sname', 'LIKE', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($this->paginate, ['*'], 'approvalPage');
 
         return view('livewire.sub-b-h-w.resident-approval', ['residents' => $residents]);

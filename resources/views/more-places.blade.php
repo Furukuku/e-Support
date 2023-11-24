@@ -11,7 +11,7 @@
         <form action="{{ route('search.place') }}" method="GET">
           @csrf
           <div class="input-group">
-            <input type="search" class="form-control" name="keyword" value="{{ old('keyword') }}" placeholder="Search">
+            <input type="search" class="form-control" name="keyword" value="{{ isset($place) ? $place : '' }}" placeholder="Search">
             <button class="btn btn-outline-secondary" type="submit">
               <span class="material-symbols-outlined align-middle">search</span>
             </button>

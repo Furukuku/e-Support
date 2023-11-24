@@ -1,5 +1,13 @@
 @extends('business.business-layout.business-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'POST JOB';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   @livewire('business.jobs.post-job')

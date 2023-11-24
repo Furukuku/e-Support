@@ -45,12 +45,12 @@ class Profile extends Component
 
         $this->validate([
             'profile_image' => ['nullable', 'image'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'first_name' => ['required', 'string', 'max:255'],
-            'middle_name' => ['nullable', 'string', 'max:255'],
-            'suffix_name' => ['nullable', 'string', 'max:255'],
-            'birthday' => ['required', 'date'],
-            'gender' => ['required', 'string', 'max:6'],
+            // 'last_name' => ['required', 'string', 'max:255'],
+            // 'first_name' => ['required', 'string', 'max:255'],
+            // 'middle_name' => ['nullable', 'string', 'max:255'],
+            // 'suffix_name' => ['nullable', 'string', 'max:255'],
+            // 'birthday' => ['required', 'date'],
+            // 'gender' => ['required', 'string', 'max:6'],
             'employment_status' => ['required', 'boolean'],
             'zone' => ['required', 'string', 'max:2'],
             'mobile_no' => ['required', new MobileNumberFormat, 'unique:users,mobile,' . $user->id, 'digits:12'],
@@ -78,12 +78,12 @@ class Profile extends Component
         ]);
 
         $resident = User::find($user->id);
-        $resident->lname = $this->last_name;
-        $resident->fname = $this->first_name;
-        $resident->mname = $this->middle_name;
-        $resident->sname = $this->suffix_name;
-        $resident->bday = $this->birthday;
-        $resident->gender = $this->gender;
+        // $resident->lname = $this->last_name;
+        // $resident->fname = $this->first_name;
+        // $resident->mname = $this->middle_name;
+        // $resident->sname = $this->suffix_name;
+        // $resident->bday = $this->birthday;
+        // $resident->gender = $this->gender;
         $resident->zone = $this->zone;
         $resident->is_employed = $this->employment_status;
         $resident->username = $this->username;

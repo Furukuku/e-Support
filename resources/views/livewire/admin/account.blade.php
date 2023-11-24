@@ -53,17 +53,26 @@
           <div class="px-2" {{ $password_hidden }}>
             <div class="row-4 mb-4">
               <label for="current-password">Current Password</label>
-              <input wire:model.defer="current_password" class="form-control" id="current-password" type="password">
-              @error('current_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              <div class="position-relative">
+                <input wire:model.defer="current_password" class="form-control" id="current-password" type="password" style="padding-right: 35px">
+                @error('current_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-current-password" style="right: 10px;cursor: pointer;"></i>
+              </div>
             </div>
             <div class="row-4 mb-4">
               <label for="new-password">New Password</label>
-              <input wire:model.defer="new_password" class="form-control" id="new-password" type="password">
-              @error('new_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+              <div class="position-relative">
+                <input wire:model.defer="new_password" class="form-control" id="new-password" type="password" style="padding-right: 35px">
+                @error('new_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+                <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-new-password" style="right: 10px;cursor: pointer;"></i>
+              </div>
             </div>
             <div class="row-4 mb-4">
               <label for="password-confirmation">Confirm Password</label>
-              <input wire:model.defer="new_password_confirmation" class="form-control" id="password-confirmation" type="password">
+              <div class="position-relative">
+                <input wire:model.defer="new_password_confirmation" class="form-control" id="password-confirmation" type="password" style="padding-right: 35px">
+                <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-confirm-password" style="right: 10px;cursor: pointer;"></i>
+              </div>
             </div>
             <div class="d-flex justify-content-end gap-2">
               <button type="submit" class="btn btn-warning">Submit</button>

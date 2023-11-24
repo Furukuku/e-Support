@@ -74,7 +74,7 @@
                 <span class="material-symbols-outlined" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#brgyClearanceInfo" style="cursor: pointer;">
                   print
                 </span>
-                <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="releaseConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
+                {{-- <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="releaseConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i> --}}
               </td>
             </tr>
           @empty

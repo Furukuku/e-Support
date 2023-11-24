@@ -17,5 +17,8 @@
 </head>
 <body class="d-flex justify-content-center align-items-center admin-auth-bg">
   @yield('admin.login')
+
+  <script src="https://kit.fontawesome.com/0541fe1713.js" crossorigin="anonymous"></script>
+  @yield('script')
 </body>
 </html>

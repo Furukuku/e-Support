@@ -11,7 +11,6 @@ use App\Http\Controllers\Users\ResidentController;
 use App\Http\Controllers\Users\SubAdminController;
 use App\Http\Controllers\Users\SubBHWController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Livewire\Admin\DocTemplates\BusinessClearance;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +45,7 @@ Route::middleware(['guest:web', 'guest:business'])->group(function(){
 
     Route::view('/register-company', 'auth.users.register-company')->name('company.register');
     Route::view('/business/terms-and-conditions', 'auth.users.business-agreements.terms-conditions')->name('business.terms-conditions');
+    Route::view('/business/privacy-policy', 'auth.users.business-agreements.privacy-policy')->name('business.privacy-policy');
 });
 
 
@@ -197,6 +197,8 @@ Route::post('/login-validate', [LoginController::class, 'residentValidate'])->na
 
 Route::view('/resident-otp-verification', 'auth.users.otp-verifications.resident-otp')->middleware('auth:web')->name('resident-verification-mobile.notice');
 
+Route::post('/otp-logout-resident', [LogoutController::class, 'residentLogout'])->name('register.resident.logout');
+
 Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', 'resident.active')->group(function() {
     Route::prefix('resident')->name('resident.')->group(function(){
 
@@ -245,6 +247,8 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 /*------------------------- Start of Business Routes -------------------------*/
 
 Route::view('/company-otp-verification', 'auth.users.otp-verifications.company-otp')->middleware('auth:business')->name('company-verification-mobile.notice');
+
+Route::post('/otp-logout-business', [LogoutController::class, 'businessLogout'])->name('register.business.logout');
 
 Route::middleware('business.auth:business', 'company-mobile.verified', 'company.approval', 'company.active')->group(function() {
     Route::prefix('business')->name('business.')->group(function(){

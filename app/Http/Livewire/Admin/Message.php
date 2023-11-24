@@ -53,22 +53,15 @@ class Message extends Component
 
         $residents = User::where('is_approved', true)->get();
 
-        $notification = Notification::send($residents, new SMSBroadcast($this->message_content));
+        Notification::send($residents, new SMSBroadcast($this->message_content));
 
-        if($notification){
-            SmsMessage::create([
-                'content' => $this->message_content,
-            ]);
+        SmsMessage::create([
+            'content' => $this->message_content,
+        ]);
 
-            $this->dispatchBrowserEvent('success', ['success' => 'Message sent!']);
-            $this->dispatchBrowserEvent('close-modal');
-            $this->closeModal();
-        }else{
-            $this->dispatchBrowserEvent('failed', ['failed' => 'Message not sent!']);
-            $this->dispatchBrowserEvent('close-modal');
-            $this->closeModal();
-        }
-
+        $this->dispatchBrowserEvent('success', ['success' => 'Message sent!']);
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
     }
 
     public function render()

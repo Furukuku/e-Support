@@ -13,24 +13,31 @@
         <div class="d-flex flex-column aling-items-center">
           <div class="mb-3">
             <h4><strong>Report Type: </strong>{{ $report_type }}</h4>
-            <p class="m-0"><strong>Zone: </strong>{{ $zone }}</p>
-            <p><strong>From: </strong>{{ $report_from }}</p>
-            <h5><strong>Description</strong></h5>
+            <p class="m-0"><span class="fw-semibold">Zone: </span>{{ $zone }}</p>
+            <p><span class="fw-semibold">From: </span>{{ $report_from }}</p>
+            <p class="mb-1"><span class="fs-5 fw-semibold">Description</span></p>
             <div class="border p-2 rounded">
               <p class="m-0" style="text-indent: 20px;">{{ $description }}</p>
             </div>
           </div>
           <div class="row justify-content-start mb-4 px-3">
             @isset($report_imgs)
-            <h5 class="px-0"><strong>Images</strong></h5>
+            <p class="mb-1 px-0"><span class="fs-5 fw-semibold">Images</span></p>
               @foreach ($report_imgs as $image)
                 <img src="{{ Storage::url($image->image) }}" class="object-fit-contain border rounded mb-2" alt="image" style="max-width: 100%;">
               @endforeach
             @endisset
           </div>
-          <h5><strong>Location</strong></h5>
+          <p class="mb-1"><span class="fs-5 fw-semibold">Location</span></p>
           <div wire:ignore id="map" class="mb-3 border shadow rounded" style="height: 300px"></div>
         </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        @if ($status === 'Pending')
+          <button type="button" wire:click="updateReport" class="btn btn-warning">Mark as Ongoing</button>
+        @elseif ($status === 'Ongoing')
+          <button type="button" wire:click="updateReport" class="btn btn-warning">Mark as Solved</button>
+        @endif
       </div>
     </div>
   </div>

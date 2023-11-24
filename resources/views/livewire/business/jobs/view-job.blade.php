@@ -30,7 +30,6 @@
         <option value="Part-time">Part-time</option>
         <option value="Contract">Contract</option>
         <option value="Temporary">Temporary</option>
-        <option value="Internship">Internship</option>
       </select>
       @error('job_type') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
     </div>
@@ -217,7 +216,7 @@
     </div>
 
     <div class="d-flex gap-2 justify-content-end {{ $edit }}">
-      <button wire:loading.attr="disabled" id="job-update-btn" type="button" class="btn btn-success text-light next-btn">Submit</button>
+      <button wire:loading.attr="disabled" id="job-update-btn" type="button" class="btn btn-success text-light next-btn">Update</button>
       <button wire:loading.attr="disabled" type="button" wire:click="cancel" class="btn btn-secondary">Cancel</button>
     </div>
   @endif

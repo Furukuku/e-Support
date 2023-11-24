@@ -4,8 +4,8 @@
     @forelse ($pendingReports as $report)
       <div wire:poll.60s class="col-auto mb-3">
         <a href="{{ route('resident.view.report', ['report' => $report]) }}" style="text-decoration: none;">
-          <div class="card bg-light shadow-sm requested-docs-card bg-white">
-            <div class="card-body pt-4 pb-5 rounded-top even-requested-docs-card-body color">
+          <div class="card bg-light shadow-sm requested-docs-card">
+            <div class="card-body pt-4 pb-5 rounded-top even-requested-docs-card-body text-white">
               <h5 class="card-title">{{ $report->report_name }}</h5>
               <p class="card-text m-0" style="font-size: 13px;">{{ $report->created_at->format('h:i A - M d, Y') }}</p>
             </div>

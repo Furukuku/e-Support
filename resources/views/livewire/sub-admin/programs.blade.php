@@ -4,7 +4,7 @@
 
   <div class="bg-white officials-profile-table shadow rounded">
     <div class="d-flex justify-content-between p-2 rounded-top officials-header">
-      <h3>PROGRAMS</h3>
+      <h3>NEWS AND EVENTS</h3>
       <button type="button" wire:loading.class="disabled" class="btn px-4 shadow btn-add" data-bs-toggle="modal" data-bs-target="#addProgram">Add</button>
     </div>
     <div class="d-flex justify-content-between p-2">

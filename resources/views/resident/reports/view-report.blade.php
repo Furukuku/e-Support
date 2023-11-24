@@ -1,10 +1,18 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'REPORT';
+    }
+  </style>
+@endpush
+
 @section('content')
 
-  <div class="py-5 d-flex justify-content-center">
+  <div class="pt-3 pb-5 d-flex justify-content-center">
 
-    <div class="container py-3 row justify-content-center view-report-container">
+    <div class="container pt-2 pb-3 row justify-content-center view-report-container">
       @if ($report->status === 'Pending')
         <div id="preview-img-container" class="col rounded py-3 mb-3">
           @foreach ($report->images as $image)
@@ -26,11 +34,8 @@
                 <option value="Stoning of Car" {{ old('kind_of_report', $report->report_name) == 'Stoning of Car' ? 'selected' : '' }}>Stoning of Car</option>
                 <option value="Trouble" {{ old('kind_of_report', $report->report_name) == 'Trouble' ? 'selected' : '' }}>Trouble</option>
                 <option value="Late-Night Karaoke Disturbance" {{ old('kind_of_report', $report->report_name) == 'Late-Night Karaoke Disturbance' ? 'selected' : '' }}>Late-Night Karaoke Disturbance</option>
-                <option value="Community Cleanliness" {{ old('kind_of_report', $report->report_name) == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
-                <option value="Infrastructure Problems" {{ old('kind_of_report', $report->report_name) == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option>
-                {{-- <option value="Public Safety Concern" {{ old('kind_of_report', $report->report_name) == 'Public Safety Concern' ? 'selected' : '' }}>Public Safety Concern</option>
-                <option value="Environmental Hazard" {{ old('kind_of_report', $report->report_name) == 'Environmental Hazard' ? 'selected' : '' }}>Environmental Hazard</option>
-                <option value="Complaint" {{ old('kind_of_report', $report->report_name) == 'Complaint' ? 'selected' : '' }}>Complaint</option> --}}
+                {{-- <option value="Community Cleanliness" {{ old('kind_of_report', $report->report_name) == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
+                <option value="Infrastructure Problems" {{ old('kind_of_report', $report->report_name) == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option> --}}
                 <option value="Others" {{ old('kind_of_report', $report->report_name) == 'Others' ? 'selected' : '' }}>Others</option>
               </select>
               @error('kind_of_report') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
@@ -68,8 +73,8 @@
               <textarea name="description" id="description" class="form-control" rows="3">{{ old('description', $report->description) }}</textarea>
               @error('description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
-            <div>
-              <p class="mb-1 fw-bold">Emergency Hotlines</p>
+            <div class="row mb-3">
+              <p class="mb-1 px-0 fw-bold">Emergency Hotlines</p>
               <p class="m-0"><small>Emergency Medical Service: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
               <p class="m-0"><small>Philippine National Police: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
               <p class="m-0"><small>Bureau of Fire Protection: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
@@ -106,8 +111,8 @@
               <p class="m-0 text-break" style="text-indent: 20px;">{{ $report->description }}</p>
             </div>
           </div>
-          <div>
-            <p class="mb-1 fw-bold">Emergency Hotlines</p>
+          <div class="row mb-3">
+            <p class="mb-1 px-0 fw-bold">Emergency Hotlines</p>
             <p class="m-0"><small>Emergency Medical Service: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
             <p class="m-0"><small>Philippine National Police: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
             <p class="m-0"><small>Bureau of Fire Protection: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
@@ -187,14 +192,14 @@
             report.value = report.value;
             other.value = '';
             break;
-          case 'Community Cleanliness': 
-            report.value = report.value;
-            other.value = '';
-            break;
-          case 'Infrastructure Problems': 
-            report.value = report.value;
-            other.value = '';
-            break;
+          // case 'Community Cleanliness': 
+          //   report.value = report.value;
+          //   other.value = '';
+          //   break;
+          // case 'Infrastructure Problems': 
+          //   report.value = report.value;
+          //   other.value = '';
+          //   break;
           // case 'Public Safety Concern': 
           //   report.value = report.value;
           //   other.value = '';

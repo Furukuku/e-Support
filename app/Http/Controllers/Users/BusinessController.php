@@ -19,11 +19,11 @@ class BusinessController extends Controller
 {
     public function updateBizClearance(Request $request, $id){
         $request->validate([
-            'business_nature' => ['required', 'string', 'max:255'],
-            'owner_name' => ['required', 'string', 'max:255'],
-            'business_name' => ['required', 'string', 'max:255'],
+            // 'business_nature' => ['required', 'string', 'max:255'],
+            // 'owner_name' => ['required', 'string', 'max:255'],
+            // 'business_name' => ['required', 'string', 'max:255'],
             'owner_address' => ['required', 'string', 'max:255'],
-            'business_address' => ['required', 'string', 'max:255'],
+            // 'business_address' => ['required', 'string', 'max:255'],
             'proof' => [File::image()],
             'ctc_image' => [File::image()],
             'ctc' => ['nullable', 'string', 'max:255'],
@@ -62,11 +62,11 @@ class BusinessController extends Controller
             $document->bizClearance->issued_on = $request->issued_on;
         }
 
-        $document->bizClearance->biz_nature = $request->business_nature;
-        $document->bizClearance->biz_owner = $request->owner_name;
-        $document->bizClearance->biz_name = $request->business_name;
+        // $document->bizClearance->biz_nature = $request->business_nature;
+        // $document->bizClearance->biz_owner = $request->owner_name;
+        // $document->bizClearance->biz_name = $request->business_name;
         $document->bizClearance->owner_address = $request->owner_address;
-        $document->bizClearance->biz_address = $request->business_address;
+        // $document->bizClearance->biz_address = $request->business_address;
         $document->bizClearance->update();
 
         return redirect()->route('business.services')->with('success', 'Document updated successfully');
@@ -109,11 +109,11 @@ class BusinessController extends Controller
     public function storeBizClearance(Request $request)
     {
         $request->validate([
-            'business_nature' => ['required', 'string', 'max:255'],
-            'owner_name' => ['required', 'string', 'max:255'],
-            'business_name' => ['required', 'string', 'max:255'],
+            // 'business_nature' => ['required', 'string', 'max:255'],
+            // 'owner_name' => ['required', 'string', 'max:255'],
+            // 'business_name' => ['required', 'string', 'max:255'],
             'owner_address' => ['required', 'string', 'max:255'],
-            'business_address' => ['required', 'string', 'max:255'],
+            // 'business_address' => ['required', 'string', 'max:255'],
             'proof' => ['required', File::image()],
             'ctc_image' => ['nullable', File::image()],
             'ctc' => ['nullable', 'string', 'max:255'],
@@ -141,12 +141,14 @@ class BusinessController extends Controller
                 $bizClearance->issued_at = $request->issued_at;
                 $bizClearance->issued_on = $request->issued_on;
             }
+
+            $business = auth()->guard('business')->user();
             
             $bizClearance->document_id = $document->id;
-            $bizClearance->biz_name = $request->business_name;
-            $bizClearance->biz_address = $request->business_address;
-            $bizClearance->biz_nature = $request->business_nature;
-            $bizClearance->biz_owner = $request->owner_name;
+            $bizClearance->biz_name = $business->biz_name;
+            $bizClearance->biz_address = $business->biz_address;
+            $bizClearance->biz_nature = $business->biz_nature;
+            $bizClearance->biz_owner = $business->fname . ' ' . (is_null($business->mname) ? '' : $business->mname[0] . '. ') . ' ' . $business->lname . (is_null($business->sname) ? '' : ' ' . $business->sname);
             $bizClearance->owner_address = $request->owner_address;
             $bizClearance->proof = $proof_filename;
             $bizClearance->save();

@@ -1,5 +1,13 @@
 @extends('business.business-layout.business-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'JOB';
+    }
+  </style>
+@endpush
+
 @section('content')
 
   @livewire('business.jobs.view-job', ['id' => $id])

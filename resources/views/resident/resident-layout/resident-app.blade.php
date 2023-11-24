@@ -30,19 +30,18 @@
         --page-name: 'HOME';
       }
     </style>
+  @elseif (str_contains(Route::currentRouteName(), 'resident.services'))
+    <style>
+      :root {
+        --page-name: 'SERVICES';
+      }
+    </style>
   @endif
 
   @livewireStyles
 </head>
 <body class="bg-light">
-  <nav class="navbar navbar-expand-lg bg-white border-bottom px-4 shadow-sm sticky-top navbar-wide
-    @if (str_contains(Route::currentRouteName(), 'resident.home') || str_contains(Route::currentRouteName(), 'resident.view-job') || str_contains(Route::currentRouteName(), 'resident.family-profile'))
-      navbar-home
-    @elseif (str_contains(Route::currentRouteName(), 'resident.services'))
-      navbar-services
-    @elseif(str_contains(Route::currentRouteName(), 'resident.profile'))
-      navbar-profile
-    @endif">
+  <nav class="navbar navbar-expand-lg bg-white border-bottom px-4 shadow-sm sticky-top navbar-wide">
     <div class="container-fluid">
       <div class="d-flex gap-5 align-items-center">
         <a class="navbar-brand mb-0 align-middle h1" href="{{ route('resident.home') }}">

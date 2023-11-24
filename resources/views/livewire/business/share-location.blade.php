@@ -57,7 +57,7 @@
         </div>
         <div wire:ignore id="map" class="mb-4 rounded shadow-sm border" style="height: 400px"></div>
         <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-success" wire:loading.attr="disabled">Request</button>
+          <button type="submit" class="btn btn-success next-btn" wire:loading.attr="disabled">Submit</button>
         </div>
       </form>
     </div>
@@ -76,13 +76,13 @@
       @elseif ($place->is_approved == false && !is_null($place->decline_msg))
         <div class="w-100 d-flex gap-2 bg-secondary bg-opacity-25 py-2 px-4 mb-3 rounded">
           <span class="material-symbols-outlined text-danger align-middle">error</span>
-          <p class="m-0">{{ $place->decline_msg }}</p>
+          <p class="m-0">Sharing of location of you business has been declined due to this reason: {{ $place->decline_msg }}</p>
         </div>
       @endif
     @else
       <div class="w-100 d-flex gap-2 bg-secondary bg-opacity-25 py-2 px-4 mb-3 rounded">
         <span class="material-symbols-outlined text-danger align-middle">error</span>
-        <p class="m-0">Your featured business in places was archived.</p>
+        <p class="m-0">Your featured business in places was archived by the administrator.</p>
       </div>
     @endif
     @if ($editable === 0)
@@ -188,7 +188,7 @@
           <div wire:ignore id="edit-map" class="mb-4 rounded shadow-sm border" style="height: 400px"></div>
           <div class="d-flex justify-content-between">
             <button type="button" class="btn btn-secondary" wire:click="cancel" wire:loading.attr="disabled">Cancel</button>
-            <button type="submit" class="btn btn-success" wire:loading.attr="disabled">Update</button>
+            <button type="submit" class="btn btn-success next-btn" wire:loading.attr="disabled">Update</button>
           </div>
         </form>
       </div>
@@ -200,51 +200,66 @@
       <script>
 
         let map, infoWindow, editMap;
+        
+        // window.addEventListener('load', () => {
+        //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        // });
 
         async function initMap() {
-          const position = { lat: 15.95401469803549, lng: 120.57649556649716 };
+          // const position = { lat: latitude, lng: longitude };
           const { Map, InfoWindow } = await google.maps.importLibrary("maps");
           const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
           const geocoder = new google.maps.Geocoder();
           const editGeocoder = new google.maps.Geocoder();
 
           window.addEventListener('show-map', () => {
-            map = new Map(document.getElementById("map"), {
-              center: position,
-              zoom: 15,
-              mapId: "map",
-            });
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
-            const marker = new AdvancedMarkerElement({
-              map: map,
-              position: position,
-              gmpDraggable: true,
-              title: "Nancayasan",
-            });
-
-            marker.addListener('dragend', function(){
-              geocodeLatLng(geocoder, map, marker)
-            });
-
-            const submitPost = document.getElementById('submit-form');
-
-            if(submitPost){
-              submitPost.addEventListener('submit', e => {
-                e.preventDefault();
-                Swal.fire({
-                  title: 'Submit Post?',
-                  text: "Are you sure you want to submit this post?",
-                  icon: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#0e2c15dc',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Yes!'
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    Livewire.emit('submit');
-                  }
-                });
+            // callback functions for user's current location
+            function successCallback(myPosition){
+              let position = { lat: myPosition.coords.latitude, lng: myPosition.coords.longitude }
+  
+              map = new Map(document.getElementById("map"), {
+                center: position,
+                zoom: 15,
+                mapId: "map",
               });
+  
+              const marker = new AdvancedMarkerElement({
+                map: map,
+                position: position,
+                gmpDraggable: true,
+                title: "Nancayasan",
+              });
+  
+              marker.addListener('dragend', function(){
+                geocodeLatLng(geocoder, map, marker)
+              });
+  
+              const submitPost = document.getElementById('submit-form');
+  
+              if(submitPost){
+                submitPost.addEventListener('submit', e => {
+                  e.preventDefault();
+                  Swal.fire({
+                    title: 'Submit Post?',
+                    text: "Are you sure you want to submit this post?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#0e2c15dc',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      Livewire.emit('submit');
+                    }
+                  });
+                });
+              }
+            }
+
+            function errorCallback(error){
+              console.log(error);
             }
           });
         }

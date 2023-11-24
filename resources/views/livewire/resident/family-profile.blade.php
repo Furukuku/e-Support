@@ -515,7 +515,7 @@
         <div class="w-100 bg-secondary bg-opacity-25 py-2 px-4 mb-3" style="margin-top: -1rem;">
           <p class="m-0 text-break fw-semibold">
             <span class="material-symbols-outlined text-danger align-middle">error</span>
-            <small>{{ auth()->guard('web')->user()->familyHead->comment }}</small>
+            <small>Family profile has been declined due to this reason: "{{ auth()->guard('web')->user()->familyHead->comment }}"</small>
           </p>
         </div>
       @endif

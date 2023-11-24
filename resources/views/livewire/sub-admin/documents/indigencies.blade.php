@@ -72,7 +72,7 @@
                 <span class="material-symbols-outlined" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#indigencyInfo" style="cursor: pointer;">
                   print
                 </span>
-                <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="releaseConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i>
+                {{-- <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="releaseConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i> --}}
               </td>
             </tr>
           @empty
@@ -135,7 +135,7 @@
               <td class="align-middle text-center">{{ $taken_doc->issued_by }}</td>
               <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>
               <td class="align-middle text-center">
-                <a href="{{ route('admin.templates.indigency', ['document' => $taken_doc]) }}">
+                <a href="{{ route('sub-admin.templates.indigency', ['document' => $taken_doc]) }}">
                   <i class="fa-solid fa-eye mx-1 align-middle view-icon"></i>
                 </a>
               </td>

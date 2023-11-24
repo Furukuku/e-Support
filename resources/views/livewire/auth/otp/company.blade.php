@@ -18,6 +18,12 @@
             <p class="my-3">Haven't recieved the code? <a wire:click="resendCode" wire:loading.class="pe-none opacity-25" wire:target="resendCode" class="link" style="cursor: pointer;">Resend</a> <span wire:loading wire:target="resendCode" class="loader"></span></p>
             <p class="text-danger my-0 py-0" style="font-size: 0.8rem">{{ $too_many_resend }}</p>
             <p class="text-success my-0 py-0" style="font-size: 0.8rem">{{ $success_message }}</p>
+            <div class="my-3">
+              <form action="{{ route('register.business.logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-link text-dark px-0">Cancel Registration</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

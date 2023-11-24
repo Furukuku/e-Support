@@ -18,7 +18,7 @@ class Company extends Component
 {
     use WithFileUploads;
 
-    public $profile_image, $last_name, $first_name, $middle_name, $suffix_name, $business_clearance, $business_name, $business_address, $business_nature, $email, $contact, $username, $password, $password_confirmation;
+    public $business_logo, $last_name, $first_name, $middle_name, $suffix_name, $business_clearance, $business_name, $business_address, $business_nature, $email, $contact, $username, $password, $password_confirmation;
 
     public $mobile;
 
@@ -69,14 +69,14 @@ class Company extends Component
     public function submit()
     {
         $this->validate([
-            'profile_image' => 'required|image',
+            'business_logo' => 'required|image',
             'username' => 'required|string|unique:users|unique:businesses|unique:barangay_health_workers|unique:sub_admins|unique:admins|min:4|max:20',
             'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|max:255|confirmed',
         ]);
 
         // $this->currentPage++;
 
-        $profile_img_filename = $this->profile_image->store('public/images/users/businesses/profiles');
+        $profile_img_filename = $this->business_logo->store('public/images/users/businesses/profiles');
 
         $business_clearance_filename = $this->business_clearance->store('public/images/users/businesses/clearances');
 

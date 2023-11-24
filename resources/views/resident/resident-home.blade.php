@@ -6,7 +6,7 @@
 
     @if ($jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true)
       <div class="w-100 px-3">
-        <h5>Recommended Jobs</h5>
+        <h5>RECOMMENDED JOBS</h5>
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             @foreach ($jobs as $job)
@@ -29,27 +29,8 @@
                   </a>
                 </div>
             @endforeach
-            {{-- <div class="card swiper-slide mb-3 shadow-sm job-cards" style="width: 20rem;height: 9rem;">
-              <a href="#" style="text-decoration: none;">
-                <div class="d-flex align-items-center h-100">
-                  <div class="d-flex align-items-center h-100 rounded-start bg-light" style="width: 40%;">
-                    <img src="{{ asset('images/Illustrations/hiring.svg') }}" class="w-100 h-100 object-fit-cover rounded-start job-card-img" alt="...">
-                  </div>
-                  <div class="h-100" style="width: 60%;">
-                    <div class="card-body h-100 d-flex flex-column justify-content-between">
-                      <div class="">
-                        <h5 class="card-title">Sample</h5>
-                        <p class="card-text text-truncate">Sample</p>
-                      </div>
-                      <p class="card-text"><small class="text-body-secondary">Sample</small></p>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div> --}}
   
           </div>
-          {{-- <div class="swiper-pagination"></div> --}}
         </div>
         @if ($jobs->count() > 10)
           <div class="d-flex justify-content-end">
@@ -59,7 +40,7 @@
       </div>
     @endif
   
-    <div class="d-flex justify-content-between align-items-center py-4 px-5 {{ $jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true ? 'my-5' : 'mb-5' }} bg-success bg-opacity-25 home-middle">
+    <div class="d-flex justify-content-between align-items-center py-4 px-5 {{ $jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true ? 'my-3' : 'mb-5' }} bg-success bg-opacity-25 home-middle">
       <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
         <h5 class="m-0 align-center">Where do you want to go?</h5>
         <p class="m-0 align-center">Explore some places around Barangay Nancayasan.</p>
@@ -74,12 +55,12 @@
     </div>
 
     <div class="mx-5 d-flex flex-column align-items-center home-end">
-      <div class="mb-4">
-        <h6 class="text-center">PLACES</h6>
+      <div class="mb-0">
+        <h5 class="text-center">PLACES</h5>
       </div>
       <div class="row w-100 gap-4 justify-content-center p-2">
         @forelse ($places as $place)
-          <div class="card shadow-sm mb-4 px-0 places-card" style="width: 18rem; cursor: pointer;">
+          <div class="card shadow-sm mb-1 px-0 places-card" style="width: 18rem; cursor: pointer;">
             <a href="{{ route('resident.place', ['place' => $place]) }}" class="text-dark" style="text-decoration: none;">
               <img src="{{ Storage::url($place->display_img) }}" class="card-img-top object-fit-cover" style="height: 13rem;" alt="...">
               <div class="card-body">

@@ -212,7 +212,7 @@
           <a href="{{ route('admin.message') }}" id="message" class="nav-link p-0 d-flex align-items-center sidebar-navigate nav-list {{ str_contains(Route::currentRouteName(), 'admin.message') ? 'navigate-active' : '' }}">
             <div class="container-fluid row p-0 ps-2 m-0">
               <span class="material-symbols-outlined col-3 text-center">send</span>
-              <p class="col-9 m-0 ps-0">Message</p>
+              <p class="col-9 m-0 ps-0">SMS Broadcast</p>
             </div>
           </a>
         </li>

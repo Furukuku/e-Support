@@ -2,7 +2,7 @@
 
   <div class="container p-4 bg-white rounded-4 shadow mb-3">
     <header>
-      <h4>Profile Account</h4>
+      <h4>Business Profile</h4>
     </header>
     <hr>
     <div class="d-flex justify-content-between align-items-center px-3 mb-4 profile-image-container">
@@ -99,17 +99,26 @@
       <div class="row">
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="current-pass"><small>Current Password</small></label>
-          <input type="password" id="current-pass" wire:model.defer="current_password" class="form-control shadow-sm rounded-3">
-          @error('current_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+          <div class="position-relative">
+            <input type="password" id="current-pass" wire:model.defer="current_password" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
+            @error('current_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-current-password" style="right: 10px;cursor: pointer;"></i>
+          </div>
         </div>
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="new-pass"><small>New Password</small></label>
-          <input type="password" id="new-pass" wire:model.defer="new_password" class="form-control shadow-sm rounded-3">
-          @error('new_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+          <div class="position-relative">
+            <input type="password" id="new-pass" wire:model.defer="new_password" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
+            @error('new_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-new-password" style="right: 10px;cursor: pointer;"></i>
+          </div>
         </div>
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="pass-confirmation"><small>Confirm Password</small></label>
-          <input type="password" id="pass-confirmation" wire:model.defer="new_password_confirmation" class="form-control shadow-sm rounded-3">
+          <div class="position-relative">
+            <input type="password" id="pass-confirmation" wire:model.defer="new_password_confirmation" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-confirm-password" style="right: 10px;cursor: pointer;"></i>
+          </div>
         </div>
       </div>
     </div>

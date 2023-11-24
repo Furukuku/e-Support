@@ -7,7 +7,7 @@
           <div class="card shadow-sm requested-docs-card">
             <div class="card-body pt-4 pb-5 rounded-top even-requested-docs-card-body">
               <h5 class="card-title text-white">{{ $myAssistanceHistory->need }}</h5>
-              <p class="card-text text-white fw-bold m-0">On: <span class="fw-normal">{{ date('M d, Y', strtotime($myAssistanceHistory->date)) }} - {{ date('h:i A', strtotime($myAssistanceHistory->time)) }}</span></p>
+              <p class="card-text text-white fw-bold m-0">On: <span class="fw-normal">{{ date('M d, Y', strtotime($myAssistanceHistory->date)) }} {{ is_null($myAssistanceHistory->time) ? '' : '- ' . date('h:i A', strtotime($myAssistanceHistory->time)) }}</span></p>
             </div>
             <div class="card-footer d-flex justify-content-between bg-white">
               <div class="d-flex">
