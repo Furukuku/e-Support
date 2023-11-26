@@ -1,6 +1,8 @@
 <div class="d-flex reg-resident-container">
 
-  <div class="col-5 reg-resident-bg"></div>
+  <div class="col-5 reg-resident-bg">
+    <div></div>
+  </div>
   <div class="bg-light col-7 shadow-lg overflow-auto">
     <div class="py-5">
       <div class="col px-5 mt-2">
@@ -110,9 +112,9 @@
               <label class="input-labels" for="company-password">Password <small class="fw-normal">(Must have uppercase, lowercase, and number)</small></label>
               <div class="position-relative">
                 <input wire:model.defer="password" id="company-password" type="password" class="form-control" style="padding-right: 35px">
-                @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 10px;cursor: pointer;"></i>
               </div>
+              @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="row-auto mb-3">
               <label class="input-labels" for="company-confirm-password">Confirm Password</label>

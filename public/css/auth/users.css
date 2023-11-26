@@ -17,10 +17,16 @@ body {
   min-height: 100vh;
 }
 
-.nancayasan-img {
+.nancayasan-img > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   background-image: url('../../images/welcome-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
+  filter: blur(2px);
 }
 
 input[type="password"]::-ms-reveal {
@@ -87,11 +93,19 @@ input[type="password"]::-ms-reveal {
 }
 
 .reg-resident-bg {
+  position: relative;
+}
+
+.reg-resident-bg > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   background-image: url('../../images/welcome-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
-  /* background: rgb(67,35,68);
-  background: radial-gradient(circle, rgba(67,35,68,1) 30%, rgba(255,192,61,1) 100%); */
+  filter: blur(2px);
 }
 
 .input-labels {
@@ -182,9 +196,20 @@ input[type="password"]::-ms-reveal {
 }
 
 .forgot-pass-bg {
-  background-image: url('../../images/welcome-bg.png');
+  position: relative;
+}
+
+.forgot-pass-bg > .forgot-pass-image {
+  background-image: url('../../images/welcome-bg2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter: blur(3px);
+  z-index: 0;
 }
 
 

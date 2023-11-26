@@ -19,14 +19,14 @@ class CleanMessages extends Command
      *
      * @var string
      */
-    protected $description = 'Delete messages older than 30 days';
+    protected $description = 'Delete messages older than 90 days';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $days = now()->subDays(30);
+        $days = now()->subDays(90);
 
         Message::where('created_at', '<', $days)->delete();
         

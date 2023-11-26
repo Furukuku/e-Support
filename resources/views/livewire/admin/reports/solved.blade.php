@@ -39,7 +39,13 @@
             <th class="align-middle text-center">Reported by</th>
             <th class="align-middle text-center">Report Type</th>
             <th class="align-middle text-center">Zone</th>
-            <th class="align-middle text-center">Date</th>
+            <th class="align-middle text-center">
+              <span wire:click="sortBy('updated_at')" class="me-1 sorting-arrow">
+                <i class="fa-solid fa-arrow-up fa-xs text-secondary {{ $sortBy === 'updated_at' && $sortDirection ==='asc' ? 'text-dark' : ''}}"></i>
+                <i class="fa-solid fa-arrow-down fa-xs text-secondary {{ $sortBy === 'updated_at' && $sortDirection ==='desc' ? 'text-dark' : ''}}"></i> 
+              </span>
+              Date
+            </th>
             <th class="align-middle text-center">Time</th>
           </tr>
         </thead>
@@ -64,8 +70,8 @@
               <td class="align-middle text-center">{{ $report->user->fname }} {{ $report->user->lname }}</td>
               <td class="align-middle text-center">{{ $report->report_name }}</td>
               <td class="align-middle text-center">{{ $report->zone }}</td>
-              <td class="align-middle text-center">{{ $report->created_at->format('M d, Y') }}</td>
-              <td class="align-middle text-center">{{ $report->created_at->format('h:i A') }}</td>
+              <td class="align-middle text-center">{{ $report->updated_at->format('M d, Y') }}</td>
+              <td class="align-middle text-center">{{ $report->updated_at->format('h:i A') }}</td>
             </tr>
           @empty
             <tr>

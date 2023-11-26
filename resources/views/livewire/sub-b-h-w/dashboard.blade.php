@@ -45,13 +45,17 @@
       </div>
     </div>
   
-    <div class="d-flex gap-4 justify-content-center">
-      <div id="beneficiaries-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
-        <canvas id="beneficiaries"></canvas>
+    <div wire:ignore class="row justify-content-center">
+      <div class="col-md-6 mb-3">
+        <div wire:ignore id="beneficiaries-container" class="bg-white rounded shadow p-5">
+          <canvas id="beneficiaries"></canvas>
+        </div>
       </div>
 
-      <div id="sex-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
-        <canvas id="sex"></canvas>
+      <div class="col-md-6 mb-3">
+        <div wire:ignore id="sex-container" class="bg-white rounded shadow p-5">
+          <canvas id="sex"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -79,8 +83,7 @@
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 position: 'top',
@@ -109,8 +112,7 @@
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 position: 'top',

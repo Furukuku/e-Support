@@ -45,47 +45,56 @@
       </div>
     </div>
   
-    <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 ps-2 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 100%;">
-      <canvas id="population"></canvas>
+    <div class="bg-white rounded shadow p-5 mb-3">
+      <div wire:ignore id="population-container" class="row">
+        <canvas id="population"></canvas>
+      </div>
     </div>
 
-    <div class="d-flex gap-4 justify-content-center">
-      <div id="beneficiaries-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
-        <canvas id="beneficiaries"></canvas>
+    <div wire:ignore class="row justify-content-center">
+      <div class="col-md-6 mb-3">
+        <div wire:ignore id="beneficiaries-container" class="bg-white rounded shadow p-5">
+          <canvas id="beneficiaries"></canvas>
+        </div>
       </div>
 
-      <div id="sex-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
-        <canvas id="sex"></canvas>
+      <div class="col-md-6 mb-3">
+        <div wire:ignore id="sex-container" class="bg-white rounded shadow p-5">
+          <canvas id="sex"></canvas>
+        </div>
       </div>
     </div>
   
-    <div class="d-flex flex-column justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow mb-5" style="width: 100%;">
-      {{-- <div class="w-100 d-flex gap-3 justify-content-end">
-        <div class="d-flex align-items-center gap-2">
-          <label for="first-date">From:</label>
-          <input type="date" wire:model="first_date" id="first-date" class="form-control">
-        </div>
-        <div class="d-flex align-items-center gap-2">
-          <label for="second-date">To:</label>
-          <input type="date" wire:model="second_date" id="second-date" class="form-control">
-        </div>
-      </div> --}}
-      <canvas id="graph-reports"></canvas>
+    <div id="reports-container" class="bg-white rounded shadow p-5 mb-3">
+      <div class="d-flex gap-3 w-100">
+        <button type="button" wire:click="allData" class="btn px-4 {{ $checked === 'all' ? 'btn-secondary' : 'btn-transparent border border-secondary' }} btn-sm">All</button>
+        <button type="button" wire:click="thisYear" class="btn {{ $checked === 'year' ? 'btn-secondary' : 'btn-transparent border border-secondary' }} btn-sm">This year</button>
+        <button type="button" wire:click="thisMonth" class="btn {{ $checked === 'month' ? 'btn-secondary' : 'btn-transparent border border-secondary' }} btn-sm">This month</button>
+        <button type="button" wire:click="thisWeek" class="btn {{ $checked === 'week' ? 'btn-secondary' : 'btn-transparent border border-secondary' }} btn-sm">This week</button>
+      </div>
+      <div wire:ignore class="row">
+        <canvas id="graph-reports"></canvas>
+      </div>
     </div>
-
-    <div class="d-flex justify-content-center align-items-center bg-white position-relative border p-3 rounded shadow" style="width: 50%;">
-      <canvas id="employ-status"></canvas>
+    
+    <div wire:ignore id="employ-status-container" class="row justify-content-center">
+      <div class="col-md-6 bg-white rounded shadow p-5">
+        <div class="row justify-content-center">
+          <canvas id="employ-status"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 
   @push('script')
     <script>
-      window.addEventListener('load', () => {
         const population = document.getElementById('population');
+        const beneficiaries = document.getElementById('beneficiaries');
+        const sex = document.getElementById('sex');
         const employStatus = document.getElementById('employ-status');
         const reports = document.getElementById('graph-reports');
       
-        new Chart(population, {
+        const populationChart = new Chart(population, {
           type: 'bar',
           data: {
             labels: [
@@ -100,33 +109,37 @@
               {
                 label: 'Residents',
                 data: @json($population),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'PWDs',
                 data: @json($pwd),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'Solo Parents',
                 data: @json($soloParent),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'Senior Citizens',
                 data: @json($senior),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'Pregnants',
                 data: @json($pregnant),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
               y: {
                 beginAtZero: true,
@@ -156,7 +169,7 @@
           }
         });
 
-        new Chart(beneficiaries, {
+        const beneficiariesChart = new Chart(beneficiaries, {
           type: 'pie',
           data: {
             labels: [
@@ -173,8 +186,7 @@
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 position: 'top',
@@ -187,7 +199,7 @@
           }
         });
 
-        new Chart(sex, {
+        const sexChart = new Chart(sex, {
           type: 'doughnut',
           data: {
             labels: [
@@ -202,8 +214,7 @@
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 position: 'top',
@@ -216,7 +227,7 @@
           }
         });
   
-        new Chart(employStatus, {
+        const employStatusChart = new Chart(employStatus, {
           type: 'doughnut',
           data: {
             labels: [
@@ -235,6 +246,7 @@
             ],
           },
           options: {
+            maintainAspectRatio: false,
             plugins: {
               title: {
                 display: true,
@@ -244,8 +256,8 @@
           }
         });
   
-        new Chart(reports, {
-          type: 'line',
+        const reportChart = new Chart(reports, {
+          type: 'bar',
           data: {
             labels: [
               '1',
@@ -260,116 +272,80 @@
                 label: 'Vehicle Accidents',
                 data: @json($va),
                 borderWidth: 1,
-                borderColor: '#C0C0C0',
-                backgroundColor: '#C0C0C0',
-                tension: 0.4
+                // borderColor: '#C0C0C0',
+                // backgroundColor: '#C0C0C0',
+                tension: 0.4,
+                borderRadius: 3,
               },
               {
                 label: 'Calamity and Disaster',
                 data: @json($cd),
                 borderWidth: 1,
-                borderColor: '#008080',
-                backgroundColor: '#008080',
-                tension: 0.4
+                // borderColor: '#008080',
+                // backgroundColor: '#008080',
+                tension: 0.4,
+                borderRadius: 3,
               },
               {
                 label: 'Illegal Gambling',
                 data: @json($ig),
                 borderWidth: 1,
-                borderColor: '#FFD700',
-                backgroundColor: '#FFD700',
-                tension: 0.4
+                // borderColor: '#FFD700',
+                // backgroundColor: '#FFD700',
+                tension: 0.4,
+                borderRadius: 3,
               },
               {
                 label: 'Drag Racing',
                 data: @json($dr),
                 borderWidth: 1,
-                borderColor: '#008000',
-                backgroundColor: '#008000',
-                tension: 0.4
+                // borderColor: '#008000',
+                // backgroundColor: '#008000',
+                tension: 0.4,
+                borderRadius: 3,
               },
               {
                 label: 'Stoning of Car',
                 data: @json($sc),
                 borderWidth: 1,
-                borderColor: '#FF6347',
-                backgroundColor: '#FF6347',
-                tension: 0.4
+                // borderColor: '#FF6347',
+                // backgroundColor: '#FF6347',
+                tension: 0.4,
+                borderRadius: 3,
               },
               {
                 label: 'Trouble',
                 data: @json($tr),
                 borderWidth: 1,
-                borderColor: '#9932CC',
-                backgroundColor: '#9932CC',
-                tension: 0.4
+                // borderColor: '#9932CC',
+                // backgroundColor: '#9932CC',
+                tension: 0.4,
+                borderRadius: 3,
               },
               {
                 label: 'Late-Night Karaoke Disturbance',
                 data: @json($lnkd),
                 borderWidth: 1,
-                borderColor: '#1E90FF',
-                backgroundColor: '#1E90FF',
-                tension: 0.4
+                // borderColor: '#1E90FF',
+                // backgroundColor: '#1E90FF',
+                tension: 0.4,
+                borderRadius: 3,
               },
-              {
-                label: 'Community Cleanliness',
-                data: @json($cc),
-                borderWidth: 1,
-                borderColor: '#00FF00',
-                backgroundColor: '#00FF00',
-                tension: 0.4
-              },
-              {
-                label: 'Infrastructure Problems',
-                data: @json($ip),
-                borderWidth: 1,
-                borderColor: '#800080',
-                backgroundColor: '#800080',
-                tension: 0.4
-              },
-              // {
-              //   label: 'Public Safety Concern',
-              //   data: ($psc),
-              //   borderWidth: 1,
-              //   borderColor: '#FF1493',
-              //   backgroundColor: '#FF1493',
-              //   tension: 0.4
-              // },
-              // {
-              //   label: 'Environmental Hazard',
-              //   data: ($eh),
-              //   borderWidth: 1,
-              //   borderColor: '#FFEBCD',
-              //   backgroundColor: '#FFEBCD',
-              //   tension: 0.4
-              // },
-              // {
-              //   label: 'Complaint',
-              //   data: ($cp),
-              //   borderWidth: 1,
-              //   borderColor: '#F0E68C',
-              //   backgroundColor: '#F0E68C',
-              //   tension: 0.4
-              // },
               {
                 label: 'Others',
                 data: @json($others),
                 borderWidth: 1,
-                borderColor: '#FF8C00',
-                backgroundColor: '#FF8C00',
-                tension: 0.4
+                // borderColor: '#FF8C00',
+                // backgroundColor: '#FF8C00',
+                tension: 0.4,
+                borderRadius: 3,
               },
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
               y: {
-                grid: {
-                  display: false,
-                },
                 beginAtZero: true,
                 title: {
                   display: true,
@@ -381,9 +357,6 @@
                 }
               },
               x: {
-                grid: {
-                  display: false,
-                },
                 title: {
                   display: true,
                   text: 'Zone',
@@ -399,7 +372,14 @@
             }
           }
         });
-      });
+
+        window.addEventListener('refresh-report', e => {
+          for($i = 0; $i < 7; $i++){
+            reportChart.data.datasets[$i].data = e.detail.reports[$i];
+          }
+
+          reportChart.update();
+        });
       
     </script>
   @endpush

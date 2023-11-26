@@ -78,7 +78,7 @@ class Profile extends Component
         ]);
 
         $business = Business::find($business->id);
-        $business->biz_name = $this->business_name;
+        // $business->biz_name = $this->business_name;
         $business->biz_address = $this->business_address;
         $business->biz_nature = $this->business_nature;
         $business->lname = $this->last_name;

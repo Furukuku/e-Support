@@ -2,24 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Document;
+use App\Models\User;
 use Illuminate\Console\Command;
 
-class DeleteOldRequestedDocuments extends Command
+class DeleteDeclinedResidentUsers extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'documents:clean';
+    protected $signature = 'users:delete-declined-resident';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Delete unclaimed documents older than a week';
+    protected $description = 'Delete declined resident users.';
 
     /**
      * Execute the console command.
@@ -28,11 +28,11 @@ class DeleteOldRequestedDocuments extends Command
     {
         $week = now()->subWeek();
 
-        Document::where('is_approved', false)
-            ->where('status', 'Pending')
+        User::where('is_approved', false)
+            ->where('decline_msg', '!=', null)
             ->where('created_at', '<', $week)
-            ->delete();
+            ->forceDelete();
 
-        $this->info('Documents older than a week has been deleted.');
+        $this->info('Declined resident users older than a week has been deleted.');
     }
 }

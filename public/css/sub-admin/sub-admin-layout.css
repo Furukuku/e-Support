@@ -38,7 +38,7 @@ body {
   flex-grow: 3;
   transition: margin-left 0.4s ease-out;
   position: fixed;
-  z-index: 2;
+  z-index: 1021;
   top: 0;
   bottom: 0;
 }

@@ -55,17 +55,17 @@
               <label for="current-password">Current Password</label>
               <div class="position-relative">
                 <input wire:model.defer="current_password" class="form-control" id="current-password" type="password" style="padding-right: 35px">
-                @error('current_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-current-password" style="right: 10px;cursor: pointer;"></i>
               </div>
+              @error('current_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="row-4 mb-4">
               <label for="new-password">New Password</label>
               <div class="position-relative">
                 <input wire:model.defer="new_password" class="form-control" id="new-password" type="password" style="padding-right: 35px">
-                @error('new_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-new-password" style="right: 10px;cursor: pointer;"></i>
               </div>
+              @error('new_password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="row-4 mb-4">
               <label for="password-confirmation">Confirm Password</label>

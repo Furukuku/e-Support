@@ -23,6 +23,25 @@ class Ongoing extends Component
 
     public $search = '';
 
+    public $sortBy = 'updated_at';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        $this->sortDirection = $this->sortBy === $field
+            ? $this->reverseSort()
+            : 'desc';
+
+        $this->sortBy = $field;
+    }
+
+    public function reverseSort()
+    {
+        return $this->sortDirection === 'desc'
+            ? 'asc'
+            : 'desc';
+    }
+    
     public function updatingSearch()
     {
         $this->resetPage('ongoingPage');
@@ -89,19 +108,7 @@ class Ongoing extends Component
                     ->orWhere('lname', 'like', '%' . $inner_search . '%');
                 });
             })
-            // ->orderByRaw(
-            //     "CASE
-            //         WHEN report_name = 'Vehicle Accident' THEN 1
-            //         WHEN report_name = 'Trouble' THEN 2
-            //         WHEN report_name = 'Calamity and Disaster' THEN 3
-            //         WHEN report_name = 'Stoning of Car' THEN 4
-            //         WHEN report_name = 'Drag Racing' THEN 5
-            //         WHEN report_name = 'Illegal Gambling' THEN 6
-            //         WHEN report_name = 'Late-Night Karaoke Disturbance' THEN 7
-            //         ELSE 8
-            //     END"
-            // )
-            ->orderBy('updated_at', 'asc')
+            ->orderBy($this->sortBy, $this->sortDirection)
             ->paginate($this->paginate, ['*'], 'ongoingPage');
 
         return view('livewire.sub-admin.reports.ongoing', ['reports' => $reports]);

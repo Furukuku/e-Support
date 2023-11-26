@@ -39,7 +39,13 @@
             <th class="align-middle text-center">Reported by</th>
             <th class="align-middle text-center">Report Type</th>
             <th class="align-middle text-center">Zone</th>
-            <th class="align-middle text-center">Date</th>
+            <th class="align-middle text-center">
+              <span wire:click="sortBy('created_at')" class="me-1 sorting-arrow">
+                <i class="fa-solid fa-arrow-up fa-xs text-secondary {{ $sortBy === 'created_at' && $sortDirection ==='asc' ? 'text-dark' : ''}}"></i>
+                <i class="fa-solid fa-arrow-down fa-xs text-secondary {{ $sortBy === 'created_at' && $sortDirection ==='desc' ? 'text-dark' : ''}}"></i> 
+              </span>
+              Date
+            </th>
             <th class="align-middle text-center">Time</th>
             <th class="align-middle text-center">Action</th>
           </tr>
@@ -69,8 +75,6 @@
               <td class="align-middle text-center">{{ $report->created_at->format('h:i A') }}</td>
               <td class="align-middle text-center">
                 <i class="fa-solid fa-eye mx-1 align-middle view-icon" disabled wire:click="viewReport({{ $report }})" data-bs-toggle="modal" data-bs-target="#viewReport"></i>
-                {{-- <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editReport({{ $report }})" data-bs-toggle="modal" data-bs-target="#updateReport"></i> --}}
-                {{-- <i class="fa-solid fa-box-archive mx-1 align-middle delete-icon text-secondary" wire:click="archiveConfirmation({{ $report }})" data-bs-toggle="modal" data-bs-target="#archiveReport"></i> --}}
               </td>
             </tr>
           @empty

@@ -1,7 +1,27 @@
+:root {
+  --main-theme-color: #0E2C15;
+}
+
 *, 
 *::after, 
 *::before {
   box-sizing: border-box;
+}
+
+.btn-primary {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
+}
+
+.btn-primary:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-primary:disabled {
+  border-color: var(--main-theme-color) !important;
 }
 
 header > div:nth-child(2) > div > img {

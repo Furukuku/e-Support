@@ -150,7 +150,7 @@
     </div>
     <div id="b-sidebar" class="block-sidebar"></div>
     <div class="right-content">
-      <nav class="navbar navbar-dark navbar-expand-lg nav-bg rounded">
+      <nav class="navbar navbar-dark sticky-top navbar-expand-lg nav-bg rounded">
         <div class="container-fluid">
           <button id="toggle-sidebar" class="navbar-brand bg-transparent border-0">
             <span class="material-symbols-outlined">menu</span>

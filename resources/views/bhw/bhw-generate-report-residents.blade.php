@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>e-Support | Generate-report</title>
+  <title>e-Support</title>
 
   <link rel="stylesheet" href="{{ asset('css/generated-reports/residents.css') }}">
 
@@ -19,8 +19,9 @@
     <button type="button" id="print-btn" class="btn btn-primary"><span class="material-symbols-outlined align-middle">print</span></button>
   </div>
 
-  <div id="printing-file" class="container bg-white border rounded shadow px-4 pt-2 pb-5" style="width: 800px">
-    <header>
+  <div id="printing-file" class="container bg-white border rounded shadow px-5 pt-4 pb-5" style="width: 800px">
+    <header class="position-relative pt-2">
+      <img src="{{ asset('images/logos/brgy-nancayasan-logo-removebg-enhanced.png') }}" class="position-absolute" alt="logo" style="height: 6rem; left: 0; top: 10px;">
       <p class="text-center m-0">CITY OF URDANETA</p>
       <p class="text-center">PROVINCE OF PANGASINAN</p>
       <h5 class="text-center fw-bold">AGE AND SEX DISAGGREGATED (80 YEARS OLD & ABOVE)</h5>

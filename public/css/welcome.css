@@ -13,11 +13,21 @@ html {
 }
 
 .website-header {
-  background-image: url('../images/welcome-bg.png');
+  min-height: 30rem;
+}
+
+.welcome-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../images/welcome-bg2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 30rem;
+  filter: blur(3px);
+  z-index: -1;
 }
 
 .readmore-btn {

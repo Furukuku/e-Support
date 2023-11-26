@@ -17,41 +17,6 @@
   @livewireStyles
 </head>
 <body>
-  {{-- <nav class="navbar navbar-expand-lg nav-bg">
-    <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1 text-white">e-Support</span>
-      <ul class="nav nav-underline justify-content-end">
-        <li class="nav-item px-4">
-          <a class="nav-link text-white {{ str_contains(Route::currentRouteName(), 'bhw.residents') ? 'active' : '' }}" aria-current="page" href="{{ route('bhw.residents') }}">Residents</a>
-        </li>
-        <li class="nav-item px-4">
-          <a class="nav-link text-white {{ str_contains(Route::currentRouteName(), 'bhw.patients') ? 'active' : '' }}" href="{{ route('bhw.patients') }}">Patients</a>
-        </li>
-        <li class="nav-item px-4">
-          <a class="nav-link text-white {{ str_contains(Route::currentRouteName(), 'bhw.resident-accounts') ? 'active' : '' }}" aria-current="page" href="{{ route('bhw.resident-accounts') }}">Resident Accounts</a>
-        </li>
-        <li class="nav-item px-2">
-          <div class="btn-group">
-            <button type="button" class="btn btn-dark bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="username">{{ auth()->user()->username }}</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li class="dropdown-item p-0">
-                <a href="{{ route('bhw.account') }}" class="btn bg-transparent text-start border-0 w-100" role="button">Account</a>
-              </li>
-              <li class="dropdown-item p-0">
-                <form action="{{ route('bhw.logout') }}" method="POST">
-                  @csrf
-                  <button type="submit" class="btn bg-transparent text-start border-0 w-100">Logout</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav> --}}
-
   <div class="main-container">
     <div id="side-bar" class="pb-5 sidebar scrollbar rounded-end">
       <h2 class="text-center text-white mt-3 mb-4">e-Support<span id="sb-close" class="sidebar-close">&times;</span></h2>
@@ -154,7 +119,7 @@
     </div>
     <div id="b-sidebar" class="block-sidebar"></div>
     <div class="right-content">
-      <nav class="navbar navbar-dark navbar-expand-lg nav-bg rounded">
+      <nav class="navbar navbar-dark navbar-expand-lg nav-bg rounded sticky-top">
         <div class="container-fluid">
           <button id="toggle-sidebar" class="navbar-brand bg-transparent border-0">
             <span class="material-symbols-outlined">menu</span>

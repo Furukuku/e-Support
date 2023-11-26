@@ -13,18 +13,343 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    // public $first_date, $second_date;
+    public $checked = 'all';
 
-    public function mount()
+    public function allData()
     {
-        // $date = Report::where('is_exist', true)
-        //     ->select('created_at')
-        //     ->orderBy('created_at', 'asc')
-        //     ->first();
+        $va = [];
+        $cd = [];
+        $ig = [];
+        $dr = [];
+        $sc = [];
+        $tr = [];
+        $lnkd = [];
+        $others = [];
 
-        // $this->first_date = $date->created_at;
-        // $this->second_date = now();
+        for($i = 1; $i <= 6; $i++){
+            $va_temp = Report::where('report_name', 'Vehicle Accident')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
 
+            $cd_temp = Report::where('report_name', 'Calamity and Disaster')    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $ig_temp = Report::where('report_name', 'Illegal Gambling')    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $dr_temp = Report::where('report_name', 'Drag Racing')    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $sc_temp = Report::where('report_name', 'Stoning of Car')    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $tr_temp = Report::where('report_name', 'Trouble')    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $others_temp = Report::where('report_name', '!=','Vehicle Accident')
+                ->where('report_name', '!=', 'Calamity and Disaster')
+                ->where('report_name', '!=', 'Illegal Gambling')
+                ->where('report_name', '!=', 'Drag Racing')
+                ->where('report_name', '!=', 'Stoning of Car')
+                ->where('report_name', '!=', 'Trouble')
+                ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            array_push($va, $va_temp);
+            array_push($cd, $cd_temp);
+            array_push($ig, $ig_temp);
+            array_push($dr, $dr_temp);
+            array_push($sc, $sc_temp);
+            array_push($tr, $tr_temp);
+            array_push($lnkd, $lnkd_temp);
+            array_push($others, $others_temp);
+        }
+
+        $this->dispatchBrowserEvent('refresh-report', [
+            'reports' => [$va, $cd, $ig, $dr, $sc, $tr, $lnkd, $others]
+        ]);
+
+        $this->checked = 'all';
+    }
+
+    public function thisYear()
+    {
+        $currentYear = now()->year;
+        $va = [];
+        $cd = [];
+        $ig = [];
+        $dr = [];
+        $sc = [];
+        $tr = [];
+        $lnkd = [];
+        $others = [];
+
+        for($i = 1; $i <= 6; $i++){
+            $va_temp = Report::where('report_name', 'Vehicle Accident')
+                ->whereYear('created_at', $currentYear)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $cd_temp = Report::where('report_name', 'Calamity and Disaster')
+                ->whereYear('created_at', $currentYear)    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $ig_temp = Report::where('report_name', 'Illegal Gambling')
+                ->whereYear('created_at', $currentYear)    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $dr_temp = Report::where('report_name', 'Drag Racing')
+                ->whereYear('created_at', $currentYear)    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $sc_temp = Report::where('report_name', 'Stoning of Car')
+                ->whereYear('created_at', $currentYear)    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $tr_temp = Report::where('report_name', 'Trouble')
+                ->whereYear('created_at', $currentYear)    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
+                ->whereYear('created_at', $currentYear)    
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $others_temp = Report::where('report_name', '!=','Vehicle Accident')
+                ->where('report_name', '!=', 'Calamity and Disaster')
+                ->where('report_name', '!=', 'Illegal Gambling')
+                ->where('report_name', '!=', 'Drag Racing')
+                ->where('report_name', '!=', 'Stoning of Car')
+                ->where('report_name', '!=', 'Trouble')
+                ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
+                ->whereYear('created_at', $currentYear)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            array_push($va, $va_temp);
+            array_push($cd, $cd_temp);
+            array_push($ig, $ig_temp);
+            array_push($dr, $dr_temp);
+            array_push($sc, $sc_temp);
+            array_push($tr, $tr_temp);
+            array_push($lnkd, $lnkd_temp);
+            array_push($others, $others_temp);
+        }
+
+        $this->dispatchBrowserEvent('refresh-report', [
+            'reports' => [$va, $cd, $ig, $dr, $sc, $tr, $lnkd, $others]
+        ]);
+
+        $this->checked = 'year';
+    }
+
+    public function thisMonth()
+    {
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+        $va = [];
+        $cd = [];
+        $ig = [];
+        $dr = [];
+        $sc = [];
+        $tr = [];
+        $lnkd = [];
+        $others = [];
+
+        for($i = 1; $i <= 6; $i++){
+            $va_temp = Report::where('report_name', 'Vehicle Accident')
+                ->whereYear('created_at', $currentYear)
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $cd_temp = Report::where('report_name', 'Calamity and Disaster')
+                ->whereYear('created_at', $currentYear)
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $ig_temp = Report::where('report_name', 'Illegal Gambling')
+                ->whereYear('created_at', $currentYear)  
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $dr_temp = Report::where('report_name', 'Drag Racing')
+                ->whereYear('created_at', $currentYear)  
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $sc_temp = Report::where('report_name', 'Stoning of Car')
+                ->whereYear('created_at', $currentYear)    
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $tr_temp = Report::where('report_name', 'Trouble')
+                ->whereYear('created_at', $currentYear)    
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
+                ->whereYear('created_at', $currentYear)    
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $others_temp = Report::where('report_name', '!=','Vehicle Accident')
+                ->where('report_name', '!=', 'Calamity and Disaster')
+                ->where('report_name', '!=', 'Illegal Gambling')
+                ->where('report_name', '!=', 'Drag Racing')
+                ->where('report_name', '!=', 'Stoning of Car')
+                ->where('report_name', '!=', 'Trouble')
+                ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
+                ->whereYear('created_at', $currentYear)
+                ->whereMonth('created_at', $currentMonth)
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            array_push($va, $va_temp);
+            array_push($cd, $cd_temp);
+            array_push($ig, $ig_temp);
+            array_push($dr, $dr_temp);
+            array_push($sc, $sc_temp);
+            array_push($tr, $tr_temp);
+            array_push($lnkd, $lnkd_temp);
+            array_push($others, $others_temp);
+        }
+
+        $this->dispatchBrowserEvent('refresh-report', [
+            'reports' => [$va, $cd, $ig, $dr, $sc, $tr, $lnkd, $others]
+        ]);
+
+        $this->checked = 'month';
+    }
+
+    public function thisWeek()
+    {
+        $startOfWeek = now()->startOfWeek();
+        $endOfWeek = now()->endOfWeek();
+        $va = [];
+        $cd = [];
+        $ig = [];
+        $dr = [];
+        $sc = [];
+        $tr = [];
+        $lnkd = [];
+        $others = [];
+
+        for($i = 1; $i <= 6; $i++){
+            $va_temp = Report::where('report_name', 'Vehicle Accident')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $cd_temp = Report::where('report_name', 'Calamity and Disaster')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $ig_temp = Report::where('report_name', 'Illegal Gambling')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $dr_temp = Report::where('report_name', 'Drag Racing')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $sc_temp = Report::where('report_name', 'Stoning of Car')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $tr_temp = Report::where('report_name', 'Trouble')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            $others_temp = Report::where('report_name', '!=','Vehicle Accident')
+                ->where('report_name', '!=', 'Calamity and Disaster')
+                ->where('report_name', '!=', 'Illegal Gambling')
+                ->where('report_name', '!=', 'Drag Racing')
+                ->where('report_name', '!=', 'Stoning of Car')
+                ->where('report_name', '!=', 'Trouble')
+                ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
+                ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                ->where('zone', $i)
+                ->where('is_exist', true)
+                ->count();
+
+            array_push($va, $va_temp);
+            array_push($cd, $cd_temp);
+            array_push($ig, $ig_temp);
+            array_push($dr, $dr_temp);
+            array_push($sc, $sc_temp);
+            array_push($tr, $tr_temp);
+            array_push($lnkd, $lnkd_temp);
+            array_push($others, $others_temp);
+        }
+
+        $this->dispatchBrowserEvent('refresh-report', [
+            'reports' => [$va, $cd, $ig, $dr, $sc, $tr, $lnkd, $others]
+        ]);
+
+        $this->checked = 'week';
     }
 
     public function render()
@@ -134,9 +459,6 @@ class Dashboard extends Component
 
         array_push($employStatus, $employed, $unemployed);
 
-
-        // $businessUsers = Business::count();
-
         $va = [];
         $cd = [];
         $ig = [];
@@ -144,86 +466,43 @@ class Dashboard extends Component
         $sc = [];
         $tr = [];
         $lnkd = [];
-        $cc = [];
-        $ip = [];
-        // $psc = [];
-        // $eh = [];
-        // $cp = [];
         $others = [];
 
         for($i = 1; $i <= 6; $i++){
             $va_temp = Report::where('report_name', 'Vehicle Accident')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $cd_temp = Report::where('report_name', 'Calamity and Disaster')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $ig_temp = Report::where('report_name', 'Illegal Gambling')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $dr_temp = Report::where('report_name', 'Drag Racing')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $sc_temp = Report::where('report_name', 'Stoning of Car')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $tr_temp = Report::where('report_name', 'Trouble')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             $lnkd_temp = Report::where('report_name', 'Late-Night Karaoke Disturbance')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
-
-            $cc_temp = Report::where('report_name', 'Community Cleanliness')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            $ip_temp = Report::where('report_name', 'Infrastructure Problems')
-                ->where('zone', $i)
-                ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
-                ->count();
-
-            // $psc_temp = Report::where('report_name', 'Public Safety Concern')
-            //     ->where('zone', $i)
-            //     ->where('is_exist', true)
-            //     ->whereBetween('created_at', [$this->first_date, $this->second_date])
-            //     ->count();
-
-
-            // $eh_temp = Report::where('report_name', 'Environmental Hazard')
-            //     ->where('zone', $i)
-            //     ->where('is_exist', true)
-            //     ->whereBetween('created_at', [$this->first_date, $this->second_date])
-            //     ->count();
-
-            // $cp_temp = Report::where('report_name', 'Complaint')
-            //     ->where('zone', $i)
-            //     ->where('is_exist', true)
-            //     ->whereBetween('created_at', [$this->first_date, $this->second_date])
-            //     ->count();
 
             $others_temp = Report::where('report_name', '!=','Vehicle Accident')
                 ->where('report_name', '!=', 'Calamity and Disaster')
@@ -232,14 +511,8 @@ class Dashboard extends Component
                 ->where('report_name', '!=', 'Stoning of Car')
                 ->where('report_name', '!=', 'Trouble')
                 ->where('report_name', '!=', 'Late-Night Karaoke Disturbance')
-                ->where('report_name', '!=', 'Community Cleanliness')
-                ->where('report_name', '!=', 'Infrastructure Problems')
-                // ->where('report_name', '!=', 'Public Safety Concern')
-                // ->where('report_name', '!=', 'Environmental Hazard')
-                // ->where('report_name', '!=', 'Complaint')
                 ->where('zone', $i)
                 ->where('is_exist', true)
-                // ->whereBetween('created_at', [$this->first_date, $this->second_date])
                 ->count();
 
             array_push($va, $va_temp);
@@ -249,11 +522,6 @@ class Dashboard extends Component
             array_push($sc, $sc_temp);
             array_push($tr, $tr_temp);
             array_push($lnkd, $lnkd_temp);
-            array_push($cc, $cc_temp);
-            array_push($ip, $ip_temp);
-            // array_push($psc, $psc_temp);
-            // array_push($eh, $eh_temp);
-            // array_push($cp, $cp_temp);
             array_push($others, $others_temp);
         }
 
@@ -270,7 +538,6 @@ class Dashboard extends Component
             'total_house_holds' => $total_house_holds->count(),
             'total_families' => $total_families,
             'employStatus' => $employStatus,
-            // 'businessUsers' => $businessUsers,
             'va' => $va,
             'cd' => $cd,
             'ig' => $ig,
@@ -278,11 +545,6 @@ class Dashboard extends Component
             'sc' => $sc,
             'tr' => $tr,
             'lnkd' => $lnkd,
-            'cc' => $cc,
-            'ip' => $ip,
-            // 'psc' => $psc,
-            // 'eh' => $eh,
-            // 'cp' => $cp,
             'others' => $others,
         ]);
     }

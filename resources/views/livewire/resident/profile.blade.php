@@ -138,17 +138,17 @@
           <label class="text-secondary" for="current-pass"><small>Current Password</small></label>
           <div class="position-relative">
             <input type="password" id="current-pass" wire:model.defer="current_password" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
-            @error('current_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
             <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-current-password" style="right: 10px;cursor: pointer;"></i>
           </div>
+          @error('current_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
         </div>
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="new-pass"><small>New Password</small></label>
           <div class="position-relative">
             <input type="password" id="new-pass" wire:model.defer="new_password" class="form-control shadow-sm rounded-3" style="padding-right: 35px">
-            @error('new_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
             <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-new-password" style="right: 10px;cursor: pointer;"></i>
           </div>
+          @error('new_password')<span class="error text-danger px-0" style="font-size: 0.8rem">{{ $message }}</span>@enderror
         </div>
         <div class="col-md-4 mb-2">
           <label class="text-secondary" for="pass-confirmation"><small>Confirm Password</small></label>

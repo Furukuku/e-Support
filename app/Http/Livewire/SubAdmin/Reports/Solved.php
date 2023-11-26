@@ -23,6 +23,25 @@ class Solved extends Component
 
     public $search = '';
 
+    public $sortBy = 'updated_at';
+    public $sortDirection = 'desc';
+
+    public function sortBy($field)
+    {
+        $this->sortDirection = $this->sortBy === $field
+            ? $this->reverseSort()
+            : 'desc';
+
+        $this->sortBy = $field;
+    }
+
+    public function reverseSort()
+    {
+        return $this->sortDirection === 'desc'
+            ? 'asc'
+            : 'desc';
+    }
+
     public function updatingSearch()
     {
         $this->resetPage('solvedPage');
@@ -43,7 +62,7 @@ class Solved extends Component
                     ->orWhere('lname', 'like', '%' . $inner_search . '%');
                 });
             })
-            ->orderBy('updated_at', 'desc')
+            ->orderBy($this->sortBy, $this->sortDirection)
             ->paginate($this->paginate, ['*'], 'solvedPage');
 
         return view('livewire.sub-admin.reports.solved', ['reports' => $reports]);

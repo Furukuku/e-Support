@@ -55,9 +55,9 @@
                 <label for="add-password">Password</label>
                 <div class="position-relative">
                   <input wire:model.defer="password" id="add-password" type="password" class="form-control" style="padding-right: 35px">
-                  @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                   <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 10px;cursor: pointer;"></i>
                 </div>
+                @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
               </div>
               <div class="row-auto mb-3">
                 <label for="add-confirm-password">Confirm Password</label>

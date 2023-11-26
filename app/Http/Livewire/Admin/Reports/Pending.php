@@ -23,6 +23,25 @@ class Pending extends Component
 
     public $search = '';
 
+    public $sortBy = 'created_at';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        $this->sortDirection = $this->sortBy === $field
+            ? $this->reverseSort()
+            : 'desc';
+
+        $this->sortBy = $field;
+    }
+
+    public function reverseSort()
+    {
+        return $this->sortDirection === 'desc'
+            ? 'asc'
+            : 'desc';
+    }
+
     public function updatingSearch()
     {
         $this->resetPage('pendingPage');
@@ -101,7 +120,7 @@ class Pending extends Component
                     ELSE 8
                 END"
             )
-            ->orderBy('created_at', 'asc')
+            ->orderBy($this->sortBy, $this->sortDirection)
             ->paginate($this->paginate, ['*'], 'pendingPage');
 
         return view('livewire.admin.reports.pending', ['reports' => $reports]);

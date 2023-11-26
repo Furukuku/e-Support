@@ -19,7 +19,13 @@ class Message extends Component
 
     public $search = '';
 
-    public $message_content, $password;
+    public $message_content;
+    public $password;
+
+    public function mount()
+    {
+        $this->message_content = 'Brgy. Nancayasan ' . '(' . now()->format('d M Y') . ')';
+    }
 
     public function updatingSearch()
     {
@@ -34,6 +40,12 @@ class Message extends Component
             'message_content',
             'password'
         );
+    }
+
+    public function closeModalPass()
+    {
+        $this->reset('password');
+        $this->resetErrorBag(['password']);
     }
 
     public function confirmSend()

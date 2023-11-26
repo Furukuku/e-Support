@@ -20,7 +20,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header border-0 pb-0 justify-content-end">
-          <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
+          <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModalPass" aria-label="Close">
             cancel
           </span>
         </div>
@@ -31,7 +31,11 @@
             </span>
           </div>
           <h4 class="text-center mb-4">Password</h4>
-          <input type="password" class="form-control" wire:model.defer="password" placeholder="Enter your password...">
+          <p class="text-center"><span class="fw-semibold">Note: </span>This will broadcast to all resident users!</p>
+          <div class="position-relative">
+            <input type="password" id="password" class="form-control" wire:model.defer="password" placeholder="Enter your password..." style="padding-right: 35px">
+            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 10px;cursor: pointer;"></i>
+          </div>
           @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="modal-footer d-flex justify-content-center border-0">

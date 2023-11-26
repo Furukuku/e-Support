@@ -128,9 +128,9 @@
               <label class="input-labels" for="resident-password">Password <small class="fw-normal">(Must have uppercase, lowercase, and number)</small></label>
               <div class="position-relative">
                 <input wire:model.defer="password" id="resident-password" type="password" class="form-control" style="padding-right: 35px">
-                @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
                 <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 10px;cursor: pointer;"></i>
               </div>
+              @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="row-auto mb-3">
               <label class="input-labels" for="resident-confirm-password">Confirm Password</label>
@@ -211,6 +211,8 @@
       <p class="mt-5 text-center sign-up-link">Already have an account? <a href="{{ route('resident.login') }}">Sign in</a></p>
     </div>
   </div>
-  <div class="col-5 reg-resident-bg"></div>
+  <div class="col-5 reg-resident-bg">
+    <div></div>
+  </div>
 
 </div>

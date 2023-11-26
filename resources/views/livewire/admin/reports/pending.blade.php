@@ -39,7 +39,13 @@
             <th class="align-middle text-center">Reported by</th>
             <th class="align-middle text-center">Report Type</th>
             <th class="align-middle text-center">Zone</th>
-            <th class="align-middle text-center">Date</th>
+            <th class="align-middle text-center">
+              <span wire:click="sortBy('created_at')" class="me-1 sorting-arrow">
+                <i class="fa-solid fa-arrow-up fa-xs text-secondary {{ $sortBy === 'created_at' && $sortDirection ==='asc' ? 'text-dark' : ''}}"></i>
+                <i class="fa-solid fa-arrow-down fa-xs text-secondary {{ $sortBy === 'created_at' && $sortDirection ==='desc' ? 'text-dark' : ''}}"></i> 
+              </span>
+              Date
+            </th>
             <th class="align-middle text-center">Time</th>
             <th class="align-middle text-center">Action</th>
           </tr>

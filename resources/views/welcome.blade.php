@@ -2,7 +2,8 @@
 
 @section('content')
 
-  <header class="d-flex w-100 px-0 py-4 website-header">
+  <header class="d-flex w-100 px-0 py-4 position-relative website-header">
+    <div class="welcome-bg"></div>
     <div class="w-50 d-flex justify-content-center align-items-center">
       <img src="{{ asset('images/logos/brgy-nancayasan-logo-removebg-enhanced.png') }}" alt="logo" style="height: 15rem;">
     </div>
@@ -27,7 +28,7 @@
           <div class="swiper-wrapper mb-3">
             @forelse ($officials as $official)
               <div class="swiper-slide shadow rounded">
-                <div class="w-100" style="height: 200px;">
+                <div class="w-100" style="height: 290px;">
                   <img class="w-100 h-100 object-fit-cover rounded-top" src="{{ Storage::url($official->display_img) }}" alt="official">
                 </div>
                 <div class="w-100 p-2">

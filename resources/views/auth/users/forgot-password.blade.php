@@ -3,7 +3,8 @@
 @section('users.auth')
 
   <div class="bg-light d-flex justify-content-center align-items-center forgot-pass-bg" style="height: 100vh;">
-    <div class="p-5 rounded shadow border bg-white" style="width: 30rem;">
+    <div class="forgot-pass-image"></div>
+    <div class="p-5 rounded shadow border bg-white z-2" style="width: 30rem;">
       @if (session('status'))
         <div class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert">
           <p class="mb-0">{{ session('status') }}</p>

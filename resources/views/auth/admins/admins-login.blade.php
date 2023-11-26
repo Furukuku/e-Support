@@ -31,26 +31,16 @@
         <div class="row mb-3">
           <label for="username" class="">Username</label>
           <div class="col-md-12">
-            <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autofocus>
-
-            @error('username')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            <input type="text" id="username" class="form-control" name="username" value="{{ old('username') }}" autofocus>
+            @error('username') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
           </div>
         </div>
         <div class="row mb-4">
           <label for="password" class="">Password</label>
           <div class="col-md-12 position-relative">
-            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" style="padding-right: 35px">
-
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-            <i class="fa-solid fa-eye d-none position-absolute top-50 translate-middle-y" id="show-password" style="right: 20px;cursor: pointer;"></i>
+            <i class="fa-solid fa-eye d-none position-absolute" id="show-password" style="top: 12px;right: 20px;cursor: pointer;"></i>
+            <input type="password" id="password" class="form-control" name="password" style="padding-right: 35px">
+            @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
           </div>
         </div>
         <div class="row">

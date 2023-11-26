@@ -45,17 +45,23 @@
       </div>
     </div>
   
-    <div id="population-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 ps-2 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 100%;">
-      <canvas id="population"></canvas>
+    <div class="bg-white rounded shadow p-5 mb-3">
+      <div wire:ignore id="population-container" class="row">
+        <canvas id="population"></canvas>
+      </div>
     </div>
   
-    <div class="d-flex gap-4 justify-content-center">
-      <div id="beneficiaries-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
-        <canvas id="beneficiaries"></canvas>
+    <div wire:ignore class="row justify-content-center">
+      <div class="col-md-6 mb-3">
+        <div wire:ignore id="beneficiaries-container" class="bg-white rounded shadow p-5">
+          <canvas id="beneficiaries"></canvas>
+        </div>
       </div>
 
-      <div id="sex-container" class="d-flex justify-content-center align-items-center bg-white position-relative border p-5 rounded shadow mb-5 py-auto mx-auto" style="height: 80vh; width: 50%;">
-        <canvas id="sex"></canvas>
+      <div class="col-md-6 mb-3">
+        <div wire:ignore id="sex-container" class="bg-white rounded shadow p-5">
+          <canvas id="sex"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -82,27 +88,32 @@
               {
                 label: 'Residents',
                 data: @json($population),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'Males',
                 data: @json($male),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'Females',
                 data: @json($female),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'PWDs',
                 data: @json($pwd),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'Solo Parents',
                 data: @json($soloParent),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
               {
                 label: 'Senior Citizens',
@@ -112,13 +123,13 @@
               {
                 label: 'Pregnants',
                 data: @json($pregnant),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 3,
               },
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
               y: {
                 beginAtZero: true,
@@ -165,8 +176,7 @@
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 position: 'top',
@@ -195,8 +205,7 @@
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 position: 'top',

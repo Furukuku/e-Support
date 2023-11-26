@@ -3,7 +3,9 @@
 @section('users.auth')
 
   <div class="d-flex w-100 justify-content-between login-container">
-    <div class="w-50 nancayasan-img"></div>
+    <div class="w-50 position-relative nancayasan-img">
+      <div></div>
+    </div>
 
     <div class="w-50 d-flex justify-content-center align-items-center py-4 position-relative login-form-container">
       {{-- <a href="{{ route('welcome') }}" class="text-dark back-btn">
@@ -53,19 +55,15 @@
             @endif
     
             <div class="form-floating mb-2">
-              <input type="text" id="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Enter username" autofocus>
+              <input type="text" id="username" class="form-control" name="username" value="{{ old('username') }}" placeholder="Enter username" autofocus>
               <label for="username" class="">Username</label>
-              @error('username')
-                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
+              @error('username') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="form-floating mb-2 position-relative">
               <i class="fa-solid fa-eye d-none position-absolute" id="show-password" style="top: 30px; right: 10px;cursor: pointer;"></i>
-              <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter password" style="padding-right: 35px">
+              <input type="password" id="password" class="form-control" name="password" placeholder="Enter password" style="padding-right: 35px">
               <label for="password" class="">Password</label>
-              @error('password')
-                <span class="invalid-feedback" role="alert">{{ $message }}</span>
-              @enderror
+              @error('password') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="d-flex justify-content-end mt-0 mb-3">
               <a href="{{ route('users.forgot-password') }}" class="text-dark forgot-pass"><small>Forgot Password?</small></a>
