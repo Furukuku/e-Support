@@ -118,15 +118,15 @@ html {
 
 .program-anchor {
   display: block;
-  height: 60px; /*same height as header*/
-  margin-top: -60px; /*same height as header*/
+  height: 70px; /*same height as header*/
+  margin-top: -70px; /*same height as header*/
   visibility: hidden;
 }
 
 .places-anchor {
   display: block;
-  height: 60px; /*same height as header*/
-  margin-top: -60px; /*same height as header*/
+  height: 70px; /*same height as header*/
+  margin-top: -70px; /*same height as header*/
   visibility: hidden;
 }
 

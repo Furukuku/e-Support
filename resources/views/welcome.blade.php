@@ -47,7 +47,7 @@
       {{-- Programs --}}
       <span id="programs" class="program-anchor"></span>
       <div class="container px-3">
-        <div class="row pt-4 pb-2">
+        <div class="row pt-3 pb-2">
           <h3 class="text-center">News & Events</h3>
         </div>
         <div class="row justify-content-center">
@@ -84,7 +84,7 @@
       {{-- Places --}}
       <span id="places" class="places-anchor"></span>
       <div class="container px-3">
-        <div class="row pt-4 pb-2">
+        <div class="row pt-3 pb-2">
           <h3 class="text-center">Places</h3>
         </div>
         <div class="row justify-content-center">
