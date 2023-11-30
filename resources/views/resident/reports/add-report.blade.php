@@ -36,8 +36,8 @@
               <option value="Trouble" {{ old('kind_of_report') == 'Trouble' ? 'selected' : '' }}>Trouble</option>
               <option value="Late-Night Karaoke Disturbance" {{ old('kind_of_report') == 'Late-Night Karaoke Disturbance' ? 'selected' : '' }}>Late-Night Karaoke Disturbance</option>
               {{-- <option value="Community Cleanliness" {{ old('kind_of_report') == 'Community Cleanliness' ? 'selected' : '' }}>Community Cleanliness</option>
-              <option value="Infrastructure Problems" {{ old('kind_of_report') == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option>
-              <option value="Others" {{ old('kind_of_report') == 'Others' ? 'selected' : '' }}>Others</option> --}}
+              <option value="Infrastructure Problems" {{ old('kind_of_report') == 'Infrastructure Problems' ? 'selected' : '' }}>Infrastructure Problems</option> --}}
+              <option value="Others" {{ old('kind_of_report') == 'Others' ? 'selected' : '' }}>Others</option>
             </select>
             @error('kind_of_report') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             <input type="text" id="other" class="form-control mt-2 d-none" value="{{ old('others') }}" name="others" placeholder="Please specify your report here...">

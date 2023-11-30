@@ -751,6 +751,11 @@ label[for="proof"] {
   .chatbot-close-btn {
     display: block !important;
   }
+  
+  .back-btn {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
 }
 
 

@@ -19,10 +19,10 @@
                       <div class="h-100" style="width: 60%;">
                         <div class="card-body h-100 d-flex flex-column justify-content-between">
                           <div class="">
-                            <h5 class="card-title">{{ $job->title }}</h5>
+                            <h5 class="card-title text-truncate">{{ $job->title }}</h5>
                             <p class="card-text text-truncate">{{ $job->business->biz_name }}</p>
                           </div>
-                          <p class="card-text"><small class="text-body-secondary">{{ $job->location }}</small></p>
+                          <p class="card-text text-truncate"><small class="text-body-secondary">{{ $job->location }}</small></p>
                         </div>
                       </div>
                     </div>
@@ -40,7 +40,7 @@
       </div>
     @endif
   
-    <div class="d-flex justify-content-between align-items-center py-4 px-5 {{ $jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true ? 'my-3' : 'mb-5' }} bg-success bg-opacity-25 home-middle">
+    <div class="d-flex justify-content-between align-items-center py-4 px-5 {{ $jobs->count() > 0 && auth()->guard('web')->user()->is_employed == true ? 'my-3' : 'mb-3' }} bg-success bg-opacity-25 home-middle">
       <div class="d-flex gap-3 flex-row align-items-center home-middle-texts">
         <h5 class="m-0 align-center">Where do you want to go?</h5>
         <p class="m-0 align-center">Explore some places around Barangay Nancayasan.</p>

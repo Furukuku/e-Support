@@ -1,5 +1,13 @@
 @extends('resident.resident-layout.resident-app')
 
+@push('page-name')
+  <style>
+    :root {
+      --page-name: 'PLACE';
+    }
+  </style>
+@endpush
+
 @section('content')
 
 <div class="mt-5 py-3">
@@ -10,7 +18,7 @@
         <img class="rounded-top w-100 object-fit-cover" src="{{ Storage::url($place->display_img) }}" style="height: 20rem;" alt="image">
       </div>
     @endif
-    <div class="d-flex justify-content-between align-items-center p-4">
+    <div class="d-flex justify-content-between gap-3 align-items-center p-4">
       <div>
         <h4 class="text-break">{{ $place->name }}</h4>
         <p class="m-0 text-secondary text-break"><small>{{ $place->location }}</small></p>
@@ -24,7 +32,7 @@
   <div class="container rounded bg-white p-4 mb-3 border shadow-sm">
     <div class="text-wrap">
       <label class="form-label fw-bold">Description</label>
-      <p class="text-break m-0" style="text-indent: 3rem">{{ $place->description }}</p>
+      <p class="text-break m-0">{{ $place->description }}</p>
     </div>
   </div>
 

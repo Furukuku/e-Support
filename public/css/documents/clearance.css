@@ -8,6 +8,22 @@ h3 {
   font-family: 'Times New Roman', Times, serif;
 }
 
+.print-btn {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
+}
+
+.print-btn:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.print-btn:disabled {
+  border-color: var(--main-theme-color) !important;
+}
+
 .confirm-fs {
   font-size: 1rem;
 }
@@ -25,7 +41,6 @@ p {
 }
 
 .print-btn {
-  background-color: #432344 !important;
   border: none !important;
 }
 

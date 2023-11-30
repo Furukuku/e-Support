@@ -13,7 +13,7 @@
         </p>
       </div>
       <div class="d-flex justify-content-center mb-5">
-        <div>
+        <div class="w-100">
           <h2 class="m-0">{{ $place->name }}</h2>
           <p>{{ $place->type }}</p>
           <p class="">{!! nl2br(e($place->description)) !!}</p>

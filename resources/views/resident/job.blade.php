@@ -18,7 +18,7 @@
           <img class="rounded-top w-100 object-fit-cover" src="{{ Storage::url($job->business_img) }}" style="height: 20rem;" alt="image">
         </div>
       @endif
-      <div class="d-flex justify-content-between p-4">
+      <div class="d-flex justify-content-between gap-3 p-4">
         <div>
           <img class="border rounded-circle object-fit-cover" src="{{ Storage::url($job->business->profile) }}" style="height: 5rem; width: 5rem" alt="profile_img">
           <h5 class="mb-4 text-break">{{ $job->business->biz_name }}</h5>

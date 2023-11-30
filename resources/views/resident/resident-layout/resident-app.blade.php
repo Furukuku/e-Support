@@ -124,7 +124,7 @@
         @if (!is_null(App\Models\BarangayInfo::first()) && App\Models\BarangayInfo::first()->family_profiling == true)
           <li class="pb-3">
             <a href="{{ route('resident.family-profile') }}" class="d-flex align-items-center {{ str_contains(Route::currentRouteName(), 'resident.family-profile') ? 'text-success' : 'main-color' }}">
-              <span class="material-symbols-outlined">manage_accounts</span>
+              <span class="material-symbols-outlined">family_restroom</span>
               <span class="ps-2">Family Profile</span>
             </a>
           </li>

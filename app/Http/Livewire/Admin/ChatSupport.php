@@ -29,7 +29,7 @@ class ChatSupport extends Component
     public function addTag()
     {
         $this->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['unique:chat_bot_tags,tag', 'required', 'string', 'max:255'],
         ]);
 
         ChatBotTag::create([
@@ -50,7 +50,7 @@ class ChatSupport extends Component
     public function updateTag()
     {
         $this->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['unique:chat_bot_tags,tag,' . $this->tag_id, 'required', 'string', 'max:255'],
         ]);
 
         $tag = ChatBotTag::find($this->tag_id);

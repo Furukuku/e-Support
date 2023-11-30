@@ -42,7 +42,7 @@ class Responses extends Component
     public function addResponse()
     {
         $this->validate([
-            'response' => ['required', 'string', 'max:255'],
+            'response' => ['unique:chat_bot_responses,response', 'required', 'string', 'max:255'],
         ]);
 
         ChatBotResponse::create([
@@ -64,7 +64,7 @@ class Responses extends Component
     public function updateResponse()
     {
         $this->validate([
-            'response' => ['required', 'string', 'max:255'],
+            'response' => ['unique:chat_bot_responses,response,' . $this->response_id, 'required', 'string', 'max:255'],
         ]);
 
         $response = ChatBotResponse::find($this->response_id);

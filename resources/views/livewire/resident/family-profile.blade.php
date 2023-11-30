@@ -4,7 +4,7 @@
     <div class="w-100">
       @if (!is_null(auth()->guard('web')->user()->familyHead->comment))
         <div class="w-100 bg-secondary bg-opacity-25 py-2 px-4 mb-3" style="margin-top: -1rem;">
-          <p class="m-0 text-break fw-semibold">
+          <p class="m-0 text-break text-center fw-semibold">
             <span class="material-symbols-outlined text-success align-middle">check_circle</span>
             <small>{{ auth()->guard('web')->user()->familyHead->comment }}</small>
           </p>
@@ -513,7 +513,7 @@
     <div class="w-100">
       @if (auth()->guard('web')->user()->familyHead->is_approved == false && !is_null(auth()->guard('web')->user()->familyHead->comment))
         <div class="w-100 bg-secondary bg-opacity-25 py-2 px-4 mb-3" style="margin-top: -1rem;">
-          <p class="m-0 text-break fw-semibold">
+          <p class="m-0 text-break text-center fw-semibold">
             <span class="material-symbols-outlined text-danger align-middle">error</span>
             <small>Family profile has been declined due to this reason: "{{ auth()->guard('web')->user()->familyHead->comment }}"</small>
           </p>

@@ -73,12 +73,15 @@
     <div class="right-content">
       <nav class="navbar navbar-dark navbar-expand-lg nav-bg rounded sticky-top">
         <div class="container-fluid">
-          <button id="toggle-sidebar" class="navbar-brand bg-transparent border-0">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <button id="toggle-sidebar2" class="navbar-brand bg-transparent border-0">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
+          <div class="d-flex align-items-center gap-2">
+             <button id="toggle-sidebar" class="navbar-brand bg-transparent border-0">
+               <span class="material-symbols-outlined align-middle">menu</span>
+             </button>
+             <button id="toggle-sidebar2" class="navbar-brand bg-transparent border-0">
+               <span class="material-symbols-outlined align-middle">menu</span>
+             </button>
+             <span class="text-white align-middle">Zone {{ auth()->guard('bhw')->user()->assigned_zone }}</span>
+          </div>
           <div class="btn-group">
             <button type="button" class="btn btn-dark bg-transparent border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
               <span id="user-username" class="username">{{ auth()->user()->username }}</span>

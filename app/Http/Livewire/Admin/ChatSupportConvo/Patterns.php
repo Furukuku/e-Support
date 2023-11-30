@@ -42,7 +42,7 @@ class Patterns extends Component
     public function addPattern()
     {
         $this->validate([
-            'question' => ['required', 'string', 'max:255'],
+            'question' => ['unique:chat_bot_patterns,keyword', 'required', 'string', 'max:255'],
         ]);
 
         ChatBotPattern::create([
@@ -64,7 +64,7 @@ class Patterns extends Component
     public function updatePattern()
     {
         $this->validate([
-            'question' => ['required', 'string', 'max:255'],
+            'question' => ['unique:chat_bot_patterns,keyword,' . $this->pattern_id, 'required', 'string', 'max:255'],
         ]);
 
         $question = ChatBotPattern::find($this->pattern_id);

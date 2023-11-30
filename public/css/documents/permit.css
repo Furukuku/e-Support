@@ -3,13 +3,29 @@
   --main-theme-color: #0E2C15;
 }
 
+/*.print-btn {*/
+/*  background-color: #432344 !important;*/
+/*  border: none !important;*/
+/*}*/
+
+/*.print-btn:hover {*/
+/*  background-color: #351c36 !important;*/
+/*}*/
+
 .print-btn {
-  background-color: #432344 !important;
-  border: none !important;
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color);
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
 }
 
 .print-btn:hover {
-  background-color: #351c36 !important;
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.print-btn:disabled {
+  border-color: var(--main-theme-color) !important;
 }
 
 .modal-close-icon {

@@ -4,7 +4,7 @@
 
   <main>
     <header class="py-2 px-4" style="background-color: #6B756D;">
-      <h3 class="text-white">Programs</h3>
+      <h3 class="text-white">News and Events</h3>
     </header>
     <div class="container my-5 p-3 px-2">
       <div class="row justify-content-center">
