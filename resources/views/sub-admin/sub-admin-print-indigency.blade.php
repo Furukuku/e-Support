@@ -47,6 +47,7 @@
       $('#addDoc').modal('hide');
       $('#addDocConfirm').modal('hide');
       $('#releaseDoc').modal('hide');
+      $('#declineDoc').modal('hide');
     });
 
     window.addEventListener('showConfirmation', () => {

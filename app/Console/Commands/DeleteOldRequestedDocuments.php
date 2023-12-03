@@ -19,20 +19,20 @@ class DeleteOldRequestedDocuments extends Command
      *
      * @var string
      */
-    protected $description = 'Delete unclaimed documents older than a week';
+    protected $description = 'Delete unclaimed documents older than a month';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $week = now()->subWeek();
+        $month = now()->subMonth();
 
-        Document::where('is_approved', false)
-            ->where('status', 'Pending')
-            ->where('created_at', '<', $week)
+        Document::where('is_released', false)
+            ->where('status', 'Ready To Pickup')
+            ->where('updated_at', '<', $month)
             ->delete();
 
-        $this->info('Documents older than a week has been deleted.');
+        $this->info('Unclaimed documents older than a month has been deleted.');
     }
 }

@@ -20,6 +20,8 @@ class Job extends Model
         'phone_number',
         'email',
         'location',
+        'contact_person_name',
+        'contact_person_position',
         'business_img',
         'description',
         'requirements',

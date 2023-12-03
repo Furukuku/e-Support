@@ -44,8 +44,12 @@ class BrgyClearances extends Component
 
     public $doc_id;
 
+    public $category = 0;
+
+    public $reason, $other;
+
     // properties for generating report
-    public $from, $to;
+    public $from, $to, $prepared_by;
 
     public $ctc_container = 'd-none';
 
@@ -100,7 +104,10 @@ class BrgyClearances extends Component
             'ctc_container',
             'price',
             'from',
-            'to'
+            'to',
+            'prepared_by',
+            'reason',
+            'other'
         );
     }
 
@@ -108,14 +115,16 @@ class BrgyClearances extends Component
     {
         $this->validate([
             'from' => ['required', 'date'],
-            'to' => ['required', 'date', new DateInterval($this->from)]
+            'to' => ['required', 'date', new DateInterval($this->from)],
+            'prepared_by' => ['required', 'string', 'max:255']
         ]);
 
         $this->dispatchBrowserEvent('close-modal');
 
         return redirect()->route('admin.generate-report.brgy-clearance', [
                 'from' => $this->from,
-                'to' => $this->to
+                'to' => $this->to,
+                'prepared_by' => $this->prepared_by
             ]);
     }
 
@@ -302,12 +311,44 @@ class BrgyClearances extends Component
         $this->name = $name;
         $this->dispatchBrowserEvent('hideSuggestions');
     }
+
+    public function declineConfirm(Document $document)
+    {
+        $this->doc_id = $document->id;
+    }
+
+    public function decline()
+    {
+        $document = Document::find($this->doc_id);
+
+        if($this->reason === 'Other'){
+            $this->validate([
+                'other' => ['required', 'string', 'max:100']
+            ]);
+
+            $document->decline_msg = $this->other;
+        }else{
+            $this->validate([
+                'reason' => ['required', 'string', 'max:100']
+            ]);
+
+            $document->decline_msg = $this->reason;
+        }
+
+        $document->status = 'Declined';
+        $document->update();
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Document declined successfully']);
+    }
     
     public function render()
     {
         $documents = Document::with(['user', 'brgyClearance'])
             ->where('type', 'Barangay Clearance')
             ->where('is_released', false)
+            ->where('status', '!=', 'Declined')
             ->where(function ($query) {
                 $query->where(function ($subQuery) {
                     $subQuery->whereHas('user', function ($query) {
@@ -339,9 +380,9 @@ class BrgyClearances extends Component
                             ->orWhere('lname', 'like', '%' . $this->history_search . '%');
                     })
                     ->orWhereHas('brgyClearance', function ($query) {
-                        $query->where('name', 'like', '%' . $this->search . '%')
-                            ->orWhere('zone', 'like', '%' . $this->search . '%')
-                            ->orWhere('purpose', 'like', '%' . $this->search . '%');
+                        $query->where('name', 'like', '%' . $this->history_search . '%')
+                            ->orWhere('zone', 'like', '%' . $this->history_search . '%')
+                            ->orWhere('purpose', 'like', '%' . $this->history_search . '%');
                     });
                 });
             })

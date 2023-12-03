@@ -9,6 +9,7 @@
         <option value="3">Programs</option>
         <option value="4">Places</option>
         <option value="5">Chat Topics</option>
+        <option value="6">Documents</option>
         {{-- <option value="6">Resident Users</option>
         <option value="7">Business Users</option> --}}
       </select>
@@ -101,6 +102,8 @@
     @livewire('admin.archives.archived-places')
   @elseif ($d_archive == 5)
     @livewire('admin.archives.archived-chat-bot-tags')
+  @elseif ($d_archive == 6)
+    @livewire('admin.archives.archived-documents')
   {{-- @elseif ($d_archive == 6)
     @livewire('admin.archives.archived-resident-users')
   @elseif ($d_archive == 7)

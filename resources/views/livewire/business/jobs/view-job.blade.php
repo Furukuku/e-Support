@@ -59,6 +59,13 @@
       @error('location') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
     </div>
     <div class="mb-3">
+      <label for="person-name" class="form-label">Contact Person</label>
+      <input type="text" wire:model.defer="contact_person_name" id="person-name" class="form-control" placeholder="Name">
+      @error('contact_person_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+      <input type="text" wire:model.defer="contact_person_position" id="person-position" class="form-control mt-2" placeholder="Position">
+      @error('contact_person_position') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+    </div>
+    <div class="mb-3">
       <label for="description" class="form-label">Job Description</label>
       <textarea id="description" wire:model.defer="job_description" class="form-control" rows="5"></textarea>
       @error('job_description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
@@ -141,7 +148,7 @@
           <p class="text-secondary text-break"><small>Date Posted: {{ $created_at->format('M d, Y') }}</small></p>
         </div>
         <div class="pt-5">
-          <a href="{{ route('business.home') }}" class="btn btn-success px-5 back-btn">Back</a>
+          <a href="{{ route('business.home') }}" class="btn btn-success px-5 back-btn add-report-btn">Back</a>
         </div>
       </div>
     </div>
@@ -194,13 +201,28 @@
           </div>
         </div>
       </div>
+      <h5 class="fw-bold mt-4">Contact Person</h5>
+      <div class="row px-2">
+        <div class="col-6">
+          <div>
+            <label class="form-label fw-bold m-0">Name</label>
+            <p class="text-break">{{ $contact_person_name }}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div>
+            <label class="form-label fw-bold m-0">Position</label>
+            <p class="text-break">{{ $contact_person_position }}</p>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
 
   @if ($done_hiring == true)
     <div class="d-flex justify-content-end mt-5 {{ $view }} repost-btn-container">
-      <button wire:loading.attr="disabled" type="button" wire:click="edit" class="btn border-success">Repost</button>
+      <button wire:loading.attr="disabled" type="button" wire:click="edit" class="btn border-success">Open Job</button>
     </div>
 
     <div class="d-flex gap-2 justify-content-end {{ $edit }}">
@@ -209,7 +231,7 @@
     </div>
   @else
     <div class="d-flex justify-content-between mt-5 {{ $view }} edit-btn-container">
-      <button id="done-hiring-btn" wire:loading.attr="disabled" type="button" class="btn border-success">Done Hiring</button>
+      <button id="done-hiring-btn" wire:loading.attr="disabled" type="button" class="btn border-success">Close Job</button>
       <button wire:loading.attr="disabled" type="button" wire:click="edit" class="btn border-success">
         <p class="m-0">Edit <i class="fa-solid fa-pen-to-square"></i></p>
       </button>
@@ -228,8 +250,8 @@
         document.getElementById('repost-btn').addEventListener('click', e => {
           e.preventDefault();
           Swal.fire({
-            title: 'Repost Job?',
-            text: "Are you sure you want to repost this job vacancy?",
+            title: 'Re-open Job?',
+            text: "Are you sure you want to re-open this job vacancy?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#0e2c15dc',

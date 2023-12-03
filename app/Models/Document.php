@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Document extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = "documents";
 
@@ -16,6 +17,7 @@ class Document extends Model
         'business_id',
         'type',
         'status',
+        'decline_msg',
         'token',
         'is_released',
     ];

@@ -49,6 +49,7 @@
       $('#releaseDoc').modal('hide');
       $('#bizClearanceInfo').modal('hide');
       $('#generateReport').modal('hide');
+      $('#declineDoc').modal('hide');
     });
 
     window.addEventListener('showConfirmation', () => {

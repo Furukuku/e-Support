@@ -20,6 +20,8 @@ class Message extends Component
     public $search = '';
 
     public $message_content;
+    public $recipient;
+    public $message_and_recipient;
     public $password;
 
     public function mount()
@@ -38,8 +40,11 @@ class Message extends Component
         $this->resetValidation();
         $this->reset(
             'message_content',
+            'message_and_recipient',
+            'recipient',
             'password'
         );
+        $this->mount();
     }
 
     public function closeModalPass()
@@ -50,10 +55,14 @@ class Message extends Component
 
     public function confirmSend()
     {
+        $this->message_and_recipient = $this->message_content . "\n\n". "To: " . $this->recipient;
+        
         $this->validate([
-            'message_content' => 'required|string|max:160',
+            'recipient' => 'required|string',
+            'message_content' => 'required|string',
+            'message_and_recipient' => 'required|string|max:160',
         ]);
-
+        
         $this->dispatchBrowserEvent('passwordConfirm');
     }
 
@@ -65,10 +74,10 @@ class Message extends Component
 
         $residents = User::where('is_approved', true)->get();
 
-        Notification::send($residents, new SMSBroadcast($this->message_content));
+        Notification::send($residents, new SMSBroadcast($this->message_and_recipient));
 
         SmsMessage::create([
-            'content' => $this->message_content,
+            'content' => $this->message_and_recipient,
         ]);
 
         $this->dispatchBrowserEvent('success', ['success' => 'Message sent!']);

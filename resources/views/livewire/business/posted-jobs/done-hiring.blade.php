@@ -17,7 +17,7 @@
       <div class="d-flex justify-content-center">
         <img src="{{ asset('images/Illustrations/no_data.svg') }}" style="height: 10rem;" alt="image">
       </div>
-      <p class="text-center mt-3" style="font-size: 13px;">You have no jobs that are done hiring.</p>
+      <p class="text-center mt-3" style="font-size: 13px;">You have no closed jobs.</p>
     @endforelse
   
   </div>

@@ -43,6 +43,10 @@ class BusinessClearances extends Component
 
     public $doc_id;
 
+    public $category = 0;
+
+    public $reason, $other;
+
     public $ctc_container = 'd-none';
 
     public $error_msg = '';
@@ -99,7 +103,9 @@ class BusinessClearances extends Component
             'issued_on_update',
             'fee',
             'clearance_no_update',
-            'ctc_container'
+            'ctc_container',
+            'reason',
+            'other'
         );
     }
 
@@ -292,12 +298,44 @@ class BusinessClearances extends Component
         $this->owner_name = $name;
         $this->dispatchBrowserEvent('hideSuggestions');
     }
+
+    public function declineConfirm(Document $document)
+    {
+        $this->doc_id = $document->id;
+    }
+
+    public function decline()
+    {
+        $document = Document::find($this->doc_id);
+
+        if($this->reason === 'Other'){
+            $this->validate([
+                'other' => ['required', 'string', 'max:100']
+            ]);
+
+            $document->decline_msg = $this->other;
+        }else{
+            $this->validate([
+                'reason' => ['required', 'string', 'max:100']
+            ]);
+
+            $document->decline_msg = $this->reason;
+        }
+
+        $document->status = 'Declined';
+        $document->update();
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Document declined successfully']);
+    }
     
     public function render()
     {
         $documents = Document::with(['user', 'business', 'bizClearance'])
             ->where('type', 'Business Clearance')
             ->where('is_released', false)
+            ->where('status', '!=', 'Declined')
             ->where(function ($query) {
                 $query->where(function ($subQuery) {
                     $subQuery->whereHas('user', function ($query) {
@@ -339,11 +377,11 @@ class BusinessClearances extends Component
                             ->orWhere('lname', 'like', '%' . $this->history_search . '%');
                     })
                     ->orWhereHas('bizClearance', function ($query) {
-                        $query->where('biz_name', 'like', '%' . $this->search . '%')
-                            ->orWhere('biz_address', 'like', '%' . $this->search . '%')
-                            ->orWhere('biz_owner', 'like', '%' . $this->search . '%')
-                            ->orWhere('owner_address', 'like', '%' . $this->search . '%')
-                            ->orWhere('biz_nature', 'like', '%' . $this->search . '%');
+                        $query->where('biz_name', 'like', '%' . $this->history_search . '%')
+                            ->orWhere('biz_address', 'like', '%' . $this->history_search . '%')
+                            ->orWhere('biz_owner', 'like', '%' . $this->history_search . '%')
+                            ->orWhere('owner_address', 'like', '%' . $this->history_search . '%')
+                            ->orWhere('biz_nature', 'like', '%' . $this->history_search . '%');
                     });
                 });
             })

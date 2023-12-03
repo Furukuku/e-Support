@@ -57,6 +57,13 @@
               <input type="text" wire:model.defer="address" id="address" class="form-control">
               @error('address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
+            <div class="mb-3">
+              <label for="person-name" class="form-label">Contact Person</label>
+              <input type="text" wire:model.defer="contact_person_name" id="person-name" class="form-control" placeholder="Name">
+              @error('contact_person_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+              <input type="text" wire:model.defer="contact_person_position" id="person-position" class="form-control mt-2" placeholder="Position">
+              @error('contact_person_position') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            </div>
             <div class="d-flex justify-content-between">
               <button type="button" wire:click="toFirst" wire:loading.attr="disabled" wire:target="toFirst, toLast" class="btn btn-secondary">Back</button>
               <button type="button" wire:click="toLast" wire:loading.attr="disabled" wire:target="toLast, toFirst" class="btn btn-success text-light next-btn">Next</button>

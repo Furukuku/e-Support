@@ -4,10 +4,19 @@
     <div class="rounded p-2 shadow-sm message-header">
       <h2 class="px-3">Message</h2>
     </div>
-    <div class="p-5 pb-3">
+    <div class="px-5 py-3">
+      <div class="p-2">
+        <label for="recipient">Recipient</label>
+        <div class="input-group">
+          <span class="input-group-text" id="to">To:</span>
+          <input type="text" wire:model.defer="recipient" id="recipient" placeholder="ex. Senior Citizen, etc." class="form-control" aria-describedby="to">
+        </div>
+        @error('recipient') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+      </div>
       <div class="p-2">
         <textarea wire:model.defer="message_content" placeholder="Type something..." class="form-control" rows="5"></textarea>
         @error('message_content') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+        @error('message_and_recipient') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
       </div>
       <div class="d-flex justify-content-center py-3">
         <button type="button" wire:click="confirmSend" wire:loading.attr="disabled" class="btn btn-warning rounded-pill px-5">Send</button>

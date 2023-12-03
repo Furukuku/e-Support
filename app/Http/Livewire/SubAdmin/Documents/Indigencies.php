@@ -34,6 +34,10 @@ class Indigencies extends Component
 
     public $doc_id;
 
+    public $category = 0;
+
+    public $reason, $other;
+
     public $error_msg = '';
 
     public function updatingSearch()
@@ -53,6 +57,8 @@ class Indigencies extends Component
             'date_requested',
             'doc_id',
             'error_msg',
+            'reason',
+            'other'
         );
     }
 
@@ -178,12 +184,44 @@ class Indigencies extends Component
         $this->name = $name;
         $this->dispatchBrowserEvent('hideSuggestions');
     }
+
+    public function declineConfirm(Document $document)
+    {
+        $this->doc_id = $document->id;
+    }
+
+    public function decline()
+    {
+        $document = Document::find($this->doc_id);
+
+        if($this->reason === 'Other'){
+            $this->validate([
+                'other' => ['required', 'string', 'max:100']
+            ]);
+
+            $document->decline_msg = $this->other;
+        }else{
+            $this->validate([
+                'reason' => ['required', 'string', 'max:100']
+            ]);
+
+            $document->decline_msg = $this->reason;
+        }
+
+        $document->status = 'Declined';
+        $document->update();
+
+        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
+        $this->dispatchBrowserEvent('successToast', ['success' => 'Document declined successfully']);
+    }
     
     public function render()
     {
         $documents = Document::with(['user', 'indigency'])
             ->where('type', 'Indigency')
             ->where('is_released', false)
+            ->where('status', '!=', 'Declined')
             ->where(function ($query) {
                 $query->where(function ($subQuery) {
                     $subQuery->whereHas('user', function ($query) {
@@ -214,8 +252,8 @@ class Indigencies extends Component
                             ->orWhere('lname', 'like', '%' . $this->history_search . '%');
                     })
                     ->orWhereHas('indigency', function ($query) {
-                        $query->where('name', 'like', '%' . $this->search . '%')
-                            ->orWhere('purpose', 'like', '%' . $this->search . '%');
+                        $query->where('name', 'like', '%' . $this->history_search . '%')
+                            ->orWhere('purpose', 'like', '%' . $this->history_search . '%');
                     });
                 });
             })

@@ -7,7 +7,7 @@ use App\Models\Document;
 
 class AdminController extends Controller
 {
-    public function generateReportIndigencies($from, $to)
+    public function generateReportIndigencies($from, $to, $prepared_by)
     {
         if($from > $to){
             return redirect()->route('admin.docs.indigencies');
@@ -26,10 +26,11 @@ class AdminController extends Controller
             'clearances' => $clearances,
             'from' => $from,
             'to' => $to,
+            'prepared_by' => $prepared_by
         ]);
     }
     
-    public function generateReportBrgyClearances($from, $to)
+    public function generateReportBrgyClearances($from, $to, $prepared_by)
     {
         if($from > $to){
             return redirect()->route('admin.docs.brgy-clearances');
@@ -48,10 +49,11 @@ class AdminController extends Controller
             'clearances' => $clearances,
             'from' => $from,
             'to' => $to,
+            'prepared_by' => $prepared_by
         ]);
     }
 
-    public function generateReportBizClearances($from, $to)
+    public function generateReportBizClearances($from, $to, $prepared_by)
     {
         if($from > $to){
             return redirect()->route('admin.docs.biz-clearances');
@@ -70,6 +72,7 @@ class AdminController extends Controller
             'clearances' => $clearances,
             'from' => $from,
             'to' => $to,
+            'prepared_by' => $prepared_by
         ]);
     }
 

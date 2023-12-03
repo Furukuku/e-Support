@@ -18,6 +18,7 @@
       $('#restoreProgram').modal('hide');
       $('#restorePlace').modal('hide');
       $('#restoreTag').modal('hide');
+      $('#restoreDocument').modal('hide');
       $('#deleteOfficial').modal('hide');
       $('#deleteFamily').modal('hide');
       $('#deleteStaff').modal('hide');

@@ -115,7 +115,7 @@
               @error('profile_image') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>
             <div class="row-auto mb-3">
-              <label class="input-labels" for="resident-verification-picture" class="form-label">Picture of any ID/Document <span class="text-secondary" style="font-size: 0.8rem;">(must have your full name and address)</span></label>
+              <label class="input-labels" for="resident-verification-picture" class="form-label">Selfie <span class="text-secondary" style="font-size: 0.8rem;">(for account verification)</span></label>
               <input wire:model="verification_image" id="resident-verification-picture" type="file" class="form-control form-control-sm w-50" accept="image/*">
               @error('verification_image') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
             </div>

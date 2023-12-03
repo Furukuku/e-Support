@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('messages:clean')->daily();
         $schedule->command('users:delete-declined-resident')->daily();
         $schedule->command('users:delete-declined-businesses')->daily();
-        // $schedule->command('documents:clean')->daily();
+        $schedule->command('documents:clean')->daily();
     }
 
     /**

@@ -16,8 +16,10 @@ class Claimed extends Component
     {
         $myClaimedDocs = Document::with(['brgyClearance', 'bizClearance', 'indigency'])
             ->where('user_id', auth()->guard('web')->id())
-            ->where('status', 'Released')
-            ->where('is_released', true)
+            ->where(function($query) {
+                $query->where('status', 'Released')
+                    ->orWhere('status', 'Declined');
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(5, ['*'], 'claimedDocs');
 

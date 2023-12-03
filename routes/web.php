@@ -88,9 +88,9 @@ Route::middleware('admin.auth:admin')->group(function() {
         Route::view('/settings', 'admin.admin-settings')->name('settings');
 
         Route::prefix('generate-report')->name('generate-report.')->group(function() {
-            Route::get('/business-clearances/{from}/{to}', [AdminController::class, 'generateReportBizClearances'])->name('biz-clearance');
-            Route::get('/barangay-clearances/{from}/{to}', [AdminController::class, 'generateReportBrgyClearances'])->name('brgy-clearance');
-            Route::get('/indigencies/{from}/{to}', [AdminController::class, 'generateReportIndigencies'])->name('indigency');
+            Route::get('/business-clearances/{from}/{to}/{prepared_by}', [AdminController::class, 'generateReportBizClearances'])->name('biz-clearance');
+            Route::get('/barangay-clearances/{from}/{to}/{prepared_by}', [AdminController::class, 'generateReportBrgyClearances'])->name('brgy-clearance');
+            Route::get('/indigencies/{from}/{to}/{prepared_by}', [AdminController::class, 'generateReportIndigencies'])->name('indigency');
         });
         
         Route::name('profile.')->group(function(){
@@ -204,6 +204,7 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 
         Route::post('/logout', [LogoutController::class, 'residentLogout'])->name('logout');
         Route::get('/home', [ResidentController::class, 'home'])->name('home');
+        Route::get('/home/place', [ResidentController::class, 'placeCategory'])->name('home.place-category');
         Route::view('/services', 'resident.request-report')->name('services');
         Route::view('/profile', 'resident.resident-profile')->name('profile');
 
@@ -219,6 +220,7 @@ Route::middleware('auth:web', 'resident-mobile.verified', 'resident.approval', '
 
         Route::get('/qr-code/{token}', [ResidentController::class, 'showQr'])->name('qr-code');
         Route::get('/edit/documents/{id}/{token}', [ResidentController::class, 'editDocs'])->name('edit.docs');
+        Route::get('/view/documents/{id}', [ResidentController::class, 'viewDocs'])->name('view.docs');
 
         Route::patch('/update/brgy-clearance/{id}', [ResidentController::class, 'updateBrgyClearance'])->name('update.brgy-clearnce');
         Route::patch('/update/business-clearance/{id}', [ResidentController::class, 'updateBizClearance'])->name('update.biz-clearnce');

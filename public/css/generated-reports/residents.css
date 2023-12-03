@@ -1,3 +1,7 @@
+:root {
+  --main-theme-color: #0E2C15;
+}
+
 html {
   font-size: 14px !important;
 }
@@ -7,13 +11,20 @@ html {
   font-family: 'Times New Roman', Times, serif;
 }
 
-#print-btn {
-  background-color: #432344 !important;
-  border: none !important;
+.btn-primary {
+  background-color: var(--main-theme-color) !important;
+  color: #fff !important;
+  border-color: var(--main-theme-color) !important;
+  --bs-btn-disabled-border-color: var(--main-theme-color) !important;
 }
 
-#print-btn:hover {
-  background-color: #351c36 !important;
+.btn-primary:hover {
+  opacity: 0.95 !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-primary:disabled {
+  border-color: var(--main-theme-color) !important;
 }
 
 @media print {

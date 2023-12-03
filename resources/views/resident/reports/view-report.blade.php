@@ -75,9 +75,9 @@
             </div>
             <div class="row mb-3">
               <p class="mb-1 px-0 fw-bold">Emergency Hotlines</p>
-              <p class="m-0"><small>Emergency Medical Service: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
-              <p class="m-0"><small>Philippine National Police: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
-              <p class="m-0"><small>Bureau of Fire Protection: </small><a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
+              <p class="m-0">Emergency Medical Service: <a href="tel:{{ !is_null($hotlines) ? $hotlines->ems : '' }}">{{ !is_null($hotlines) ? $hotlines->ems : '' }}</a></p>
+              <p class="m-0">Philippine National Police: <a href="tel:{{ !is_null($hotlines) ? $hotlines->pnp : '' }}">{{ !is_null($hotlines) ? $hotlines->pnp : '' }}</a></p>
+              <p class="m-0">Bureau of Fire Protection: <a href="tel:{{ !is_null($hotlines) ? $hotlines->bfp : '' }}">{{ !is_null($hotlines) ? $hotlines->bfp : '' }}</a></p>
             </div>
             <div class="d-flex justify-content-between my-4">
               <a href="{{ route('resident.services') }}" class="btn btn-secondary rounded-pill px-4 d-none back-btn">Back</a>

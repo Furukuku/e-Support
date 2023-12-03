@@ -468,6 +468,25 @@ class ResidentController extends Controller
         return redirect()->route('resident.services')->with('success', 'Document updated successfully');
     }
 
+    public function viewDocs($id)
+    {
+        $document = Document::with(['brgyClearance', 'bizClearance', 'indigency'])->find($id);
+
+        if(!is_null($document) && $document->user_id == auth()->guard('web')->id()){
+            if($document->type === 'Barangay Clearance'){
+                return view('resident.documents.view-documents.brgy-clearance', ['document' => $document]);
+            }else if($document->type === 'Business Clearance'){
+                return view('resident.documents.view-documents.business-clearance', ['document' => $document]);
+            }else if($document->type === 'Indigency'){
+                return view('resident.documents.view-documents.indigency', ['document' => $document]);
+            }else{
+                abort(404);
+            }
+        }else{
+            abort(404);
+        }
+    }
+
     public function editDocs($id, $token)
     {
         $document = Document::with(['brgyClearance', 'bizClearance', 'indigency'])
@@ -552,7 +571,7 @@ class ResidentController extends Controller
             $bizClearance->biz_name = $request->business_name;
             $bizClearance->biz_address = $request->business_address;
             $bizClearance->biz_nature = $request->business_nature;
-            $bizClearance->biz_owner = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . ' ' . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
+            $bizClearance->biz_owner = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
             $bizClearance->owner_address = 'Zone ' . $user->zone . ', Nancayasan Urdaneta City, Pangasinan';
             $bizClearance->proof = $proof_filename;
             $bizClearance->save();
@@ -598,7 +617,7 @@ class ResidentController extends Controller
 
             $indigency = new Indigency();
             $indigency->document_id = $document->id;
-            $indigency->name = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . ' ' . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
+            $indigency->name = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
             $indigency->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
             $indigency->save();
 
@@ -663,7 +682,7 @@ class ResidentController extends Controller
             $user = auth()->guard('web')->user();
             
             $brgyClearance->document_id = $document->id;
-            $brgyClearance->name = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . ' ' . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
+            $brgyClearance->name = $user->fname . ' ' . (is_null($user->mname) ? '' : $user->mname[0] . '. ') . $user->lname . (is_null($user->sname) ? '' : ' ' . $user->sname);
             $brgyClearance->zone = $user->zone;
             $brgyClearance->purpose = $request->purpose === 'Others' ? $request->others : $request->purpose;
             $brgyClearance->save();
@@ -705,6 +724,34 @@ class ResidentController extends Controller
         return view('resident.resident-home', [
             'jobs' => $jobs,
             'places' => $places,
+        ]);
+    }
+
+    public function placeCategory(Request $request)
+    {
+        $jobs = Job::with('business')->where('done_hiring', false)->inRandomOrder()->take(10)->get();
+
+        $places = null;
+        if($request->category === 'Others'){
+            $places = Place::where('is_approved', true)
+            ->where('type', '!=', 'Mall')
+            ->where('type', '!=', 'Restaurant')
+            ->where('type', '!=', 'Store')
+            ->where('type', '!=', 'Car Wash')
+            ->where('type', '!=', 'Repair Shop')
+            ->where('type', '!=', 'Junk Shop')
+            ->where('type', '!=', 'Pharmacies')
+            ->get();
+        }else{
+            $places = Place::where('is_approved', true)
+            ->where('type', $request->category)
+            ->get();
+        }
+
+        return view('resident.resident-home', [
+            'jobs' => $jobs,
+            'places' => $places,
+            'category' => $request->category,
         ]);
     }
 

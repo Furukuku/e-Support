@@ -18,9 +18,9 @@ class RequestedDocs extends Component
         $this->docs_tab = 'toPickup';
     }
 
-    public function claimed()
+    public function history()
     {
-        $this->docs_tab = 'claimed';
+        $this->docs_tab = 'history';
     }
 
     public function render()

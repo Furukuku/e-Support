@@ -19,6 +19,11 @@
           <input type="date" id="to" wire:model.defer="to" class="form-control">
           @error('to') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
         </div>
+        <div class="mb-3">
+          <label for="to" class="form-label">Prepared by:</label>
+          <input type="text" id="to" wire:model.defer="prepared_by" class="form-control" placeholder="Enter the name who prepared">
+          @error('prepared_by') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+        </div>
       </div>
       <div class="modal-footer d-flex justify-content-center border-0">
         <button type="button" wire:loading.attr="disabled" wire:click="generateReport" class="btn btn-warning rounded-pill px-4">Generate</button>
@@ -246,6 +251,41 @@
       <div class="modal-footer d-flex justify-content-center border-0">
         <button type="button" class="btn btn-secondary px-4 mx-3" wire:click="closeModal" wire:loading.attr="disabled" data-bs-dismiss="modal">Cancel</button>
         <button type="button" wire:loading.attr="disabled" wire:click="release" class="btn btn-success px-4 mx-3">Release</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Decline Modal -->
+<div wire:ignore.self class="modal fade" id="declineDoc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="declineDocLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header header-bg py-2">
+        <h1 class="modal-title fs-5" id="declineDocLabel">Decline Indigency</h1>
+        <span class="material-symbols-outlined modal-close-icon" data-bs-dismiss="modal" wire:click="closeModal" aria-label="Close">
+          cancel
+        </span>
+      </div>
+      <div class="modal-body pt-0">
+        <div class="p-3">
+          <label for="reason" class="form-label">Reason</label>
+          <select id="reason" wire:model="reason" class="form-select">
+            <option value="">Choose one...</option>
+            <option value="Incorrect information.">Incorrect information.</option>
+            <option value="Violations of local ordinances.">Violations of local ordinances.</option>
+            <option value="Other">Other</option>
+          </select>
+          @error('reason') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @if ($reason === 'Other')
+            <textarea id="other" wire:model.defer="other" class="form-control mt-3" rows="3"></textarea>
+            @error('other') <span class="error text-danger" style="font-size: 0.8rem">{{ $message }}</span> @enderror
+          @endif
+        </div>
+      </div>
+      <div class="modal-footer d-flex gap-2 justify-content-end">
+        <button type="button" class="btn btn-secondary px-4" wire:click="closeModal" wire:loading.class="disabled" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" wire:click="decline" wire:loading.attr="disabled" class="btn btn-danger px-4">Decline</button>
       </div>
     </div>
   </div>

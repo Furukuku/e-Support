@@ -15,7 +15,7 @@ class PostJob extends Component
 
     public $page;
 
-    public $job_title, $job_type, $workplace_type, $phone_number, $email, $address, $business_image, $job_description, $job_requirements;
+    public $job_title, $job_type, $workplace_type, $phone_number, $email, $address, $contact_person_name, $contact_person_position, $business_image, $job_description, $job_requirements;
 
     public function toFirst()
     {
@@ -44,6 +44,8 @@ class PostJob extends Component
             'phone_number' => ['required', 'digits:11'],
             'email' => ['required', 'email', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
+            'contact_person_name' => ['required', 'string', 'max:255'],
+            'contact_person_position' => ['required', 'string', 'max:255'],
         ]);
 
         $this->page = 'last';
@@ -58,6 +60,8 @@ class PostJob extends Component
             'phone_number' => ['required', 'digits:11'],
             'email' => ['required', 'email', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
+            'contact_person_name' => ['required', 'string', 'max:255'],
+            'contact_person_position' => ['required', 'string', 'max:255'],
             'business_image' => ['nullable', 'image'],
             'job_description' => ['required', 'string'],
             'job_requirements' => ['required', 'string'],
@@ -73,6 +77,8 @@ class PostJob extends Component
                     'phone_number' => $this->phone_number,
                     'email' => $this->email,
                     'location' => $this->address,
+                    'contact_person_name' => $this->contact_person_name,
+                    'contact_person_position' => $this->contact_person_position,
                     'description' => $this->job_description,
                     'requirements' => $this->job_requirements,
                 ]);
@@ -87,6 +93,8 @@ class PostJob extends Component
                     'phone_number' => $this->phone_number,
                     'email' => $this->email,
                     'location' => $this->address,
+                    'contact_person_name' => $this->contact_person_name,
+                    'contact_person_position' => $this->contact_person_position,
                     'business_img' => $business_img_filename,
                     'description' => $this->job_description,
                     'requirements' => $this->job_requirements,

@@ -83,7 +83,7 @@
                 </span>
                 {{-- <i class="fa-solid fa-eye mx-1 align-middle view-icon" wire:click="view({{ $document }})" data-bs-toggle="modal" data-bs-target="#brgyClearanceInfo"></i> --}}
                 {{-- <i class="fa-solid fa-pen mx-1 align-middle edit-icon" wire:click="editDoc({{ $document }})" data-bs-toggle="modal" data-bs-target="#editDoc"></i> --}}
-                {{-- <i class="fa-solid fa-file-circle-check mx-1 align-middle text-success release-icon" wire:click="releaseConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#releaseDoc"></i> --}}
+                <i class="fa-solid fa-circle-xmark mx-1 align-middle text-danger delete-icon" wire:click="declineConfirm({{ $document }})" data-bs-toggle="modal" data-bs-target="#declineDoc"></i>
               </td>
             </tr>
           @empty
@@ -97,73 +97,86 @@
     </div>
   </div>
 
-  <div class="bg-white officials-profile-table shadow rounded pt-3 my-5">
-    <div class="d-flex justify-content-start gap-2 mx-2 mb-3 fs-5">
-      <p class="m-0">Today's Total Collected Fee:</p>
-      <p class="m-0">&#8369;{{ $total_fee }}</p>
-    </div>
-    <div class="d-flex justify-content-between p-2">
-      <div class="row g-1 align-items-center">
-        <div class="col-3">
-          <label for="history-entries">Show</label>
-        </div>
-        <div class="col-6">
-          <select id="history-entries" wire:model="history_paginate" class="form-select form-select-sm">
-            @foreach ($history_paginate_values as $value)
-              <option value="{{ $value }}">{{ $value }}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="col-3">
-          <label for="history-entries">entries</label>
-        </div>
-      </div>
-      <div class="row align-items-center">
-        <div class="col-auto">
-          <label for="history-search">Search:</label>
-        </div>
-        <div class="col-auto">
-          <input wire:model="history_search" id="history-search" type="text" class="form-control form-control-sm">
-        </div>
-      </div>
-    </div>
-    <div class="py-1 px-2">
-      <table class="table border rounded table-striped">
-        <thead>
-          <tr>
-            <th class="align-middle text-center">Status</th>
-            <th class="align-middle text-center">Name</th>
-            <th class="align-middle text-center">Issued by</th>
-            <th class="align-middle text-center">Fee</th>
-            <th class="align-middle text-center">Date/Time Claimed</th>
-            <th class="align-middle text-center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          @forelse ($taken_documents as $taken_doc)
-            <tr>
-              <td class="align-middle text-center">
-                <div class="px-1 rounded-pill bg-success text-white">{{ $taken_doc->status }}</div>
-              </td>
-              <td class="align-middle text-center">{{ $taken_doc->brgyClearance->name }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->issued_by }}</td>
-              <td class="align-middle text-center">{{ is_null($taken_doc->brgyClearance->fee) ? '0' : $taken_doc->brgyClearance->fee }}</td>
-              <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>
-              <td class="align-middle text-center">
-                <a href="{{ route('admin.templates.brgy-clearance', ['document' => $taken_doc]) }}">
-                  <i class="fa-solid fa-eye mx-1 align-middle view-icon"></i>
-                </a>
-              </td>
-            </tr>
-          @empty
-            <tr>
-              <h4>No Records Found.</h4>
-            </tr>
-          @endforelse
-        </tbody>
-      </table>
-      {{ $taken_documents->links() }}
+  <div class="officials-profile-table d-flex justify-content-end mt-5">
+    <div class="shadow-sm">
+      <select wire:model="category" class="form-select">
+        <option value="0">Released</option>
+        <option value="1">Declined</option>
+      </select>
     </div>
   </div>
+
+  @if ($category == '0')
+    <div class="bg-white officials-profile-table shadow rounded pt-3 mt-2 mb-5">
+      <div class="d-flex justify-content-start gap-2 mx-2 mb-3 fs-5">
+        <p class="m-0">Today's Total Collected Fee:</p>
+        <p class="m-0">&#8369;{{ $total_fee }}</p>
+      </div>
+      <div class="d-flex justify-content-between p-2">
+        <div class="row g-1 align-items-center">
+          <div class="col-3">
+            <label for="history-entries">Show</label>
+          </div>
+          <div class="col-6">
+            <select id="history-entries" wire:model="history_paginate" class="form-select form-select-sm">
+              @foreach ($history_paginate_values as $value)
+                <option value="{{ $value }}">{{ $value }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-3">
+            <label for="history-entries">entries</label>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <label for="history-search">Search:</label>
+          </div>
+          <div class="col-auto">
+            <input wire:model="history_search" id="history-search" type="text" class="form-control form-control-sm">
+          </div>
+        </div>
+      </div>
+      <div class="py-1 px-2">
+        <table class="table border rounded table-striped">
+          <thead>
+            <tr>
+              <th class="align-middle text-center">Status</th>
+              <th class="align-middle text-center">Name</th>
+              <th class="align-middle text-center">Issued by</th>
+              <th class="align-middle text-center">Fee</th>
+              <th class="align-middle text-center">Date/Time Claimed</th>
+              <th class="align-middle text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @forelse ($taken_documents as $taken_doc)
+              <tr>
+                <td class="align-middle text-center">
+                  <div class="px-1 rounded-pill bg-success text-white">{{ $taken_doc->status }}</div>
+                </td>
+                <td class="align-middle text-center">{{ $taken_doc->brgyClearance->name }}</td>
+                <td class="align-middle text-center">{{ $taken_doc->issued_by }}</td>
+                <td class="align-middle text-center">{{ is_null($taken_doc->brgyClearance->fee) ? '0' : $taken_doc->brgyClearance->fee }}</td>
+                <td class="align-middle text-center">{{ $taken_doc->updated_at->format('h:i A - M d, Y') }}</td>
+                <td class="align-middle text-center">
+                  <a href="{{ route('admin.templates.brgy-clearance', ['document' => $taken_doc]) }}">
+                    <i class="fa-solid fa-eye mx-1 align-middle view-icon"></i>
+                  </a>
+                </td>
+              </tr>
+            @empty
+              <tr>
+                <h4>No Records Found.</h4>
+              </tr>
+            @endforelse
+          </tbody>
+        </table>
+        {{ $taken_documents->links() }}
+      </div>
+    </div>
+  @elseif ($category == '1')
+    @livewire('admin.documents.declined.brgy-clearances')
+  @endif
 
 </div>

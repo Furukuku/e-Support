@@ -14,7 +14,7 @@ class ViewJob extends Component
 
     protected $listeners = ['submit', 'doneHiring'];
 
-    public $job_title, $job_type, $workplace_type, $phone_number, $email, $location, $business_image, $job_description, $job_requirements, $done_hiring, $created_at, $biz_name, $biz_profile;
+    public $job_title, $job_type, $workplace_type, $phone_number, $email, $location, $contact_person_name, $contact_person_position, $business_image, $job_description, $job_requirements, $done_hiring, $created_at, $biz_name, $biz_profile;
 
     public $view_biz_img, $requirements;
 
@@ -40,6 +40,8 @@ class ViewJob extends Component
                 $this->phone_number = $job->phone_number;
                 $this->email = $job->email;
                 $this->location = $job->location;
+                $this->contact_person_name = $job->contact_person_name;
+                $this->contact_person_position = $job->contact_person_position;
                 $this->job_description = $job->description;
                 $this->job_requirements = $job->requirements;
                 $this->done_hiring = $job->done_hiring;
@@ -87,6 +89,8 @@ class ViewJob extends Component
             'phone_number' => ['required', 'digits:11'],
             'email' => ['required', 'email', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
+            'contact_person_name' => ['required', 'string', 'max:255'],
+            'contact_person_position' => ['required', 'string', 'max:255'],
             'business_image' => ['nullable', 'image'],
             'job_description' => ['required', 'string'],
             'job_requirements' => ['required', 'string'],
@@ -101,6 +105,8 @@ class ViewJob extends Component
             $job->phone_number = $this->phone_number;
             $job->email = $this->email;
             $job->location = $this->location;
+            $job->contact_person_name = $this->contact_person_name;
+            $job->contact_person_position = $this->contact_person_position;
             $job->description = $this->job_description;
             $job->requirements = $this->job_requirements;
 

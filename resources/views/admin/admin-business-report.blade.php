@@ -65,6 +65,12 @@
           @endforelse
         </tbody>
       </table>
+      <div class="d-flex justify-content-end mt-4">
+        <div class="d-flex flex-column align-items-center">
+          <p style="margin-bottom: -4px; text-decoration: underline;">{{ $prepared_by }}</p>
+          <p class="m-0 fw-semibold">Prepared By</p>
+        </div>
+      </div>
     </main>
   </div>
 

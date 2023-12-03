@@ -173,6 +173,12 @@
         </table>
       </div>
     </footer>
+    <div class="d-flex justify-content-end mt-5">
+      <div class="d-flex flex-column align-items-center">
+        <p style="margin-bottom: -4px; text-decoration: underline;">{{ auth()->guard('sub-admin')->user()->fname }} {{ is_null(auth()->guard('sub-admin')->user()->mname) ? '' : auth()->guard('sub-admin')->user()->mname[0] . '.' }} {{ auth()->guard('sub-admin')->user()->lname }}</p>
+        <p class="m-0 fw-semibold">Prepared By</p>
+      </div>
+    </div>
   </div>
 
 
