@@ -58,58 +58,60 @@
         <h5 class="text-center">PLACES</h5>
       </div>
       <div class="row w-100 gap-4 justify-content-center p-2">
-        <div class="swiper placesSwiper">
-          <div class="swiper-wrapper d-flex justify-content-center place-category">
-            <div class="swiper-slide" style="width: 4.78rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Mall" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Mall' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Mall</button>
-              </form>
-            </div>
-            <div class="swiper-slide" style="width: 7.231rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Restaurant" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Restaurant' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Restaurant</button>
-              </form>
-            </div>
-            <div class="swiper-slide" style="width: 5.133rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Store" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Store' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Store</button>
-              </form>
-            </div>
-            <div class="swiper-slide" style="width: 6.751rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Car Wash" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Car Wash' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Car Wash</button>
-              </form>
-            </div>
-            <div class="swiper-slide" style="width: 7.783rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Repair Shop" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Repair Shop' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Repair Shop</button>
-              </form>
-            </div>
-            <div class="swiper-slide" style="width: 7.09rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Junk Shop" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Junk Shop' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Junk Shop</button>
-              </form>
-            </div>
-            <div class="swiper-slide" style="width: 7.504rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Pharmacies" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Pharmacies' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Pharmacies</button>
-              </form>
-            </div>
-            <div class="swiper-slide" style="width: 5.71rem;">
-              <form action="{{ route('resident.home.place-category') }}" method="GET">
-                <input type="hidden" value="Others" name="category">
-                <button type="submit" class="btn {{ isset($category) && $category === 'Others' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Others</button>
-              </form>
+        @if ($places->count() > 0)
+          <div class="d-flex justify-content-center">
+            <div id="p-category" class="d-flex gap-2 overflow-x-hidden px-2 py-1 place-category">
+              <div class="swiper-slide" style="width: 4.78rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Mall" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Mall' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Mall</button>
+                </form>
+              </div>
+              <div class="swiper-slide" style="width: 7.231rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Restaurant" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Restaurant' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Restaurant</button>
+                </form>
+              </div>
+              <div class="swiper-slide" style="width: 5.133rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Store" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Store' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Store</button>
+                </form>
+              </div>
+              <div class="swiper-slide" style="width: 6.751rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Car Wash" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Car Wash' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Car Wash</button>
+                </form>
+              </div>
+              <div class="swiper-slide" style="width: 7.783rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Repair Shop" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Repair Shop' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Repair Shop</button>
+                </form>
+              </div>
+              <div class="swiper-slide" style="width: 7.09rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Junk Shop" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Junk Shop' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Junk Shop</button>
+                </form>
+              </div>
+              <div class="swiper-slide" style="width: 7.504rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Pharmacies" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Pharmacies' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Pharmacies</button>
+                </form>
+              </div>
+              <div class="swiper-slide" style="width: 5.71rem;">
+                <form action="{{ route('resident.home.place-category') }}" method="GET">
+                  <input type="hidden" value="Others" name="category">
+                  <button type="submit" class="btn {{ isset($category) && $category === 'Others' ? 'btn-secondary' : 'btn-outline-secondary' }} btn-sm rounded-pill px-4 text-nowrap">Others</button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        @endif
         @forelse ($places as $place)
           <div class="card shadow-sm mb-1 px-0 places-card" style="width: 18rem; cursor: pointer;">
             <a href="{{ route('resident.place', ['place' => $place]) }}" class="text-dark" style="text-decoration: none;">
@@ -168,12 +170,45 @@
 @if ($places->count() > 0)
   <script>
 
-    var swiper = new Swiper(".placesSwiper", {
-      slidesPerView: 'auto',
-      spaceBetween: 10,
-      loop: false,
-      freeMode: true,
+    const category = document.getElementById('p-category');
+    let isGrabbing = false;
+    let touchStartPosition = 0;
+
+    function grabToFalse(){
+      isGrabbing = false;
+    }
+
+    function grabToTrue(){
+      isGrabbing = true;
+    }
+
+    category.addEventListener('mousemove', e => {
+        if (!isGrabbing) return;
+        category.scrollLeft -= e.movementX;
     });
+
+    category.addEventListener('mousedown', grabToTrue);
+
+    category.addEventListener('mouseup', grabToFalse);
+
+    category.addEventListener('mouseleave', grabToFalse);
+
+    category.addEventListener('touchstart', e => {
+        isGrabbing = true;
+        touchStartPosition = e.touches[0].clientX;
+    });
+
+    category.addEventListener('touchend', grabToFalse);
+
+    category.addEventListener('touchcancel', grabToFalse);
+
+    category.addEventListener('touchmove', e => {
+        if (!isGrabbing) return;
+        const touchMoveX = touchStartPosition - e.touches[0].clientX;
+        category.scrollLeft += touchMoveX;
+        touchStartPosition = e.touches[0].clientX;
+    });
+
 
   </script>
 @endif

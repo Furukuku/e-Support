@@ -523,13 +523,6 @@ label[for="proof"] {
 }
 
 
-@media (max-width: 1070px) {
-  .place-category {
-    justify-content: start !important;
-  }
-}
-
-
 @media (max-width: 1105px){
   .fam-profile-main-container,
   .edit-family-profile {
