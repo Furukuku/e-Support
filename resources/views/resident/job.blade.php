@@ -78,6 +78,21 @@
           </div>
         </div>
       </div>
+      <h5 class="fw-bold mt-4">Contact Person</h5>
+      <div class="row px-2">
+        <div class="col-6">
+          <div>
+            <label class="form-label fw-bold m-0">Name</label>
+            <p class="text-break">{{ $job->contact_person_name }}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div>
+            <label class="form-label fw-bold m-0">Position</label>
+            <p class="text-break">{{ $job->contact_person_position }}</p>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
