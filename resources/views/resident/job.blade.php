@@ -62,19 +62,11 @@
             <label class="form-label fw-bold m-0">Workplace Type</label>
             <p class="text-break">{{ $job->workplace_type }}</p>
           </div>
-          <div>
-            <label class="form-label fw-bold m-0">Job Type</label>
-            <p class="text-break">{{ $job->job_type }}</p>
-          </div>
         </div>
         <div class="col-6">
           <div>
-            <label class="form-label fw-bold m-0">Email</label>
-            <p class="text-break">{{ $job->email }}</p>
-          </div>
-          <div>
-            <label class="form-label fw-bold m-0">Phone Number</label>
-            <p class="text-break">{{ $job->phone_number }}</p>
+            <label class="form-label fw-bold m-0">Job Type</label>
+            <p class="text-break">{{ $job->job_type }}</p>
           </div>
         </div>
       </div>
@@ -85,11 +77,19 @@
             <label class="form-label fw-bold m-0">Name</label>
             <p class="text-break">{{ $job->contact_person_name }}</p>
           </div>
+          <div>
+            <label class="form-label fw-bold m-0">Email</label>
+            <p class="text-break">{{ $job->email }}</p>
+          </div>
         </div>
         <div class="col-6">
           <div>
             <label class="form-label fw-bold m-0">Position</label>
             <p class="text-break">{{ $job->contact_person_position }}</p>
+          </div>
+          <div>
+            <label class="form-label fw-bold m-0">Phone Number</label>
+            <p class="text-break">{{ $job->phone_number }}</p>
           </div>
         </div>
       </div>

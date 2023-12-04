@@ -102,6 +102,22 @@ span {
   --bs-dropdown-link-active-bg: #e0e0e0;
 }
 
+.place-inactive {
+  border-color: var(--theme-color) !important;
+}
+
+.place-active {
+  border-color: var(--theme-color) !important;
+  background-color: var(--theme-color) !important;
+  color: #fff !important;
+}
+
+.place-category-btn:hover {
+  border-color: var(--theme-color) !important;
+  background-color: var(--theme-color) !important;
+  color: #fff !important;
+}
+
 /* #jobs-container {
   -ms-overflow-style: none;
   scrollbar-width: none;

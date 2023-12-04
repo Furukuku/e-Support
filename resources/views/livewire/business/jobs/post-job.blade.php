@@ -1,6 +1,6 @@
-<div class="py-5 mt-5 d-flex justify-content-evenly post-job-main-container">
+<div class="py-3 mt-5 d-flex justify-content-evenly post-job-main-container">
   
-  <div class="d-flex align-items-center mt-3">
+  <div class="d-flex align-items-start pt-3 mt-3">
     <img class="post-job-illustration" src="{{ asset('images/Illustrations/hiring.svg') }}" alt="job">
   </div>
   <div class="">
@@ -26,7 +26,7 @@
               </select>
               @error('job_type') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
               <label for="workplace" class="form-label">Workplace Type</label>
               <select wire:model.defer="workplace_type" id="workplace" class="form-select">
                 <option value="">Choose one...</option>
@@ -43,6 +43,13 @@
           <div class="second-step">
             <h3 class="mb-4">Set your contacts</h3>
             <div class="mb-3">
+              <label for="person-name" class="form-label">Contact Person</label>
+              <input type="text" wire:model.defer="contact_person_name" id="person-name" class="form-control" placeholder="Name">
+              @error('contact_person_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+              <input type="text" wire:model.defer="contact_person_position" id="person-position" class="form-control mt-2" placeholder="Position">
+              @error('contact_person_position') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
+            </div>
+            <div class="mb-3">
               <label for="phone" class="form-label">Phone Number</label>
               <input type="tel" wire:model.defer="phone_number" id="phone" class="form-control">
               @error('phone_number') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
@@ -52,17 +59,10 @@
               <input type="text" wire:model.defer="email" id="email" class="form-control">
               @error('email') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
               <label for="address" class="form-label">Address</label>
               <input type="text" wire:model.defer="address" id="address" class="form-control">
               @error('address') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
-            </div>
-            <div class="mb-3">
-              <label for="person-name" class="form-label">Contact Person</label>
-              <input type="text" wire:model.defer="contact_person_name" id="person-name" class="form-control" placeholder="Name">
-              @error('contact_person_name') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
-              <input type="text" wire:model.defer="contact_person_position" id="person-position" class="form-control mt-2" placeholder="Position">
-              @error('contact_person_position') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
             </div>
             <div class="d-flex justify-content-between">
               <button type="button" wire:click="toFirst" wire:loading.attr="disabled" wire:target="toFirst, toLast" class="btn btn-secondary">Back</button>
@@ -82,7 +82,7 @@
                 <textarea id="description" wire:model.defer="job_description" class="form-control" rows="5"></textarea>
                 @error('job_description') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
               </div>
-              <div class="mb-3">
+              <div class="mb-4">
                 <label for="requirements" class="form-label">Job Requirements</label>
                 <textarea id="requirements" wire:model.defer="job_requirements" placeholder="Use semicolon if you wish to separate each requirements. (ex. 1st requirement; 2nd requirement; etc.)" class="form-control" rows="5"></textarea>
                 @error('job_requirements') <span class="error text-danger px-0" style="font-size: 0.75rem">{{ $message }}</span> @enderror
