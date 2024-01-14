@@ -66,8 +66,10 @@ class BusinessClearance extends Component
 
         $captain_name = null;
 
-        if(!is_null($captain)){
+        if(!is_null($captain) && !is_null($captain->mname)){
             $captain_name = $captain->fname . ' '. $captain->mname[0] . '. ' . $captain->lname . ' ' . $captain->sname;
+        }else if(!is_null($captain) && is_null($captain->mname)){
+            $captain_name = $captain->fname . ' ' . $captain->lname . ' ' . $captain->sname;
         }
 
         $officials = BrgyOfficial::where('position', 'Kagawad')

@@ -124,8 +124,8 @@ class BrgyOfficials extends Component
             'display_img' => $display_img_filename,
             'lname' => $this->last_name,
             'fname' => $this->first_name,
-            'mname' => $this->middle_name,
-            'sname' => $this->suffix_name,
+            'mname' => $this->middle_name === "" ? null : $this->middle_name,
+            'sname' => $this->suffix_name === "" ? null : $this->suffix_name,
             'zone' => $this->zone,
             'gender' => $this->gender,
             'contact' => $this->phone_no,
@@ -231,8 +231,8 @@ class BrgyOfficials extends Component
             $official->display_img = $display_img_filename;
             $official->lname = $this->last_name;
             $official->fname = $this->first_name;
-            $official->mname = $this->middle_name;
-            $official->sname = $this->suffix_name;
+            $official->mname = $this->middle_name === "" ? null : $this->middle_name;
+            $official->sname = $this->suffix_name === "" ? null : $this->suffix_name;
             $official->zone = $this->zone;
             $official->gender = $this->gender;
             $official->contact = $this->phone_no;
@@ -267,8 +267,8 @@ class BrgyOfficials extends Component
             $official = BrgyOfficial::find($this->official_id);
             $official->lname = $this->last_name;
             $official->fname = $this->first_name;
-            $official->mname = $this->middle_name;
-            $official->sname = $this->suffix_name;
+            $official->mname = $this->middle_name === "" ? null : $this->middle_name;
+            $official->sname = $this->suffix_name === "" ? null : $this->suffix_name;
             $official->zone = $this->zone;
             $official->gender = $this->gender;
             $official->contact = $this->phone_no;

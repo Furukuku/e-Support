@@ -91,20 +91,20 @@
           <h5 class="text-center mb-2 fw-bold">BARANGAY COUNCIL</h5>
         @endif
         @forelse ($officials as $official)
-          <p class="text-center fw-bold">{{ strtoupper($official->fname . ' ' . $official->mname[0] . '. ' . $official->lname . ' ' . $official->sname) }}</p>
+          <p class="text-center fw-bold">{{ strtoupper($official->fname . ' ' . (!is_null($official->mname) ? $official->mname[0] . '. ' : '') . $official->lname . ' ' . $official->sname) }}</p>
         @empty
           
         @endforelse
         @if (!is_null($sk))
-          <p class="text-center m-0 fw-bold">{{ strtoupper($sk->fname . ' ' . $sk->mname[0] . '. ' . $sk->lname . ' ' . $sk->sname) }}</p>
+          <p class="text-center m-0 fw-bold">{{ strtoupper($sk->fname . ' ' . (!is_null($sk->mname) ? $sk->mname[0] . '. ' : '') . $sk->lname . ' ' . $sk->sname) }}</p>
           <p class="text-center">SK CHAIRMAN</p>
         @endif
         @if (!is_null($treasurer))
-          <p class="text-center m-0 fw-bold">{{ strtoupper($treasurer->fname . ' ' . $treasurer->mname[0] . '. ' . $treasurer->lname . ' ' . $treasurer->sname) }}</p>
+          <p class="text-center m-0 fw-bold">{{ strtoupper($treasurer->fname . ' ' . (!is_null($treasurer->mname) ? $treasurer->mname[0] . '. ' : '') . $treasurer->lname . ' ' . $treasurer->sname) }}</p>
           <p class="text-center">BRGY TREASURER</p>
         @endif
         @if (!is_null($secretary))
-          <p class="text-center m-0 fw-bold">{{ strtoupper($secretary->fname . ' ' . $secretary->mname[0] . '. ' . $secretary->lname . ' ' . $secretary->sname) }}</p>
+          <p class="text-center m-0 fw-bold">{{ strtoupper($secretary->fname . ' ' . (!is_null($secretary->mname) ? $secretary->mname[0] . '. ' : '') . $secretary->lname . ' ' . $secretary->sname) }}</p>
           <p class="text-center">BRGY SECRETARY</p>
         @endif
       </section>
